@@ -1,10 +1,5 @@
-import {  questionPools as pool, _T, responses as common_responses,  } from "../../common"
-import { SurveyItem, SurveyGroupItem, ExpressionName } from "survey-engine/data_types";
-import { Item, SurveyDefinition, OptionDef } from "case-editor-tools/surveys/types";
-import { SurveyItems } from 'case-editor-tools/surveys';
-import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { singleChoicePrefix } from "@common/studies/common/questionPools";
-import { Translation } from "@common/studies/common/languages/types";
+import {  _T, Translation } from "../../common"
+import { OptionDef } from "case-editor-tools/surveys/types";
 
 export function as_option(key:string, content: Map<string,string> ): OptionDef {
     return {

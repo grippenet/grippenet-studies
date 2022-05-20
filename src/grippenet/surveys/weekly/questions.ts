@@ -1,13 +1,12 @@
-import {  questionPools, _T, responses as common_responses, LanguageMap,  } from "../../../common"
-import { SurveyItem, SurveyGroupItem, ExpressionName, SurveySingleItem } from "survey-engine/data_types";
-import { Item, SurveyDefinition, OptionDef } from "case-editor-tools/surveys/types";
+import {  questionPools, _T, responses as common_responses, LanguageMap } from "../../../common"
+import {  SurveySingleItem } from "survey-engine/data_types";
+import { Item,  OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { MultipleChoicePrefix, singleChoicePrefix } from "@common/studies/common/questionPools";
-import { Translation } from "@common/studies/common/languages/types";
-import { ItemProps } from "@common/studies/common/questionPools/types";
-import { as_option, french, OptionList, OverridenResponses, ResponseOveriddes } from "../utils";
+import { as_option, french, OptionList } from "../utils";
 import { multipleChoiceKey } from "case-editor-tools/constants/key-definitions";
+
+const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
 
 // Q16
 // Q7 
@@ -17,7 +16,7 @@ import { multipleChoiceKey } from "case-editor-tools/constants/key-definitions";
 // Q11 => +7, +8
 // +Q17
 
-interface SymptomDependentProps extends ItemProps {
+interface SymptomDependentProps extends questionPools.ItemProps {
     SymptomQuestion: questionPools.weekly.Symptoms
 }
 
@@ -135,7 +134,7 @@ export class VisitedMedicalService extends questionPools.weekly.VisitedMedicalSe
         }
 }
 
-interface AntibioticFromProps extends ItemProps {
+interface AntibioticFromProps extends questionPools.ItemProps {
     medicationQuestion: questionPools.weekly.TookMedication
 }
 
@@ -233,7 +232,7 @@ export class CauseOfSymptoms extends questionPools.weekly.CauseOfSymptoms {
 export class HowDoYouFeel extends Item {
 
     
-    constructor(props:ItemProps) {
+    constructor(props:questionPools.ItemProps) {
         super(props.parentKey, 'Q9d');
         this.isRequired = props.isRequired;
     }

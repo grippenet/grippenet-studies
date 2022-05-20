@@ -11,10 +11,10 @@ import {  questionPools as pool, _T, responses as common_responses,  } from "../
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { singleChoicePrefix } from "@common/studies/common/questionPools";
 import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes } from "../utils";
 
 type ItemProps = pool.ItemProps;
+const singleChoicePrefix = pool.singleChoicePrefix;
 
 const ResponseEncoding = {
     health_prof: {
