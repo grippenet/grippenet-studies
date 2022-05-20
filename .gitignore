@@ -1,3 +1,6 @@
 build
 common
 node_modules
+output
+report.*.json
+*.log
