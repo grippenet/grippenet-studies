@@ -1,6 +1,6 @@
 import {  questionPools, _T, responses as common_responses, LanguageMap } from "../../../common"
 import {  SurveySingleItem } from "survey-engine/data_types";
-import { Item,  OptionDef } from "case-editor-tools/surveys/types";
+import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { as_option, french, OptionList } from "../utils";
@@ -20,12 +20,12 @@ interface SymptomDependentProps extends questionPools.ItemProps {
     SymptomQuestion: questionPools.weekly.Symptoms
 }
 
-class StoolCount extends Item {
+export class StoolCount extends questionPools.ItemQuestion {
 
     symptomsKey: string
 
     constructor(props: SymptomDependentProps) {
-        super(props.parentKey, 'Q16');
+        super(props, 'Q16');
         this.symptomsKey = props.SymptomQuestion.key;
     }
 
@@ -34,7 +34,7 @@ class StoolCount extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: french("Combien de selles par jour avez-vous ?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -43,7 +43,7 @@ class StoolCount extends Item {
     
     getCondition() {
         const codes = common_responses.weekly.symptoms;
-        return se.responseHasKeysAny(this.symptomsKey, multipleChoiceKey, codes.diarrhea);
+        return se.responseHasKeysAny(this.symptomsKey, MultipleChoicePrefix, codes.diarrhea);
     }
 
     getResponses() {
@@ -51,11 +51,11 @@ class StoolCount extends Item {
                as_option("0", french("Moins de 3")),
                as_option("1", french("Plus de 3"))
             ];
-        }
+    }
     
-        getHelpGroupContent() {
-            return undefined;
-        }
+    getHelpGroupContent() {
+        return undefined;
+    }
 }
 
 
@@ -139,12 +139,12 @@ interface AntibioticFromProps extends questionPools.ItemProps {
 }
 
 
-export class AntibioticFrom extends Item {
+export class AntibioticFrom extends questionPools.ItemQuestion {
 
     medicationKey: string
 
     constructor(props: AntibioticFromProps) {
-        super(props.parentKey, 'Q9d');
+        super(props, 'Q9d');
         this.medicationKey = props.medicationQuestion.key;
     }
 
@@ -153,7 +153,7 @@ export class AntibioticFrom extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            //condition: this.getCondition(),
+            condition: this.condition,
             questionText: french("Concernant les antibiotiques que vous avez pris :"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -229,12 +229,11 @@ export class CauseOfSymptoms extends questionPools.weekly.CauseOfSymptoms {
 }
 
 
-export class HowDoYouFeel extends Item {
+export class HowDoYouFeel extends questionPools.ItemQuestion {
 
     
     constructor(props:questionPools.ItemProps) {
-        super(props.parentKey, 'Q9d');
-        this.isRequired = props.isRequired;
+        super(props, 'Q9d');
     }
 
     buildItem(): SurveySingleItem {
@@ -242,6 +241,7 @@ export class HowDoYouFeel extends Item {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
+            condition: this.condition,
             questionText:french("Globalement, comment vous sentez-vous ?"),
             sliderLabel: french(""),
             noResponseLabel: french("Pour répondre "),

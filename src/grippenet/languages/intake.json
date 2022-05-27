@@ -1,0 +1,18 @@
+{
+    "intake.Q17.option.site_official": {
+        "en": "Using an official website (public health agency, ...)",
+        "fr": "Par le site d'une institution officielle"
+    },
+    "intake.Q17.option.site_news": {
+        "en": "Using an news website",
+        "fr": "Par un site d'information généraliste"
+    },
+    "intake.Q17.option.webhealth": {
+        "en": "Using an health related information website",
+        "fr": "Par un site sur la santé"
+    },
+    "intake.Q17.option.social": {
+        "en": "Via a social network",
+        "fr": "Par un réseau social"
+    }
+}

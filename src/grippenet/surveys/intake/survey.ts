@@ -3,6 +3,7 @@ import { SurveyItem, SurveyGroupItem, ExpressionName } from "survey-engine/data_
 import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
 import { questionPools } from "../../../common";
 import * as intake from "./questions";
+import { add_meta } from "../utils";
 
 const pool = questionPools.intake;
 
@@ -12,11 +13,11 @@ export class IntakeDef extends SurveyDefinition {
 
     Q_birthdate: Item;
 
-    constructor() {
+    constructor(meta:Map<string,string>) {
 
         super({
             surveyKey: 'intake',
-            name: _T("intake.name.0", "Intake questionnaire"),
+            name:add_meta( _T("intake.name.0", "Intake questionnaire"), meta),
             description: _T("intake.description.0", "The purpose of the background questionnaire is to find out a little more about each user."),
             durationText: _T( "intake.typicalDuration.0", "Duration 5-10 minutes")
         });
@@ -92,7 +93,7 @@ export class IntakeDef extends SurveyDefinition {
         const Q_find_platform = new intake.FindOutAboutPlatform({parentKey:rootKey, isRequired:true});
         this.items.push(Q_find_platform);
 
-        const surveyEndText = new pool.FinalText(rootKey);
+        const surveyEndText = new pool.FinalText({parentKey: rootKey});
         this.items.push(surveyEndText);
     }
 

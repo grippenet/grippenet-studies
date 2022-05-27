@@ -1,6 +1,7 @@
 import {  ItemBuilder, _T,questionPools } from "../../../common"
 import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
+import {  add_meta } from "../utils";
 
 const pool = questionPools.weekly;
 
@@ -10,14 +11,14 @@ export class WeeklyDef extends SurveyDefinition {
 
     Q_same_illnes: Item;
 
-    constructor() {
+    constructor(meta:Map<string,string>) {
         super({
             surveyKey: 'weekly',
-            name: _T( "weekly.name.0", "Weekly questionnaire"),
+            name: add_meta( _T( "weekly.name.0", "Weekly questionnaire"), meta),
             description:_T("weekly.description.0", "Please also report if you had no complaints."),
             durationText: _T( "weekly.typicalDuration.0", "Duration 1-5 minutes")
         });
-
+        
         this.items = [];
 
         const rootKey = this.key
@@ -29,6 +30,9 @@ export class WeeklyDef extends SurveyDefinition {
         // // -------> HAS SYMPTOMS GROUP
         const hasSymptomGroup = new pool.SymptomsGroup({parentKey: rootKey, keySymptomsQuestion: Q_symptoms.key});
         const hasSymptomGroupKey = hasSymptomGroup.key;
+
+        const Q_Stool = new weekly.StoolCount({parentKey: rootKey, SymptomQuestion: Q_symptoms});
+        this.items.push(Q_Stool);
 
         // // Q2 same illnes --------------------------------------
         const Q_same_illnes = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true});
@@ -150,6 +154,10 @@ export class WeeklyDef extends SurveyDefinition {
         hasMoreGroup.addItem(Q_causeOfSymptoms.get());
 
         this.items.push(hasMoreGroup);
+
+        const Q_Howdoyoufeel = new weekly.HowDoYouFeel({parentKey: rootKey});
+        
+        this.items.push(Q_Howdoyoufeel);
 
         const surveyEndText = new pool.SurveyEnd({parentKey:rootKey});
         this.items.push(surveyEndText);

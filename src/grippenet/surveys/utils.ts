@@ -1,4 +1,4 @@
-import {  _T, Translation } from "../../common"
+import {  _T, Translation, LanguageMap } from "../../common"
 import { OptionDef } from "case-editor-tools/surveys/types";
 
 export function as_option(key:string, content: Map<string,string> ): OptionDef {
@@ -118,6 +118,13 @@ export class OptionList {
     }
 }
 
+
+export function add_meta(m: LanguageMap, meta: Map<string,string> ):LanguageMap {
+    meta.forEach((value, key)=> {
+        m.set('_' + key, value);
+    });
+    return m;
+}
 
 
 

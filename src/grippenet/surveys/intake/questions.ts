@@ -7,7 +7,7 @@
 // Q24 => Q26
 // Q17 +8, +9, +10, +11 ....
 
-import {  questionPools as pool, _T, responses as common_responses,  } from "../../../common"
+import {  questionPools as pool, _T, responses as common_responses, questionPools,  } from "../../../common"
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
@@ -25,11 +25,10 @@ const ResponseEncoding = {
 }
 
 
-export class BodyHeight extends Item {
+export class BodyHeight extends questionPools.ItemQuestion {
 
     constructor(props:ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q19');
-        this.isRequired = props.isRequired;
+        super(props, 'Q19');
     }
 
     buildItem() {
@@ -63,11 +62,10 @@ export class BodyHeight extends Item {
 
 }
 
-export class BodyWeight extends Item {
+export class BodyWeight extends questionPools.ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q20');
-        this.isRequired = props.isRequired;
+        super(props,'Q20');
     }
 
     buildItem() {
@@ -101,11 +99,10 @@ export class BodyWeight extends Item {
 
 }
 
-export class HealthProfessional extends Item {
+export class HealthProfessional extends questionPools.ItemQuestion {
 
     constructor(props:ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q4e');
-        this.isRequired = props.isRequired;
+        super(props,'Q4e');
     }
 
     buildItem() {
@@ -148,13 +145,12 @@ interface HealthProfessionalSubProps extends ItemProps {
     healthProfessional: HealthProfessional
 }
 
-abstract class HealthProfessionalSub extends Item {
+abstract class HealthProfessionalSub extends questionPools.ItemQuestion {
     
     healthProKey: string;
 
     constructor(props:HealthProfessionalSubProps, defaultKey: string) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: defaultKey);
-        this.isRequired = props.isRequired;
+        super(props, defaultKey);
         this.healthProKey = props.healthProfessional.key;
     }
 
@@ -163,7 +159,6 @@ abstract class HealthProfessionalSub extends Item {
         return se.responseHasKeysAny(this.healthProKey, singleChoicePrefix, codes.yes_human );
     }
 }
-
 
 export class HealthProfessionalType extends HealthProfessionalSub {
 
@@ -176,7 +171,7 @@ export class HealthProfessionalType extends HealthProfessionalSub {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: french("Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?"),
           //  helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -255,7 +250,6 @@ export class HealthProfessionalType extends HealthProfessionalSub {
 
         return responses;
     }
-
    
 }
 
@@ -270,7 +264,7 @@ export class HealthProfessionalPractice extends HealthProfessionalSub {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
-            condition: this.getCondition(),
+            condition: this.condition,
             questionText: french("Dans quelle structure exercez-vous ?"),
             //helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
@@ -359,11 +353,10 @@ export class Smoking extends pool.intake.Smoking implements OverridenResponses {
     }
 }
 
-export class GastroEnteritisFrequency extends Item {
+export class GastroEnteritisFrequency extends questionPools.ItemQuestion {
 
     constructor(props:ItemProps) {
-        super(props.parentKey, props.keyOverride ? props.keyOverride: 'Q34');
-        this.isRequired = props.isRequired;
+        super(props, 'Q34');
     }
 
     buildItem() {

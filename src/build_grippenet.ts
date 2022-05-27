@@ -1,6 +1,9 @@
 import { CommonStudyBuilder } from "../common/studies/common";
 import { buildMissing, study_exporter } from "../common/tools/exporter";
+
 import "../common/studies/common/languages/fr";
+import "./grippenet/languages";
+
 import { GrippenetStudyBuilder } from "./grippenet/study";
 
 const builder = new GrippenetStudyBuilder();
