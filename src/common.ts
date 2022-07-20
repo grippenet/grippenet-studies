@@ -15,3 +15,4 @@ export { ItemBuilder } from "../common/tools/items";
 
 export { LanguageHelpers } from "../common/studies/common/languages/languageHelpers";
 
+export * from "../common/studies/common/participantFlags";

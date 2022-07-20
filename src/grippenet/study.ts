@@ -2,7 +2,9 @@ import { IntakeDef } from "./surveys/intake/survey";
 import { WeeklyDef } from "./surveys/weekly/survey";
 import { VaccinationDef } from "./surveys/vaccination/vaccination";
 import { StudyBuilder, StudyRulesBuilder, SurveyKeys } from "../common";
-import { MeansOfTransport } from "../../common/studies/common/questionPools/intakeQuestions";
+import { GrippenetRulesBuilder } from "./rules";
+import { ReminderSurvey } from "./surveys/reminders/survey";
+import { GrippenetKeys } from "./keys";
 
 export class GrippenetStudyBuilder extends StudyBuilder {
 
@@ -19,23 +21,29 @@ export class GrippenetStudyBuilder extends StudyBuilder {
         const intake = new IntakeDef(meta);
         const weekly = new WeeklyDef(meta);
         const vacc = new VaccinationDef(meta);
+        const reminders = new ReminderSurvey(meta);
 
         this.surveys = [
             intake,
             weekly,
-            vacc
+            vacc,
+            reminders
         ];
 
         // Keys inform the rules builder of the key of all dependent questions
-        const keys: SurveyKeys = {
+        const keys: GrippenetKeys = {
             intakeKey: intake.key,
             intakeBirthDateKey: intake.getBirthDateKey(),
             weeklyKey: weekly.key,
             weeklySameIllnessKey: weekly.getSameIllnessKey(),
             vacKey: vacc.key,
+            reminders: {
+                survey: reminders.key,
+                reminder_weekly: reminders.getWeeklyReminderKey()
+            }
         };
 
-        const builder = new StudyRulesBuilder(keys);
+        const builder = new GrippenetRulesBuilder(keys);
 
         this.studyRules = builder.build();
 

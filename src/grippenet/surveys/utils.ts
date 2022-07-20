@@ -18,6 +18,13 @@ export function french(text:string): Map<string,string> {
     ]);
 }
 
+export function english(text:string): Map<string,string> {
+    return new Map<string,string>([
+        ['en', text]
+    ]);
+}
+
+
 /**
  * Describe a response encoding a simple dictionary
  * Key is the option key to use
