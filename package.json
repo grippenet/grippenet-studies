@@ -7,7 +7,9 @@
     "prestart": "npm run-script build",
     "start": "node  --report-uncaught-exception build/src/index.js",
     "common": "npm run-script build && node  --report-uncaught-exception build/src/build_common.js",
-    "grippenet": "npm run-script build && node  --report-uncaught-exception build/src/build_grippenet.js"
+    "grippenet": "npm run-script build && node  --report-uncaught-exception build/src/build_grippenet.js",
+    "build-test": "npm run-script build && node  --report-uncaught-exception build/src/build_test.js",
+    "build-rules": "npm run-script build && node  --report-uncaught-exception build/src/build_rules.js"
   },
   "dependencies": {
     "@types/node": "^16.10.3",
