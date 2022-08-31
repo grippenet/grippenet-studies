@@ -121,8 +121,8 @@ export class HealthProfessional extends questionPools.ItemQuestion {
         const codes = ResponseEncoding.health_prof;
         return [
             as_option(codes.no, french("Non") ),
-            as_option(codes.yes_animal, french("Oui, j’exerce en tant que professionnel de la santé humaine")),
-            as_option(codes.yes_human, french("Yes, I am practicing as an animal health professional"))
+            as_option(codes.yes_human, french("Oui, j’exerce en tant que professionnel de la santé humaine")),
+            as_option(codes.yes_animal, french("Yes, I am practicing as an animal health professional"))
         ];
     }
 
