@@ -1,10 +1,9 @@
-import {  questionPools, _T, responses as common_responses, LanguageMap } from "../../../common"
+import {  questionPools, _T, responses as common_responses, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion } from "../../../common"
 import {  SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { as_option, french, OptionList } from "../utils";
-import { multipleChoiceKey } from "case-editor-tools/constants/key-definitions";
 
 const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
 
@@ -16,36 +15,20 @@ const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
 // Q11 => +7, +8
 // +Q17
 
-interface SymptomDependentProps extends questionPools.ItemProps {
+interface SymptomDependentProps extends ItemProps {
     SymptomQuestion: questionPools.weekly.Symptoms
 }
 
-export class StoolCount extends questionPools.ItemQuestion {
-
-    symptomsKey: string
+export class StoolCount extends BaseChoiceQuestion {
 
     constructor(props: SymptomDependentProps) {
-        super(props, 'Q16');
-        this.symptomsKey = props.SymptomQuestion.key;
-    }
-
-    buildItem(): SurveySingleItem {
-        return SurveyItems.singleChoice({
-            parentKey: this.parentKey,
-            itemKey: this.itemKey,
-            isRequired: this.isRequired,
-            condition: this.condition,
+        super(props, 'Q16', 'single');
+        this.condition = props.SymptomQuestion.createSymptomCondition('diarrhea');
+        this.options = {
             questionText: french("Combien de selles par jour avez-vous ?"),
-            helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
-        });
+        }
     }
     
-    getCondition() {
-        const codes = common_responses.weekly.symptoms;
-        return se.responseHasKeysAny(this.symptomsKey, MultipleChoicePrefix, codes.diarrhea);
-    }
-
     getResponses() {
             return  [
                as_option("0", french("Moins de 3")),
@@ -134,35 +117,17 @@ export class VisitedMedicalService extends questionPools.weekly.VisitedMedicalSe
         }
 }
 
-interface AntibioticFromProps extends questionPools.ItemProps {
+interface AntibioticFromProps extends ItemProps {
     medicationQuestion: questionPools.weekly.TookMedication
 }
-
-
-export class AntibioticFrom extends questionPools.ItemQuestion {
-
-    medicationKey: string
+export class AntibioticFrom extends BaseChoiceQuestion {
 
     constructor(props: AntibioticFromProps) {
-        super(props, 'Q9d');
-        this.medicationKey = props.medicationQuestion.key;
-    }
-
-    buildItem(): SurveySingleItem {
-        return SurveyItems.singleChoice({
-            parentKey: this.parentKey,
-            itemKey: this.itemKey,
-            isRequired: this.isRequired,
-            condition: this.condition,
+        super(props, 'Q9d', 'single');
+        this.condition = props.medicationQuestion.createTookAntibioticCondition();
+        this.options = {
             questionText: french("Concernant les antibiotiques que vous avez pris :"),
-            helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
-        });
-    }
-    
-    getCondition() {
-        const codes = common_responses.weekly.took_medication;
-        return se.responseHasKeysAny(this.medicationKey, multipleChoiceKey, codes.antibio);
+        };
     }
 
     getResponses() {
@@ -172,9 +137,6 @@ export class AntibioticFrom extends questionPools.ItemQuestion {
         ];
     }
     
-    getHelpGroupContent() {
-            return undefined;
-    }
 }
 
 export class CovidHabitsChange extends questionPools.weekly.CovidHabitsChange {
@@ -229,10 +191,10 @@ export class CauseOfSymptoms extends questionPools.weekly.CauseOfSymptoms {
 }
 
 
-export class HowDoYouFeel extends questionPools.ItemQuestion {
+export class HowDoYouFeel extends ItemQuestion {
 
     
-    constructor(props:questionPools.ItemProps) {
+    constructor(props:ItemProps) {
         super(props, 'Q9d');
     }
 

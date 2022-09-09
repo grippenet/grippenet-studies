@@ -1,13 +1,11 @@
-import {  ItemBuilder, _T,questionPools } from "../../../common"
-import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
+import {  _T,questionPools, SurveyBuilder } from "../../../common"
+import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
 import {  add_meta } from "../utils";
 
 const pool = questionPools.weekly;
 
-export class WeeklyDef extends SurveyDefinition {
-
-    items: ItemBuilder[];
+export class WeeklyDef extends SurveyBuilder {
 
     Q_same_illnes: Item;
 
@@ -19,8 +17,6 @@ export class WeeklyDef extends SurveyDefinition {
             durationText: _T( "weekly.typicalDuration.0", "Duration 1-5 minutes")
         });
         
-        this.items = [];
-
         const rootKey = this.key
 
         // Symptoms Q1
@@ -129,6 +125,10 @@ export class WeeklyDef extends SurveyDefinition {
         const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:true});
         hasMoreGroup.addItem(Q_tookMedication.get());
 
+        const Q_antibioFrom = new weekly.AntibioticFrom({parentKey:hasMoreGroupKey, isRequired: false, medicationQuestion: Q_tookMedication } )
+
+        hasMoreGroup.addItem(Q_antibioFrom.get());
+
         // // Q14 hospitalized ------------------------------------------------
         const Q_hospitalized = new pool.Hospitalized({parentKey:hasMoreGroupKey, isRequired:true});
         hasMoreGroup.addItem(Q_hospitalized.get());
@@ -167,9 +167,4 @@ export class WeeklyDef extends SurveyDefinition {
         return this.Q_same_illnes.key;
     }
 
-    buildSurvey() {
-        for (const item of this.items) {
-            this.addItem(item.get());
-        }
-    }
 }
