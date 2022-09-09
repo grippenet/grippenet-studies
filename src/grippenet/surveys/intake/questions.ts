@@ -7,13 +7,14 @@
 // Q24 => Q26
 // Q17 +8, +9, +10, +11 ....
 
-import {  questionPools as pool, _T, responses as common_responses, questionPools,  } from "../../../common"
+import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, SingleItemDependency, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes } from "../utils";
+import { postalCode } from "../../questions/postalCode";
+import { Expression } from "survey-engine/data_types";
 
-type ItemProps = pool.ItemProps;
 const singleChoicePrefix = pool.singleChoicePrefix;
 
 const ResponseEncoding = {
@@ -24,8 +25,127 @@ const ResponseEncoding = {
     }
 }
 
+export class PostalCode extends ItemQuestion {
 
-export class BodyHeight extends questionPools.ItemQuestion {
+    constructor(props: ItemProps) {
+        super(props, 'Q3');
+    }
+
+    getHelpGroupContent() {
+        return [
+            pool.text_why_asking( "intake.Q3.helpGroup.text.0"),
+            {
+                content: _T("intake.Q3.helpGroup.text.1", "In order to verify the representativeness of our cohort (the group of participants in this study), and to examine the geographical differences in the spread of the coronavirus and influenza."),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+            pool.text_how_answer("intake.Q3.helpGroup.text.2"),
+            {
+                content: _T("intake.Q3.helpGroup.text.3", "Insert the postal code of your place of residence"),
+            },
+        ];
+    }
+
+    buildItem() {
+
+        return postalCode({
+            parentKey: this.parentKey,
+            responseKey: '0',
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: _T("intake.Q3.title.0", "What is your home postal code?"),
+            helpGroupContent: this.getHelpGroupContent(),
+        });
+
+        /*
+        bottomDisplayCompoments: [
+                {
+                    role: 'error',
+                    content: generateLocStrings(_T("intake.Q3.error.3", "Please enter the digits of your postal code")),
+                    displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2'))
+                },
+                {
+                    role: 'error',
+                    content: generateLocStrings(_T("intake.Q3.error.4", "Please enter at most 5 digits")),
+                    displayCondition: expWithArgs('not', expWithArgs('getSurveyItemValidation', 'this', 'r2max'))
+                }
+            ]
+        */
+    }
+
+}
+
+export const working_mainactivity_condition = (item: Item) => {
+    const codes = common_responses.intake.main_activity;
+    return new SingleItemDependency({
+        item: item,
+        type: 'single',
+        responses: [codes.fulltime, codes.partial, codes.self, codes.student ] 
+    });
+}
+
+export class PostalCodeWork extends BaseChoiceQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'Q4b', 'single');
+        this.options = {
+            questionText: _T("intake.Q4b.title.0", "What is the postal code of your school/college/workplace (where you spend the majority of your working/studying time)?"),
+        };
+    }
+
+    getResponses() {
+        return [
+            {
+                key: '0', role: 'option',
+                content: french("Je connais ce code postal")
+            },
+            {
+                key: '1', role: 'option',
+                content: _T("intake.Q4b.rg.scg.option.1", "I don’t know")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T("intake.Q4b.rg.scg.option.2", "Not applicable (e.g. don’t have a fixed workplace)")
+            },
+        ];
+    }
+
+    hasPostalCodeCondition() {
+        return this.createConditionFrom(['0']);
+    }
+
+    getHelpGroupContent() {
+        return [
+            pool.text_why_asking("intake.Q4b.helpGroup.text.0"),
+            {
+                content: _T("intake.Q4b.helpGroup.text.1", "To be able to determine the distance you regularly travel during your movements."),
+            },
+        ]
+    }
+}
+
+export class PostalCodeWorkLocation extends ItemQuestion {
+
+    constructor(props: ItemProps, postal: PostalCodeWork) {
+        super(props, 'Q4b_0');
+        this.condition = postal.hasPostalCodeCondition();
+    }
+
+    buildItem() {
+        return postalCode({
+            parentKey: this.parentKey,
+            responseKey: '0',
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: french("Selectionnez la commune de votre lieu de travail ou d'étude"),
+           // helpGroupContent: this.getHelpGroupContent(),
+        });
+    }
+
+}
+
+export class BodyHeight extends ItemQuestion {
 
     constructor(props:ItemProps) {
         super(props, 'Q19');
@@ -62,7 +182,7 @@ export class BodyHeight extends questionPools.ItemQuestion {
 
 }
 
-export class BodyWeight extends questionPools.ItemQuestion {
+export class BodyWeight extends ItemQuestion {
 
     constructor(props: ItemProps) {
         super(props,'Q20');
@@ -99,22 +219,13 @@ export class BodyWeight extends questionPools.ItemQuestion {
 
 }
 
-export class HealthProfessional extends questionPools.ItemQuestion {
+export class HealthProfessional extends BaseChoiceQuestion {
 
     constructor(props:ItemProps) {
-        super(props,'Q4e');
-    }
-
-    buildItem() {
-        return SurveyItems.singleChoice({
-            parentKey: this.parentKey,
-            itemKey: this.itemKey,
-            isRequired: this.isRequired,
-            condition: this.condition,
+        super(props,'Q4e', 'single');
+        this.options = {
             questionText: french("Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?"),
-            helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
-        });
+        };
     }
 
     getResponses() {
@@ -122,15 +233,21 @@ export class HealthProfessional extends questionPools.ItemQuestion {
         return [
             as_option(codes.no, french("Non") ),
             as_option(codes.yes_human, french("Oui, j’exerce en tant que professionnel de la santé humaine")),
-            as_option(codes.yes_animal, french("Yes, I am practicing as an animal health professional"))
+            as_option(codes.yes_animal, french("Yes, j'exerce en tant que professionnel de la santé animale"))
         ];
     }
 
+    isHumanHealthProfessionalCondition(): Expression {
+        const codes = ResponseEncoding.health_prof;
+        return se.singleChoice.any(this.key, codes.yes_human ); 
+    }
+
+    /*
     getHelpGroupContent() {
         return [
             pool.text_why_asking("intake.Q20.helpGroup.why_asking"),
             {
-                content: french("Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales."),
+                content: french(""),
             },
             pool.text_how_answer("intake.Q20.helpGroup.how_answer"),
             {
@@ -138,44 +255,17 @@ export class HealthProfessional extends questionPools.ItemQuestion {
             }
         ];
     }
+    */
 
 }
 
-interface HealthProfessionalSubProps extends ItemProps {
-    healthProfessional: HealthProfessional
-}
+export class HealthProfessionalType extends BaseChoiceQuestion {
 
-abstract class HealthProfessionalSub extends questionPools.ItemQuestion {
-    
-    healthProKey: string;
-
-    constructor(props:HealthProfessionalSubProps, defaultKey: string) {
-        super(props, defaultKey);
-        this.healthProKey = props.healthProfessional.key;
-    }
-
-    getCondition() {
-        const codes = ResponseEncoding.health_prof;
-        return se.responseHasKeysAny(this.healthProKey, singleChoicePrefix, codes.yes_human );
-    }
-}
-
-export class HealthProfessionalType extends HealthProfessionalSub {
-
-    constructor(props:HealthProfessionalSubProps) {
-        super(props, 'Q4f');
-    }
-
-    buildItem() {
-        return SurveyItems.singleChoice({
-            parentKey: this.parentKey,
-            itemKey: this.itemKey,
-            isRequired: this.isRequired,
-            condition: this.condition,
+    constructor(props:ItemProps) {
+        super(props, 'Q4f', 'single');
+        this.options = {
             questionText: french("Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?"),
-          //  helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
-        });
+        }
     }
 
     getResponses():OptionDef[] {
@@ -253,22 +343,13 @@ export class HealthProfessionalType extends HealthProfessionalSub {
    
 }
 
-export class HealthProfessionalPractice extends HealthProfessionalSub {
+export class HealthProfessionalPractice extends BaseChoiceQuestion {
 
-    constructor(props:HealthProfessionalSubProps) {
-        super(props, 'Q4g');
-    }
-
-    buildItem() {
-        return SurveyItems.singleChoice({
-            parentKey: this.parentKey,
-            itemKey: this.itemKey,
-            isRequired: this.isRequired,
-            condition: this.condition,
+    constructor(props:ItemProps) {
+        super(props, 'Q4g', 'single');
+        this.options = {
             questionText: french("Dans quelle structure exercez-vous ?"),
-            //helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
-        });
+        }
     }
 
     getResponses() {
@@ -353,22 +434,13 @@ export class Smoking extends pool.intake.Smoking implements OverridenResponses {
     }
 }
 
-export class GastroEnteritisFrequency extends questionPools.ItemQuestion {
+export class GastroEnteritisFrequency extends BaseChoiceQuestion {
 
     constructor(props:ItemProps) {
-        super(props, 'Q34');
-    }
-
-    buildItem() {
-        return SurveyItems.singleChoice({
-            parentKey: this.parentKey,
-            itemKey: this.itemKey,
-            isRequired: this.isRequired,
-            condition: this.condition,
-            questionText: french("Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?"),
-            //helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
-        });
+        super(props, 'Q34', 'single');
+        this.options =  {
+            questionText: french("A quelle fréquence avez vous une gastro-entértie?")
+        }
     }
 
     getResponses() {
@@ -382,9 +454,6 @@ export class GastroEnteritisFrequency extends questionPools.ItemQuestion {
             as_option("5", french("Je ne sais pas")),
         ];
     }
-
-    
-
 }
 
 

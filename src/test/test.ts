@@ -1,10 +1,10 @@
-import {  ItemBuilder, _T, questionPools } from "../common"
+import {  ItemBuilder, _T, questionPools, ItemQuestion, ItemProps } from "../common"
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveySingleItem } from "survey-engine/data_types";
 import { french } from "../grippenet/surveys/utils";
 import { postalCode } from "../grippenet/questions";
 
-class PostalLookupQuestion extends questionPools.ItemQuestion {
+class PostalLookupQuestion extends ItemQuestion {
 
     buildItem(): SurveySingleItem {
         return postalCode({

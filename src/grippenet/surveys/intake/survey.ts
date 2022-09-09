@@ -1,15 +1,13 @@
 import {  _T } from "../../../common"
-import { SurveyItem, SurveyGroupItem, ExpressionName } from "survey-engine/data_types";
-import { Item, SurveyDefinition } from "case-editor-tools/surveys/types";
-import { questionPools } from "../../../common";
+import { ExpressionName } from "survey-engine/data_types";
+import { Item } from "case-editor-tools/surveys/types";
+import { questionPools, SurveyBuilder } from "../../../common";
 import * as intake from "./questions";
 import { add_meta } from "../utils";
 
 const pool = questionPools.intake;
 
-export class IntakeDef extends SurveyDefinition {
-
-    items: Item[];
+export class IntakeDef extends SurveyBuilder {
 
     Q_birthdate: Item;
 
@@ -22,27 +20,41 @@ export class IntakeDef extends SurveyDefinition {
             durationText: _T( "intake.typicalDuration.0", "Duration 5-10 minutes")
         });
 
-        this.items = [];
-
         const rootKey = this.key;
 
         const Q_gender = new pool.Gender({parentKey: rootKey, isRequired:true, useOther:false});
 
-        this.items.push(Q_gender);
+        this.push(Q_gender);
 
         const Q_birthdate = new pool.DateOfBirth({parentKey:rootKey, isRequired:true});
         this.Q_birthdate = Q_birthdate;
 
-        this.items.push(Q_birthdate);
+        this.push(Q_birthdate);
 
-        const Q_postal = new pool.PostalCode({parentKey:rootKey, isRequired:true});
-        this.items.push(Q_postal);
+        const Q_postal = new intake.PostalCode({parentKey:rootKey, isRequired:true});
+        this.push(Q_postal);
 
         const Q_main_activity = new pool.MainActivity({parentKey:rootKey, isRequired:true});
-        this.items.push(Q_main_activity);
+        this.push(Q_main_activity);
 
-        const Q_postal_work = new pool.PostalCodeWork({parentKey:rootKey, keyMainActivity:Q_main_activity.key, isRequired:true});
-        this.items.push(Q_postal_work);
+        const working_condition = intake.working_mainactivity_condition(Q_main_activity);
+
+        const Q_healthProf = new intake.HealthProfessional({parentKey:rootKey, isRequired:true});
+        this.push(Q_healthProf, working_condition);
+
+        const HumanHealthProf = Q_healthProf.isHumanHealthProfessionalCondition();
+
+        const Q_healthProfType = new intake.HealthProfessionalType({parentKey:rootKey, isRequired:true});
+        this.push(Q_healthProfType, HumanHealthProf);
+
+        const Q_healthProfPractice = new intake.HealthProfessionalPractice({parentKey:rootKey, isRequired:true});
+        this.push(Q_healthProfPractice, HumanHealthProf);
+
+        const Q_postal_work = new intake.PostalCodeWork({parentKey:rootKey, isRequired:true});
+        this.push(Q_postal_work, working_condition);
+
+        const Q_postal_work_location = new intake.PostalCodeWorkLocation({parentKey: rootKey, isRequired: true}, Q_postal_work);
+        this.items.push(Q_postal_work_location);
 
         const Q_work_type = new pool.WorkTypeEurostat({parentKey:rootKey, keyMainActivity:Q_main_activity.key, isRequired:true});
         this.items.push(Q_work_type);
@@ -68,6 +80,9 @@ export class IntakeDef extends SurveyDefinition {
         const Q_common_cold_frequ = new pool.CommonColdFrequency({parentKey:rootKey, isRequired:true});
         this.items.push(Q_common_cold_frequ);
 
+        const Q_gastro_freq = new intake.GastroEnteritisFrequency({parentKey:rootKey, isRequired:true});
+        this.items.push(Q_gastro_freq);
+
         const Q_regular_medication = new pool.RegularMedication({parentKey:rootKey, isRequired:true});
         this.items.push(Q_regular_medication);
 
@@ -77,7 +92,7 @@ export class IntakeDef extends SurveyDefinition {
         const Q_pregnancy_trimester = new pool.PregnancyTrimester({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, keyQPregnancy:Q_pregnancy.key, isRequired:true});
         this.items.push(Q_pregnancy_trimester);
 
-        const Q_smoking = new pool.Smoking({parentKey:rootKey, isRequired:true});
+        const Q_smoking = new intake.Smoking({parentKey:rootKey, isRequired:true});
         this.items.push(Q_smoking);
 
         const Q_allergies = new pool.Allergies({parentKey:rootKey, isRequired:true});

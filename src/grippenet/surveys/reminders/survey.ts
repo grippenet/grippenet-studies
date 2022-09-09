@@ -3,7 +3,7 @@ import { english, add_meta, as_option} from "../utils";
 import {  SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { ItemQuestion } from "../../../../common/studies/common/questionPools";
+import { ItemQuestion } from "../../../common";
 
 
 export class ReminderSurvey extends SurveyDefinition {
