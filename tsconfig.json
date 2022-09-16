@@ -65,5 +65,10 @@
   "include": [
     "src",
     "common"
+  ],
+  "exclude": [
+    "node_modules",
+    "build",
+    "**/__tests__/*",
   ]
 }

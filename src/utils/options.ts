@@ -9,8 +9,6 @@ export function as_option(key:string, content: Map<string,string> ): OptionDef {
     }   
 }
 
-
-
 /**
  * Describe a response encoding a simple dictionary
  * Key is the option key to use
@@ -83,7 +81,7 @@ export class OptionList {
         if(index < 0) {
             throw new Error("Option key '"+key+"' is not found in list");
         }
-        var i = index -1;
+        var i = index;
         if(i < 0) {
             i = 0;
         }
@@ -98,7 +96,7 @@ export class OptionList {
     }
 
     insertAt(index: number, ...oo:OptionDef[]) {
-        this.options = this.options.splice(index, 0, ...oo);
+        this.options.splice(index, 0, ...oo);
         return this;
     }
 
