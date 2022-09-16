@@ -1,4 +1,4 @@
-import {  _T, Translation, LanguageMap } from "../../common"
+import {  _T, Translation, LanguageMap } from "../common"
 import { OptionDef } from "case-editor-tools/surveys/types";
 
 export function as_option(key:string, content: Map<string,string> ): OptionDef {
@@ -9,27 +9,13 @@ export function as_option(key:string, content: Map<string,string> ): OptionDef {
     }   
 }
 
-/**
- * Returns a french text
- */
-export function french(text:string): Map<string,string> {
-    return new Map<string,string>([
-        ['fr', text]
-    ]);
-}
-
-export function english(text:string): Map<string,string> {
-    return new Map<string,string>([
-        ['en', text]
-    ]);
-}
 
 
 /**
  * Describe a response encoding a simple dictionary
  * Key is the option key to use
  */
-export interface DictResponse {
+ export interface DictResponse {
     [key:string]: Translation
 }
 
@@ -124,14 +110,3 @@ export class OptionList {
         return this.options;
     }
 }
-
-
-export function add_meta(m: LanguageMap, meta: Map<string,string> ):LanguageMap {
-    meta.forEach((value, key)=> {
-        m.set('_' + key, value);
-    });
-    return m;
-}
-
-
-

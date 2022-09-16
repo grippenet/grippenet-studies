@@ -3,17 +3,17 @@ import {  SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { as_option, french, OptionList } from "../utils";
+import { as_option, french, OptionList } from "../../../utils";
 
 const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
 
-// Q16
-// Q7 
-// Q7b
-// +Q9d
-// Qcov7 4a=>4, 4b=>17, 18=>, 12=>()
-// Q11 => +7, +8
-// +Q17
+// [X] Q16
+// [ ] Q7 
+// [ ] Q7b
+// [ ] +Q9d
+// [ ] Qcov7 4a=>4, 4b=>17, 18=>, 12=>()
+// [ ] Q11 => +7, +8
+// [ ] +Q17
 
 interface SymptomDependentProps extends ItemProps {
     SymptomQuestion: questionPools.weekly.Symptoms

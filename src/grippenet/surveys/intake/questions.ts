@@ -1,17 +1,21 @@
-// Q4e
-// Q4f
-// Q4g
-// Q5 +Option5
-// Q34
-// Q13 +5, +6, no
-// Q24 => Q26
-// Q17 +8, +9, +10, +11 ....
+// [X] Q3
+// [X] Q4b 
+// [X] Q4e
+// [X] Q4f
+// [X] Q4g
+// [ ] Q5 +Option5
+// [X] Q13 +5, +6, no
+// [X] Q19 Body Weight
+// [X] Q20 Body Height
+// [ ] Q24 => Q26
+// [X] Q17 +8, +9, +10, +11 ....
+// [X] Q34
 
 import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, SingleItemDependency, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes } from "../utils";
+import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes } from "../../../utils";
 import { postalCode } from "../../questions/postalCode";
 import { Expression } from "survey-engine/data_types";
 
@@ -144,6 +148,7 @@ export class PostalCodeWorkLocation extends ItemQuestion {
     }
 
 }
+
 
 export class BodyHeight extends ItemQuestion {
 
