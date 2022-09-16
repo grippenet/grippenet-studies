@@ -62,7 +62,7 @@ export class IntakeDef extends SurveyBuilder {
         const Q_highest_education = new pool.HighestEducation({parentKey:rootKey, keyQBirthday:Q_birthdate.key, isRequired:true});
         this.items.push(Q_highest_education);
 
-        const Q_people_met = new pool.PeopleMet({parentKey:rootKey, isRequired:true});
+        const Q_people_met = new intake.PeopleMet({parentKey:rootKey, isRequired:true});
         this.items.push(Q_people_met);
 
         const Q_age_groups = new pool.AgeGroups({parentKey:rootKey, isRequired:true});

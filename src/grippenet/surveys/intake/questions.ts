@@ -1,21 +1,21 @@
-// [X] Q3
+// [X] Q3 PostalCode
 // [X] Q4b 
 // [X] Q4e
 // [X] Q4f
 // [X] Q4g
-// [ ] Q5 +Option5
-// [X] Q13 +5, +6, no
+// [X] Q5 PeopleMet +Option5
+// [X] Q13 Smoking +5, +6, no
 // [X] Q19 Body Weight
 // [X] Q20 Body Height
-// [ ] Q24 => Q26
+// [X] Q24 Homeopathic Medecine => Q26
 // [X] Q17 +8, +9, +10, +11 ....
-// [X] Q34
+// [X] Q34 GastroEnteritisFrequency
 
 import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, SingleItemDependency, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
-import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes } from "../../../utils";
+import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes, OptionList } from "../../../utils";
 import { postalCode } from "../../questions/postalCode";
 import { Expression } from "survey-engine/data_types";
 
@@ -147,6 +147,23 @@ export class PostalCodeWorkLocation extends ItemQuestion {
         });
     }
 
+}
+
+export class PeopleMet extends pool.intake.PeopleMet {
+
+    getResponses(): OptionDef[] {
+        const options = super.getResponses();
+
+        const list = new OptionList(options);
+
+        const o_5 = as_option('5', french("Entre 1 et 9 enfants ou adolescents dans la même journée (en ne comptant pas vos propres enfants) "));
+
+        o_5.disabled = this.getExclusiveNoneCondition();
+
+        list.insertAfterKey('0', o_5);
+
+        return list.values();
+    }
 }
 
 
