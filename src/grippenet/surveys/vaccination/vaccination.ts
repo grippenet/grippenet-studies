@@ -2,7 +2,7 @@ import {  ItemBuilder, _T,questionPools } from "../../../common"
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyGroupItem, ExpressionName } from "survey-engine/data_types";
 import { add_meta } from "../../../utils";
-//import * as vaccination from "./questions";
+import * as vaccination from "./questions";
 
 const pool = questionPools.vaccination;
 
@@ -43,10 +43,10 @@ export class VaccinationDef extends SurveyDefinition {
         const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:hasVaccineGroup.key, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:true});
         hasVaccineGroup.addItem(Q_flu_vaccine_this_season_when.get());
 
-        const Q_flu_vaccine_this_season_reasons_for = new pool.FluVaccineThisSeasonReasonFor({parentKey:hasVaccineGroup.key, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:true});
+        const Q_flu_vaccine_this_season_reasons_for = new vaccination.FluVaccineThisSeasonReasonFor({parentKey:hasVaccineGroup.key, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:true});
         hasVaccineGroup.addItem(Q_flu_vaccine_this_season_reasons_for.get());
 
-        const Q_flu_vaccine_this_season_reasons_against = new pool.FluVaccineThisSeasonReasonAgainst({parentKey:hasVaccineGroup.key, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:true});
+        const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:hasVaccineGroup.key, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:true});
         hasVaccineGroup.addItem(Q_flu_vaccine_this_season_reasons_against.get());
 
         const Q_covidVac = new pool.CovidVac({parentKey:hasVaccineGroupKey, isRequired:true});
