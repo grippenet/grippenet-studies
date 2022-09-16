@@ -1,7 +1,7 @@
 import {  _T,questionPools, SurveyBuilder } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
-import {  add_meta } from "../utils";
+import {  add_meta } from "../../../utils";
 
 const pool = questionPools.weekly;
 

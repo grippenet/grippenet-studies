@@ -1,5 +1,5 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
-import { english, add_meta, as_option} from "../utils";
+import { english, add_meta, as_option} from "../../../utils";
 import {  SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';

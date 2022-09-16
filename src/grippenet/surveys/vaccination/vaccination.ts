@@ -1,7 +1,7 @@
 import {  ItemBuilder, _T,questionPools } from "../../../common"
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyGroupItem, ExpressionName } from "survey-engine/data_types";
-import { add_meta } from "../utils";
+import { add_meta } from "../../../utils";
 //import * as vaccination from "./questions";
 
 const pool = questionPools.vaccination;

@@ -2,7 +2,7 @@
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { GenericQuestionProps } from "case-editor-tools/surveys/types";
 import { ItemComponent, SurveyItem } from "survey-engine/data_types";
-import { french } from "../surveys/utils";
+import { french } from "../../utils";
 import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 
 interface postalCodeProps extends GenericQuestionProps {

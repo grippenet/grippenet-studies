@@ -3,7 +3,7 @@ import { ExpressionName } from "survey-engine/data_types";
 import { Item } from "case-editor-tools/surveys/types";
 import { questionPools, SurveyBuilder } from "../../../common";
 import * as intake from "./questions";
-import { add_meta } from "../utils";
+import { add_meta } from "../../../utils";
 
 const pool = questionPools.intake;
 
