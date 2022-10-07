@@ -3,7 +3,7 @@ Grippenet Studies
 
 # Installation
 
-This repository uses common-study-definition repository as local directory
+This repository uses common-study-definition repository as a local directory
 
 ```
 git clone https://github.com/influenzanet/common-study-definition.git common
