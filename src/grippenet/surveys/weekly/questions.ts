@@ -1,8 +1,7 @@
-import {  questionPools, _T, responses as common_responses, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion } from "../../../common"
+import {  questionPools, _T, responses as common_responses, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion, ClientExpression as client } from "../../../common"
 import {  SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { as_option, french, OptionList } from "../../../utils";
 
 const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
@@ -49,12 +48,12 @@ export class VisitedMedicalService extends questionPools.weekly.VisitedMedicalSe
             const codes = common_responses.weekly.visit_medical;
     
             // All response except no
-            const exclusiveNo = se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.no);
+            const exclusiveNo = client.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.no);
     
             // All response except planned visit
-            const exclusivePlan = se.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.plan);
+            const exclusivePlan = client.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.plan);
     
-            const exclusiveOther = se.multipleChoice.any(this.key, codes.no, codes.plan);
+            const exclusiveOther = client.multipleChoice.any(this.key, codes.no, codes.plan);
     
             return [
                 {
