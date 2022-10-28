@@ -5,6 +5,7 @@ import { RuleSet } from "./base"
 
 const create = (): Expression[]=> {
 
+    /*
     const out: Expression[] = [];
 
     const flag_reminder = GrippenetFlags.reminder_weekly;
@@ -12,6 +13,8 @@ const create = (): Expression[]=> {
     out.push(se.participantActions.updateFlag(flag_reminder.key, flag_reminder.values.yes) );
 
     return out;
+    */
+   return [];
 };
 
 export const ruleset: RuleSet = {
