@@ -192,11 +192,11 @@ export class BodyHeight extends ItemQuestion {
         return [
                 pool.text_why_asking("intake.Q19.helpGroup.why_asking"),
                 {
-                    content: french("Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales."),
+                    content: _T("intake.Q19.helpGroup.asking_reason", "To know your body mass index"),
                 },
                 pool.text_how_answer("intake.Q19.helpGroup.how_answer"),
                 {
-                    content: french("Indiquez votre taille approximative en centimètres, sans virgule.")
+                    content: _T("intake.Q19.helpGroup.answer_tip", "Enter your approximative height in cm"),
                 }
         ];
     }
@@ -477,6 +477,39 @@ export class GastroEnteritisFrequency extends BaseChoiceQuestion {
     }
 }
 
+const common_cold_codes = {
+    "sometimes": "6",
+    ...common_responses.intake.cold_frequency
+}
+
+export class CommonColdFrequency extends pool.intake.CommonColdFrequency implements OverridenResponses {
+
+    getResponses(): OptionDef[] {
+
+       const codes = common_responses.intake.cold_frequency;
+
+        const responses = super.getResponses();
+
+        const list = new OptionList(responses);
+
+        list.insertAfterKey(codes.never, as_option(common_cold_codes.sometimes, french("Parfois, pas tous les ans")));
+
+        return list.values();
+    }
+
+    getResponseOverrides():ResponseOveriddes {
+        const o : ResponseOveriddes = {};
+
+        const codes = common_cold_codes;
+
+        o[codes.never] = [codes.never, codes.sometimes];
+
+        return o;
+    }
+
+}
+
+
 
 /**
  * Find out about Platform: multiple choice question about where the participant found out about the platform
@@ -507,8 +540,8 @@ export class GastroEnteritisFrequency extends BaseChoiceQuestion {
                 as_option( codes.work, _T("intake.Q17.rg.mcg.option.5", "Via school or work")),
                 as_option( codes.healthworker, french("Par un professionnel de santé")),
                 as_option( codes.project, french("Par un de mes proches qui travaille sur le projet")),
-                as_option( codes.other_alt, _T("intake.Q17.rg.mcg.option.6", "Other")),
-            ]
+                as_input_option(codes.other_alt, _T("intake.Q17.rg.mcg.option.6", "Other"))
+            ];
         }
 
     getResponseOverrides():ResponseOveriddes {

@@ -1,4 +1,12 @@
 {
+   "intake.Q19.helpGroup.asking_reason": {
+     "en":"To know your body mass index",
+     "fr":"Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales.)"
+   },
+   "intake.Q19.helpGroup.answer_tip": {
+    "en":"Enter your approximative height in cm",
+    "fr": "Indiquez votre taille approximative en centimètres, sans virgule."
+   },
     "intake.Q17.option.site_official": {
         "en": "Using an official website (public health agency, ...)",
         "fr": "Par le site d'une institution officielle"

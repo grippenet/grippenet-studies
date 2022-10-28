@@ -31,6 +31,15 @@ export class IntakeDef extends SurveyBuilder {
 
         this.push(Q_birthdate);
 
+        const Q_Height = new intake.BodyHeight({parentKey: rootKey, isRequired: true});
+        this.push(Q_Height);
+
+        const Q_Weight = new intake.BodyWeight({parentKey: rootKey, isRequired: true});
+        this.push(Q_Weight);
+
+        const Q_pregnancy = new pool.Pregnancy({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, isRequired:true});
+        this.items.push(Q_pregnancy);
+
         const Q_postal = new intake.PostalCode({parentKey:rootKey, isRequired:true});
         this.push(Q_postal);
 
@@ -65,7 +74,7 @@ export class IntakeDef extends SurveyBuilder {
         const Q_people_met = new intake.PeopleMet({parentKey:rootKey, isRequired:true});
         this.items.push(Q_people_met);
 
-        const Q_age_groups = new pool.AgeGroups({parentKey:rootKey, isRequired:true});
+        const Q_age_groups = new pool.AgeGroups({parentKey:rootKey, isRequired:true, useAlone: true});
         this.items.push(Q_age_groups);
 
         const Q_people_at_risk = new pool.PeopleAtRisk({parentKey:rootKey, keyOfAgeGroups:Q_age_groups.key, isRequired:true});
@@ -83,14 +92,11 @@ export class IntakeDef extends SurveyBuilder {
         const Q_gastro_freq = new intake.GastroEnteritisFrequency({parentKey:rootKey, isRequired:true});
         this.items.push(Q_gastro_freq);
 
-        const Q_regular_medication = new pool.RegularMedication({parentKey:rootKey, isRequired:true});
+        const Q_regular_medication = new pool.RegularMedication({parentKey:rootKey, isRequired:true, useRatherNotAnswer: false});
         this.items.push(Q_regular_medication);
 
-        const Q_pregnancy = new pool.Pregnancy({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, isRequired:true});
-        this.items.push(Q_pregnancy);
-
-        const Q_pregnancy_trimester = new pool.PregnancyTrimester({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, keyQPregnancy:Q_pregnancy.key, isRequired:true});
-        this.items.push(Q_pregnancy_trimester);
+        //const Q_pregnancy_trimester = new pool.PregnancyTrimester({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, keyQPregnancy:Q_pregnancy.key, isRequired:true});
+        //this.items.push(Q_pregnancy_trimester);
 
         const Q_smoking = new intake.Smoking({parentKey:rootKey, isRequired:true});
         this.items.push(Q_smoking);
