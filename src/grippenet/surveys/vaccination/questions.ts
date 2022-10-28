@@ -1,5 +1,4 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
-import { LanguageMap } from "../../../../common/studies/common/languages";
 import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, SingleItemDependency, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
 import { as_input_option, as_option, french, OptionList, OverridenResponses, ResponseOveriddes } from "../../../utils";
 

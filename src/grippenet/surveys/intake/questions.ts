@@ -104,7 +104,7 @@ export class PostalCodeWork extends BaseChoiceQuestion {
             },
             {
                 key: '1', role: 'option',
-                content: _T("intake.Q4b.rg.scg.option.1", "I don’t know")
+                content: _T("intake.Q4b.rg.scg.option.1", "I don’t know/can’t remember")
             },
             {
                 key: '2', role: 'option',
@@ -506,7 +506,7 @@ export class GastroEnteritisFrequency extends BaseChoiceQuestion {
                 as_option( codes.family,  _T("intake.Q17.rg.mcg.option.4", "Via family or friends")),
                 as_option( codes.work, _T("intake.Q17.rg.mcg.option.5", "Via school or work")),
                 as_option( codes.healthworker, french("Par un professionnel de santé")),
-                as_option( codes.poster, french("Par un de mes proches qui travaille sur le projet")),
+                as_option( codes.project, french("Par un de mes proches qui travaille sur le projet")),
                 as_option( codes.other_alt, _T("intake.Q17.rg.mcg.option.6", "Other")),
             ]
         }
