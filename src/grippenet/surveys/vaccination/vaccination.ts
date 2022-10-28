@@ -34,11 +34,18 @@ export class VaccinationDef extends SurveyDefinition {
         const hasVaccineGroup = pool.hasVacGroup({parentKey:rootKey, keyVacStart:Q_vacStart.key});
         const hasVaccineGroupKey = hasVaccineGroup.key;
 
+        const Q_flu_vaccin_voucher = new vaccination.FluVaccinationVoucher({parentKey:hasVaccineGroup.key, isRequired:true});
+        hasVaccineGroup.addItem(Q_flu_vaccin_voucher.get());
+
         const Q_flu_vaccine_last_season = new pool.FluVaccineLastSeason({parentKey:hasVaccineGroup.key, isRequired:true});
         hasVaccineGroup.addItem(Q_flu_vaccine_last_season.get());
 
         const Q_flu_vaccine_this_season = new pool.FluVaccineThisSeason({parentKey:hasVaccineGroup.key, isRequired:true});
         hasVaccineGroup.addItem(Q_flu_vaccine_this_season.get());
+
+        const Q_flu_vaccin_by_whom = new vaccination.FluVaccinationByWhom({parentKey: hasVaccineGroup.key, isRequired: true});
+        Q_flu_vaccin_by_whom.setCondition(Q_flu_vaccine_this_season.createIsVaccinatedCondition());
+        hasVaccineGroup.addItem(Q_flu_vaccin_by_whom.get());
 
         const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:hasVaccineGroup.key, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:true});
         hasVaccineGroup.addItem(Q_flu_vaccine_this_season_when.get());
@@ -70,7 +77,7 @@ export class VaccinationDef extends SurveyDefinition {
         const Q_vaccinePro = new pool.CovidVaccineProReasons({parentKey:hasVaccineGroupKey, keyVac:Q_covidVac.key, isRequired:true});
         hasVaccineGroup.addItem(Q_vaccinePro.get());
 
-        const Q_vaccineContra = new pool.CovidVaccineAgainstReasons({parentKey:hasVaccineGroupKey, keyVac:Q_covidVac.key, isRequired:true});
+        const Q_vaccineContra = new vaccination.CovidVaccineAgainstReasons({parentKey:hasVaccineGroupKey, keyVac:Q_covidVac.key, isRequired:true});
         hasVaccineGroup.addItem(Q_vaccineContra.get());
 
         this.items.push(hasVaccineGroup);

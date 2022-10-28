@@ -2,6 +2,22 @@
     "vaccination.Q0.privacy.note": {
         "en": "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses.",
         "fr": "_TODO_"
-    }
-   
+    },
+   "vaccination.Q35m.option.18": {
+    "en": "counter indication",
+    "fr": "Je présente une contre-indication à la vaccination"
+   },
+   "vaccination.Q35m.option.19": {
+    "en":  "bad experience with previous vaccine",
+    "fr": "J’ai déjà eu une mauvaise expérience suite à une vaccination"
+   },
+   "vaccination.Q18.asking_reason": {
+    "en": "asking_reason",
+    "fr": "Pour savoir si vous appartenez à une catégorie de personnes ciblées par les recommandations vaccinales."
+   },
+   "vaccination.Q18.answer_tip": {
+    "en": "how_answer",
+    "fr": "Cochez « Oui » si vous avez reçu un bon de vaccination contre la grippe depuis le mois d'octobre indiqué, envoyé par l’assurance maladie ou si votre médecin vous a fait un bon."
+   }
 }
+   

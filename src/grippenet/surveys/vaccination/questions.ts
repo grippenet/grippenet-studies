@@ -1,6 +1,8 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
+import { text_how_answer, text_why_asking } from "../../../../common/studies/common/questionPools";
 import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, SingleItemDependency, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
 import { as_input_option, as_option, french, OptionList, OverridenResponses, ResponseOveriddes } from "../../../utils";
+import { starting_year } from "../../constants";
 
 // Q10c.11
 // Q10d.15, 16, 17, 18, 19
@@ -55,3 +57,70 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
         return o;
     }
 }
+
+
+export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAgainstReasons {
+
+    getResponses(): OptionDef[] {
+        const r = super.getResponses();
+        const list = new OptionList(r);
+        
+        list.insertAfterKey('20', 
+            as_option('18', _T("vaccination.Q35m.option.18", "counter indication")),
+            as_option('19', _T("vaccination.Q35m.option.19", "bad experience with previous vaccine"))
+        )
+
+        return list.values();
+    }
+}
+
+export class FluVaccinationByWhom extends BaseChoiceQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'Q10e', 'single');
+        this.setOptions({
+            questionText: french("Par qui avez-vous été vacciné ?")
+        });
+    }
+
+    getResponses(): OptionDef[] {
+        return [
+            as_option('1', french("Par un médecin généraliste")),
+            as_option('2', french('Par un infirmier')),
+            as_option('3', french('Par un sage-femme')),
+            as_option('4', french('Par un pharmacien')),
+            as_option('5', french('Par un médecin ou infirmier du travail')),
+            as_input_option('6', french("Par un professionnel d’une autre spécialité (préciser)")),
+        ];
+    }
+    
+}
+
+
+export class FluVaccinationVoucher extends BaseChoiceQuestion { 
+    constructor(props: ItemProps) {
+        super(props, 'Q18', 'single');
+        this.setOptions({
+            questionText: french("Avez-vous eu un bon de vaccination contre la grippe cette année (depuis octobre "+starting_year+")?")
+        });
+    }
+
+    getResponses(): OptionDef[] {
+        return [
+            as_option('1', french("Oui")),
+            as_option('0', french("None")),
+            as_option("2", french("Je ne sais pas / ne me souviens pas"))
+        ];
+    }
+
+    getHelpGroupContent() { 
+        return [
+            text_why_asking("vaccination.Q18.why_asking"),
+            {content: _T("vaccination.Q18.asking_reason","asking_reason")},
+            text_how_answer("vaccination.Q18.how_answer"),
+            {content: _T("vaccination.Q18.answer_tip","how_answer")},
+        ];
+        
+    }
+}
+
