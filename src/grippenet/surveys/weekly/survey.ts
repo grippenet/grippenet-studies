@@ -7,7 +7,7 @@ const pool = questionPools.weekly;
 
 export class WeeklyDef extends SurveyBuilder {
 
-    Q_same_illnes: Item;
+    Q_same_illness: Item;
 
     constructor(meta:Map<string,string>) {
         super({
@@ -30,10 +30,10 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_Stool = new weekly.StoolCount({parentKey: rootKey, SymptomQuestion: Q_symptoms});
         this.items.push(Q_Stool);
 
-        // // Q2 same illnes --------------------------------------
-        const Q_same_illnes = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true});
-        hasSymptomGroup.addItem(Q_same_illnes.get());
-        this.Q_same_illnes = Q_same_illnes;
+        // // Q2 same illness --------------------------------------
+        const Q_same_illness = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true, useDoesNotApply: false});
+        hasSymptomGroup.addItem(Q_same_illness.get());
+        this.Q_same_illness = Q_same_illness;
 
         // // Qcov3 pcr tested contact COVID-19--------------------------------------
         const Q_covidPCRTestedContact = new pool.PcrTestedContact({parentKey: hasSymptomGroupKey, isRequired: true});
@@ -44,7 +44,7 @@ export class WeeklyDef extends SurveyBuilder {
         hasSymptomGroup.addItem(Q_pcrHouseholdContact.get());
 
         // // Q3 when first symptoms --------------------------------------
-        const Q_symptomStart = new pool.SymptomsStart({parentKey: hasSymptomGroupKey, keySameIllness: Q_same_illnes.key, isRequired: true});
+        const Q_symptomStart = new pool.SymptomsStart({parentKey: hasSymptomGroupKey, keySameIllness: Q_same_illness.key, isRequired: true});
         hasSymptomGroup.addItem(Q_symptomStart.get());
 
         // // Q4 when symptoms end --------------------------------------
@@ -164,7 +164,7 @@ export class WeeklyDef extends SurveyBuilder {
     }
 
     getSameIllnessKey() {
-        return this.Q_same_illnes.key;
+        return this.Q_same_illness.key;
     }
 
 }
