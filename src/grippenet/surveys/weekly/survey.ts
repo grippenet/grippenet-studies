@@ -82,11 +82,11 @@ export class WeeklyDef extends SurveyBuilder {
         const hasMoreGroupKey = hasMoreGroup.key;
 
         // // Q7 visited medical service --------------------------------------
-        const Q_visitedMedicalService = new pool.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: true});
+        const Q_visitedMedicalService = new weekly.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: true});
         hasMoreGroup.addItem(Q_visitedMedicalService.get());
 
         // // Q7b how soon visited medical service --------------------------------------
-        const Q_visitedMedicalServiceWhen = new pool.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: true});
+        const Q_visitedMedicalServiceWhen = new pool.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: true, useHospitalAdmission: false});
         hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
 
         // // Qcov18 reasons no medical services-----------------------------------------
@@ -98,7 +98,7 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_symptomImpliedCovidTest.get());
 
         // Qcov16i test type -----------------------------------------------------
-        const Q_covidTestType = new pool.CovidTestType({parentKey: hasMoreGroupKey, keySymptomImpliedCovidTest: Q_symptomImpliedCovidTest.key, isRequired: true});
+        const Q_covidTestType = new pool.CovidTestType({parentKey: hasMoreGroupKey, keySymptomImpliedCovidTest: Q_symptomImpliedCovidTest.key, isRequired: true, useSerology: false});
         hasMoreGroup.addItem(Q_covidTestType.get());
 
         // Qcov16b PCR test result
@@ -122,7 +122,7 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_resultFluPCRTest.get());
 
         // // Q9 took medication --------------------------------------
-        const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:true});
+        const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:true, useOtherTextInput: false});
         hasMoreGroup.addItem(Q_tookMedication.get());
 
         const Q_antibioFrom = new weekly.AntibioticFrom({parentKey:hasMoreGroupKey, isRequired: false, medicationQuestion: Q_tookMedication } )
@@ -146,11 +146,33 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_dailyRoutineDaysMissed.get());
 
         // // Qcov7 Covid 19 habits change question ------------------------------------------------------
-        const Q_covidHabits = new pool.CovidHabitsChange({parentKey:hasMoreGroupKey, isRequired:false});
+        const Q_covidHabits = new weekly.CovidHabitsChange({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_covidHabits.get());
 
+
+        /**
+         * CovidMask
+         */
+        const maskGroup = new weekly.MaskGroup({parentKey: hasMoreGroupKey});
+        maskGroup.setCondition(Q_covidHabits.createWearMaskCondition());
+
+        const QMaskContext = new weekly.MaskWearingContext({parentKey: maskGroup.key});
+        maskGroup.addItem(QMaskContext.get());
+
+        const QMaskWearingAlways = new weekly.MaskWearingAlways({parentKey: maskGroup.key});
+        maskGroup.addItem(QMaskWearingAlways.get());
+
+        const MaskNotWearingReason = new weekly.MaskNotWearingReason({parentKey: maskGroup.key});
+        MaskNotWearingReason.setCondition(QMaskWearingAlways.createConditionNoUnknown());
+        maskGroup.addItem(MaskNotWearingReason.get());
+
+        const QMaskProvidedFrom = new weekly.MaskProvidedFrom({parentKey: maskGroup.key});
+        maskGroup.addItem(QMaskProvidedFrom.get());
+
+        hasMoreGroup.addItem(maskGroup.get());
+
         // // Q11 think cause of symptoms --------------------------------------
-        const Q_causeOfSymptoms = new pool.CauseOfSymptoms({parentKey:hasMoreGroupKey, isRequired:true});
+        const Q_causeOfSymptoms = new weekly.CauseOfSymptoms({parentKey:hasMoreGroupKey, isRequired:true});
         hasMoreGroup.addItem(Q_causeOfSymptoms.get());
 
         this.items.push(hasMoreGroup);
