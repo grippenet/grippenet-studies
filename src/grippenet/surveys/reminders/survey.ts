@@ -1,21 +1,22 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
-import { english, add_meta, as_option} from "../../../utils";
+import { english, as_option} from "../../../utils";
 import {  SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { ItemQuestion } from "../../../common";
+import { ItemQuestion, SurveyBuilder } from "../../../common";
 
 
-export class ReminderSurvey extends SurveyDefinition {
+export class ReminderSurvey extends SurveyBuilder {
 
     weeklyReminder: SurveyItem
 
     constructor(meta:Map<string,string>) {
         super({
             surveyKey: 'reminders',
-            name:add_meta( english("reminders study"), meta),
+            name:english("reminders study"),
             description: english("Private survey holding reminders preference"),
-            durationText: english("Not relevant")
+            durationText: english("Not relevant"),
+            metadata: meta,
         });
 
         const weeklyReminder = SurveyItems.singleChoice({

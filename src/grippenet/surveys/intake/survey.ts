@@ -3,7 +3,6 @@ import { ExpressionName } from "survey-engine/data_types";
 import { Item } from "case-editor-tools/surveys/types";
 import { questionPools, SurveyBuilder } from "../../../common";
 import * as intake from "./questions";
-import { add_meta } from "../../../utils";
 
 const pool = questionPools.intake;
 
@@ -15,11 +14,12 @@ export class IntakeDef extends SurveyBuilder {
 
         super({
             surveyKey: 'intake',
-            name:add_meta( _T("intake.name.0", "Intake questionnaire"), meta),
+            name:_T("intake.name.0", "Intake questionnaire"),
             description: _T("intake.description.0", "The purpose of the background questionnaire is to find out a little more about each user."),
-            durationText: _T( "intake.typicalDuration.0", "Duration 5-10 minutes")
+            durationText: _T( "intake.typicalDuration.0", "Duration 5-10 minutes"),
+            metadata: meta,
         });
-
+        
         const rootKey = this.key;
 
         const Q_gender = new pool.Gender({parentKey: rootKey, isRequired:true, useOther:false});

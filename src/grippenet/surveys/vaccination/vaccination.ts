@@ -1,26 +1,26 @@
-import {  ItemBuilder, _T,questionPools } from "../../../common"
+import {  ItemBuilder, _T,questionPools, SurveyBuilder } from "../../../common"
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
 import { SurveyGroupItem, ExpressionName } from "survey-engine/data_types";
-import { add_meta } from "../../../utils";
 import * as vaccination from "./questions";
 
 const pool = questionPools.vaccination;
 
-export class VaccinationDef extends SurveyDefinition {
+export class VaccinationDef extends SurveyBuilder {
 
     items: ItemBuilder[];
 
     constructor(meta:Map<string,string>) {
         super({
             surveyKey: 'vaccination',
-            name: add_meta(_T( "vaccination.name.0", "Vaccination questionnaire"), meta),
+            name: _T( "vaccination.name.0", "Vaccination questionnaire"),
             description: _T(
                 "vaccination.description.0",
                  "The purpose of the vaccination questionnaire is to find out more about protection given by the vaccine and monitor vaccination uptake in Italy.",
             ),
             durationText: _T(
                 "vaccination.typicalDuration.0", "Duration 5-10 minutes"
-            )
+            ),
+            metadata: meta,
         });
 
         this.items = [];

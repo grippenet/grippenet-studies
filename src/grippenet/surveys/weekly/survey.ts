@@ -1,7 +1,6 @@
 import {  _T,questionPools, SurveyBuilder } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
-import {  add_meta } from "../../../utils";
 
 const pool = questionPools.weekly;
 
@@ -12,9 +11,10 @@ export class WeeklyDef extends SurveyBuilder {
     constructor(meta:Map<string,string>) {
         super({
             surveyKey: 'weekly',
-            name: add_meta( _T( "weekly.name.0", "Weekly questionnaire"), meta),
+            name:  _T( "weekly.name.0", "Weekly questionnaire"),
             description:_T("weekly.description.0", "Please also report if you had no complaints."),
-            durationText: _T( "weekly.typicalDuration.0", "Duration 1-5 minutes")
+            durationText: _T( "weekly.typicalDuration.0", "Duration 1-5 minutes"),
+            metadata: meta
         });
         
         const rootKey = this.key

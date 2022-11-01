@@ -839,12 +839,12 @@ caniuse-lite@^1.0.30001400:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001402.tgz#aa29e1f47f5055b0d0c07696a67b8b08023d14c8"
   integrity sha512-Mx4MlhXO5NwuvXGgVb+hg65HZ+bhUYsz8QtDGDo2QmaJS2GBX47Xfi2koL86lc8K+l+htXeTEB/Aeqvezoo6Ew==
 
-case-editor-tools@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.0.7.tgz#d1deb0f13e38228dcadd9c5f6b081cd1129a699d"
-  integrity sha512-R7sG6+/eYu/+Xt7Au35h1EVQFM2J41Z9WeivJ+7aIv5j274o//LniKoGsjCz4buREWTaDm7Luyz5Rq72rpB+sw==
+case-editor-tools@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.3.0.tgz#f1e2c0e195148a8c41448e6fc06a6382bc7ac34c"
+  integrity sha512-Z1FmceH5iOWmOVj0828nI2TXvHCyMN8e+vQZnDKlI2t82o6nGtrq6yoKVpWryNgl/iwA81ZyMg8Uv27F3KZLAQ==
   dependencies:
-    survey-engine "^1.1.3"
+    survey-engine "^1.2.0"
 
 chalk@^2.0.0:
   version "2.4.2"
@@ -941,6 +941,11 @@ cross-spawn@^7.0.3:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+date-fns@^2.29.3:
+  version "2.29.3"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
+  integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
 
 debug@^4.1.0, debug@^4.1.1:
   version "4.3.4"
@@ -1723,11 +1728,6 @@ minimatch@^3.0.4, minimatch@^3.1.1:
   dependencies:
     brace-expansion "^1.1.7"
 
-moment@2.24.0:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
-
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
@@ -2047,12 +2047,12 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-survey-engine@^1.1.3:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/survey-engine/-/survey-engine-1.1.4.tgz#f5194140eb589326d03cdd856b114b67d1f290f2"
-  integrity sha512-yJNluQ4Rlz5BazeonOzjTY1lpR6SKmP8kw/R5sc89h38JazkdBWdkRvrOpBjp5O+ut+WuBSs5300uhvizUdkyw==
+survey-engine@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/survey-engine/-/survey-engine-1.2.0.tgz#01cc04929f4ccb139aa25614e61e042ae46009d2"
+  integrity sha512-vUgFRaWfr6FPOduMJN0AHICm6cPFuWcfN10TYakX+/A5dZ3SOPyRtPt2T9P/VDNR/bTbY74u+xlNjDnO4fpopQ==
   dependencies:
-    moment "2.24.0"
+    date-fns "^2.29.3"
 
 terminal-link@^2.0.0:
   version "2.1.1"
