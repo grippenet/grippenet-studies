@@ -48,6 +48,7 @@ export class IntakeDef extends SurveyBuilder {
 
         const working_condition = intake.working_mainactivity_condition(Q_main_activity);
 
+        /*
         const Q_healthProf = new intake.HealthProfessional({parentKey:rootKey, isRequired:true});
         this.push(Q_healthProf, working_condition);
 
@@ -58,7 +59,7 @@ export class IntakeDef extends SurveyBuilder {
 
         const Q_healthProfPractice = new intake.HealthProfessionalPractice({parentKey:rootKey, isRequired:true});
         this.push(Q_healthProfPractice, HumanHealthProf);
-
+        */
         const Q_postal_work = new intake.PostalCodeWork({parentKey:rootKey, isRequired:true});
         this.push(Q_postal_work, working_condition);
 
