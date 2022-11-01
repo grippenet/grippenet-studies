@@ -35,6 +35,7 @@ export class WeeklyDef extends SurveyBuilder {
         hasSymptomGroup.addItem(Q_same_illness.get());
         this.Q_same_illness = Q_same_illness;
 
+        /*
         // // Qcov3 pcr tested contact COVID-19--------------------------------------
         const Q_covidPCRTestedContact = new pool.PcrTestedContact({parentKey: hasSymptomGroupKey, isRequired: true});
         hasSymptomGroup.addItem(Q_covidPCRTestedContact.get());
@@ -42,7 +43,7 @@ export class WeeklyDef extends SurveyBuilder {
         // Qcov3b household pcr contacts COVID-19--------------------------
         const Q_pcrHouseholdContact = new pool.PcrHouseholdContact({parentKey: hasSymptomGroupKey, covid19ContactKey: Q_covidPCRTestedContact.key, isRequired: true});
         hasSymptomGroup.addItem(Q_pcrHouseholdContact.get());
-
+        */
         // // Q3 when first symptoms --------------------------------------
         const Q_symptomStart = new pool.SymptomsStart({parentKey: hasSymptomGroupKey, keySameIllness: Q_same_illness.key, isRequired: true});
         hasSymptomGroup.addItem(Q_symptomStart.get());
