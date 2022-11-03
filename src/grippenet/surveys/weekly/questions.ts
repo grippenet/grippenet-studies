@@ -249,8 +249,6 @@ export class MaskWearingContext extends BaseChoiceQuestion {
             questionText: french("Dans quelle(s) circonstance(s) avez-vous porté un masque ?"),
             topDisplayCompoments: [
                 text_select_all_apply("weekly.Qmask1.select_all_apply"),
-            ],
-            helpGroupContent: [
             ]
         });
     }
@@ -277,8 +275,6 @@ export class MaskWearingAlways extends BaseChoiceQuestion {
         super(props, 'QFRmask2', 'single');
         this.setOptions({
             questionText: french("Dans ces circonstances, avez-vous systématiquement porté un masque, tant que vous aviez des symptômes ?"),
-            helpGroupContent: [
-            ]
         });
     }
 
@@ -309,8 +305,6 @@ export class MaskNotWearingReason extends BaseChoiceQuestion {
             topDisplayCompoments: [
                 text_select_all_apply("weekly.Qmask3.select_all_apply"),
             ],
-            helpGroupContent: [
-            ]
         });
     }
 
@@ -336,8 +330,6 @@ export class MaskProvidedFrom extends BaseChoiceQuestion {
             questionText: french("Où vous êtes-vous procuré ce ou ces masques ?"),
             topDisplayCompoments: [
                 text_select_all_apply("weekly.Qmask4.select_all_apply"),
-            ],
-            helpGroupContent: [
             ]
         });
     }
