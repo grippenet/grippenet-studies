@@ -31,7 +31,7 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.9'
-    - run: pip install ifn-surveys
+    - run: pip install influenzanet.surveys
     - name: build html
       run: python scripts/build-html.py
     - name: Release
