@@ -12,6 +12,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Checkout common
+      uses: actions/checkout@v3
+      with:
+        repository: 'influenzanet/common-study-definition'
+        path: 'common-study-definition'
     - name: Set Node.js 16.x
       uses: actions/setup-node@v3
       with:
@@ -19,6 +24,8 @@ jobs:
         cache: npm
     - name: Install deps
       run: yarn
+    - name: Link
+      run: ln -s common-study-definition/src common
     - name: build library
       run: yarn build
     - name: export surveys
