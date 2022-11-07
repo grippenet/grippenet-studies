@@ -1,0 +1,40 @@
+name: build-survey
+on:
+  push:
+    branches:
+      - main
+    tags:
+        - v*
+jobs:
+  run:
+    name: build-survey
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set Node.js 16.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+        cache: npm
+    - name: Install deps
+      run: yarn
+    - name: build library
+      run: yarn build
+    - name: export surveys
+      run: yarn grippenet
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - run: pip install ifn-surveys
+    - name: build html
+      run: python scripts/build-html.py
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          output/grippenet/surveys/*.json
+          output/grippenet/surveys/*.html
+          output/grippenet/studyRules.json
+
+
