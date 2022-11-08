@@ -35,6 +35,22 @@ export function dict_to_response(dict: DictResponse): OptionDef[] {
     return responses;
 }
 
+/**
+ * 
+ * Create options from an array of [key, en_text]
+ * @param opts 
+ * @param prefix prefix to add to the key to obtain the translation id
+ * @returns 
+ */
+export function array_to_options(opts: Array<string[]>, prefix: string):OptionDef[] {
+    const oo : OptionDef[] = opts.map(o => {
+        const id = prefix + o[0];
+        return as_option(o[0], _T(id, o[1]) );
+   });
+   return oo;
+}
+
+
 export function as_input_option(key:string, content: Map<string,string>, description?: Map<string, string>  ): OptionDef {
     return {
         key: key,
