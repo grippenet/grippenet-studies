@@ -15,7 +15,7 @@ import {  questionPools as pool, _T, responses as common_responses, ItemQuestion
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 
-import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes, OptionList } from "../../../utils";
+import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes, OptionList, array_to_options } from "../../../utils";
 import { postalCode } from "../../questions/postalCode";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ClientExpression as client } from "../../../common";
@@ -41,7 +41,7 @@ export class FillingForWhom extends BaseChoiceQuestion {
     constructor(props: ItemProps) {
         super(props, 'Q0', 'single');
         this.options = {
-            questionText: french("Pour qui remplissez vous ce questionnaire ?", "intake.Q0.text"),
+            questionText: _T("intake.Q0.text", "For whom do you want to fill this survey"),
         }
     }
 
@@ -128,7 +128,7 @@ export class NotPossibleToContinue extends BaseChoiceQuestion {
 
     getResponses(): OptionDef[] {
         return [
-            as_option("0", french(""))
+            as_option("0", _T("intake.QEnd.option", ""))
         ];
     }
 }
@@ -239,7 +239,7 @@ export class PostalCodeWork extends BaseChoiceQuestion {
         return [
             {
                 key: '0', role: 'option',
-                content: french("Je connais ce code postal")
+                content: _T("intake.Q4b.option.0", "I know this postal code")
             },
             {
                 key: '1', role: 'option',
@@ -280,7 +280,7 @@ export class PostalCodeWorkLocation extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: french("Selectionnez la commune de votre lieu de travail ou d'étude"),
+            questionText: _T("intake.Q4b_0.text", "Select the postal code of your homework or study location"),
            // helpGroupContent: this.getHelpGroupContent(),
         });
     }
@@ -294,7 +294,7 @@ export class PeopleMet extends pool.intake.PeopleMet {
 
         const list = new OptionList(options);
 
-        const o_5 = as_option('5', french("Entre 1 et 9 enfants ou adolescents dans la même journée (en ne comptant pas vos propres enfants) "));
+        const o_5 = as_option('5', _T("intake.Q5.option.5", "Between 1 to 9 children in the same day (not counting your own children)"));
 
         o_5.disabled = this.getExclusiveNoneCondition();
 
@@ -317,9 +317,9 @@ export class BodyHeight extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: french("Quelle est votre taille (en centimètres)?"),
+            questionText: _T("intake.Q19.text", "What is your body height (in centimeter)"),
             helpGroupContent: this.getHelpGroupContent(),
-            inputLabel: french("Votre taille"),
+            inputLabel: _T("intake.Q19.inputlabel","Your height"),
             componentProperties: {
                 min: 60,
                 max: 280, // Taller known human 272 cm (1918)
@@ -348,15 +348,16 @@ export class BodyWeight extends ItemQuestion {
         super(props,'Q20');
     }
 
+    
     buildItem() {
         return SurveyItems.numericInput({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: french("Quelle est votre poids (en kilogrammes)?"),
+            questionText: _T("intake.Q20.text" ,"What is your body weight"),
             helpGroupContent: this.getHelpGroupContent(),
-            inputLabel: french("Votre poids"),
+            inputLabel: _T("intake.Q20.inputlabel", "Your weight"),
             componentProperties: {
                 min: 1,
                 max: 500, 
@@ -368,11 +369,11 @@ export class BodyWeight extends ItemQuestion {
         return [
                 pool.text_why_asking("intake.Q20.helpGroup.why_asking"),
                 {
-                    content: french("Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales."),
+                    content: _T("intake.Q20.helpGroup.asking_reason", "To know your BMI")
                 },
                 pool.text_how_answer("intake.Q20.helpGroup.how_answer"),
                 {
-                    content: french("Indiquez votre poids actuel approximatif en kilogrammes, sans virgule.")
+                    content: _T("intake.Q20.helpGroup.answer_tip", "Enter you weight in Kg")
                 }
         ];
     }
@@ -393,7 +394,7 @@ export class HealthProfessional extends BaseChoiceQuestion {
         return [
             as_option(codes.no, french("Non") ),
             as_option(codes.yes_human, french("Oui, j’exerce en tant que professionnel de la santé humaine")),
-            as_option(codes.yes_animal, french("Yes, j'exerce en tant que professionnel de la santé animale"))
+            as_option(codes.yes_animal,french( "Yes, j'exerce en tant que professionnel de la santé animale"))
         ];
     }
 
@@ -407,11 +408,11 @@ export class HealthProfessional extends BaseChoiceQuestion {
         return [
             pool.text_why_asking("intake.Q20.helpGroup.why_asking"),
             {
-                content: french(""),
+                content: ""),
             },
             pool.text_how_answer("intake.Q20.helpGroup.how_answer"),
             {
-                content: french("Indiquez votre poids actuel approximatif en kilogrammes, sans virgule.")
+                content: "Indiquez votre poids actuel approximatif en kilogrammes, sans virgule.")
             }
         ];
     }
@@ -424,7 +425,7 @@ export class HealthProfessionalType extends BaseChoiceQuestion {
     constructor(props:ItemProps) {
         super(props, 'Q4f', 'single');
         this.options = {
-            questionText: french("Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?"),
+            questionText:french( "Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?"),
         }
     }
 
@@ -552,38 +553,17 @@ export class Smoking extends pool.intake.Smoking implements OverridenResponses {
 
     getResponses(): OptionDef[] {
 
-        const dict =  {
-            "0": {
-                "en": "No",
-                "fr": "Non, je n'ai jamais fumé"
-            },
-            "5": {
-                "en": "No, I stopped smoking more than one year ago",
-                "fr": "Non, j’ai arrêté de fumer depuis plus d’un an"
-            },
-            "6": {
-                "en": "No, I stopped smoking less than one year ago",
-                "fr": "Non, j’ai arrêté de fumer depuis moins d’un an"
-            },
-            "1": {
-                "en": "Yes, occasionally",
-                "fr": "Oui, occasionnellement"
-            },
-            "2": {
-                "en": "Yes, daily, fewer than 10 times a day",
-                "fr": "Oui, tous les jours, moins de 10 fois par jour"
-            },
-            "3": {
-                "en": "Yes, daily, 10 or more times a day",
-                "fr": "Oui, tous les jours, 10 fois ou plus par jour"
-            },
-            "4": {
-                "en": "Dont know\/would rather not answer",
-                "fr": "Je ne sais pas \/ préfère ne pas répondre"
-            }
-        };
+        const oo =  [
+            ["0", "No"],
+            ["5", "No, I stopped smoking more than one year ago"],
+            ["6", "No, I stopped smoking less than one year ago"],
+            ["1","Yes, occasionally"],
+            ["2", "Yes, daily, fewer than 10 times a day"],
+            ["3","Yes, daily, 10 or more times a day"],
+            ["4", "Dont know\/would rather not answer"]
+        ];
 
-       return dict_to_response(dict);
+       return array_to_options(oo, "intake.Q13.option.");
     }
 
     getResponseOverrides(): ResponseOveriddes {
@@ -599,27 +579,28 @@ export class GastroEnteritisFrequency extends BaseChoiceQuestion {
     constructor(props:ItemProps) {
         super(props, 'Q34', 'single');
         this.options =  {
-            questionText: french("A quelle fréquence avez vous une gastro-entértie?")
+            questionText: _T("intake.Q34.text", "How often do you have gastro-enteritis")
         }
     }
 
     getResponses() {
-        return [
-            as_option("0", french( "Presque jamais")),
-            as_option("6", french("Parfois, pas tous les ans")),
-            as_option("1", french("Une à deux fois par an")),
-            as_option("2", french( "Entre 3 et 5 fois par an")),
-            as_option("3", french("Entre 6 et 10 fois par an")),
-            as_option("4", french( "Plus de 10 fois par an")),
-            as_option("5", french("Je ne sais pas")),
+        const oo =  [
+            ["0", "Almost never"],
+            ["6", "Sometimes, not every year"],
+            ["1", "One to two times a year"],
+            ["2",  "3 to 5 times a year"],
+            ["3", "6 to 10 times a year"],
+            ["4", "More than 10 times a year"],
+            ["5", "I dont know"],
         ];
+        return array_to_options(oo, "intake.Q34.option.");
     }
 }
 
 const common_cold_codes = {
     "sometimes": "6",
     ...common_responses.intake.cold_frequency
-}
+} as const;
 
 export class CommonColdFrequency extends pool.intake.CommonColdFrequency implements OverridenResponses {
 
@@ -631,7 +612,7 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
 
         const list = new OptionList(responses);
 
-        list.insertAfterKey(codes.never, as_option(common_cold_codes.sometimes, french("Parfois, pas tous les ans")));
+        list.insertAfterKey(codes.never, as_option(common_cold_codes.sometimes,  _T("intake.Q8.option.6", "Sometimes, not every year")));
 
         return list.values();
     }
@@ -647,8 +628,6 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
     }
 
 }
-
-
 
 /**
  * Find out about Platform: multiple choice question about where the participant found out about the platform
@@ -669,7 +648,7 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
                
                 as_option( codes.webhealth, _T("intake.Q17.option.webhealth", "Using an health related information website")),
               
-                as_option( '11', french("Par un email")),
+                as_option( '11', _T("intake.Q17.option.email", "By an email")),
 
                 as_option(codes.social, _T("intake.Q17.option.social", "Via a social network")),
             
@@ -677,8 +656,8 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
                 as_option( codes.poster, _T("intake.Q17.rg.mcg.option.3", "By poster")),
                 as_option( codes.family,  _T("intake.Q17.rg.mcg.option.4", "Via family or friends")),
                 as_option( codes.work, _T("intake.Q17.rg.mcg.option.5", "Via school or work")),
-                as_option( codes.healthworker, french("Par un professionnel de santé")),
-                as_option( codes.project, french("Par un de mes proches qui travaille sur le projet")),
+                as_option( codes.healthworker, _T("intake.Q17.option.healtworker","By an health worker")),
+                as_option( codes.project,  _T("intake.Q17.option.project", "By a relative working on the project")),
                 as_input_option(codes.other_alt, _T("intake.Q17.rg.mcg.option.6", "Other"))
             ];
         }

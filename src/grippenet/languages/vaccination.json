@@ -1,23 +1,94 @@
 {
-    "vaccination.Q0.privacy.note": {
-        "en": "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses.",
-        "fr": "_TODO_"
-    },
-   "vaccination.Q35m.option.18": {
+  "vaccination.Q0.privacy.note": {
+    "en": "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses.",
+    "fr": "_TODO_"
+  },
+  "vaccination.Q10c.option.voucher": {
+    "en": "I have a voucher",
+    "fr": "J’ai eu un bon de vaccination"
+  },
+  "vaccination.Q10c.option.pregnant_baby": {
+    "en": "I'm pregnant and want to protect my baby",
+    "fr": "Je suis enceinte et je souhaite protéger mon bébé contre la grippe"
+  },
+  "vaccination.Q10d.option.advisory_pregnant": {
+    "fr": "On m'a déconseillé de me faire vacciner car je suis enceinte",
+    "en": "advised_not_to_pregnant"
+  },
+  "vaccination.Q10d.option.pregnant_baby": {
+    "fr": "Je suis enceinte et je crains que le vaccin présente un danger pour mon bébé",
+    "en": "I'm pregnant and fear for my baby"
+  },
+  "vaccination.Q10d.option.avoid_healthseeking": {
+    "en": "Because of pandemic, I avoid to visit doctor or pharmacy",
+    "fr": "Du fait de la pandémie de COVID-19, j’évite de me rendre chez le médecin ou à la pharmacie"
+  },
+  "vaccination.Q10d.option.increase_risk_covid": {
+    "en": "I fear the influenza vaccine to increase my risk to get Covid19",
+    "fr": "Je crains que le vaccin contre la grippe saisonnière augmente mon risque d’attraper la COVID-19 "
+  },
+  "vaccination.Q10d.option.other_covid19": {
+    "en": "Other reason related to Covid19",
+    "fr": "Autre raison en lien avec la COVID-19 (champs libre, préciser)"
+  },
+  "vaccination.Q10e.text": {
+    "fr": "Par qui avez-vous été vacciné ?",
+    "en": "By who have you been vaccinated"
+  },
+  "vaccination.Q10e.option.gp": {
+    "fr": "Par un médecin généraliste",
+    "en": "By a generalist practitionner"
+  },
+  "vaccination.Q10e.option.nurse": {
+    "fr": "Par un infirmier",
+    "en": "By a nurse"
+  },
+  "vaccination.Q10e.option.midwife": {
+    "fr": "Par une sage-femme",
+    "en": "By a midwife"
+  },
+  "vaccination.Q10e.option.pharmacist": {
+    "fr": "Par un pharmacien",
+    "en": "By a pharmacist"
+  },
+  "vaccination.Q10e.option.occupational": {
+    "fr": "Par un médecin ou infirmier du travail",
+    "en": "By an occupational med practitionner"
+  },
+  "vaccination.Q10e.option.other": {
+    "fr": "Par un professionnel d’une autre spécialité (préciser)",
+    "en": "By another kind of practitionner"
+  },
+  "vaccination.Q18.text": {
+    "en": "Do you have a voucher for influenza vaccine since last october",
+    "fr": "Avez-vous eu un bon de vaccination contre la grippe cette année (depuis octobre 2022)?"
+  },
+  "vaccination.Q18.option.yes": {
+    "fr": "Oui",
+    "en": "Yes"
+  },
+  "vaccination.Q18.option.no": {
+    "fr": "Non",
+    "en": "No"
+  },
+  "vaccination.Q18.option.dnk": {
+    "fr": "Je ne sais pas / ne me souviens pas",
+    "en": "I dont know"
+  },
+  "vaccination.Q35m.option.18": {
     "en": "counter indication",
     "fr": "Je présente une contre-indication à la vaccination"
-   },
-   "vaccination.Q35m.option.19": {
-    "en":  "bad experience with previous vaccine",
+  },
+  "vaccination.Q35m.option.19": {
+    "en": "bad experience with previous vaccine",
     "fr": "J’ai déjà eu une mauvaise expérience suite à une vaccination"
-   },
-   "vaccination.Q18.asking_reason": {
+  },
+  "vaccination.Q18.asking_reason": {
     "en": "asking_reason",
     "fr": "Pour savoir si vous appartenez à une catégorie de personnes ciblées par les recommandations vaccinales."
-   },
-   "vaccination.Q18.answer_tip": {
+  },
+  "vaccination.Q18.answer_tip": {
     "en": "how_answer",
     "fr": "Cochez « Oui » si vous avez reçu un bon de vaccination contre la grippe depuis le mois d'octobre indiqué, envoyé par l’assurance maladie ou si votre médecin vous a fait un bon."
-   }
+  }
 }
-   

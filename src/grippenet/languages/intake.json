@@ -1,26 +1,186 @@
 {
-   "intake.Q19.helpGroup.asking_reason": {
-     "en":"To know your body mass index",
-     "fr":"Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales.)"
-   },
-   "intake.Q19.helpGroup.answer_tip": {
-    "en":"Enter your approximative height in cm",
+  "intake.Q0.text": {
+    "en": "For whom do you want to fill this survey",
+    "fr": "Pour qui remplissez vous ce questionnaire ?"
+  },
+  "intake.Q0.option.0": {
+    "en": "Myself",
+    "fr": "Pour moi-même"
+  },
+  "intake.Q0.option.3": {
+    "en": "For a person under 18 years-old for whom I'm the legal representative",
+    "fr": "Pour une personne âgée de moins de 18 ans dont je suis le parent ou représentant légal"
+  },
+  "intake.Q0.option.1": {
+    "en": "A member of my household",
+    "fr": "Pour un membre majeur de mon foyer"
+  },
+  "intake.Q0.option.2": {
+    "en": "Someone else",
+    "fr": "Pour quelqu'un d'autre"
+  },
+  "intake.Q4b.option.0": {
+    "en": "I know this postal code",
+    "fr": "Je connais ce code postal"
+  },
+  "intake.Q4b_0.text": {
+    "fr": "Sélectionnez la commune de votre lieu de travail ou d'étude",
+    "en": "Select the postal code of your homework or study location"
+  },
+  "intake.Q5.option.5": {
+    "fr": "Entre 1 et 9 enfants ou adolescents dans la même journée (en ne comptant pas vos propres enfants)",
+    "en": "Between 1 to 9 children in the same day (not counting your own children)"
+  },
+  "intake.Q8.option.6": {
+    "fr": "Parfois, pas tous les ans",
+    "en": "Sometimes, not every year"
+  },
+  "intake.Q19.text": {
+    "fr": "Quelle est votre taille (en centimètres)?",
+    "en": "What is your body height (in centimeter)"
+  },
+  "intake.Q19.inputlabel": {
+    "fr": "Votre taille",
+    "en": "Your height"
+  },
+  "intake.Q20.text": {
+    "fr": "Quelle est votre poids (en kilogrammes)?",
+    "en": "What is your body weight"
+  },
+  "intake.Q20.inputlabel": {
+    "fr": "Votre poids",
+    "en": "Your weight"
+  },
+  "intake.Q20.helpGroup.asking_reason": {
+    "fr": "Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales.",
+    "en": "To know your BMI"
+  },
+  "intake.Q20.helpGroup.answer_tip": {
+    "en": "Enter you weight in Kg",
+    "fr": "Indiquez votre poids actuel approximatif en kilogrammes, sans virgule."
+  },
+  "intake.Q13.option.0": {
+    "en": "No",
+    "fr": "Non, je n'ai jamais fumé"
+  },
+  "intake.Q13.option.5": {
+    "en": "No, I stopped smoking more than one year ago",
+    "fr": "Non, j’ai arrêté de fumer depuis plus d’un an"
+  },
+  "intake.Q13.option.6": {
+    "en": "No, I stopped smoking less than one year ago",
+    "fr": "Non, j’ai arrêté de fumer depuis moins d’un an"
+  },
+  "intake.Q13.option.1": {
+    "en": "Yes, occasionally",
+    "fr": "Oui, occasionnellement"
+  },
+  "intake.Q13.option.2": {
+    "en": "Yes, daily, fewer than 10 times a day",
+    "fr": "Oui, tous les jours, moins de 10 fois par jour"
+  },
+  "intake.Q13.option.3": {
+    "en": "Yes, daily, 10 or more times a day",
+    "fr": "Oui, tous les jours, 10 fois ou plus par jour"
+  },
+  "intake.Q13.option.4": {
+    "en": "Dont know/would rather not answer",
+    "fr": "Je ne sais pas / préfère ne pas répondre"
+  },
+  "intake.Q22.text": {
+    "en": "Q22.text",
+    "fr": "Je certifie avoir expliqué à cette personne le contenu de cette étude et avoir obtenu son libre consentement pour y participer. Elle m'a donné pouvoir pour remplir les questionnaires à sa place."
+  },
+  "intake.Q22.option.0": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "intake.Q22.option.1": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "intake.Q23.text": {
+    "en": "Q23.text",
+    "fr": "Je certifie avoir expliqué à cette personne le contenu de cette étude et avoir obtenu son libre consentement pour y participer. Elle m'a donné pouvoir pour remplir les questionnaires à sa place. Je certifie être l’un de ses représentants légaux."
+  },
+  "intake.Q23.option.0": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "intake.Q23.option.1": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "intake.QEnd.text": {
+    "en": "It's not possible to continue this survey",
+    "fr": "Il n'est pas possible de poursuivre ce questionnaire"
+  },
+  "intake.Q19.helpGroup.asking_reason": {
+    "en": "To know your body mass index",
+    "fr": "Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales.)"
+  },
+  "intake.Q19.helpGroup.answer_tip": {
+    "en": "Enter your approximative height in cm",
     "fr": "Indiquez votre taille approximative en centimètres, sans virgule."
-   },
-    "intake.Q17.option.site_official": {
-        "en": "Using an official website (public health agency, ...)",
-        "fr": "Par le site d'une institution officielle"
-    },
-    "intake.Q17.option.site_news": {
-        "en": "Using an news website",
-        "fr": "Par un site d'information généraliste"
-    },
-    "intake.Q17.option.webhealth": {
-        "en": "Using an health related information website",
-        "fr": "Par un site sur la santé"
-    },
-    "intake.Q17.option.social": {
-        "en": "Via a social network",
-        "fr": "Par un réseau social"
-    }
+  },
+  "intake.Q17.option.site_official": {
+    "en": "Using an official website (public health agency, ...)",
+    "fr": "Par le site d'une institution officielle"
+  },
+  "intake.Q17.option.site_news": {
+    "en": "Using an news website",
+    "fr": "Par un site d'information généraliste"
+  },
+  "intake.Q17.option.webhealth": {
+    "en": "Using an health related information website",
+    "fr": "Par un site sur la santé"
+  },
+  "intake.Q17.option.social": {
+    "en": "Via a social network",
+    "fr": "Par un réseau social"
+  },
+  "intake.Q34.text": {
+    "fr": "A quelle fréquence avez vous une gastro-entérite?",
+    "en": "How often do you have gastro-enteritis"
+  },
+  "intake.Q34.option.0": {
+    "en": "Almost never",
+    "fr": "Presque jamais"
+  },
+  "intake.Q34.option.6": {
+    "en": "Sometimes, not every year",
+    "fr": "Parfois, pas tous les ans"
+  },
+  "intake.Q34.option.1": {
+    "en": "One to two times a year",
+    "fr": "Une à deux fois par an"
+  },
+  "intake.Q34.option.2": {
+    "en": "3 to 5 times a year",
+    "fr": "Entre 3 et 5 fois par an"
+  },
+  "intake.Q34.option.3": {
+    "en": "6 to 10 times a year",
+    "fr": "Entre 6 et 10 fois par an"
+  },
+  "intake.Q34.option.4": {
+    "en": "More than 10 times a year",
+    "fr": "Plus de 10 fois par an"
+  },
+  "intake.Q34.option.5": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas"
+  },
+  "intake.Q17.option.email": {
+    "en": "By an email",
+    "fr": "Par un email"
+  },
+  "intake.Q17.option.healtworker": {
+    "fr": "Par un professionnel de santé",
+    "en": "By an health worker"
+  },
+  "intake.Q17.option.project": {
+    "en": "By a relative working on the project",
+    "fr": "Par un de mes proches qui travaille sur le projet"
+  }
 }
