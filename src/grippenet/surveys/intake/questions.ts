@@ -11,13 +11,13 @@
 // [X] Q17 +8, +9, +10, +11 ....
 // [X] Q34 GastroEnteritisFrequency
 
-import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, SingleItemDependency, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
+import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, GroupQuestion, ItemProps, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 
 import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes, OptionList } from "../../../utils";
 import { postalCode } from "../../questions/postalCode";
-import { Expression } from "survey-engine/data_types";
+import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ClientExpression as client } from "../../../common";
 
 const ResponseEncoding = {
@@ -25,8 +25,149 @@ const ResponseEncoding = {
         no: "0",
         yes_human: "1",
         yes_animal: "2"
+    } as const,
+
+    for_whom: {
+        myself: "0",
+        "someone": "2",
+        "household": "1",
+        "representative": "3",
+    } as const,
+} as const;
+export class FillingForWhom extends BaseChoiceQuestion {
+
+    readonly codes = ResponseEncoding.for_whom;
+
+    constructor(props: ItemProps) {
+        super(props, 'Q0', 'single');
+        this.options = {
+            questionText: french("Pour qui remplissez vous ce questionnaire ?", "intake.Q0.text"),
+        }
+    }
+
+    createConditionLegalRepresentative(): Expression {
+        return client.singleChoice.any(this.key, this.codes.representative);
+    }
+    
+    createConditionHousehold(): Expression {
+        return client.singleChoice.any(this.key, this.codes.household);
+    }
+
+    createConditionMyself(): Expression {
+        return client.singleChoice.any(this.key, this.codes.myself);
+    }
+
+    createConditionSomeoneElse(): Expression {
+        return client.singleChoice.any(this.key, this.codes.someone);
+    }
+
+    getResponses() {
+            return  [
+                as_option(this.codes.myself, _T("intake.Q0.option.0", "Myself")),
+                as_option(this.codes.representative, _T("intake.Q0.option.3", "For a person under 18 years-old for whom I'm the legal representative")),
+                as_option(this.codes.household, _T("intake.Q0.option.1","A member of my household")),
+                as_option(this.codes.someone, _T("intake.Q0.option.2","Someone else")),
+            ];        
+    }  
+    
+    getHelpGroupContent() {
+        return undefined;
     }
 }
+
+export class FillingForWhomLegalRepresentative extends BaseChoiceQuestion {
+
+    readonly codes = {
+        'yes': '1',
+        'no': '0'
+    } as const;
+
+
+    constructor(props: ItemProps) {
+        super(props, 'Q23', 'single');
+        this.options = {
+            questionText: _T("intake.Q23.text", "Q23.text"),
+        }
+    }
+    
+    getResponses() {
+            return  [
+                as_option(this.codes.no, _T("intake.Q23.option.0", "No")),
+                as_option(this.codes.yes, _T("intake.Q23.option.1", "Yes")),
+            ];        
+    }  
+    
+    createYesCondition(): Expression {
+        return client.singleChoice.any(this.key, this.codes.yes);
+    }
+
+    createNoCondition(): Expression {
+        return client.singleChoice.any(this.key, this.codes.no);
+    }
+
+
+    getHelpGroupContent() {
+        return undefined;
+    }
+}
+
+export class NotPossibleToContinue extends BaseChoiceQuestion {
+    constructor(props: ItemProps) {
+        super(props, 'QEnd', 'single');
+        this.options = {
+            questionText: _T("intake.QEnd.text", "It's not possible to continue this survey"),
+            customValidations: [
+                {
+                    key:'v1',
+                    type:"hard",
+                    rule: client.compare.eq(0, 1)
+                }
+            ]
+        };
+    }
+
+    getResponses(): OptionDef[] {
+        return [
+            as_option("0", french(""))
+        ];
+    }
+}
+
+export class FillingForWhomHousold extends BaseChoiceQuestion {
+
+    readonly codes = {
+        'yes': '1',
+        'no': '0'
+    } as const;
+
+    constructor(props: ItemProps) {
+        super(props, 'Q22', 'single');
+        this.options = {
+            questionText: _T("intake.Q22.text", "Q22.text"),
+        }
+    }
+
+    createYesCondition(): Expression {
+        return client.singleChoice.any(this.key, this.codes.yes);
+    }
+
+    createNoCondition(): Expression {
+        return client.singleChoice.any(this.key, this.codes.no);
+    }
+
+    
+    getResponses() {
+            return  [
+                as_option(this.codes.no,  _T("intake.Q22.option.0", "No")),
+                as_option(this.codes.yes, _T("intake.Q22.option.1", "Yes")),
+            ];        
+    }
+    
+    getHelpGroupContent() {
+        return undefined;
+    }
+}
+
 
 export class PostalCode extends ItemQuestion {
 
@@ -80,11 +221,9 @@ export class PostalCode extends ItemQuestion {
 
 export const working_mainactivity_condition = (item: Item) => {
     const codes = common_responses.intake.main_activity;
-    return new SingleItemDependency({
-        item: item,
-        type: 'single',
-        responses: [codes.fulltime, codes.partial, codes.self, codes.student ] 
-    });
+    return client.singleChoice.any(item.key,
+        codes.fulltime, codes.partial, codes.self, codes.student 
+    );
 }
 
 export class PostalCodeWork extends BaseChoiceQuestion {
@@ -466,7 +605,7 @@ export class GastroEnteritisFrequency extends BaseChoiceQuestion {
 
     getResponses() {
         return [
-            as_option("0",french( "Presque jamais")),
+            as_option("0", french( "Presque jamais")),
             as_option("6", french("Parfois, pas tous les ans")),
             as_option("1", french("Une à deux fois par an")),
             as_option("2", french( "Entre 3 et 5 fois par an")),
