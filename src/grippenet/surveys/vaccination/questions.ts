@@ -1,6 +1,6 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { text_how_answer, text_why_asking } from "../../../../common/studies/common/questionPools";
-import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, SingleItemDependency, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
+import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
 import { as_input_option, as_option, french, OptionList, OverridenResponses, ResponseOveriddes } from "../../../utils";
 import { starting_year } from "../../constants";
 
