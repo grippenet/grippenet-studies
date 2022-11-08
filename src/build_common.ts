@@ -7,6 +7,4 @@ builder.build();
 
 const study = builder.getStudy();
 
-study_exporter([study], true);
-
-buildMissing('./output/common');
+study_exporter([study]);

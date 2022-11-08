@@ -12,6 +12,4 @@ builder.build();
 
 const study = builder.getStudy();
 
-study_exporter([study], true);
-
-buildMissing('./output/grippenet');
+study_exporter([study]);
