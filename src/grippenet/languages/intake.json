@@ -1,4 +1,13 @@
 {
+  "intake.prelude.text": {
+    "#comment": "",
+    "en": "Intake survey prelude text in markdown",
+    "fr": [
+      "Les réponses aux questions précédées d’un astérisque (*) sont obligatoires pour pouvoir valider le questionnaire.",
+      "",
+      "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
+    ]
+  },
   "intake.Q0.text": {
     "en": "For whom do you want to fill this survey",
     "fr": "Pour qui remplissez vous ce questionnaire ?"

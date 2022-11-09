@@ -16,11 +16,14 @@ export class IntakeDef extends SurveyBuilder {
             surveyKey: 'intake',
             name:_T("intake.name.0", "Intake questionnaire"),
             description: _T("intake.description.0", "The purpose of the background questionnaire is to find out a little more about each user."),
-            durationText: _T( "intake.typicalDuration.0", "Duration 5-10 minutes"),
+            durationText: _T("intake.typicalDuration.0", "Duration 5-10 minutes"),
             metadata: meta,
         });
 
         const rootKey = this.key;
+
+        const prelude = new intake.SurveyPrelude({parentKey: rootKey})
+        this.push(prelude);
 
         const QForWhom = new intake.FillingForWhom({parentKey: rootKey, isRequired: true});
         this.push(QForWhom);

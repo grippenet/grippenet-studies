@@ -19,6 +19,7 @@ import { french, dict_to_response, as_option, as_input_option, OverridenResponse
 import { postalCode } from "../../questions/postalCode";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ClientExpression as client } from "../../../common";
+import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 
 const ResponseEncoding = {
     health_prof: {
@@ -34,6 +35,27 @@ const ResponseEncoding = {
         "representative": "3",
     } as const,
 } as const;
+
+export class SurveyPrelude extends ItemQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'prelude');
+    }
+
+    buildItem(): SurveySingleItem {
+        return SurveyItems.display({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            content: [
+                ComponentGenerators.markdown({
+                    content: _T("vaccination.prelude", "Vaccination survey prelude text in markdown")
+                })
+            ]
+        });
+    }
+
+}
+
 export class FillingForWhom extends BaseChoiceQuestion {
 
     readonly codes = ResponseEncoding.for_whom;
