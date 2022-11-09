@@ -1,12 +1,12 @@
-Grippenet Studies
-====
+# Grippenet Studies
 
-# Installation
+## Installation
 
-This repository uses common-study-definition repository as a local directory
+This repository uses the src directory of common-study-definition repository as a local directory
 
 ```
-git clone https://github.com/influenzanet/common-study-definition.git common
+git clone https://github.com/influenzanet/common-study-definition.git common_studies
+ln -s common_studies/src common
 ```
 
 Then you can install
@@ -14,7 +14,7 @@ Then you can install
 yarn
 ```
 
-# Usage
+## Usage
 
 To build grippenet surveys 
 
@@ -28,3 +28,4 @@ To build common surveys
 yarn common
 ```
  
+##
