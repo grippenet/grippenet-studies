@@ -1,18 +1,39 @@
-import { OptionDef } from "case-editor-tools/surveys/types";
-import { text_how_answer, text_why_asking } from "../../../../common/studies/common/questionPools";
-import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, ItemProps, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
-import { as_input_option, as_option, french, OptionList, OverridenResponses, ResponseOveriddes } from "../../../utils";
-import { starting_year } from "../../constants";
+import { SurveyItems } from "case-editor-tools/surveys";
+import {  OptionDef } from "case-editor-tools/surveys/types";
+import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
+import { SurveySingleItem } from "survey-engine/data_types";
+import { questionPools as pool, 
+    _T, responses as common_responses, ItemQuestion, ItemProps, BaseChoiceQuestion, 
+    ClientExpression as client, exp_as_arg } from "../../../common"
+import { as_input_option, as_option, OptionList, OverridenResponses, ResponseOveriddes } from "../../../utils";
+
+const text_how_answer = pool.text_how_answer;
+const text_why_asking = pool.text_why_asking;
 
 // Q10c.11
 // Q10d.15, 16, 17, 18, 19
+// Q37
 
 const encoding = common_responses.vaccination;
 
+export class SurveyPrelude extends ItemQuestion {
+    
+    buildItem(): SurveySingleItem {
+        return SurveyItems.display({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            content: [
+                ComponentGenerators.markdown({
+                    content: _T("vaccination.prelude", "Vaccination survey prelude text in markdown")
+                })
+            ]
+        });
+    }
+
+}
+
 export class FluVaccineThisSeasonReasonFor extends pool.vaccination.FluVaccineThisSeasonReasonFor implements OverridenResponses {
     
- 
-
     getResponses(): OptionDef[] {
         const options = super.getResponses();
         const codes = encoding.flu_vac_reason;
@@ -129,3 +150,48 @@ export class FluVaccinationVoucher extends BaseChoiceQuestion {
     }
 }
 
+export class LastCovid19Infection extends ItemQuestion {
+
+    constructor( props: ItemProps) {
+        super(props, 'Q37');
+    }
+
+    buildItem() {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: _T("vaccination.Q37.text", "Did you get a COVID19 infection in the past last months"),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: [
+                {
+                    key: '1', role: 'dateInput',
+                    optionProps: {
+                        dateInputMode: { str: 'YM' },
+                        min: exp_as_arg( client.timestampWithOffset({'years': -1})),
+                        max: exp_as_arg( client.timestampWithOffset({'minutes': 1}) )
+                    },
+                    content: _T("vaccination.Q37.rg.scg.option.1.text", "Choose date"),
+                },
+                as_option('0', _T("vaccination.Q37.rg.scg.option.0.text", "No")),
+                as_option('2', _T("vaccination.Q37.rg.scg.option.2.text", "I don't know (anymore)"))
+            ]
+        });
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("vaccination.Q37.helpGroup.text.0"),
+
+            {
+                content: _T("vaccination.Q37.helpGroup.text.1", "Knowing where is your last infection"),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+            text_how_answer("vaccination.Q37.helpGroup.text.2"),
+            {
+                content: _T("vaccination.Q37.helpGroup.text.3", "Response as precisely as possible"),
+            },
+        ]
+    }
+}

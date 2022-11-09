@@ -1,4 +1,14 @@
 {
+  "vaccination.prelude": {
+    "en": "Vaccination survey prelude text in markdown",
+    "fr": [
+      "Les réponses aux questions précédées d’un astérisque (*) sont obligatoires pour pouvoir valider le questionnaire.",
+      "",
+      "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet.fr/COVIDnet.fr, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la COVID-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire.",
+      "",
+      "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
+    ]
+  },
   "vaccination.Q0.privacy.note": {
     "en": "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses.",
     "fr": "_TODO_"
@@ -90,5 +100,29 @@
   "vaccination.Q18.answer_tip": {
     "en": "how_answer",
     "fr": "Cochez « Oui » si vous avez reçu un bon de vaccination contre la grippe depuis le mois d'octobre indiqué, envoyé par l’assurance maladie ou si votre médecin vous a fait un bon."
+  },
+  "vaccination.Q37.rg.scg.option.1.text": {
+    "en": "Choose date",
+    "fr": "Choisissez une date"
+  },
+  "vaccination.Q37.text": {
+    "en": "Did you get a COVID19 infection in the past last months",
+    "fr": "Avez-vous été infecté par le SARS-CoV-2 (COVID19) au cours des derniers mois"
+  },
+  "vaccination.Q37.rg.scg.option.0.text": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "vaccination.Q37.rg.scg.option.2.text": {
+    "en": "I don't know (anymore)",
+    "fr": "Je ne sais plus"
+  },
+  "vaccination.Q37.helpGroup.text.1": {
+    "en": "Knowing where is your last infection",
+    "fr": "TODO"
+  },
+  "vaccination.Q37.helpGroup.text.3": {
+    "en": "Response as precisely as possible",
+    "fr": "TODO"
   }
 }
