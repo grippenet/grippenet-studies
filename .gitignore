@@ -5,3 +5,4 @@ output
 report.*.json
 *.log
 .env
+venv
