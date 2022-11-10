@@ -1,5 +1,5 @@
 import { CommonStudyBuilder } from "../common/studies/common";
-import { buildMissing, study_exporter } from "../common/tools/exporter";
+import { study_exporter } from "../common/tools/exporter";
 
 const builder = new CommonStudyBuilder();
 
