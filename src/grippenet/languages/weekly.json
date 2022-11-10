@@ -1,5 +1,4 @@
 {
-    
     "weekly.EX.Qcov18.helpGroup.text.3": {
         "en": "Multiple answers are possible.",
         "fr": "_TODO_"
@@ -14,6 +13,234 @@
     },
     "weekly.EX.Q9.rg.mcg.option.7.desc": {
         "en": "Please specify",
-        "fn": "Précisez"
+        "fr": "Précisez"
+    },
+    "weekly.QFRmask5.text": {
+        "en": "Why did you not wear a mask",
+        "fr": "Pour quelle(s) raison(s) n’avez-vous pas porté de masque ?"
+    },
+    "weekly.QFRmask5.option.ridiculous": {
+        "en": "You fear to be ridiculous",
+        "fr": "Vous avez eu peur d’être ridicule"
+    },
+    "weekly.QFRmask5.option.excessive": {
+        "en": "it's a little excessive",
+        "fr": "Vous pensez que c’est un peu exagéré"
+    },
+    "weekly.QFRmask5.option.efficient": {
+        "en": "it would not be efficient",
+        "fr": "Vous estimez que ça ne serait pas assez efficace"
+    },
+    "weekly.QFRmask5.option.unrisky.trans": {
+        "en": "There is no risk of transmission",
+        "fr": "Vous pensez qu’il n’y a pas de risque de transmettre des virus aux autres"
+    },
+    "weekly.QFRmask5.option.dontcare.trans": {
+        "en": "I dont care much if I transmit the virus",
+        "fr": "Cela vous importe peu de transmettre des virus aux autres"
+    },
+    "weekly.QFRmask5.option.find.mask": {
+        "en": "I dont know where to obtain this kind of mask",
+        "fr": "Vous ne savez pas où vous procurer ce genre de masque"
+    },
+    "weekly.QFRmask5.option.spend.money": {
+        "en": "I don't want to spend money for that",
+        "fr": "Vous ne souhaitez pas dépenser votre argent pour cela"
+    },
+    "weekly.QFRmask5.option.keep.mask": {
+        "en": "I find hard to keep the mask a long time on my face",
+        "fr": "Vous trouvez qu’il est difficile de garder un masque un long moment"
+    },
+    "weekly.QFRmask5.option.concerned": {
+        "en": "I dont feel concerned",
+        "fr": "Vous ne vous sentez pas concerné"
+    },
+    "weekly.QFRmask5.option.other": {
+        "en": "Other",
+        "fr": "Autre (précisez)"
+    },
+    "weekly.QFRmask5.option.dnk": {
+        "en": "I dont know",
+        "fr": "Je ne sais pas / je ne souhaite pas répondre"
+    },
+    "weekly.Q16.text": {
+        "en": "How many stool a day did you have",
+        "fr": "Combien de selles par jour avez-vous ?"
+    },
+    "weekly.EX.Q7.rg.mcg.option.other_community_pract": {
+        "en": "Other community practitioner",
+        "fr": "Autre médecin de ville (pédiatre, ORL, cardiologue…)"
+    },
+    "weekly.EX.Q7.rg.mcg.option.gynecologist": {
+        "en": "Gynecologist",
+        "fr": "Gynécologue/obstétricien"
+    },
+    "weekly.EX.Q7.rg.mcg.option.midwife": {
+        "en": "Midwife",
+        "fr": "Sage-femme"
+    },
+    "weekly.EX.Q7.rg.mcg.option.pharmacist": {
+        "en": "Pharmacist",
+        "fr": "Pharmacien"
+    },
+    "weekly.EX.Q7.rg.mcg.option.scholar_nurse": {
+        "en": "Scholar nurse",
+        "fr": "Infirmier scolaire"
+    },
+    "weekly.Q9d.text": {
+        "en": "About the antibiotic you used",
+        "fr": "Concernant les antibiotiques que vous avez pris :"
+    },
+    "weekly.Q9d.option.from_doctor": {
+        "en": "They have just been prescribed by a doctor",
+        "fr": "Ils viennent de vous être prescrits par un médecin pour les symptômes que vous rapportez aujourd'hui"
+    },
+    "weekly.Q9d.option.from_home": {
+        "en": "You already have them at home",
+        "fr": "Vous les aviez déjà chez vous"
+    },
+    "weekly.QFRmask1.text": {
+        "en": "Under what circumstances did you wear a mask",
+        "fr": "Dans quelle(s) circonstance(s) avez-vous porté un masque ?"
+    },
+    "weekly.QFRmask1.option.fear_transmit": {
+        "en": "By fear of transmitting to household",
+        "fr": "Chez vous pour ne pas contaminer votre entourage (enfants, parents, conjoint"
+    },
+    "weekly.QFRmask1.option.oustide": {
+        "en": "Oustide home",
+        "fr": "A l’extérieur (pour aller faire vos courses, voir des amis, dans les transports en commun, etc.) pour ne pas contaminer les autres"
+    },
+    "weekly.QFRmask1.option.at_work": {
+        "en": "At work",
+        "fr": "Sur votre lieu de travail (ou d’étude)"
+    },
+    "weekly.QFRmask1.option.contact_elder": {
+        "en": "Close to elder people",
+        "fr": "Lorsque vous avez été en contact avec une ou plusieurs personnes âgées de 65 ans et plus"
+    },
+    "weekly.QFRmask1.option.contact_at_risk": {
+        "en": "Close to people with chronic disease",
+        "fr": "Lorsque vous avez été en contact avec une ou plusieurs personnes porteuses de pathologie(s) chronique(s) (asthme, diabète, maladie cardiaque, cancer, etc.)"
+    },
+    "weekly.QFRmask1.option.hospital": {
+        "en": "By visiting people at hospital",
+        "fr": "Lorsque vous avez rendu visite à une ou plusieurs personnes hospitalisées"
+    },
+    "weekly.QFRmask1.option.young_children": {
+        "en": "Close to young people",
+        "fr": "Lorsque vous avez été en contact avec un ou plusieurs jeunes enfants (moins de deux ans)"
+    },
+    "weekly.QFRmask1.option.other": {
+        "en": "Other",
+        "fr": "Dans d’autres circonstances (précisez)"
+    },
+    "weekly.QFRmask1.option.dnk": {
+        "en": "I dont know",
+        "fr": "Je ne sais pas  / je ne souhaite pas répondre"
+    },
+    "weekly.QFRmask2.text": {
+        "en": "In this context, did you always wear a mask",
+        "fr": "Dans ces circonstances, avez-vous systématiquement porté un masque, tant que vous aviez des symptômes ?"
+    },
+    "weekly.QFRmask2.option.yes": {
+        "en": "Yes",
+        "fr": "Oui"
+    },
+    "weekly.QFRmask2.option.no": {
+        "en": "No",
+        "fr": "Non"
+    },
+    "weekly.QFRmask2.option.dnk": {
+        "en": "I dont know",
+        "fr": "Je ne sais pas  / je ne souhaite pas répondre"
+    },
+    "weekly.QFRmaskE.text": {
+        "en": "Why did you not always wear a mask in this context",
+        "fr": "pour quelle(s) raison(s) n’avez-vous pas systématiquement porté un masque, tant que vous aviez des symptômes ?"
+    },
+    "weekly.QFRmask3.option.at_home": {
+        "en": "At home",
+        "fr": "Chez vous pour ne pas contaminer votre entourage (enfants, parents, conjoint)"
+    },
+    "weekly.QFRmask3.option.not_enough": {
+        "en": "Dont have enough mask",
+        "fr": "Vous n’aviez pas suffisamment de masques"
+    },
+    "weekly.QFRmask3.option.incommode": {
+        "en": "Mask incommode me for breathing",
+        "fr": "Cela vous gênait pour respirer ou vous donnait une sensation désagréable (chaleur, humidité)"
+    },
+    "weekly.QFRmask3.option.constraint": {
+        "en": "Too constraining",
+        "fr": "Vous avez trouvé cela trop contraignant à utiliser"
+    },
+    "weekly.QFRmask3.option.other_look": {
+        "en": "Other reason",
+        "fr": "Pour une autre raison (précisez)"
+    },
+    "weekly.QFRmask3.option.dnk": {
+        "en": "I dont know",
+        "fr": "Je ne sais pas / je ne souhaite pas répondre"
+    },
+    "weekly.QFRmask4.text": {
+        "en": "Where did you get this mask from?",
+        "fr": "Où vous êtes-vous procuré ce ou ces masques ?"
+    },
+    "weekly.QFRmask4.option.pharmacy": {
+        "en": "At the pharmacy",
+        "fr": "En pharmacie / parapharmacie"
+    },
+    "weekly.QFRmask4.option.internet": {
+        "en": "On internet",
+        "fr": "Sur Internet"
+    },
+    "weekly.QFRmask4.option.work": {
+        "en": "At work",
+        "fr": "Sur votre lieu de travail"
+    },
+    "weekly.QFRmask4.option.doctor": {
+        "en": "From my doctor",
+        "fr": "Votre médecin traitant vous en a donné"
+    },
+    "weekly.QFRmask4.option.other": {
+        "en": "Other",
+        "fr": "Autre (précisez)"
+    },
+    "weekly.QFRmask4.option.dnk": {
+        "en": "I dont know",
+        "fr": "Je ne sais pas / je ne souhaite pas répondre"
+    },
+    "weekly.Q11.option.doctor_said_flu": {
+        "en": "My doctor said they are caused by flu",
+        "fr": "Mon médecin m'a dit qu'il s'agissait de la grippe"
+    },
+    "weekly.Q16.option.less3": {
+        "en": "Less than 3",
+        "fr": "Moins de 3"
+    },
+    "weekly.Q16.option.more3": {
+        "en": "More than 3",
+        "fr": "Plus de 3"
+    },
+    "weekly.Q17.text": {
+        "en": "Globally, how do you feel today",
+        "fr": "Globalement, comment vous sentez-vous ?"
+    },
+    "weekly.Q17.sliderLabel": {
+        "en": "Slider label",
+        "fr": "Slider label"
+    },
+    "weekly.Q17.noResponseLabel": {
+        "en": "noResponseLabel",
+        "fr": "Pour répondre "
+    },
+    "weekly.Q17.helpGroup.asking_reason": {
+        "en": "How do you feel asking reason",
+        "fr": "_TODO_"
+    },
+    "weekly.Q17.helpGroup.answer_tip": {
+        "en": "How do you feel answer tip",
+        "fr": "_TODO_"
     }
 }

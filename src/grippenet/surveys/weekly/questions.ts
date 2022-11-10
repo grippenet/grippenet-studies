@@ -1,15 +1,16 @@
-import {  questionPools, _T, responses as common_responses, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion, GroupQuestion, GroupProps, ClientExpression as client } from "../../../common"
+import {  questionPools, _T, responses as common_responses, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion,
+     GroupQuestion, GroupProps, ClientExpression as client, trans_text } from "../../../common"
 import {  Expression, ItemComponent, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { as_input_option, as_option, french, OptionList } from "../../../utils";
-import { text_select_all_apply } from "../../../../common/studies/common/questionPools";
+import { text_how_answer, text_select_all_apply, text_why_asking } from "../../../../common/studies/common/questionPools";
 import { matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 
 const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
 
 // [X] Q16
-// [ ] Q7 
+// [X] Q7 
 // [ ] Q7b
 // [ ] +Q9d
 // [ ] Qcov7 4a=>4, 4b=>17, 18=>, 12=>()
@@ -26,14 +27,14 @@ export class StoolCount extends BaseChoiceQuestion {
         super(props, 'Q16', 'single');
         this.condition = props.SymptomQuestion.createSymptomCondition('diarrhea');
         this.options = {
-            questionText: french("Combien de selles par jour avez-vous ?"),
+            questionText: _T("weekly.Q16.text", "How many stool a day did you have"),
         }
     }
     
     getResponses() {
             return  [
-               as_option("0", french("Moins de 3")),
-               as_option("1", french("Plus de 3"))
+               as_option("0", _T( "weekly.Q16.option.less3", "Less than 3")),
+               as_option("1", _T( "weekly.Q16.option.more3", "More than 3"))
             ];
     }
     
@@ -76,27 +77,27 @@ export class VisitedMedicalService extends questionPools.weekly.VisitedMedicalSe
                 {
                     key: '6', role: 'option',
                     disabled: exclusiveOther,
-                    content: french("Autre médecin de ville (pédiatre, ORL, cardiologue…)")
+                    content: _T( "weekly.EX.Q7.rg.mcg.option.other_community_pract", "Other community practitioner")
                 },
                 {
                     key: '9', role: 'option',
                     disabled: exclusiveOther,
-                    content: french("Gynécologue\/obstétricien")
+                    content: _T( "weekly.EX.Q7.rg.mcg.option.gynecologist", "Gynecologist")
                 },
                 {
                     key: '10', role: 'option',
                     disabled: exclusiveOther,
-                    content: french("Sage-femme")
+                    content: _T("weekly.EX.Q7.rg.mcg.option.midwife", "Midwife")
                 },
                 {
                     key: '7', role: 'option',
                     disabled: exclusiveOther,
-                    content: french("Pharmacien")
+                    content: _T("weekly.EX.Q7.rg.mcg.option.pharmacist", "Pharmacist")
                 },
                 {
                     key: '8', role: 'option',
                     disabled: exclusiveOther,
-                    content: french("Infirmier scolaire")
+                    content: _T("weekly.EX.Q7.rg.mcg.option.scholar_nurse","Scholar nurse")
                 },
                 {
                     key: codes.emergency, role: 'option',
@@ -127,14 +128,14 @@ export class AntibioticFrom extends BaseChoiceQuestion {
         super(props, 'Q9d', 'single');
         this.condition = props.medicationQuestion.createTookAntibioticCondition();
         this.options = {
-            questionText: french("Concernant les antibiotiques que vous avez pris :"),
+            questionText: _T("weekly.Q9d.text", "About the antibiotic you used"),
         };
     }
 
     getResponses() {
         return  [
-            as_option("0", french("Ils viennent de vous être prescrits par un médecin pour les symptômes que vous rapportez aujourd'hui")),
-            as_option("1", french("Vous les aviez déjà chez vous"))
+            as_option("0", _T("weekly.Q9d.option.from_doctor", "They have just been prescribed by a doctor")),
+            as_option("1", _T("weekly.Q9d.option.from_home","You already have them at home"))
         ];
     }
     
@@ -186,9 +187,11 @@ export class CovidHabitsChange extends questionPools.weekly.CovidHabitsChange {
         const codes = common_responses.weekly.covid_habits;
         const scale_codes = questionPools.weekly.CovidHabitsChange.likertScaleCodes;
         
+        const yes_codes = [ scale_codes.yes_more, scale_codes.yes_already ];
+
         return client.logic.or(
-            client.responseHasKeysAny(this.key, [responseGroupKey, this.getLikertRowKey(codes.wear_mask_french)].join('.'), scale_codes.yes_more, scale_codes.yes_already ),
-            client.responseHasKeysAny(this.key, [responseGroupKey, this.getLikertRowKey(codes.wear_mask_home_french)].join('.'), scale_codes.yes_more, scale_codes.yes_already ),
+            client.responseHasKeysAny(this.key, [responseGroupKey, this.getLikertRowKey(codes.wear_mask_french)].join('.'), ...yes_codes ),
+            client.responseHasKeysAny(this.key, [responseGroupKey, this.getLikertRowKey(codes.wear_mask_home_french)].join('.'), ...yes_codes ),
         )
     }
 }
@@ -199,7 +202,7 @@ export class CauseOfSymptoms extends questionPools.weekly.CauseOfSymptoms {
     
         const list = new OptionList(super.getResponses());
         
-        list.insertAfterKey('9',  as_option("7", french("Mon médecin m'a dit qu'il s'agissait de la grippe")) );
+        list.insertAfterKey('9',  as_option("7", _T("weekly.Q11.option.doctor_said_flu", "My doctor said they are caused by flu")) );
 
         return list.values();
     }
@@ -210,7 +213,7 @@ export class HowDoYouFeel extends ItemQuestion {
 
     
     constructor(props:ItemProps) {
-        super(props, 'Q9d');
+        super(props, 'Q17');
     }
 
     buildItem(): SurveySingleItem {
@@ -219,13 +222,23 @@ export class HowDoYouFeel extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText:french("Globalement, comment vous sentez-vous ?"),
-            sliderLabel: french(""),
-            noResponseLabel: french("Pour répondre "),
+            questionText:_T("weekly.Q17.text", "Globally, how do you feel today"),
+            sliderLabel: _T( "weekly.Q17.sliderLabel", "Slider label"),
+            noResponseLabel: _T("weekly.Q17.noResponseLabel", "noResponseLabel"),
+            helpGroupContent: this.getHelpGroupContent(),
             min: 0,
             max: 100,
             stepSize: 1
         });
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("weekly.Q17.helpGroup.why_asking"),
+            trans_text("weekly.Q17.helpGroup.asking_reason", "How do you feel asking reason"),
+            text_how_answer("weekly.Q17.helpGroup.how_answer"),
+            trans_text("weekly.Q17.helpGroup.answer_tip", "How do you feel answer tip"),
+        ]
     }
 
 }
@@ -246,7 +259,7 @@ export class MaskWearingContext extends BaseChoiceQuestion {
     constructor(props: ItemProps) {
         super(props, 'QFRmask1', 'multiple');
         this.setOptions({
-            questionText: french("Dans quelle(s) circonstance(s) avez-vous porté un masque ?"),
+            questionText: _T("weekly.QFRmask1.text", "Under what circumstances did you wear a mask"),
             topDisplayCompoments: [
                 text_select_all_apply("weekly.Qmask1.select_all_apply"),
             ]
@@ -255,15 +268,15 @@ export class MaskWearingContext extends BaseChoiceQuestion {
 
     getResponses(): OptionDef[] {
         return [
-            as_option("1", french("Chez vous pour ne pas contaminer votre entourage (enfants, parents, conjoint")),
-            as_option("2", french("A l’extérieur (pour aller faire vos courses, voir des amis, dans les transports en commun, etc.) pour ne pas contaminer les autres")),
-            as_option("3", french("Sur votre lieu de travail (ou d’étude)")),
-            as_option("4", french("Lorsque vous avez été en contact avec une ou plusieurs personnes âgées de 65 ans et plus")),
-            as_option("5", french("Lorsque vous avez été en contact avec une ou plusieurs personnes porteuses de pathologie(s) chronique(s) (asthme, diabète, maladie cardiaque, cancer, etc.)")),
-            as_option("6", french("Lorsque vous avez rendu visite à une ou plusieurs personnes hospitalisées")),
-            as_option("7", french("Lorsque vous avez été en contact avec un ou plusieurs jeunes enfants (moins de deux ans)")),
-            as_option("8", french("Dans d’autres circonstances (précisez)")),
-            as_option("99", french("Je ne sais pas  / je ne souhaite pas répondre")),
+            as_option("1", _T( "weekly.QFRmask1.option.fear_transmit", "By fear of transmitting to household")),
+            as_option("2", _T( "weekly.QFRmask1.option.oustide", "Oustide home")),
+            as_option("3", _T( "weekly.QFRmask1.option.at_work", "At work")),
+            as_option("4", _T("weekly.QFRmask1.option.contact_elder", "Close to elder people")),
+            as_option("5", _T("weekly.QFRmask1.option.contact_at_risk","Close to people with chronic disease")),
+            as_option("6", _T( "weekly.QFRmask1.option.hospital","By visiting people at hospital")),
+            as_option("7", _T( "weekly.QFRmask1.option.young_children","Close to young people")),
+            as_option("8", _T( "weekly.QFRmask1.option.other","Other")),
+            as_option("99", _T( "weekly.QFRmask1.option.dnk","I dont know")),
         ]
     }
 
@@ -274,15 +287,15 @@ export class MaskWearingAlways extends BaseChoiceQuestion {
     constructor(props: ItemProps) {
         super(props, 'QFRmask2', 'single');
         this.setOptions({
-            questionText: french("Dans ces circonstances, avez-vous systématiquement porté un masque, tant que vous aviez des symptômes ?"),
+            questionText: _T( "weekly.QFRmask2.text","In this context, did you always wear a mask"),
         });
     }
 
     getResponses(): OptionDef[] {
         return [
-            as_option("1", french("Oui")),
-            as_option("0", french("Non")),
-            as_option("99", french("Je ne sais pas  / je ne souhaite pas répondre")),
+            as_option("1", _T("weekly.QFRmask2.option.yes", "Yes")),
+            as_option("0", _T("weekly.QFRmask2.option.no", "No")),
+            as_option("99", _T("weekly.QFRmask2.option.dnk", "I dont know")),
         ]
     }
 
@@ -301,7 +314,7 @@ export class MaskNotWearingReason extends BaseChoiceQuestion {
     constructor(props: ItemProps) {
         super(props, 'QFRmask3', 'multiple');
         this.setOptions({
-            questionText: french("pour quelle(s) raison(s) n’avez-vous pas systématiquement porté un masque, tant que vous aviez des symptômes ?"),
+            questionText: _T( "weekly.QFRmaskE.text", "Why did you not always wear a mask in this context"),
             topDisplayCompoments: [
                 text_select_all_apply("weekly.Qmask3.select_all_apply"),
             ],
@@ -310,13 +323,13 @@ export class MaskNotWearingReason extends BaseChoiceQuestion {
 
     getResponses(): OptionDef[] {
         return [
-            as_option("1", french("Chez vous pour ne pas contaminer votre entourage (enfants, parents, conjoint)")),
-            as_option("2", french("Vous n’aviez pas suffisamment de masques")),
-            as_option("3", french("Cela vous gênait pour respirer ou vous donnait une sensation désagréable (chaleur, humidité)")),
-            as_option("4", french("Vous avez trouvé cela trop contraignant à utiliser")),
-            as_option("5", french("A cause du regard des autres")),
-            as_input_option("6", french("Pour une autre raison (précisez)")), 
-            as_option("99", french("Je ne sais pas / je ne souhaite pas répondre")),
+            as_option("1", _T("weekly.QFRmask3.option.at_home", "At home")),
+            as_option("2", _T("weekly.QFRmask3.option.not_enough", "Dont have enough mask")),
+            as_option("3", _T("weekly.QFRmask3.option.incommode", "Mask incommode me for breathing")),
+            as_option("4", _T("weekly.QFRmask3.option.constraint", "Too constraining")),
+            as_option("5", _T("weekly.QFRmask3.option.other_look", "Because of other people's opinion when seeing me")),
+            as_input_option("6", _T( "weekly.QFRmask3.option.other_look", "Other reason")), 
+            as_option("99", _T( "weekly.QFRmask3.option.dnk", "I dont know")),
         ]
     }
 
@@ -327,7 +340,7 @@ export class MaskProvidedFrom extends BaseChoiceQuestion {
     constructor(props: ItemProps) {
         super(props, 'QFRmask4', 'multiple');
         this.setOptions({
-            questionText: french("Où vous êtes-vous procuré ce ou ces masques ?"),
+            questionText: _T( "weekly.QFRmask4.text", "Where did you get this mask from?"),
             topDisplayCompoments: [
                 text_select_all_apply("weekly.Qmask4.select_all_apply"),
             ]
@@ -336,12 +349,42 @@ export class MaskProvidedFrom extends BaseChoiceQuestion {
 
     getResponses(): OptionDef[] {
         return [
-            as_option("1", french("En pharmacie / parapharmacie")),
-            as_option("2", french("Sur Internet")),
-            as_option("3", french("Sur votre lieu de travail")),
-            as_option("4", french("Votre médecin traitant vous en a donné")),
-            as_input_option("5", french("Autre (précisez)")),
-            as_option("99", french("Je ne sais pas / je ne souhaite pas répondre")),
+            as_option("1", _T( "weekly.QFRmask4.option.pharmacy", "At the pharmacy")),
+            as_option("2", _T("weekly.QFRmask4.option.internet", "On internet")),
+            as_option("3", _T( "weekly.QFRmask4.option.work", "At work")),
+            as_option("4", _T("weekly.QFRmask4.option.doctor", "From my doctor")),
+            as_input_option("5", _T("weekly.QFRmask4.option.other", "Other")),
+            as_option("99", _T( "weekly.QFRmask4.option.dnk", "I dont know")),
+        ];
+    }
+
+}
+
+export class MaskWhyNotWearing extends BaseChoiceQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'QFRmask5', 'multiple');
+        this.setOptions({
+            questionText: _T("weekly.QFRmask5.text", "Why did you not wear a mask"),
+            topDisplayCompoments: [
+                text_select_all_apply("weekly.QFRmask5.select_all_apply"),
+            ]
+        });
+    }
+
+    getResponses(): OptionDef[] {
+        return [
+            as_option("1", _T("weekly.QFRmask5.option.ridiculous", "You fear to be ridiculous")),
+            as_option("2", _T("weekly.QFRmask5.option.excessive", "it's a little excessive")),
+            as_option("3", _T("weekly.QFRmask5.option.efficient", "it would not be efficient")),
+            as_option("4", _T("weekly.QFRmask5.option.unrisky.trans", "There is no risk of transmission")),
+            as_option("5", _T("weekly.QFRmask5.option.dontcare.trans", "I dont care much if I transmit the virus")),
+            as_option("6", _T("weekly.QFRmask5.option.find.mask", "I dont know where to obtain this kind of mask")),
+            as_option("7", _T("weekly.QFRmask5.option.spend.money", "I don't want to spend money for that")),
+            as_option("8", _T("weekly.QFRmask5.option.keep.mask", "I find hard to keep the mask a long time on my face")),
+            as_option("9", _T("weekly.QFRmask5.option.concerned", "I dont feel concerned")),
+            as_input_option("10", _T("weekly.QFRmask5.option.other", "Other")),
+            as_option("99", _T("weekly.QFRmask5.option.dnk", "I dont know"))
         ];
     }
 

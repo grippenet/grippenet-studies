@@ -1,10 +1,14 @@
 import { SurveyDefinition } from "case-editor-tools/surveys/types";
-import { english, as_option} from "../../../utils";
+import {  as_option} from "../../../utils";
 import {  SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { ItemQuestion, SurveyBuilder } from "../../../common";
 
+
+const english = (text:string) => {
+    return new Map([ ['en', text]]);
+}
 
 export class ReminderSurvey extends SurveyBuilder {
 

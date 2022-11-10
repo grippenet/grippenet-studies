@@ -407,16 +407,16 @@ export class HealthProfessional extends BaseChoiceQuestion {
     constructor(props:ItemProps) {
         super(props,'Q4e', 'single');
         this.options = {
-            questionText: french("Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?"),
+            questionText: french("Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?", "intake.Q4e.text", "Are you working in the domain of human or animal health"),
         };
     }
 
     getResponses() {
         const codes = ResponseEncoding.health_prof;
         return [
-            as_option(codes.no, french("Non") ),
-            as_option(codes.yes_human, french("Oui, j’exerce en tant que professionnel de la santé humaine")),
-            as_option(codes.yes_animal,french( "Yes, j'exerce en tant que professionnel de la santé animale"))
+            as_option(codes.no, french("Non", "intake.Q4e.option.no", "No") ),
+            as_option(codes.yes_human, french("Oui, j’exerce en tant que professionnel de la santé humaine", "intake.Q4f.option.human", "Human health prof")),
+            as_option(codes.yes_animal,french( "Yes, j'exerce en tant que professionnel de la santé animale", "intake.Q4f.option.animal", "Animal health prof"))
         ];
     }
 
@@ -447,7 +447,7 @@ export class HealthProfessionalType extends BaseChoiceQuestion {
     constructor(props:ItemProps) {
         super(props, 'Q4f', 'single');
         this.options = {
-            questionText:french( "Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?"),
+            questionText:french( "Exercez-vous actuellement en tant que professionnel de santé humaine ou animale ?", "intake.Q4f.text", "Are you working in the domain of human or animal health"),
         }
     }
 
@@ -531,7 +531,7 @@ export class HealthProfessionalPractice extends BaseChoiceQuestion {
     constructor(props:ItemProps) {
         super(props, 'Q4g', 'single');
         this.options = {
-            questionText: french("Dans quelle structure exercez-vous ?"),
+            questionText: french("Dans quelle structure exercez-vous ?", "intake.Q4g.text", "In which kind of practice"),
         }
     }
 

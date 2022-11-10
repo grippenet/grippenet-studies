@@ -2,5 +2,33 @@
     "common.other_specify": {
         "en": "Other (specify)",
         "fr": "Autre (préciser)"
+    },
+    "common.postalcodes.search": {
+        "en": "Search",
+        "fr": "Recherchez"
+    },
+    "common.postalcodes.modify_response": {
+        "en": "Modify your response",
+        "fr": "Modifier votre réponse"
+    },
+    "common.postalcodes.select_label": {
+        "en": "Select you municipality in the following list",
+        "fr": "Sélectionnez votre commune dans la liste ci-dessous"
+    },
+    "common.postalcodes.loading_error": {
+        "en": "An error occured during search",
+        "fr": "Une erreur est survenue durant le chargement des données"
+    },
+    "common.postalcodes.current_response": {
+        "en": "Your current response",
+        "fr": "Votre réponse actuelle"
+    },
+    "common.postalcodes.min_length_error": {
+        "en": "Enter the 5 letters of your postal code",
+        "fr": "Entrez les 5 caractères de votre code postal"
+    },
+    "common.postalcodes.label": {
+        "en": "Enter the 5 letters of your postal code",
+        "fr": "Indiquez votre code postal"
     }
 }

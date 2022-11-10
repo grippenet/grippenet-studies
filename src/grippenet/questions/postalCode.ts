@@ -2,8 +2,8 @@
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { GenericQuestionProps } from "case-editor-tools/surveys/types";
 import { ItemComponent, SurveyItem } from "survey-engine/data_types";
-import { french } from "../../utils";
 import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
+import { _T } from '../../common';
 
 interface postalCodeProps extends GenericQuestionProps {
     responseKey: string;
@@ -11,33 +11,35 @@ interface postalCodeProps extends GenericQuestionProps {
 
 export const postalCode = (props: postalCodeProps): SurveyItem => {
 
-    const text = (label: string) => generateLocStrings(french(label));
+   const text = (id: string, ref: string) => {
+      return generateLocStrings(_T(id, ref));
+   }
 
     const items : ItemComponent[] = [
       { "key": "postalcodes", "role":"lookupName"},
       {
         "role": "buttonLabel",
-        "content": text("Recherchez")
+        "content": text("common.postalcodes.search", "Search" )
       },
       {
         "role": "updateButton",
-        "content": text("Modifier votre réponse")
+        "content": text("common.postalcodes.modify_response", "Modify your response")
       },
       {
         "role": "selectLabel",
-        "content": text("Sélectionnez votre commune dans la liste ci-dessous")
+        "content": text("common.postalcodes.select_label", "Select you municipality in the following list")
       },
       {
         "role": "loadingError",
-        "content": text("Une erreur est survenue durant le chargement des données")
+        "content": text("common.postalcodes.loading_error", "An error occured during search")
       },
       {
         "role": "responseLabel",
-        "content": text("Votre réponse actuelle")
+        "content": text("common.postalcodes.current_response", "Your current response")
       },
       {
         "role": "minLengthError",
-        "content": text("Entrez les 5 caractères de votre code postal")
+        "content": text("common.postalcodes.min_length_error", "Enter the 5 letters of your postal code")
       }
     ];
 
@@ -49,9 +51,8 @@ export const postalCode = (props: postalCodeProps): SurveyItem => {
             {"key": "maxLength", "value": "5"},
             {"key": "minLength", "value": "5"}
         ],
-        "content": [
-            { "code": "fr", "parts": [ { "str": "Indiquez votre code postal" } ] }
-        ],
+        "content": text("common.postalcodes.label", "Enter the 5 letters of your postal code")
+       
     }
 
     const customProps = {

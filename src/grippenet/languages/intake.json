@@ -40,9 +40,9 @@
     "fr": "Entre 1 et 9 enfants ou adolescents dans la même journée (en ne comptant pas vos propres enfants)",
     "en": "Between 1 to 9 children in the same day (not counting your own children)"
   },
-  "intake.Q6.alone.yes":{
-    "en":"I live alone",
-    "fr":"Je vis seul"
+  "intake.Q6.alone.yes": {
+    "en": "I live alone",
+    "fr": "Je vis seul"
   },
   "intake.Q8.option.6": {
     "fr": "Parfois, pas tous les ans",
@@ -195,5 +195,9 @@
   "intake.Q17.option.project": {
     "en": "By a relative working on the project",
     "fr": "Par un de mes proches qui travaille sur le projet"
+  },
+  "intake.QEnd.option": {
+    "en": "",
+    "fr": ""
   }
 }
