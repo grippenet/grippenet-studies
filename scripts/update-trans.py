@@ -32,7 +32,12 @@ class Target:
         if trans['en'] != t['en']:
             print("Reference text is not the same for '%s' : '%s' <=> '%s'" % (name, trans['en'], t['en'] ))
             return 
-        t['fr'] = trans['fr']
+        text: str = ""
+        if 'fr' in trans:
+            text = trans['fr']
+
+        if not text == "" and not text.startswith('TODO'):
+            t['fr'] = trans['fr']
         self.updated.append(name)
 
     def save(self):
