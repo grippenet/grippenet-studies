@@ -115,7 +115,7 @@ export class IntakeDef extends SurveyBuilder {
         const Q_people_met = new intake.PeopleMet({parentKey:rootKey, isRequired:true});
         items.push(Q_people_met);
 
-        const Q_age_groups = new pool.AgeGroups({parentKey:rootKey, isRequired:true, useAlone: true});
+        const Q_age_groups = new pool.AgeGroups({parentKey:rootKey, isRequired:true, useAlone: true, useAnswerTip: true});
         items.push(Q_age_groups);
 
         const Q_people_at_risk = new pool.PeopleAtRisk({parentKey:rootKey, keyOfAgeGroups:Q_age_groups.key, isRequired:true});
@@ -145,14 +145,14 @@ export class IntakeDef extends SurveyBuilder {
         const Q_allergies = new pool.Allergies({parentKey:rootKey, isRequired:true});
         items.push(Q_allergies);
 
-        const Q_special_diet = new pool.SpecialDiet({parentKey:rootKey, isRequired:true});
-        items.push(Q_special_diet);
+        //const Q_special_diet = new pool.SpecialDiet({parentKey:rootKey, isRequired:true});
+        //items.push(Q_special_diet);
 
         // Q26 in standard, but Q24 in French implementation
         const Q_homeopathic_meds = new pool.HomeophaticMedicine({parentKey:rootKey, isRequired:true, keyOverride:'Q24'});
         items.push(Q_homeopathic_meds);
 
-        const Q_find_platform = new intake.FindOutAboutPlatform({parentKey:rootKey, isRequired:true});
+        const Q_find_platform = new intake.FindOutAboutPlatform({parentKey:rootKey, isRequired:true, useAnswerTip: true});
         items.push(Q_find_platform);
 
         const surveyEndText = new pool.FinalText({parentKey: rootKey});
