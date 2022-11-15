@@ -53,9 +53,6 @@ export class FluVaccineThisSeasonReasonFor extends pool.vaccination.FluVaccineTh
 
 export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVaccineThisSeasonReasonAgainst implements OverridenResponses {
 
-   
-      
-
 
     getResponses(): OptionDef[] {
         const options = super.getResponses();
