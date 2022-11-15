@@ -96,5 +96,5 @@ for target in targets:
         if name in data:
             continue
         data[name] = trans
-        data[name]['_from_'] = target.file
+        # data[name]['_from_'] = target.file
 save_json(update_file + '.new', data)
