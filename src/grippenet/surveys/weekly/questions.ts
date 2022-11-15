@@ -328,7 +328,7 @@ export class MaskNotWearingReason extends BaseChoiceQuestion {
             as_option("3", _T("weekly.QFRmask3.option.incommode", "Mask incommode me for breathing")),
             as_option("4", _T("weekly.QFRmask3.option.constraint", "Too constraining")),
             as_option("5", _T("weekly.QFRmask3.option.other_look", "Because of other people's opinion when seeing me")),
-            as_input_option("6", _T( "weekly.QFRmask3.option.other_look", "Other reason")), 
+            as_input_option("6", _T( "weekly.QFRmask3.option.other", "Other reason")), 
             as_option("99", _T( "weekly.QFRmask3.option.dnk", "I dont know")),
         ]
     }
