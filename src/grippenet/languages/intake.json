@@ -196,6 +196,10 @@
     "en": "By a relative working on the project",
     "fr": "Par un de mes proches qui travaille sur le projet"
   },
+  "intake.Q17.helpGroup.text.answer_tip": {
+    "en": "Answer tip",
+    "fr": "_TODO_"
+  },
   "intake.QEnd.option": {
     "en": "",
     "fr": ""
