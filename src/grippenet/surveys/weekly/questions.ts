@@ -1,13 +1,22 @@
-import {  questionPools, _T, responses as common_responses, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion,
+import {  questionPools, _T, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion,
      GroupQuestion, GroupProps, ClientExpression as client, trans_text } from "../../../common"
 import {  Expression, ItemComponent, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { as_input_option, as_option, french, OptionList } from "../../../utils";
-import { text_how_answer, text_select_all_apply, text_why_asking } from "../../../../common/studies/common/questionPools";
+import { require_response, text_how_answer, text_select_all_apply, text_why_asking } from "../../../../common/studies/common/questionPools";
 import { matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
+import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
+import { generateHelpGroupComponent, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
+import { MatrixRow, textComponent } from "../../../../common/compat";
+import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
+import responses from "./responses";
 
 const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
+
+// Alias namespace
+import pool = questionPools.weekly;
+
 
 // [X] Q16
 // [X] Q7 
@@ -18,8 +27,19 @@ const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
 // [ ] +Q17
 
 interface SymptomDependentProps extends ItemProps {
-    SymptomQuestion: questionPools.weekly.Symptoms
+    SymptomQuestion: pool.Symptoms
 }
+
+export class SymptomsStart extends pool.SymptomsStart {
+
+    getCondition(): Expression {
+        const codes = responses.same_illness;
+        return client.logic.not(
+            client.singleChoice.any(this.keySameIllness, codes.yes)
+        );
+    }
+}
+
 
 export class StoolCount extends BaseChoiceQuestion {
 
@@ -43,12 +63,11 @@ export class StoolCount extends BaseChoiceQuestion {
     }
 }
 
-
-export class VisitedMedicalService extends questionPools.weekly.VisitedMedicalService {
+export class VisitedMedicalService extends pool.VisitedMedicalService {
 
     getResponses() {
         
-            const codes = common_responses.weekly.visit_medical;
+            const codes = responses.visit_medical;
     
             // All response except no
             const exclusiveNo = client.responseHasOnlyKeysOtherThan(this.key, MultipleChoicePrefix, codes.no);
@@ -75,27 +94,27 @@ export class VisitedMedicalService extends questionPools.weekly.VisitedMedicalSe
                     content: _T("weekly.EX.Q7.rg.mcg.option.1", "GP or GP's practice nurse")
                 },
                 {
-                    key: '6', role: 'option',
+                    key: codes.other_community, role: 'option',
                     disabled: exclusiveOther,
                     content: _T( "weekly.EX.Q7.rg.mcg.option.other_community_pract", "Other community practitioner")
                 },
                 {
-                    key: '9', role: 'option',
+                    key: codes.gynecologist, role: 'option',
                     disabled: exclusiveOther,
                     content: _T( "weekly.EX.Q7.rg.mcg.option.gynecologist", "Gynecologist")
                 },
                 {
-                    key: '10', role: 'option',
+                    key: codes.midwife, role: 'option',
                     disabled: exclusiveOther,
                     content: _T("weekly.EX.Q7.rg.mcg.option.midwife", "Midwife")
                 },
                 {
-                    key: '7', role: 'option',
+                    key: codes.pharmacist, role: 'option',
                     disabled: exclusiveOther,
                     content: _T("weekly.EX.Q7.rg.mcg.option.pharmacist", "Pharmacist")
                 },
                 {
-                    key: '8', role: 'option',
+                    key: codes.scholar, role: 'option',
                     disabled: exclusiveOther,
                     content: _T("weekly.EX.Q7.rg.mcg.option.scholar_nurse","Scholar nurse")
                 },
@@ -117,10 +136,168 @@ export class VisitedMedicalService extends questionPools.weekly.VisitedMedicalSe
                 
             ];
         }
+
+        /**
+         * Get List visits labels of by code
+         * @returns 
+         */
+        getVisitTypes() {
+            const r = this.getResponses();
+            const codes = responses.visit_medical;
+    
+            const d = new Map<string, LanguageMap>();
+            r.forEach(resp=> {
+                if(resp.key == codes.no || resp.key == codes.plan) {
+                    return;
+                }
+                d.set(resp.key, resp.content);
+            });
+            return d;
+        }
+
 }
 
+interface VisitedMedicalServiceProps extends ItemProps {
+    visiteMedicalService: VisitedMedicalService 
+}
+export class VisitedMedicalServiceWhen extends ItemQuestion {
+
+    visiteMedicalService: VisitedMedicalService 
+    
+    constructor(props: VisitedMedicalServiceProps) {
+        super(props, 'Q7b');
+        this.visiteMedicalService = props.visiteMedicalService;
+    }
+
+    buildItem() {
+
+        const itemKey = this.key;
+        const editor = new ItemEditor(undefined, { itemKey: itemKey, isGroup: false });
+
+        editor.setTitleComponent(
+            generateTitleComponent(_T("weekly.EX.Q7b.title.0", "How soon after your symptoms appeared did you first VISIT this medical service?"))
+        );
+
+        // INFO POPUP
+        editor.setHelpGroupComponent( generateHelpGroupComponent(this.getHelpGroupContent())  );
+
+        // RESPONSE PART
+        const rg = editor.addNewResponseComponent({ role: 'responseGroup' });
+
+        editor.addExistingResponseComponent(
+            textComponent({
+             key: "note1",
+             content:  _T("weekly.EX.Q7b.rg.sFcN.text.0", 'Select the correct number of days')
+            })
+        , rg?.key);
+
+        const ddOptions: ResponseRowCell = {
+            key: 'col1', role: 'dropDownGroup', items: [
+                {
+                    key: '0', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.0", "Same day"),
+                },
+                {
+                    key: '1', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.1", "1 day"),
+                },
+                {
+                    key: '2', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.2", "2 days"),
+                },
+                {
+                    key: '3', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.3", "3 days"),
+                },
+                {
+                    key: '4', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.4", "4 days"),
+                },
+                {
+                    key: '5', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.5", "5 - 7 days"),
+                },
+                {
+                    key: '6', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.6", "More than 7 days"),
+                },
+                {
+                    key: '7', role: 'option', content: _T("weekly.EX.Q7b.rg.mat.r1.col1.option.7", "I don't know/can't remember"),
+                },
+            ]
+        };
+
+        const visitTypes = this.visiteMedicalService.getVisitTypes();
+
+        const visits = responses.visit_medical;
+
+        const displayCondition = (code:string) => {
+            return client.multipleChoice.any(this.visiteMedicalService.key, code);
+        }
+
+        const conditionCodes: string[] = [];
+
+        // Wanted entries
+        // Row id, visit code to show (label is auto from the visit question)
+        const rows = [
+            ['r1', visits.gp],
+            ['r2', visits.emergency],
+            ['r4', visits.other],
+        ];
+
+        const matrixRows: MatrixRow[] =  rows.map(r =>  {
+            const visitCode = r[1];
+            const key = r[0];
+            
+            const label = visitTypes.get(visitCode);
+            if(!label) {
+                throw new Error("weekly.Q7b: no visit code known for "+ visitCode);
+            }
+            
+            conditionCodes.push(key);
+
+            return {
+                key: key, role: 'responseRow', cells: [
+                    {
+                        key: 'col0', role: 'label', content:label,
+                    },
+                    { ...ddOptions }
+                ],
+                displayCondition: displayCondition(visitCode)
+            }
+        });
+
+        const rg_inner = initMatrixQuestion(matrixKey, matrixRows);
+
+        editor.addExistingResponseComponent(rg_inner, rg?.key);
+
+        // Condition
+
+        // Select dynamically used codes in boxes
+        const condition = client.multipleChoice.any(this.visiteMedicalService.key, ...conditionCodes);
+        
+        editor.setCondition(condition);
+
+        // VALIDATIONs
+        if (this.isRequired) {
+            require_response(editor, this.key, responseGroupKey);
+        }
+
+        return editor.getItem();
+
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("weekly.EX.Q7b.helpGroup.text.0"),
+            {
+                content: _T("weekly.EX.Q7b.helpGroup.text.1", "To find out how quickly people with symptoms are seen by the health services."),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+            text_how_answer("weekly.EX.Q7b.helpGroup.text.2"),
+            {
+                content: _T("weekly.EX.Q7b.helpGroup.text.3", "Only record the time until your FIRST contact with the health services."),
+            },
+        ]
+    }
+}
+
+
 interface AntibioticFromProps extends ItemProps {
-    medicationQuestion: questionPools.weekly.TookMedication
+    medicationQuestion: pool.TookMedication
 }
 export class AntibioticFrom extends BaseChoiceQuestion {
 
@@ -141,11 +318,11 @@ export class AntibioticFrom extends BaseChoiceQuestion {
     
 }
 
-export class CovidHabitsChange extends questionPools.weekly.CovidHabitsChange {
+export class CovidHabitsChange extends pool.CovidHabitsChange {
 
     getOptionItems(): Map<string, LanguageMap>  {
 
-        const codes = common_responses.weekly.covid_habits;
+        const codes = responses.covid_habits;
 
         return new Map([
             [codes.wash_hands,  _T("weekly.EX.Qcov7.rg.v1C0.text.1", 'Regularly wash or disinfect hands') ],
@@ -184,8 +361,8 @@ export class CovidHabitsChange extends questionPools.weekly.CovidHabitsChange {
     }   
 
     createWearMaskCondition(): Expression {
-        const codes = common_responses.weekly.covid_habits;
-        const scale_codes = questionPools.weekly.CovidHabitsChange.likertScaleCodes;
+        const codes = responses.covid_habits;
+        const scale_codes = pool.CovidHabitsChange.likertScaleCodes;
         
         const yes_codes = [ scale_codes.yes_more, scale_codes.yes_already ];
 
@@ -196,7 +373,7 @@ export class CovidHabitsChange extends questionPools.weekly.CovidHabitsChange {
     }
 }
 
-export class CauseOfSymptoms extends questionPools.weekly.CauseOfSymptoms {
+export class CauseOfSymptoms extends pool.CauseOfSymptoms {
 
     getResponses(): Array<OptionDef> {
     
@@ -207,7 +384,6 @@ export class CauseOfSymptoms extends questionPools.weekly.CauseOfSymptoms {
         return list.values();
     }
 }
-
 
 export class HowDoYouFeel extends ItemQuestion {
 

@@ -1,4 +1,4 @@
-import {  _T,questionPools, SurveyBuilder } from "../../../common"
+import {  _T,questionPools, SurveyBuilder, transTextComponent } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
 
@@ -31,7 +31,7 @@ export class WeeklyDef extends SurveyBuilder {
         this.items.push(Q_Stool);
 
         // // Q2 same illness --------------------------------------
-        const Q_same_illness = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true, useDoesNotApply: false});
+        const Q_same_illness = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true, useDoesNotApply: true});
         hasSymptomGroup.addItem(Q_same_illness.get());
         this.Q_same_illness = Q_same_illness;
 
@@ -45,7 +45,7 @@ export class WeeklyDef extends SurveyBuilder {
         hasSymptomGroup.addItem(Q_pcrHouseholdContact.get());
         */
         // // Q3 when first symptoms --------------------------------------
-        const Q_symptomStart = new pool.SymptomsStart({parentKey: hasSymptomGroupKey, keySameIllness: Q_same_illness.key, isRequired: true});
+        const Q_symptomStart = new weekly.SymptomsStart({parentKey: hasSymptomGroupKey, keySameIllness: Q_same_illness.key, isRequired: true});
         hasSymptomGroup.addItem(Q_symptomStart.get());
 
         // // Q4 when symptoms end --------------------------------------
@@ -83,19 +83,20 @@ export class WeeklyDef extends SurveyBuilder {
         const hasMoreGroupKey = hasMoreGroup.key;
 
         // // Q7 visited medical service --------------------------------------
-        const Q_visitedMedicalService = new weekly.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: true});
+        const Q_visitedMedicalService = new weekly.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_visitedMedicalService.get());
 
         // // Q7b how soon visited medical service --------------------------------------
-        const Q_visitedMedicalServiceWhen = new pool.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: true, useHospitalAdmission: false});
+        const Q_visitedMedicalServiceWhen = new weekly.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, isRequired: false, visiteMedicalService: Q_visitedMedicalService});
         hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
 
         // // Qcov18 reasons no medical services-----------------------------------------
-        const Q_visitedNoMedicalService = new pool.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: true});
+        const Q_visitedNoMedicalService = new pool.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false});
+        Q_visitedNoMedicalService.setOptions({topDisplayCompoments: [ transTextComponent("common.only_single_response","Only single response")] });
         hasMoreGroup.addItem(Q_visitedNoMedicalService.get());
 
         // // Qcov16h test -----------------------------------------------------
-        const Q_symptomImpliedCovidTest = new pool.SymptomImpliedCovidTest({parentKey: hasMoreGroupKey, isRequired: true});
+        const Q_symptomImpliedCovidTest = new pool.SymptomImpliedCovidTest({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_symptomImpliedCovidTest.get());
 
         // Qcov16i test type -----------------------------------------------------
@@ -103,27 +104,27 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_covidTestType.get());
 
         // Qcov16b PCR test result
-        const Q_resultPCRTest = new pool.ResultPCRTest({parentKey:hasMoreGroupKey, keyTestType: Q_covidTestType.key, isRequired: true})
+        const Q_resultPCRTest = new pool.ResultPCRTest({parentKey:hasMoreGroupKey, keyTestType: Q_covidTestType.key, isRequired: false})
         hasMoreGroup.addItem(Q_resultPCRTest.get());
 
         //Qcov16f Serological test result
-        const Q_resultAntigenicTest = new pool.ResultAntigenicTest({parentKey:hasMoreGroupKey, keyTestType: Q_covidTestType.key, isRequired: true})
+        const Q_resultAntigenicTest = new pool.ResultAntigenicTest({parentKey:hasMoreGroupKey, keyTestType: Q_covidTestType.key, isRequired: false})
         hasMoreGroup.addItem(Q_resultAntigenicTest.get());
 
         //Qcov16k Serological test result
-        const Q_resultRapidAntigenicTest = new pool.ResultRapidAntigenicTest({parentKey:hasMoreGroupKey, keyTestType:Q_covidTestType.key, isRequired:true})
+        const Q_resultRapidAntigenicTest = new pool.ResultRapidAntigenicTest({parentKey:hasMoreGroupKey, keyTestType:Q_covidTestType.key, isRequired:false})
         hasMoreGroup.addItem(Q_resultRapidAntigenicTest.get());
 
         // // Qcov19 test -----------------------------------------------------
-        const Q_fluTest = new pool.FluTest({parentKey: hasMoreGroupKey, isRequired: true});
+        const Q_fluTest = new pool.FluTest({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_fluTest.get());
 
         //Qcov19b Flu PCR test result
-        const Q_resultFluPCRTest = new pool.ResultFluTest({parentKey:hasMoreGroupKey, keyFluTest: Q_fluTest.key, isRequired: true})
+        const Q_resultFluPCRTest = new pool.ResultFluTest({parentKey:hasMoreGroupKey, keyFluTest: Q_fluTest.key, isRequired: false})
         hasMoreGroup.addItem(Q_resultFluPCRTest.get());
 
         // // Q9 took medication --------------------------------------
-        const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:true, useOtherTextInput: false});
+        const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:false, useOtherTextInput: true});
         hasMoreGroup.addItem(Q_tookMedication.get());
 
         const Q_antibioFrom = new weekly.AntibioticFrom({parentKey:hasMoreGroupKey, isRequired: false, medicationQuestion: Q_tookMedication } )
@@ -131,19 +132,19 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_antibioFrom.get());
 
         // // Q14 hospitalized ------------------------------------------------
-        const Q_hospitalized = new pool.Hospitalized({parentKey:hasMoreGroupKey, isRequired:true});
+        const Q_hospitalized = new pool.Hospitalized({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_hospitalized.get());
 
         // // Q10 daily routine------------------------------------------------
-        const Q_dailyRoutine = new pool.DailyRoutine({parentKey:hasMoreGroupKey, isRequired:true});
+        const Q_dailyRoutine = new pool.DailyRoutine({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_dailyRoutine.get());
 
         // // Q10b today-------------------------------------------------------
-        const Q_dailyRoutineToday = new pool.DailyRoutineToday({parentKey:hasMoreGroupKey, keyDailyRoutine: Q_dailyRoutine.key, isRequired:true});
+        const Q_dailyRoutineToday = new pool.DailyRoutineToday({parentKey:hasMoreGroupKey, keyDailyRoutine: Q_dailyRoutine.key, isRequired:false});
         hasMoreGroup.addItem(Q_dailyRoutineToday.get());
 
         // // Q10c daily routine days-----------------------------------------
-        const Q_dailyRoutineDaysMissed = new pool.DailyRoutineDaysMissed({parentKey:hasMoreGroupKey, keyDailyRoutine: Q_dailyRoutine.key, isRequired:true});
+        const Q_dailyRoutineDaysMissed = new pool.DailyRoutineDaysMissed({parentKey:hasMoreGroupKey, keyDailyRoutine: Q_dailyRoutine.key, isRequired:false});
         hasMoreGroup.addItem(Q_dailyRoutineDaysMissed.get());
 
         // // Qcov7 Covid 19 habits change question ------------------------------------------------------
