@@ -4,6 +4,8 @@ export { SurveyKeys } from "../common/studies/common/keys";
 
 export * from "../common/tools";
 
+export * from "../common/compat";
+
 export { StudyRulesBuilder } from "../common/studies/common/rules";
 
 export * from "../common/studies/common/languages";
