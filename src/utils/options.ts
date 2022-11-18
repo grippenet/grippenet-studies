@@ -1,13 +1,6 @@
-import {  _T, Translation, LanguageMap } from "../common"
+import {  _T, Translation } from "../common"
 import { OptionDef } from "case-editor-tools/surveys/types";
-
-export function as_option(key:string, content: Map<string,string> ): OptionDef {
-    return {
-        role: 'option',
-        key: key,
-        content: content,
-    }   
-}
+import { as_option } from "../../common/tools/options";
 
 /**
  * Describe a response encoding a simple dictionary
@@ -50,17 +43,6 @@ export function array_to_options(opts: Array<string[]>, prefix: string):OptionDe
    return oo;
 }
 
-
-export function as_input_option(key:string, content: Map<string,string>, description?: Map<string, string>  ): OptionDef {
-    return {
-        key: key,
-        role: "input",
-        style: [{ key: 'className', value: 'w-100' }],
-        content: content,
-        description: description
-    };
-}
-
 export interface ResponseOveriddes {
     [key:string]: string[]
 };
@@ -68,59 +50,4 @@ export interface ResponseOveriddes {
 
 export interface OverridenResponses {
     getResponseOverrides(): ResponseOveriddes
-}
-
-export class OptionList {
-    options: OptionDef[]
-
-    constructor(options:OptionDef[]) {
-        this.options = options;
-    }
-
-    /**
-     * 
-     * @param key key to find and insert element after this element
-     * @param oo list of options to add
-     * @returns OptionList fluent interface
-     */
-    insertAfterKey(key:string, ...oo:OptionDef[]) {
-        const index = this.indexOf(key);
-        if(index < 0) {
-            throw new Error("Option key '"+key+"' is not found in list");
-        }
-        this.insertAt(index + 1, ...oo);
-        return this;
-    }
-
-    insertBeforeKey(key:string, ...oo:OptionDef[]) {
-        const index = this.indexOf(key);
-        if(index < 0) {
-            throw new Error("Option key '"+key+"' is not found in list");
-        }
-        var i = index;
-        if(i < 0) {
-            i = 0;
-        }
-        this.insertAt(i, ...oo);
-        return this;
-    }
-
-    indexOf(key:string):number {
-        return this.options.findIndex((o)=>{
-            return o.key == key;
-        });
-    }
-
-    insertAt(index: number, ...oo:OptionDef[]) {
-        this.options.splice(index, 0, ...oo);
-        return this;
-    }
-
-    /**
-     * Get options after update
-     * @returns Get
-     */
-    values(): OptionDef[] {
-        return this.options;
-    }
 }
