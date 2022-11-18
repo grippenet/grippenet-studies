@@ -1,6 +1,4 @@
 import {  ItemBuilder, _T,questionPools, SurveyBuilder } from "../../../common"
-import { SurveyDefinition } from "case-editor-tools/surveys/types";
-import { SurveyGroupItem, ExpressionName } from "survey-engine/data_types";
 import * as vaccination from "./questions";
 
 const pool = questionPools.vaccination;
@@ -34,22 +32,8 @@ export class VaccinationDef extends SurveyBuilder {
 
         this.items.push(...vaccGroup);
         
-        /*
-        const prefillRules = []
-        for (const item of (<SurveyGroupItem>hasVaccineGroup.get()).items) {
-            prefillRules.push(
-                {
-                    name: <ExpressionName>"GET_LAST_SURVEY_ITEM",
-                    data: [
-                        { str: "vaccination" },
-                        { str: item.key }
-                    ]
-                }
-            );
-        }
-
-        this.editor.setPrefillRules(prefillRules);
-        */
+        const QSurveyEnd = new pool.FinalText({parentKey: rootKey});
+        this.items.push(QSurveyEnd);
     }
 
     buildVaccGroup(rootKey: string): ItemBuilder[] {
@@ -58,25 +42,25 @@ export class VaccinationDef extends SurveyBuilder {
 
         const Q_flu_vaccin_voucher = new vaccination.FluVaccinationVoucher({parentKey:rootKey, isRequired:true});
         items.push(Q_flu_vaccin_voucher);
-
-        const Q_flu_vaccine_last_season = new pool.FluVaccineLastSeason({parentKey:rootKey, isRequired:true});
-        items.push(Q_flu_vaccine_last_season);
-
-        const Q_flu_vaccine_this_season = new pool.FluVaccineThisSeason({parentKey:rootKey, isRequired:true});
+        
+        const Q_flu_vaccine_this_season = new pool.FluVaccineThisSeason({parentKey:rootKey, isRequired:false});
         items.push(Q_flu_vaccine_this_season);
+        
+        const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
+        items.push(Q_flu_vaccine_this_season_when);
 
         const Q_flu_vaccin_by_whom = new vaccination.FluVaccinationByWhom({parentKey: rootKey, isRequired: true});
         Q_flu_vaccin_by_whom.setCondition(Q_flu_vaccine_this_season.createIsVaccinatedCondition());
         items.push(Q_flu_vaccin_by_whom);
 
-        const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:true});
-        items.push(Q_flu_vaccine_this_season_when);
-
         const Q_flu_vaccine_this_season_reasons_for = new vaccination.FluVaccineThisSeasonReasonFor({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:true});
         items.push(Q_flu_vaccine_this_season_reasons_for);
 
-        const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:rootKey, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:true});
+        const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:rootKey, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_reasons_against);
+
+        const Q_flu_vaccine_last_season = new pool.FluVaccineLastSeason({parentKey:rootKey, isRequired:true});
+        items.push(Q_flu_vaccine_last_season);
 
         const Q_covidVac = new pool.CovidVac({parentKey:rootKey, isRequired:true});
         items.push(Q_covidVac);
@@ -103,7 +87,7 @@ export class VaccinationDef extends SurveyBuilder {
         items.push(Q_vaccinePro.get());
         */
 
-        const Q_vaccineContra = new vaccination.CovidVaccineAgainstReasons({parentKey:rootKey, keyVac:Q_covidVac.key, isRequired:true});
+        const Q_vaccineContra = new vaccination.CovidVaccineAgainstReasons({parentKey:rootKey, keyVac:Q_covidVac.key, isRequired:false});
         items.push(Q_vaccineContra);
         
         const Q_lastCovidInfection = new vaccination.LastCovid19Infection({parentKey: rootKey});

@@ -3,9 +3,13 @@ import {  OptionDef } from "case-editor-tools/surveys/types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveySingleItem } from "survey-engine/data_types";
 import { questionPools as pool, 
-    _T, responses as common_responses, ItemQuestion, ItemProps, BaseChoiceQuestion, 
-    ClientExpression as client, exp_as_arg } from "../../../common"
-import { as_input_option, as_option, OptionList, OverridenResponses, ResponseOveriddes } from "../../../utils";
+    _T, ItemQuestion, ItemProps, BaseChoiceQuestion, 
+    ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList } from "../../../common"
+
+import {  OverridenResponses, ResponseOveriddes } from "../../../utils";
+import ResponseEncoding from "./responses";
+
+import encoding from "./responses";
 
 const text_how_answer = pool.text_how_answer;
 const text_why_asking = pool.text_why_asking;
@@ -13,8 +17,6 @@ const text_why_asking = pool.text_why_asking;
 // Q10c.11
 // Q10d.15, 16, 17, 18, 19
 // Q37
-
-const encoding = common_responses.vaccination;
 
 export class SurveyPrelude extends ItemQuestion {
     
@@ -58,15 +60,17 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
         const options = super.getResponses();
         const codes = encoding.flu_notvac_reason; 
         const list = new OptionList(options);
+        
         list.insertAfterKey(codes.offer, 
             as_option(codes.advised_pregnancy,  _T("vaccination.Q10d.option.advisory_pregnant", "advised_not_to_pregnant")),
             as_option(codes.pregnant_baby, _T("vaccination.Q10d.option.pregnant_baby", "I'm pregnant and fear for my baby"))
         );
 
         list.insertAfterKey(codes.minor_illness,
+            as_option(codes.bad_experience, _T("vaccination.Q10d.option.bad_experience","I had a bad experience with vaccination")),
             as_option(codes.avoid_healthseek, _T("vaccination.Q10d.option.avoid_healthseeking","Because of pandemic, I avoid to visit doctor or pharmacy")),
             as_option(codes.risk_covid,  _T("vaccination.Q10d.option.increase_risk_covid", "I fear the influenza vaccine to increase my risk to get Covid19")),
-            as_input_option(codes.covid_other, _T( "vaccination.Q10d.option.other_covid19", "Other reason related to Covid19"))
+            option_input_other(codes.covid_other, _T( "vaccination.Q10d.option.other_covid19", "Other reason related to Covid19"), "none")
         );
         
         return list.values();        
@@ -84,13 +88,18 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
 export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAgainstReasons {
 
     getResponses(): OptionDef[] {
+
+        const codes = encoding.covid_notvac_reason;
+
         const r = super.getResponses();
         const list = new OptionList(r);
         
-        list.insertAfterKey('20', 
-            as_option('18', _T("vaccination.Q35m.option.18", "counter indication")),
-            as_option('19', _T("vaccination.Q35m.option.19", "bad experience with previous vaccine"))
+        list.insertAfterKey(codes.disagree, 
+ //           as_option('18', _T("vaccination.Q35m.option.18", "counter indication")),
+            as_option(codes.bad_experience, _T("vaccination.Q35m.option.19", "bad experience with previous vaccine"))
         )
+
+        list.without(codes.counter_indication, codes.not_free);
 
         return list.values();
     }
@@ -98,9 +107,6 @@ export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAga
 
 export class FluVaccinationByWhom extends BaseChoiceQuestion {
     
-
-
-   
     constructor(props: ItemProps) {
         super(props, 'Q10e', 'single');
         this.setOptions({
@@ -115,7 +121,7 @@ export class FluVaccinationByWhom extends BaseChoiceQuestion {
             as_option('3',  _T("vaccination.Q10e.option.midwife", "By a midwife")),
             as_option('4', _T("vaccination.Q10e.option.pharmacist", "By a pharmacist")),
             as_option('5', _T( "vaccination.Q10e.option.occupational", "By an occupational med practitionner")),
-            as_input_option('6', _T("vaccination.Q10e.option.other", "By another kind of practitionner"))
+            option_input_other('6', _T("vaccination.Q10e.option.other", "By another kind of practitionner"), "none")
         ];
     }   
 }
