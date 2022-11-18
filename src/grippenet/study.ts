@@ -29,11 +29,9 @@ export class GrippenetStudyBuilder extends StudyBuilder {
 
         // Keys inform the rules builder of the key of all dependent questions
         const keys: GrippenetKeys = {
-            intakeKey: intake.key,
-            intakeBirthDateKey: intake.getBirthDateKey(),
-            weeklyKey: weekly.key,
-            weeklySameIllnessKey: weekly.getSameIllnessKey(),
-            vacKey: vacc.key,
+            intake: intake,
+            weekly: weekly,
+            vaccination: vacc,
         };
 
         const builder = new GrippenetRulesBuilder(keys);

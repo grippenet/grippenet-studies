@@ -6,7 +6,7 @@ const pool = questionPools.weekly;
 
 export class WeeklyDef extends SurveyBuilder {
 
-    Q_same_illness: Item;
+    Q_symptomsEnd: Item;
 
     constructor(meta:Map<string,string>) {
         super({
@@ -31,10 +31,9 @@ export class WeeklyDef extends SurveyBuilder {
         this.items.push(Q_Stool);
 
         // // Q2 same illness --------------------------------------
-        const Q_same_illness = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true, useDoesNotApply: true});
+        const Q_same_illness = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true, useDoesNotApply: false});
         hasSymptomGroup.addItem(Q_same_illness.get());
-        this.Q_same_illness = Q_same_illness;
-
+        
         /*
         // // Qcov3 pcr tested contact COVID-19--------------------------------------
         const Q_covidPCRTestedContact = new pool.PcrTestedContact({parentKey: hasSymptomGroupKey, isRequired: true});
@@ -50,6 +49,7 @@ export class WeeklyDef extends SurveyBuilder {
 
         // // Q4 when symptoms end --------------------------------------
         const Q_symptomsEnd = new pool.SymptomsEnd({parentKey:hasSymptomGroupKey, keySymptomsStart: Q_symptomStart.key, isRequired:true});
+        this.Q_symptomsEnd = Q_symptomsEnd;
         hasSymptomGroup.addItem(Q_symptomsEnd.get());
 
         // // Q5 symptoms developed suddenly --------------------------------------
@@ -187,8 +187,8 @@ export class WeeklyDef extends SurveyBuilder {
         this.items.push(surveyEndText);
     }
 
-    getSameIllnessKey() {
-        return this.Q_same_illness.key;
+    getSymptomEnd(): Item {
+        return this.Q_symptomsEnd;
     }
 
 }
