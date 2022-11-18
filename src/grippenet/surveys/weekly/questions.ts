@@ -1,14 +1,13 @@
 import {  questionPools, _T, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion,
-     GroupQuestion, GroupProps, ClientExpression as client, trans_text } from "../../../common"
+     GroupQuestion, GroupProps, ClientExpression as client, trans_text, as_input_option, as_option, OptionList, MatrixRow, textComponent }  from "../../../common"
 import {  Expression, ItemComponent, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { as_input_option, as_option, french, OptionList } from "../../../utils";
+import { french,  } from "../../../utils";
 import { require_response, text_how_answer, text_select_all_apply, text_why_asking } from "../../../../common/studies/common/questionPools";
 import { matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
 import { generateHelpGroupComponent, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
-import { MatrixRow, textComponent } from "../../../../common/compat";
 import { initMatrixQuestion, ResponseRowCell } from "case-editor-tools/surveys/responseTypeGenerators/matrixGroupComponent";
 import responses from "./responses";
 

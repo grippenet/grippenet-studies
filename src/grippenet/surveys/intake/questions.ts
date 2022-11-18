@@ -11,30 +11,16 @@
 // [X] Q17 +8, +9, +10, +11 ....
 // [X] Q34 GastroEnteritisFrequency
 
-import {  questionPools as pool, _T, responses as common_responses, ItemQuestion, GroupQuestion, ItemProps, BaseChoiceQuestion, BaseQuestionOptions } from "../../../common"
+import {  questionPools as pool, _T,  ItemQuestion,  ItemProps, BaseChoiceQuestion,transTextComponent,  } from "../../../common"
+import { ClientExpression as client, as_option, as_input_option,OptionList, } from "../../../common";
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-
-import { french, dict_to_response, as_option, as_input_option, OverridenResponses, ResponseOveriddes, OptionList, array_to_options } from "../../../utils";
+import { french, dict_to_response, OverridenResponses, ResponseOveriddes, array_to_options } from "../../../utils";
 import { postalCode } from "../../questions/postalCode";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
-import { ClientExpression as client } from "../../../common";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 
-const ResponseEncoding = {
-    health_prof: {
-        no: "0",
-        yes_human: "1",
-        yes_animal: "2"
-    } as const,
-
-    for_whom: {
-        myself: "0",
-        "someone": "2",
-        "household": "1",
-        "representative": "3",
-    } as const,
-} as const;
+import ResponseEncoding from "./responses";
 
 export class SurveyPrelude extends ItemQuestion {
     
@@ -55,6 +41,26 @@ export class SurveyPrelude extends ItemQuestion {
     }
 
 }
+
+export class SurveyImpersonateResponse extends ItemQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'impersonate');
+    }
+
+    buildItem(): SurveySingleItem {
+        return SurveyItems.display({
+            condition: this.condition,
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            content: [
+                transTextComponent("vaccination.impersonate", "Please fill this form as if you were the person your are filling it for")
+            ]
+        });
+    }
+
+}
+
 
 export class FillingForWhom extends BaseChoiceQuestion {
 
@@ -242,7 +248,7 @@ export class PostalCode extends ItemQuestion {
 }
 
 export const working_mainactivity_condition = (item: Item) => {
-    const codes = common_responses.intake.main_activity;
+    const codes = ResponseEncoding.main_activity;
     return client.singleChoice.any(item.key,
         codes.fulltime, codes.partial, codes.self, codes.student 
     );
@@ -590,7 +596,7 @@ export class Smoking extends pool.intake.Smoking implements OverridenResponses {
 
     getResponseOverrides(): ResponseOveriddes {
         const o : ResponseOveriddes = {};
-        const r = common_responses.intake.smoking;
+        const r = ResponseEncoding.smoking;
         o[r.no] = ['5','6'];
         return o;
     }
@@ -618,23 +624,17 @@ export class GastroEnteritisFrequency extends BaseChoiceQuestion {
         return array_to_options(oo, "intake.Q34.option.");
     }
 }
-
-const common_cold_codes = {
-    "sometimes": "6",
-    ...common_responses.intake.cold_frequency
-} as const;
-
 export class CommonColdFrequency extends pool.intake.CommonColdFrequency implements OverridenResponses {
 
     getResponses(): OptionDef[] {
 
-       const codes = common_responses.intake.cold_frequency;
+       const codes = ResponseEncoding.cold_frequency;
 
         const responses = super.getResponses();
 
         const list = new OptionList(responses);
 
-        list.insertAfterKey(codes.never, as_option(common_cold_codes.sometimes,  _T("intake.Q8.option.6", "Sometimes, not every year")));
+        list.insertAfterKey(codes.never, as_option(codes.sometimes,  _T("intake.Q8.option.6", "Sometimes, not every year")));
 
         return list.values();
     }
@@ -642,7 +642,7 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
     getResponseOverrides():ResponseOveriddes {
         const o : ResponseOveriddes = {};
 
-        const codes = common_cold_codes;
+        const codes = ResponseEncoding.cold_frequency;
 
         o[codes.never] = [codes.never, codes.sometimes];
 
@@ -658,7 +658,7 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
 
    getReponses(): OptionDef[] {
 
-       const codes = common_responses.intake.find_about;
+       const codes = ResponseEncoding.find_about;
 
        return [
                 as_option( codes.radio , _T("intake.Q17.rg.mcg.option.0", "Radio or television")), // 0
@@ -685,7 +685,7 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
         }
 
     getResponseOverrides():ResponseOveriddes {
-        const codes = common_responses.intake.find_about;
+        const codes = ResponseEncoding.find_about;
 
         const o : ResponseOveriddes = {};
 
