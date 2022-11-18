@@ -41,6 +41,10 @@
     "en": "Other reason related to Covid19",
     "fr": "Autre raison en lien avec la COVID-19 (champs libre, préciser)"
   },
+  "vaccination.Q10d.option.bad_experience": {
+    "en": "I had a bad experience with vaccination",
+    "fr": "J'ai déjà eu une mauvaise expérience suite à une vaccination"
+  },
   "vaccination.Q10e.text": {
     "fr": "Par qui avez-vous été vacciné ?",
     "en": "By who have you been vaccinated"
@@ -123,6 +127,10 @@
   },
   "vaccination.Q37.helpGroup.text.3": {
     "en": "Response as precisely as possible",
+    "fr": "TODO"
+  },
+  "vaccination.surveyEnd.title.0": {
+    "en": "Thank you! This was all for now, please submit (push « send ») your responses.",
     "fr": "TODO"
   }
 }
