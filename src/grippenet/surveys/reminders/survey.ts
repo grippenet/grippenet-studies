@@ -1,9 +1,6 @@
-import { SurveyDefinition } from "case-editor-tools/surveys/types";
-import {  as_option} from "../../../utils";
-import {  SurveyItem, SurveySingleItem } from "survey-engine/data_types";
-import { OptionDef } from "case-editor-tools/surveys/types";
+import {  SurveyItem } from "survey-engine/data_types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { ItemQuestion, SurveyBuilder } from "../../../common";
+import { SurveyBuilder, as_option } from "../../../common";
 
 
 const english = (text:string) => {
