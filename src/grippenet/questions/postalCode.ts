@@ -52,10 +52,10 @@ export const postalCode = (props: postalCodeProps): SurveyItem => {
             {"key": "minLength", "value": "5"}
         ],
         "content": text("common.postalcodes.label", "Enter the 5 letters of your postal code")
-       
     }
 
     const customProps = {
+       mapToRole: 'input',
         responseItemDefs: [ rg ], 
         ...props
     };
