@@ -81,7 +81,7 @@ export class IntakeDef extends SurveyBuilder {
 
         const Q_Height = new intake.BodyHeight({parentKey: rootKey, isRequired: true});
         items.push(Q_Height);
-        this.prefillWithLastResponse(Q_birthdate);
+        this.prefillWithLastResponse(Q_Height);
 
         const Q_Weight = new intake.BodyWeight({parentKey: rootKey, isRequired: true});
         items.push(Q_Weight);
@@ -116,10 +116,10 @@ export class IntakeDef extends SurveyBuilder {
         const Q_postal_work = new intake.PostalCodeWork({parentKey:rootKey, isRequired:true});
         Q_postal_work.setCondition(working_condition)
         this.prefillWithLastResponse(Q_postal_work);
-        
         items.push(Q_postal_work);
 
         const Q_postal_work_location = new intake.PostalCodeWorkLocation({parentKey: rootKey, isRequired: true}, Q_postal_work);
+        this.prefillWithLastResponse(Q_postal_work_location);
         items.push(Q_postal_work_location);
 
         const Q_work_type = new pool.WorkTypeEurostat({parentKey:rootKey, keyMainActivity:Q_main_activity.key, isRequired:true});
@@ -140,6 +140,7 @@ export class IntakeDef extends SurveyBuilder {
         items.push(Q_people_at_risk);
 
         const Q_children_in_school = new pool.ChildrenInSchool({parentKey:rootKey, keyOfAgeGroups:Q_age_groups.key, isRequired:true});
+        this.prefillWithLastResponse(Q_children_in_school, {'years': 1});
         items.push(Q_children_in_school);
 
         const Q_means_of_transport = new pool.MeansOfTransport({parentKey:rootKey, isRequired:true});
@@ -174,6 +175,7 @@ export class IntakeDef extends SurveyBuilder {
 
         // Q26 in standard, but Q24 in French implementation
         const Q_homeopathic_meds = new pool.HomeophaticMedicine({parentKey:rootKey, isRequired:true, keyOverride:'Q24'});
+        this.prefillWithLastResponse(Q_homeopathic_meds, {months: 9});
         items.push(Q_homeopathic_meds);
 
         const Q_find_platform = new intake.FindOutAboutPlatform({parentKey:rootKey, isRequired:true, useAnswerTip: true});
