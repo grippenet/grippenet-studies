@@ -1,11 +1,9 @@
 import { SurveyItems } from "case-editor-tools/surveys";
 import {  OptionDef } from "case-editor-tools/surveys/types";
-import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { SurveySingleItem } from "survey-engine/data_types";
 import { questionPools as pool, 
     _T, ItemQuestion, ItemProps, BaseChoiceQuestion, 
-    ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList } from "../../../common"
-
+    ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList, markdownComponent } from "../../../common"
 import {  OverridenResponses, ResponseOveriddes } from "../../../utils";
 import ResponseEncoding from "./responses";
 
@@ -25,7 +23,8 @@ export class SurveyPrelude extends ItemQuestion {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             content: [
-                ComponentGenerators.markdown({
+                markdownComponent({
+                    key: 'prelude',
                     content: _T("vaccination.prelude", "Vaccination survey prelude text in markdown")
                 })
             ]
