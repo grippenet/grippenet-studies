@@ -1,5 +1,6 @@
 
 import { SurveyItems } from 'case-editor-tools/surveys';
+//import { CustomResponseItem } from 'case-editor-tools/surveys/survey-items';
 import { GenericQuestionProps } from "case-editor-tools/surveys/types";
 import { ItemComponent, SurveyItem } from "survey-engine/data_types";
 import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
@@ -8,6 +9,8 @@ import { _T } from '../../common';
 interface postalCodeProps extends GenericQuestionProps {
     responseKey: string;
 }
+
+type MapToRoleType = 'singleChoiceGroup' | 'multipleChoiceGroup' | 'input';
 
 export const postalCode = (props: postalCodeProps): SurveyItem => {
 
@@ -43,7 +46,9 @@ export const postalCode = (props: postalCodeProps): SurveyItem => {
       }
     ];
 
+    const mapToRole: MapToRoleType = 'input';
     const rg = {
+        mapToRole: mapToRole,
         key: props.responseKey,
         role: "postalCodeLookup",
         items: items,
@@ -55,8 +60,7 @@ export const postalCode = (props: postalCodeProps): SurveyItem => {
     }
 
     const customProps = {
-       mapToRole: 'input',
-        responseItemDefs: [ rg ], 
+        responseItemDefs: [ rg ] , 
         ...props
     };
 
