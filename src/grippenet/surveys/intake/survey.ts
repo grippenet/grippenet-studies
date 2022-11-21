@@ -79,15 +79,15 @@ export class IntakeDef extends SurveyBuilder {
         items.push(Q_birthdate);
         this.prefillWithLastResponse(Q_birthdate);
 
-        const Q_Height = new intake.BodyHeight({parentKey: rootKey, isRequired: true});
+        const Q_Height = new intake.BodyHeight({parentKey: rootKey, isRequired: false});
         items.push(Q_Height);
         this.prefillWithLastResponse(Q_Height);
 
-        const Q_Weight = new intake.BodyWeight({parentKey: rootKey, isRequired: true});
+        const Q_Weight = new intake.BodyWeight({parentKey: rootKey, isRequired: false});
         items.push(Q_Weight);
         this.prefillWithLastResponse(Q_Weight, {'years': 1} );
 
-        const Q_pregnancy = new pool.Pregnancy({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, isRequired:true});
+        const Q_pregnancy = new pool.Pregnancy({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, isRequired:false});
         this.prefillWithLastResponse(Q_pregnancy, {months: 3} );
         items.push(Q_pregnancy);
 
@@ -113,33 +113,33 @@ export class IntakeDef extends SurveyBuilder {
         const Q_healthProfPractice = new intake.HealthProfessionalPractice({parentKey:rootKey, isRequired:true});
         items.push(Q_healthProfPractice, HumanHealthProf);
         */
-        const Q_postal_work = new intake.PostalCodeWork({parentKey:rootKey, isRequired:true});
+        const Q_postal_work = new intake.PostalCodeWork({parentKey:rootKey, isRequired:false});
         Q_postal_work.setCondition(working_condition)
         this.prefillWithLastResponse(Q_postal_work);
         items.push(Q_postal_work);
 
-        const Q_postal_work_location = new intake.PostalCodeWorkLocation({parentKey: rootKey, isRequired: true}, Q_postal_work);
+        const Q_postal_work_location = new intake.PostalCodeWorkLocation({parentKey: rootKey, isRequired: false}, Q_postal_work);
         this.prefillWithLastResponse(Q_postal_work_location);
         items.push(Q_postal_work_location);
 
-        const Q_work_type = new pool.WorkTypeEurostat({parentKey:rootKey, keyMainActivity:Q_main_activity.key, isRequired:true});
+        const Q_work_type = new pool.WorkTypeEurostat({parentKey:rootKey, keyMainActivity:Q_main_activity.key, isRequired:false});
         this.prefillWithLastResponse(Q_work_type);
         items.push(Q_work_type);
 
-        const Q_highest_education = new pool.HighestEducation({parentKey:rootKey, keyQBirthday:Q_birthdate.key, isRequired:true});
+        const Q_highest_education = new pool.HighestEducation({parentKey:rootKey, keyQBirthday:Q_birthdate.key, isRequired:false});
         this.prefillWithLastResponse(Q_highest_education);
         items.push(Q_highest_education);
 
         const Q_people_met = new intake.PeopleMet({parentKey:rootKey, isRequired:true});
         items.push(Q_people_met);
 
-        const Q_age_groups = new pool.AgeGroups({parentKey:rootKey, isRequired:true, useAlone: true, useAnswerTip: true});
+        const Q_age_groups = new pool.AgeGroups({parentKey:rootKey, isRequired:false, useAlone: true, useAnswerTip: true});
         items.push(Q_age_groups);
 
-        const Q_people_at_risk = new pool.PeopleAtRisk({parentKey:rootKey, ageGroupQuestion: Q_age_groups, isRequired:true});
+        const Q_people_at_risk = new pool.PeopleAtRisk({parentKey:rootKey, ageGroupQuestion: Q_age_groups, isRequired:false});
         items.push(Q_people_at_risk);
 
-        const Q_children_in_school = new pool.ChildrenInSchool({parentKey:rootKey, ageGroupQuestion: Q_age_groups, isRequired:true});
+        const Q_children_in_school = new pool.ChildrenInSchool({parentKey:rootKey, ageGroupQuestion: Q_age_groups, isRequired:false});
         this.prefillWithLastResponse(Q_children_in_school, {'years': 1});
         items.push(Q_children_in_school);
 
@@ -147,11 +147,11 @@ export class IntakeDef extends SurveyBuilder {
         this.prefillWithLastResponse(Q_means_of_transport);
         items.push(Q_means_of_transport);
 
-        const Q_common_cold_frequ = new intake.CommonColdFrequency({parentKey:rootKey, isRequired:true});
+        const Q_common_cold_frequ = new intake.CommonColdFrequency({parentKey:rootKey, isRequired:false});
         this.prefillWithLastResponse(Q_common_cold_frequ);
         items.push(Q_common_cold_frequ);
 
-        const Q_gastro_freq = new intake.GastroEnteritisFrequency({parentKey:rootKey, isRequired:true});
+        const Q_gastro_freq = new intake.GastroEnteritisFrequency({parentKey:rootKey, isRequired:false});
         this.prefillWithLastResponse(Q_gastro_freq);
         items.push(Q_gastro_freq);
 
@@ -174,11 +174,11 @@ export class IntakeDef extends SurveyBuilder {
         //items.push(Q_special_diet);
 
         // Q26 in standard, but Q24 in French implementation
-        const Q_homeopathic_meds = new pool.HomeophaticMedicine({parentKey:rootKey, isRequired:true, keyOverride:'Q24'});
+        const Q_homeopathic_meds = new pool.HomeophaticMedicine({parentKey:rootKey, isRequired:false, keyOverride:'Q24'});
         this.prefillWithLastResponse(Q_homeopathic_meds, {months: 9});
         items.push(Q_homeopathic_meds);
 
-        const Q_find_platform = new intake.FindOutAboutPlatform({parentKey:rootKey, isRequired:true, useAnswerTip: true});
+        const Q_find_platform = new intake.FindOutAboutPlatform({parentKey:rootKey, isRequired:false, useAnswerTip: true});
         this.prefillWithLastResponse(Q_find_platform);
         items.push(Q_find_platform);
 
