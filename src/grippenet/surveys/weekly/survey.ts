@@ -20,15 +20,12 @@ export class WeeklyDef extends SurveyBuilder {
         const rootKey = this.key
 
         // Symptoms Q1
-        const Q_symptoms = new pool.Symptoms({parentKey: rootKey, isRequired: true, useRash: false});
+        const Q_symptoms = new pool.Symptoms({parentKey: rootKey, isRequired: true, useRash: false, noteOnTop: true});
         this.items.push(Q_symptoms);
 
         // // -------> HAS SYMPTOMS GROUP
         const hasSymptomGroup = new pool.SymptomsGroup({parentKey: rootKey, keySymptomsQuestion: Q_symptoms.key});
         const hasSymptomGroupKey = hasSymptomGroup.key;
-
-        const Q_Stool = new weekly.StoolCount({parentKey: rootKey, SymptomQuestion: Q_symptoms});
-        this.items.push(Q_Stool);
 
         // // Q2 same illness --------------------------------------
         const Q_same_illness = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true, useDoesNotApply: false});
@@ -73,27 +70,18 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_highestTempMeasured = new pool.HighestTemprerature({parentKey:hasSymptomGroupKey, keySymptomsQuestion: Q_symptoms.key, keyDidYouMeasureTemperature: Q_didUMeasureTemp.key, isRequired: true, keyOverride: "Q6d"});
         hasSymptomGroup.addItem(Q_highestTempMeasured.get());
 
+        // Q16
+        const Q_Stool = new weekly.StoolCount({parentKey: rootKey, SymptomQuestion: Q_symptoms, isRequired: false});
+        hasSymptomGroup.addItem(Q_Stool.get());
+
         // Q36 optional information
-        const Q_wantsMore = new pool.ConsentForMore({parentKey: hasSymptomGroupKey, isRequired: true});
+        const Q_wantsMore = new pool.ConsentForMore({parentKey: hasSymptomGroupKey, isRequired: false});
         hasSymptomGroup.addItem(Q_wantsMore.get());
 
         this.items.push(hasSymptomGroup);
 
         const hasMoreGroup = new pool.HasMoreGroup({parentKey: rootKey, consentForMoreKey: Q_wantsMore.key});
         const hasMoreGroupKey = hasMoreGroup.key;
-
-        // // Q7 visited medical service --------------------------------------
-        const Q_visitedMedicalService = new weekly.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: false});
-        hasMoreGroup.addItem(Q_visitedMedicalService.get());
-
-        // // Q7b how soon visited medical service --------------------------------------
-        const Q_visitedMedicalServiceWhen = new weekly.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, isRequired: false, visiteMedicalService: Q_visitedMedicalService});
-        hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
-
-        // // Qcov18 reasons no medical services-----------------------------------------
-        const Q_visitedNoMedicalService = new pool.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false});
-        Q_visitedNoMedicalService.setOptions({topDisplayCompoments: [ transTextComponent("common.only_single_response","Only single response")] });
-        hasMoreGroup.addItem(Q_visitedNoMedicalService.get());
 
         // // Qcov16h test -----------------------------------------------------
         const Q_symptomImpliedCovidTest = new pool.SymptomImpliedCovidTest({parentKey: hasMoreGroupKey, isRequired: false});
@@ -115,13 +103,27 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_resultRapidAntigenicTest = new pool.ResultRapidAntigenicTest({parentKey:hasMoreGroupKey, keyTestType:Q_covidTestType.key, isRequired:false})
         hasMoreGroup.addItem(Q_resultRapidAntigenicTest.get());
 
-        // // Qcov19 test -----------------------------------------------------
+        // // Qcov19 test 
         const Q_fluTest = new pool.FluTest({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_fluTest.get());
 
         //Qcov19b Flu PCR test result
-        const Q_resultFluPCRTest = new pool.ResultFluTest({parentKey:hasMoreGroupKey, keyFluTest: Q_fluTest.key, isRequired: false})
+        const Q_resultFluPCRTest = new pool.ResultFluTest({parentKey:hasMoreGroupKey, isRequired: false})
+        Q_resultFluPCRTest.setCondition(Q_fluTest.getHasTestCondition());
         hasMoreGroup.addItem(Q_resultFluPCRTest.get());
+
+        // Q7 visited medical service
+        const Q_visitedMedicalService = new weekly.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: false, noteOnTop: true});
+        hasMoreGroup.addItem(Q_visitedMedicalService.get());
+
+        // Q7b how soon visited medical service 
+        const Q_visitedMedicalServiceWhen = new weekly.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, isRequired: false, visiteMedicalService: Q_visitedMedicalService});
+        hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
+
+        // Qcov18 reasons no medical services 
+        const Q_visitedNoMedicalService = new pool.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false});
+        Q_visitedNoMedicalService.setOptions({topDisplayCompoments: [ transTextComponent("common.only_single_response","Only single response")] });
+        hasMoreGroup.addItem(Q_visitedNoMedicalService.get());
 
         // // Q9 took medication --------------------------------------
         const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:false, useOtherTextInput: true});
@@ -174,12 +176,12 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(maskGroup.get());
 
         // // Q11 think cause of symptoms --------------------------------------
-        const Q_causeOfSymptoms = new weekly.CauseOfSymptoms({parentKey:hasMoreGroupKey, isRequired:true});
+        const Q_causeOfSymptoms = new weekly.CauseOfSymptoms({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_causeOfSymptoms.get());
 
         this.items.push(hasMoreGroup);
 
-        const Q_Howdoyoufeel = new weekly.HowDoYouFeel({parentKey: rootKey});
+        const Q_Howdoyoufeel = new weekly.HowDoYouFeel({parentKey: rootKey, isRequired: false});
         
         this.items.push(Q_Howdoyoufeel);
 
