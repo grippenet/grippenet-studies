@@ -15,7 +15,7 @@
   },
   "vaccination.Q0.privacy.note": {
     "en": "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses.",
-    "fr": ""
+    "fr": "_TODO_"
   },
   "vaccination.Q10c.option.voucher": {
     "en": "I have a voucher",
@@ -30,8 +30,8 @@
     "fr": "Nous voudrions savoir pourquoi certaines personnes se font vacciner, et d’autres non."
   },
   "vaccination.Q10c.helpGroup.answer_tip": {
-      "en": "Select all options which have counted to make your decision",
-      "fr": "Choisissez toutes les affirmations qui ont comptées pour prendre votre décision."
+    "en": "Select all options which have counted to make your decision",
+    "fr": "Choisissez toutes les affirmations qui ont comptées pour prendre votre décision."
   },
   "vaccination.Q10d.option.advisory_pregnant": {
     "fr": "On m'a déconseillé de me faire vacciner car je suis enceinte",
@@ -70,7 +70,7 @@
     "en": "By a nurse"
   },
   "vaccination.Q10e.option.midwife": {
-    "fr": "Par une sage-femme",
+    "fr": "Par un sage-femme",
     "en": "By a midwife"
   },
   "vaccination.Q10e.option.pharmacist": {
@@ -119,11 +119,11 @@
   },
   "vaccination.Q37.rg.scg.option.1.text": {
     "en": "Choose date",
-    "fr": "Choisissez une date"
+    "fr": "Oui, choisissez une date"
   },
   "vaccination.Q37.text": {
     "en": "Did you get a COVID19 infection in the past last months",
-    "fr": "Avez-vous été infecté par le SARS-CoV-2 (COVID19) au cours des derniers mois"
+    "fr": "Avez-vous été infecté par le SARS-CoV-2 (COVID-19) au cours des derniers mois ? (L’infection doit avoir été confirmée par un test PCR ou un test antigénique ou auto-test)"
   },
   "vaccination.Q37.rg.scg.option.0.text": {
     "en": "No",
@@ -135,14 +135,14 @@
   },
   "vaccination.Q37.helpGroup.text.1": {
     "en": "Knowing where is your last infection",
-    "fr": "TODO"
+    "fr": "Nous voudrions pouvoir évaluer la protection apportée par le vaccin"
   },
   "vaccination.Q37.helpGroup.text.3": {
     "en": "Response as precisely as possible",
-    "fr": "TODO"
+    "fr": "Répondez « Oui » si vous avez été infecté par le virus.Si vous ne connaissez pas la date exacte, merci de donner la meilleure estimation possible. "
   },
   "vaccination.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses.",
-    "fr": "TODO"
+    "fr": "Merci pour vos réponses, vous pouvez maintenant valider votre questionnaire en cliquant sur le bouton ci-dessous."
   }
 }

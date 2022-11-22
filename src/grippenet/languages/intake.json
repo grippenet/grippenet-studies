@@ -13,8 +13,8 @@
     "fr": "_TODO_"
   },
   "intake.unsupervised.minor": {
-      "en": "Minor people must use supervised",
-      "fr": "_TODO_"
+    "en": "Minor people must use supervised",
+    "fr": "_TODO_"
   },
   "intake.Q0.text": {
     "en": "For whom do you want to fill this survey",
@@ -146,22 +146,22 @@
   },
   "intake.Q17.option.site_official": {
     "en": "Using an official website (public health agency, ...)",
-    "fr": "Par le site d'une institution officielle"
+    "fr": "Par un site Internet institutionnel (Santé publique France, Ameli…)"
   },
   "intake.Q17.option.site_news": {
     "en": "Using an news website",
-    "fr": "Par un site d'information généraliste"
+    "fr": "Par un site Internet d’informations généralistes (type journaux en ligne)"
   },
   "intake.Q17.option.webhealth": {
     "en": "Using an health related information website",
-    "fr": "Par un site sur la santé"
+    "fr": "Par un site Internet d’information en santé"
   },
   "intake.Q17.option.social": {
     "en": "Via a social network",
     "fr": "Par un réseau social"
   },
   "intake.Q34.text": {
-    "fr": "A quelle fréquence avez vous une gastro-entérite?",
+    "fr": "A quelle fréquence avez vous des gastro-entérites ?",
     "en": "How often do you have gastro-enteritis"
   },
   "intake.Q34.option.0": {

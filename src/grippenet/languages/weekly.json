@@ -1,15 +1,15 @@
 {
   "weekly.EX.Qcov18.helpGroup.text.3": {
     "en": "Multiple answers are possible.",
-    "fr": "_TODO_"
+    "fr": "Vous pouvez choisir plusieurs réponses."
   },
   "weekly.EX.Q11.helpGroup.text.0": {
     "en": "Why are we asking this question?",
-    "fr": "_TODO_"
+    "fr": "Pourquoi demandons-nous cela ?"
   },
   "weekly.EX.Q11.helpGroup.text.2": {
     "en": "How should I answer this question?",
-    "fr": "_TODO_"
+    "fr": "Comment dois-je répondre à cette question ?"
   },
   "weekly.EX.Q9.rg.mcg.option.7.desc": {
     "en": "Please specify",
@@ -233,7 +233,7 @@
   },
   "weekly.Q17.sliderLabel": {
     "en": "Slider label",
-    "fr": "Slider label"
+    "fr": "Tirer sur le curseur pour choisir"
   },
   "weekly.Q17.noResponseLabel": {
     "en": "noResponseLabel",
@@ -241,10 +241,10 @@
   },
   "weekly.Q17.helpGroup.asking_reason": {
     "en": "How do you feel asking reason",
-    "fr": "_TODO_"
+    "fr": "Comment vous sentez-vous ? "
   },
   "weekly.Q17.helpGroup.answer_tip": {
     "en": "How do you feel answer tip",
-    "fr": "_TODO_"
+    "fr": "Tirer sur le curseur pour noter votre ressenti aujourd'hui sur une échèlle de 0 à 100"
   }
 }
