@@ -1,14 +1,12 @@
 import {  _T } from "../../../common"
-import { ExpressionName } from "survey-engine/data_types";
 import { Item } from "case-editor-tools/surveys/types";
 import { questionPools, SurveyBuilder, SimpleGroupQuestion, ClientExpression as ce } from "../../../common";
 import * as intake from "./questions";
 
-const pool = questionPools.intake;
-
+import pool = questionPools.intake;
 export class IntakeDef extends SurveyBuilder {
 
-    Q_birthdate?: Item;
+    Q_birthdate?: pool.DateOfBirth;
 
     constructor(meta:Map<string,string>) {
 
@@ -54,6 +52,25 @@ export class IntakeDef extends SurveyBuilder {
             )
         );
 
+       
+        const QBirthDate = this.getBirthDateItem();
+
+        const QUnsuperviserWarning = new intake.UnsupervisedMinorWarning({parentKey: rootKey, isRequired: true});
+        
+        QUnsuperviserWarning.setCondition(
+            ce.logic.and(
+                ce.compare.lt(QBirthDate.getAgeExpression('years'), 18),
+                ce.logic.or(
+                    QForWhom.createConditionMyself(),
+                    QFillingforHoushold.createYesCondition()
+                )
+            )
+        );
+
+        this.push(QUnsuperviserWarning);
+
+        this.push(mainGroup);
+
         const QSurveyEnd = new intake.NotPossibleToContinue({parentKey: rootKey});
         this.push(QSurveyEnd, ce.logic.or(
           QForWhom.createConditionSomeoneElse(),
@@ -61,8 +78,7 @@ export class IntakeDef extends SurveyBuilder {
           QFillingforHoushold.createNoCondition() 
         ));
 
-        this.push(mainGroup);
-
+        
     }
 
     buildMainGroup(rootKey: string): Item[] {    
@@ -78,6 +94,7 @@ export class IntakeDef extends SurveyBuilder {
         this.Q_birthdate = Q_birthdate;
         items.push(Q_birthdate);
         this.prefillWithLastResponse(Q_birthdate);
+
 
         const Q_Height = new intake.BodyHeight({parentKey: rootKey, isRequired: false});
         items.push(Q_Height);
@@ -174,11 +191,11 @@ export class IntakeDef extends SurveyBuilder {
         //items.push(Q_special_diet);
 
         // Q26 in standard, but Q24 in French implementation
-        const Q_homeopathic_meds = new pool.HomeophaticMedicine({parentKey:rootKey, isRequired:false, keyOverride:'Q24'});
+        const Q_homeopathic_meds = new pool.HomeophaticMedicine({parentKey:rootKey, isRequired:false, keyOverride:'Q24', useHelpgroup: false});
         this.prefillWithLastResponse(Q_homeopathic_meds, {months: 9});
         items.push(Q_homeopathic_meds);
 
-        const Q_find_platform = new intake.FindOutAboutPlatform({parentKey:rootKey, isRequired:false, useAnswerTip: true});
+        const Q_find_platform = new intake.FindOutAboutPlatform({parentKey:rootKey, isRequired:false, useAnswerTip: false});
         this.prefillWithLastResponse(Q_find_platform);
         items.push(Q_find_platform);
 
@@ -188,7 +205,7 @@ export class IntakeDef extends SurveyBuilder {
         return items;
     }
 
-    getBirthDateItem():Item {
+    getBirthDateItem(): pool.DateOfBirth {
         if(!this.Q_birthdate) {
             throw new Error("Birthday not initialized");
         }

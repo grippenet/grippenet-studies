@@ -12,7 +12,7 @@
 // [X] Q34 GastroEnteritisFrequency
 
 import {  questionPools as pool, _T,  ItemQuestion,  ItemProps, BaseChoiceQuestion,transTextComponent,  } from "../../../common"
-import { ClientExpression as client, as_option, as_input_option,OptionList, markdownComponent } from "../../../common";
+import { ClientExpression as client, as_option, as_input_option,OptionList, markdownComponent, textComponent } from "../../../common";
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
 import { french, dict_to_response, OverridenResponses, ResponseOveriddes, array_to_options } from "../../../utils";
@@ -35,13 +35,34 @@ export class SurveyPrelude extends ItemQuestion {
             content: [
                 markdownComponent({
                     key: 'prelude',
-                    content: _T("vaccination.prelude", "Vaccination survey prelude text in markdown")
+                    content: _T("intake.prelude", "intake survey prelude text in markdown")
                 })
             ]
         });
     }
-
 }
+
+export class UnsupervisedMinorWarning extends ItemQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'N2');
+    }
+
+    buildItem(): SurveySingleItem {
+        return SurveyItems.display({
+            parentKey: this.parentKey,
+            condition: this.condition,
+            itemKey: this.itemKey,
+            content: [
+                textComponent({
+                    key: 'N2',
+                    content: _T("intake.unsupervised.minor", "Minor people must use supervised")
+                })
+            ]
+        });
+    }
+}
+
 
 export class SurveyImpersonateResponse extends ItemQuestion {
     
