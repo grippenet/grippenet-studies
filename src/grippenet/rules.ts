@@ -4,8 +4,8 @@ import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { ServerExpression as se } from "../common";
 import { Expression } from "survey-engine/data_types";
 import WeeklyResponses from "./surveys/weekly/responses";
-
 import { GrippenetFlags as flags } from "./flags";
+import { Duration,  } from "case-editor-tools/types/duration";
 
 export function response_item_key(name:string) {
     return responseGroupKey + '.' + name;
@@ -91,19 +91,39 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
 
         const underAgeFlag = flags.underAgeVac;
 
+        const minorFlag = flags.minor;
+
         const intakeBirthDateKey = this.keys.intake.getBirthDateItem().key;
+
+        const olderAgeExpression = (age: Duration): Expression => {
+            
+            const offset : Duration = {};
+            if(age.years) {
+                offset.years = -age.years;
+            }
+            if(age.months) {
+                offset.months = -age.months;
+            }
+            
+            if(Object.keys(offset).length == 0) {
+                throw new Error("offset must have at least one entry");
+            }
+
+            // Timestamp(birthday) < Timestamp( now -offset)
+            // True = Older than offset
+            return se.lt(
+                se.getResponseValueAsNum(intakeBirthDateKey, ageResponseComp),
+                se.timestampWithOffset(offset)
+            );
+        };
+
 
         const handleChild = se.ifThen(
             se.checkSurveyResponseKey(intakeKey),
             se.do(
                 // set child flag if younger than age
                 se.if(
-                    // Timestamp(birthday) < Timestamp( now -offset)
-                    // True = Older than offset
-                    se.lt(
-                        se.getResponseValueAsNum(intakeBirthDateKey, ageResponseComp),
-                        se.timestampWithOffset(underAgeFlag.offset)
-                    ),
+                    olderAgeExpression(underAgeFlag.age),
                     updateFlag(underAgeFlag.key, underAgeFlag.values.no), // Not under age = Can be vaccinated
                     updateFlag(underAgeFlag.key, underAgeFlag.values.yes)
                 ),
@@ -127,7 +147,14 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
                         assignedSurveys.remove(vacKey, 'all'),
                         se.participantActions.removeFlag(flags.vaccinationCompleted.key)
                     )
-                ) // if
+                ), // if
+                 // Update minor flag
+                 se.if(
+                    olderAgeExpression(minorFlag.age),
+                    updateFlag(minorFlag.key, minorFlag.values.no), 
+                    updateFlag(minorFlag.key, minorFlag.values.yes)
+                ),
+               
             ) // do
         );
 

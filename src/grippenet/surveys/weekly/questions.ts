@@ -15,6 +15,7 @@ const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
 
 // Alias namespace
 import pool = questionPools.weekly;
+import { GrippenetFlags } from "../../flags";
 
 
 // [X] Q16
@@ -64,7 +65,7 @@ export class StoolCount extends BaseChoiceQuestion {
 
 export class VisitedMedicalService extends pool.VisitedMedicalService {
 
-    getResponses() {
+    getResponses():OptionDef[] {
         
             const codes = responses.visit_medical;
     
@@ -76,6 +77,15 @@ export class VisitedMedicalService extends pool.VisitedMedicalService {
     
             const exclusiveOther = client.multipleChoice.any(this.key, codes.no, codes.plan);
     
+
+            const isMinorExp = client.compare.eq(
+                    client.getters.getAttribute(
+                        client.getters.getAttribute(client.getters.getContext(), 'participantFlags'),
+                        GrippenetFlags.minor.key
+                    ),
+                    GrippenetFlags.minor.values.yes
+            );
+
             return [
                 {
                     key: codes.no, role: 'option',
@@ -115,6 +125,7 @@ export class VisitedMedicalService extends pool.VisitedMedicalService {
                 {
                     key: codes.scholar, role: 'option',
                     disabled: exclusiveOther,
+                    displayCondition: isMinorExp,
                     content: _T("weekly.EX.Q7.rg.mcg.option.scholar_nurse","Scholar nurse")
                 },
                 {
@@ -126,11 +137,6 @@ export class VisitedMedicalService extends pool.VisitedMedicalService {
                     key: codes.other, role: 'option',
                     disabled: exclusiveOther,
                     content: _T("weekly.EX.Q7.rg.mcg.option.4", "Other medical services")
-                },
-                {
-                    key: codes.hospital, role: 'option',
-                    disabled: exclusiveOther,
-                    content: _T("weekly.EX.Q7.rg.mcg.option.2", "Hospital admission")
                 },
                 
             ];
@@ -149,7 +155,9 @@ export class VisitedMedicalService extends pool.VisitedMedicalService {
                 if(resp.key == codes.no || resp.key == codes.plan) {
                     return;
                 }
-                d.set(resp.key, resp.content);
+                if(resp.content) {
+                    d.set(resp.key, resp.content);
+                }
             });
             return d;
         }
@@ -246,7 +254,7 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
                 throw new Error("weekly.Q7b: no visit code known for "+ visitCode);
             }
             
-            conditionCodes.push(key);
+            conditionCodes.push(visitCode);
 
             return {
                 key: key, role: 'responseRow', cells: [

@@ -8,11 +8,19 @@ const monthInSeconds = 60 * 60 * 24 * 30;
 export const GrippenetFlags = {
     underAgeVac: {
         key: 'ageVac',
-        offset: {months: -6}, //  Offset must be negative values
+        age: {months: 6}, 
         values: {
             yes: '1', // Yes = Under age for vaccination survey
             no: '0' // No = 
-        }
+        } as const
+    } as const,
+    minor: {
+        key: 'minor',
+        age: {years: 18},
+        values: {
+            yes: '1',
+            no: '0'
+        } as const
     } as const,
     hasOnGoingSymptoms: flags.hasOnGoingSymptoms,
     vaccinationCompleted: flags.vaccinationCompleted
