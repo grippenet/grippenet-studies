@@ -440,7 +440,7 @@ export class MaskGroup extends GroupQuestion {
 export class MaskWearingContext extends BaseChoiceQuestion {
 
     constructor(props: ItemProps) {
-        super(props, 'QFRmask1', 'multiple');
+        super(props, 'Qm1', 'multiple');
         this.setOptions({
             questionText: _T("weekly.QFRmask1.text", "Under what circumstances did you wear a mask"),
             topDisplayCompoments: [
@@ -462,13 +462,12 @@ export class MaskWearingContext extends BaseChoiceQuestion {
             as_option("99", _T( "weekly.QFRmask1.option.dnk","I dont know")),
         ]
     }
-
 }
 
 export class MaskWearingAlways extends BaseChoiceQuestion {
 
     constructor(props: ItemProps) {
-        super(props, 'QFRmask2', 'single');
+        super(props, 'Qm2', 'single');
         this.setOptions({
             questionText: _T( "weekly.QFRmask2.text","In this context, did you always wear a mask"),
         });
@@ -495,7 +494,7 @@ export class MaskWearingAlways extends BaseChoiceQuestion {
 export class MaskNotWearingReason extends BaseChoiceQuestion {
     
     constructor(props: ItemProps) {
-        super(props, 'QFRmask3', 'multiple');
+        super(props, 'Qm3', 'multiple');
         this.setOptions({
             questionText: _T( "weekly.QFRmaskE.text", "Why did you not always wear a mask in this context"),
             topDisplayCompoments: [
@@ -506,12 +505,11 @@ export class MaskNotWearingReason extends BaseChoiceQuestion {
 
     getResponses(): OptionDef[] {
         return [
-            as_option("1", _T("weekly.QFRmask3.option.at_home", "At home")),
-            as_option("2", _T("weekly.QFRmask3.option.not_enough", "Dont have enough mask")),
-            as_option("3", _T("weekly.QFRmask3.option.incommode", "Mask incommode me for breathing")),
-            as_option("4", _T("weekly.QFRmask3.option.constraint", "Too constraining")),
-            as_option("5", _T("weekly.QFRmask3.option.other_look", "Because of other people's opinion when seeing me")),
-            as_input_option("6", _T( "weekly.QFRmask3.option.other", "Other reason")), 
+            as_option("1", _T("weekly.QFRmask3.option.not_enough", "Dont have enough mask")),
+            as_option("2", _T("weekly.QFRmask3.option.incommode", "Mask incommode me for breathing")),
+            as_option("3", _T("weekly.QFRmask3.option.constraint", "Too constraining")),
+            as_option("4", _T("weekly.QFRmask3.option.other_look", "Because of other people's opinion when seeing me")),
+            as_input_option("5", _T( "weekly.QFRmask3.option.other", "Other reason")), 
             as_option("99", _T( "weekly.QFRmask3.option.dnk", "I dont know")),
         ]
     }
@@ -521,7 +519,7 @@ export class MaskNotWearingReason extends BaseChoiceQuestion {
 export class MaskProvidedFrom extends BaseChoiceQuestion {
     
     constructor(props: ItemProps) {
-        super(props, 'QFRmask4', 'multiple');
+        super(props, 'Qm4', 'multiple');
         this.setOptions({
             questionText: _T( "weekly.QFRmask4.text", "Where did you get this mask from?"),
             topDisplayCompoments: [

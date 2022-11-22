@@ -43,7 +43,7 @@ export class VaccinationDef extends SurveyBuilder {
         const Q_flu_vaccin_voucher = new vaccination.FluVaccinationVoucher({parentKey:rootKey, isRequired:true});
         items.push(Q_flu_vaccin_voucher);
         
-        const Q_flu_vaccine_this_season = new pool.FluVaccineThisSeason({parentKey:rootKey, isRequired:false});
+        const Q_flu_vaccine_this_season = new pool.FluVaccineThisSeason({parentKey:rootKey, isRequired:true});
         items.push(Q_flu_vaccine_this_season);
         
         const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});

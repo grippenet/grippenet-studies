@@ -3,7 +3,7 @@ import {  OptionDef } from "case-editor-tools/surveys/types";
 import { SurveySingleItem } from "survey-engine/data_types";
 import { questionPools as pool, 
     _T, ItemQuestion, ItemProps, BaseChoiceQuestion, 
-    ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList, markdownComponent } from "../../../common"
+    ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList, markdownComponent, transTextComponent, trans_text } from "../../../common"
 import {  OverridenResponses, ResponseOveriddes } from "../../../utils";
 import ResponseEncoding from "./responses";
 
@@ -49,6 +49,15 @@ export class FluVaccineThisSeasonReasonFor extends pool.vaccination.FluVaccineTh
         const o : ResponseOveriddes = {};
         o[codes.riskgroup] = [ codes.voucher, codes.pregnant_baby ];
         return o;
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking("vaccination.Q10c.helpGroup.why_asking"),
+            trans_text("vaccination.Q10c.helpGroup.asking_reason", "We would like to know why some people are willing to be vaccinated or not"),
+            text_how_answer("vaccination.Q10c.helpGroup.how_answer"),
+            trans_text("vaccination.Q10c.helpGroup.answer_tip", "Select all options which have counted to make your decision"),
+        ];
     }
 }
 
@@ -101,6 +110,7 @@ export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAga
         list.without(codes.counter_indication, codes.not_free);
 
         return list.values();
+
     }
 }
 
@@ -115,12 +125,12 @@ export class FluVaccinationByWhom extends BaseChoiceQuestion {
 
     getResponses(): OptionDef[] {
         return [
-            as_option('1', _T("vaccination.Q10e.option.gp",  "By a generalist practitionner")),
+            as_option('1', _T("vaccination.Q10e.option.gp",  "By a generalist practitioner")),
             as_option('2', _T("vaccination.Q10e.option.nurse", "By a nurse")),
             as_option('3',  _T("vaccination.Q10e.option.midwife", "By a midwife")),
             as_option('4', _T("vaccination.Q10e.option.pharmacist", "By a pharmacist")),
-            as_option('5', _T( "vaccination.Q10e.option.occupational", "By an occupational med practitionner")),
-            option_input_other('6', _T("vaccination.Q10e.option.other", "By another kind of practitionner"), "none")
+            as_option('5', _T( "vaccination.Q10e.option.occupational", "By an occupational med practitioner")),
+            option_input_other('6', _T("vaccination.Q10e.option.other", "By another kind of practitioner"), "none")
         ];
     }   
 }

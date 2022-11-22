@@ -8,9 +8,13 @@
       "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
     ]
   },
-  "vaccination.impersonate": {
-    "en": "Please fill this form as if you were the person your are filling it for",
-    "fr": "Répondez s-il-vous-plaît à toutes les questions comme si vous étiez la personne pour laquelle vous remplissez ce questionnaire."
+  "intake.prelude": {
+    "en": "intake survey prelude text in markdown",
+    "fr": "_TODO_"
+  },
+  "intake.unsupervised.minor": {
+      "en": "Minor people must use supervised",
+      "fr": "_TODO_"
   },
   "intake.Q0.text": {
     "en": "For whom do you want to fill this survey",

@@ -9,9 +9,13 @@
       "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
     ]
   },
+  "vaccination.impersonate": {
+    "en": "Please fill this form as if you were the person your are filling it for",
+    "fr": "Répondez s-il-vous-plaît à toutes les questions comme si vous étiez la personne pour laquelle vous remplissez ce questionnaire."
+  },
   "vaccination.Q0.privacy.note": {
     "en": "(**) By selecting one of these options you give your consent to use your historical data to prefill this survey's responses.",
-    "fr": "_TODO_"
+    "fr": ""
   },
   "vaccination.Q10c.option.voucher": {
     "en": "I have a voucher",
@@ -20,6 +24,14 @@
   "vaccination.Q10c.option.pregnant_baby": {
     "en": "I'm pregnant and want to protect my baby",
     "fr": "Je suis enceinte et je souhaite protéger mon bébé contre la grippe"
+  },
+  "vaccination.Q10c.helpGroup.asking_reason": {
+    "en": "We would like to know why some people are willing to be vaccinated or not",
+    "fr": "Nous voudrions savoir pourquoi certaines personnes se font vacciner, et d’autres non."
+  },
+  "vaccination.Q10c.helpGroup.answer_tip": {
+      "en": "Select all options which have counted to make your decision",
+      "fr": "Choisissez toutes les affirmations qui ont comptées pour prendre votre décision."
   },
   "vaccination.Q10d.option.advisory_pregnant": {
     "fr": "On m'a déconseillé de me faire vacciner car je suis enceinte",
