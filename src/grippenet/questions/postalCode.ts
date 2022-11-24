@@ -21,7 +21,7 @@ export const postalCode = (props: postalCodeProps): SurveyItem => {
     const items : ItemComponent[] = [
       { "key": "postalcodes", "role":"lookupName"},
       {
-        "role": "buttonLabel",
+        "role": "searchButton",
         "content": text("common.postalcodes.search", "Search" )
       },
       {
