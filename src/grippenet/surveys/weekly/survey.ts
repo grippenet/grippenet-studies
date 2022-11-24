@@ -1,4 +1,4 @@
-import {  _T,questionPools, SurveyBuilder, transTextComponent } from "../../../common"
+import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
 
@@ -28,7 +28,7 @@ export class WeeklyDef extends SurveyBuilder {
         const hasSymptomGroupKey = hasSymptomGroup.key;
 
         // // Q2 same illness --------------------------------------
-        const Q_same_illness = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: true, useDoesNotApply: false});
+        const Q_same_illness = new pool.SameIllness({parentKey: hasSymptomGroupKey, isRequired: false, useDoesNotApply: false});
         hasSymptomGroup.addItem(Q_same_illness.get());
         
         /*
@@ -41,33 +41,33 @@ export class WeeklyDef extends SurveyBuilder {
         hasSymptomGroup.addItem(Q_pcrHouseholdContact.get());
         */
         // // Q3 when first symptoms --------------------------------------
-        const Q_symptomStart = new weekly.SymptomsStart({parentKey: hasSymptomGroupKey, keySameIllness: Q_same_illness.key, isRequired: true});
+        const Q_symptomStart = new weekly.SymptomsStart({parentKey: hasSymptomGroupKey, keySameIllness: Q_same_illness.key, isRequired: false});
         hasSymptomGroup.addItem(Q_symptomStart.get());
 
         // // Q4 when symptoms end --------------------------------------
-        const Q_symptomsEnd = new pool.SymptomsEnd({parentKey:hasSymptomGroupKey, keySymptomsStart: Q_symptomStart.key, isRequired:true});
+        const Q_symptomsEnd = new pool.SymptomsEnd({parentKey:hasSymptomGroupKey, keySymptomsStart: Q_symptomStart.key, isRequired:false});
         this.Q_symptomsEnd = Q_symptomsEnd;
         hasSymptomGroup.addItem(Q_symptomsEnd.get());
 
         // // Q5 symptoms developed suddenly --------------------------------------
-        const Q_symptomsSuddenlyDeveloped = new pool.SymptomsSuddenlyDeveloped({parentKey:hasSymptomGroupKey, isRequired:true});
+        const Q_symptomsSuddenlyDeveloped = new pool.SymptomsSuddenlyDeveloped({parentKey:hasSymptomGroupKey, isRequired:false});
         hasSymptomGroup.addItem(Q_symptomsSuddenlyDeveloped.get());
 
         // Q6 fever start questions
         // Separated into individual questions and Key code overriden to prevent Q6.a and keep Q6
-        const Q_feverStart = new pool.FeverStart({parentKey:hasSymptomGroupKey, keySymptomsQuestion:Q_symptoms.key, keySymptomStart: Q_symptomStart.key, isRequired:true, keyOverride:"Q6"});
+        const Q_feverStart = new pool.FeverStart({parentKey:hasSymptomGroupKey, keySymptomsQuestion:Q_symptoms.key, keySymptomStart: Q_symptomStart.key, isRequired:false, keyOverride:"Q6"});
         hasSymptomGroup.addItem(Q_feverStart.get());
 
         // Q6b fever developed suddenly
-        const Q_feverDevelopedSuddenly = new pool.FeverDevelopedSuddenly({parentKey: hasSymptomGroupKey, keySymptomsQuestion:Q_symptoms.key, isRequired: true, keyOverride:"Q6b"});
+        const Q_feverDevelopedSuddenly = new pool.FeverDevelopedSuddenly({parentKey: hasSymptomGroupKey, keySymptomsQuestion:Q_symptoms.key, isRequired: false, keyOverride:"Q6b"});
         hasSymptomGroup.addItem(Q_feverDevelopedSuddenly.get());
 
         // Q6c temperature taken
-        const Q_didUMeasureTemp = new pool.DidUMeasureTemperature({parentKey:hasSymptomGroupKey, keySymptomsQuestion: Q_symptoms.key, isRequired: true, keyOverride: "Q6c"});
+        const Q_didUMeasureTemp = new pool.DidUMeasureTemperature({parentKey:hasSymptomGroupKey, keySymptomsQuestion: Q_symptoms.key, isRequired: false, keyOverride: "Q6c"});
         hasSymptomGroup.addItem(Q_didUMeasureTemp.get());
 
         // Q6d highest temperature taken
-        const Q_highestTempMeasured = new pool.HighestTemprerature({parentKey:hasSymptomGroupKey, keySymptomsQuestion: Q_symptoms.key, keyDidYouMeasureTemperature: Q_didUMeasureTemp.key, isRequired: true, keyOverride: "Q6d"});
+        const Q_highestTempMeasured = new pool.HighestTemprerature({parentKey:hasSymptomGroupKey, keySymptomsQuestion: Q_symptoms.key, keyDidYouMeasureTemperature: Q_didUMeasureTemp.key, isRequired: false, keyOverride: "Q6d"});
         hasSymptomGroup.addItem(Q_highestTempMeasured.get());
 
         // Q16
@@ -88,7 +88,7 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_symptomImpliedCovidTest.get());
 
         // Qcov16i test type -----------------------------------------------------
-        const Q_covidTestType = new pool.CovidTestType({parentKey: hasMoreGroupKey, keySymptomImpliedCovidTest: Q_symptomImpliedCovidTest.key, isRequired: true, useSerology: false});
+        const Q_covidTestType = new pool.CovidTestType({parentKey: hasMoreGroupKey, keySymptomImpliedCovidTest: Q_symptomImpliedCovidTest.key, isRequired: false, useSerology: false});
         hasMoreGroup.addItem(Q_covidTestType.get());
 
         // Qcov16b PCR test result
@@ -121,7 +121,7 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
 
         // Qcov18 reasons no medical services 
-        const Q_visitedNoMedicalService = new pool.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false});
+        const Q_visitedNoMedicalService = new pool.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false, useAnswerTip: false});
         Q_visitedNoMedicalService.setOptions({topDisplayCompoments: [ transTextComponent("common.only_single_response","Only single response")] });
         hasMoreGroup.addItem(Q_visitedNoMedicalService.get());
 
@@ -174,6 +174,15 @@ export class WeeklyDef extends SurveyBuilder {
         maskGroup.addItem(QMaskProvidedFrom.get());
 
         hasMoreGroup.addItem(maskGroup.get());
+
+       const QMaskWhyNotWearing = new weekly.MaskWhyNotWearing({parentKey: hasMoreGroupKey});
+       QMaskWhyNotWearing.setCondition(
+            ce.logic.and(
+                Q_symptoms.createSymptomCondition("cough"),
+                Q_covidHabits.createDontWearMaskCondition(),
+            )
+       );
+       hasMoreGroup.addItem(QMaskWhyNotWearing.get());
 
         // // Q11 think cause of symptoms --------------------------------------
         const Q_causeOfSymptoms = new weekly.CauseOfSymptoms({parentKey:hasMoreGroupKey, isRequired:false});

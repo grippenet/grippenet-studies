@@ -1,9 +1,8 @@
 import {  questionPools, _T, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion,
-     GroupQuestion, GroupProps, ClientExpression as client, trans_text, as_input_option, as_option, OptionList, MatrixRow, textComponent }  from "../../../common"
+     GroupQuestion, GroupProps, ClientExpression as client, trans_text, as_input_option, as_option, OptionList, MatrixRow, textComponent, option_def, option_input_other }  from "../../../common"
 import {  Expression, ItemComponent, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
-import { french,  } from "../../../utils";
 import { require_response, text_how_answer, text_select_all_apply, text_why_asking } from "../../../../common/studies/common/questionPools";
 import { matrixKey, responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { ItemEditor } from "case-editor-tools/surveys/survey-editor/item-editor";
@@ -243,6 +242,7 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
             ['r1', visits.gp],
             ['r2', visits.emergency],
             ['r4', visits.other],
+            ['r5', visits.other_community]
         ];
 
         const matrixRows: MatrixRow[] =  rows.map(r =>  {
@@ -378,6 +378,19 @@ export class CovidHabitsChange extends pool.CovidHabitsChange {
             client.responseHasKeysAny(this.key, [responseGroupKey, this.getLikertRowKey(codes.wear_mask_home_french)].join('.'), ...yes_codes ),
         )
     }
+
+    createDontWearMaskCondition(): Expression {
+        const codes = responses.covid_habits;
+        const scale_codes = pool.CovidHabitsChange.likertScaleCodes;
+        
+        const no_codes = [ scale_codes.no];
+
+        return client.logic.or(
+            client.responseHasKeysAny(this.key, [responseGroupKey, this.getLikertRowKey(codes.wear_mask_french)].join('.'), ...no_codes ),
+            client.responseHasKeysAny(this.key, [responseGroupKey, this.getLikertRowKey(codes.wear_mask_home_french)].join('.'), ...no_codes ),
+        )
+    }
+
 }
 
 export class CauseOfSymptoms extends pool.CauseOfSymptoms {
@@ -450,16 +463,19 @@ export class MaskWearingContext extends BaseChoiceQuestion {
     }
 
     getResponses(): OptionDef[] {
+        const exclusiveCondition = client.multipleChoice.any(this.key, "99");
+        const exclusiveIDontKnow = client.multipleChoice.none(this.key, "99");
+        const opts = {disabled: exclusiveCondition};
         return [
-            as_option("1", _T( "weekly.QFRmask1.option.fear_transmit", "By fear of transmitting to household")),
-            as_option("2", _T( "weekly.QFRmask1.option.oustide", "Oustide home")),
-            as_option("3", _T( "weekly.QFRmask1.option.at_work", "At work")),
-            as_option("4", _T("weekly.QFRmask1.option.contact_elder", "Close to elder people")),
-            as_option("5", _T("weekly.QFRmask1.option.contact_at_risk","Close to people with chronic disease")),
-            as_option("6", _T( "weekly.QFRmask1.option.hospital","By visiting people at hospital")),
-            as_option("7", _T( "weekly.QFRmask1.option.young_children","Close to young people")),
-            as_option("8", _T( "weekly.QFRmask1.option.other","Other")),
-            as_option("99", _T( "weekly.QFRmask1.option.dnk","I dont know")),
+            option_def("1", _T( "weekly.QFRmask1.option.fear_transmit", "By fear of transmitting to household"), opts),
+            option_def("2", _T( "weekly.QFRmask1.option.oustide", "Oustide home"), opts),
+            option_def("3", _T( "weekly.QFRmask1.option.at_work", "At work"), opts),
+            option_def("4", _T("weekly.QFRmask1.option.contact_elder", "Close to elder people"), opts),
+            option_def("5", _T("weekly.QFRmask1.option.contact_at_risk","Close to people with chronic disease"), opts),
+            option_def("6", _T( "weekly.QFRmask1.option.hospital","By visiting people at hospital"), opts),
+            option_def("7", _T( "weekly.QFRmask1.option.young_children","Close to young people"), opts),
+            option_input_other("8", _T( "weekly.QFRmask1.option.other","Other"), "weekly.QFRmask1.option.other.desc", opts ),
+            option_def("99", _T( "weekly.QFRmask1.option.dnk","I dont know"), {disabled: exclusiveIDontKnow}),
         ]
     }
 }
@@ -477,12 +493,12 @@ export class MaskWearingAlways extends BaseChoiceQuestion {
         return [
             as_option("1", _T("weekly.QFRmask2.option.yes", "Yes")),
             as_option("0", _T("weekly.QFRmask2.option.no", "No")),
-            as_option("99", _T("weekly.QFRmask2.option.dnk", "I dont know")),
+            as_option("2", _T("weekly.QFRmask2.option.dnk", "I dont know")),
         ]
     }
 
     createConditionNoUnknown() {
-        return client.singleChoice.any(this.key, '0', '99');
+        return client.singleChoice.any(this.key, '0', '2');
     } 
 
     createConditionYes() {
@@ -504,13 +520,17 @@ export class MaskNotWearingReason extends BaseChoiceQuestion {
     }
 
     getResponses(): OptionDef[] {
+
+        const exclusiveCondition = client.multipleChoice.any(this.key, "6");
+        const exclusiveDontKnow = client.multipleChoice.none(this.key, "6");
+
         return [
-            as_option("1", _T("weekly.QFRmask3.option.not_enough", "Dont have enough mask")),
-            as_option("2", _T("weekly.QFRmask3.option.incommode", "Mask incommode me for breathing")),
-            as_option("3", _T("weekly.QFRmask3.option.constraint", "Too constraining")),
-            as_option("4", _T("weekly.QFRmask3.option.other_look", "Because of other people's opinion when seeing me")),
-            as_input_option("5", _T( "weekly.QFRmask3.option.other", "Other reason")), 
-            as_option("99", _T( "weekly.QFRmask3.option.dnk", "I dont know")),
+            option_def("1", _T("weekly.QFRmask3.option.not_enough", "Dont have enough mask"), {disabled: exclusiveCondition}),
+            option_def("2", _T("weekly.QFRmask3.option.incommode", "Mask incommode me for breathing"), {disabled: exclusiveCondition}),
+            option_def("3", _T("weekly.QFRmask3.option.constraint", "Too constraining"), {disabled: exclusiveCondition}),
+            option_def("4", _T("weekly.QFRmask3.option.other_look", "Because of other people's opinion when seeing me"), {disabled: exclusiveCondition}),
+            option_input_other("5", _T( "weekly.QFRmask3.option.other", "Other reason"), "weekly.QFRmask3.option.other.desc", {disabled: exclusiveCondition}), 
+            option_def("6", _T( "weekly.QFRmask3.option.dnk", "I dont know"),  {disabled: exclusiveDontKnow}),
         ]
     }
 
@@ -529,13 +549,17 @@ export class MaskProvidedFrom extends BaseChoiceQuestion {
     }
 
     getResponses(): OptionDef[] {
+
+        const exclusiveCondition = client.multipleChoice.any(this.key, "6");
+        const exclusiveDontKnow = client.multipleChoice.none(this.key, "6");
+
         return [
-            as_option("1", _T( "weekly.QFRmask4.option.pharmacy", "At the pharmacy")),
-            as_option("2", _T("weekly.QFRmask4.option.internet", "On internet")),
-            as_option("3", _T( "weekly.QFRmask4.option.work", "At work")),
-            as_option("4", _T("weekly.QFRmask4.option.doctor", "From my doctor")),
-            as_input_option("5", _T("weekly.QFRmask4.option.other", "Other")),
-            as_option("99", _T( "weekly.QFRmask4.option.dnk", "I dont know")),
+            option_def("1", _T( "weekly.QFRmask4.option.pharmacy", "At the pharmacy"), {disabled: exclusiveCondition}),
+            option_def("2", _T("weekly.QFRmask4.option.internet", "On internet"), {disabled: exclusiveCondition}),
+            option_def("3", _T( "weekly.QFRmask4.option.work", "At work"), {disabled: exclusiveCondition}),
+            option_def("4", _T("weekly.QFRmask4.option.doctor", "From my doctor"), {disabled: exclusiveCondition}),
+            option_input_other("5", _T("weekly.QFRmask4.option.other", "Other"), "weekly.QFRmask4.option.other.desc", {disabled: exclusiveCondition}),
+            option_def("6", _T( "weekly.QFRmask4.option.dnk", "I dont know"), {disabled: exclusiveDontKnow}),
         ];
     }
 
@@ -544,7 +568,7 @@ export class MaskProvidedFrom extends BaseChoiceQuestion {
 export class MaskWhyNotWearing extends BaseChoiceQuestion {
     
     constructor(props: ItemProps) {
-        super(props, 'QFRmask5', 'multiple');
+        super(props, 'Qm5', 'multiple');
         this.setOptions({
             questionText: _T("weekly.QFRmask5.text", "Why did you not wear a mask"),
             topDisplayCompoments: [
@@ -554,18 +578,21 @@ export class MaskWhyNotWearing extends BaseChoiceQuestion {
     }
 
     getResponses(): OptionDef[] {
+        const exclusiveCondition = client.multipleChoice.any(this.key, "11");
+        const exclusiveDontKnow = client.multipleChoice.none(this.key, "11");
+
         return [
-            as_option("1", _T("weekly.QFRmask5.option.ridiculous", "You fear to be ridiculous")),
-            as_option("2", _T("weekly.QFRmask5.option.excessive", "it's a little excessive")),
-            as_option("3", _T("weekly.QFRmask5.option.efficient", "it would not be efficient")),
-            as_option("4", _T("weekly.QFRmask5.option.unrisky.trans", "There is no risk of transmission")),
-            as_option("5", _T("weekly.QFRmask5.option.dontcare.trans", "I dont care much if I transmit the virus")),
-            as_option("6", _T("weekly.QFRmask5.option.find.mask", "I dont know where to obtain this kind of mask")),
-            as_option("7", _T("weekly.QFRmask5.option.spend.money", "I don't want to spend money for that")),
-            as_option("8", _T("weekly.QFRmask5.option.keep.mask", "I find hard to keep the mask a long time on my face")),
-            as_option("9", _T("weekly.QFRmask5.option.concerned", "I dont feel concerned")),
-            as_input_option("10", _T("weekly.QFRmask5.option.other", "Other")),
-            as_option("99", _T("weekly.QFRmask5.option.dnk", "I dont know"))
+            option_def("1", _T("weekly.QFRmask5.option.ridiculous", "You fear to be ridiculous"), {disabled: exclusiveCondition}),
+            option_def("2", _T("weekly.QFRmask5.option.excessive", "it's a little excessive"), {disabled: exclusiveCondition}),
+            option_def("3", _T("weekly.QFRmask5.option.efficient", "it would not be efficient"), {disabled: exclusiveCondition}),
+            option_def("4", _T("weekly.QFRmask5.option.unrisky.trans", "There is no risk of transmission"), {disabled: exclusiveCondition}),
+            option_def("5", _T("weekly.QFRmask5.option.dontcare.trans", "I dont care much if I transmit the virus"), {disabled: exclusiveCondition}),
+            option_def("6", _T("weekly.QFRmask5.option.find.mask", "I dont know where to obtain this kind of mask"), {disabled: exclusiveCondition}),
+            option_def("7", _T("weekly.QFRmask5.option.spend.money", "I don't want to spend money for that"), {disabled: exclusiveCondition}),
+            option_def("8", _T("weekly.QFRmask5.option.keep.mask", "I find hard to keep the mask a long time on my face"), {disabled: exclusiveCondition}),
+            option_def("9", _T("weekly.QFRmask5.option.concerned", "I dont feel concerned"), {disabled: exclusiveCondition}),
+            option_input_other("10", _T("weekly.QFRmask5.option.other", "Other"), "weekly.QFRmask5.option.other.desc", {disabled: exclusiveCondition}),
+            option_def("11", _T("weekly.QFRmask5.option.dnk", "I dont know"), {disabled: exclusiveDontKnow})
         ];
     }
 
