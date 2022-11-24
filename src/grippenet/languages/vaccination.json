@@ -51,7 +51,7 @@
   },
   "vaccination.Q10d.option.other_covid19": {
     "en": "Other reason related to Covid19",
-    "fr": "Autre raison en lien avec la COVID-19 (champs libre, préciser)"
+    "fr": "Autre raison en lien avec la COVID-19"
   },
   "vaccination.Q10d.option.bad_experience": {
     "en": "I had a bad experience with vaccination",
@@ -63,7 +63,7 @@
   },
   "vaccination.Q10e.option.gp": {
     "fr": "Par un médecin généraliste",
-    "en": "By a generalist practitionner"
+    "en": "By a generalist practitioner"
   },
   "vaccination.Q10e.option.nurse": {
     "fr": "Par un infirmier",
@@ -79,11 +79,11 @@
   },
   "vaccination.Q10e.option.occupational": {
     "fr": "Par un médecin ou infirmier du travail",
-    "en": "By an occupational med practitionner"
+    "en": "By an occupational med practitioner"
   },
   "vaccination.Q10e.option.other": {
     "fr": "Par un professionnel d’une autre spécialité (préciser)",
-    "en": "By another kind of practitionner"
+    "en": "By another kind of practitioner"
   },
   "vaccination.Q18.text": {
     "en": "Do you have a voucher for influenza vaccine since last october",

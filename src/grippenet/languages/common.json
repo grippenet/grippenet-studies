@@ -3,6 +3,10 @@
     "en": "Other (specify)",
     "fr": "Autre (préciser)"
   },
+  "common.only_single_response": {
+    "en":"Only single response",
+    "fr":"Indiquez une seule réponse"
+  },
   "common.postalcodes.search": {
     "en": "Search",
     "fr": "Recherchez"

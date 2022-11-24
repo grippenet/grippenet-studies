@@ -1,5 +1,5 @@
 {
-  "intake.prelude.text": {
+  "intake.prelude": {
     "#comment": "",
     "en": "Intake survey prelude text in markdown",
     "fr": [
@@ -8,13 +8,9 @@
       "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
     ]
   },
-  "intake.prelude": {
-    "en": "intake survey prelude text in markdown",
-    "fr": "_TODO_"
-  },
   "intake.unsupervised.minor": {
     "en": "Minor people must use supervised",
-    "fr": "_TODO_"
+    "fr": "Les questionnaires de personnes mineurs doivent être remplis par des adultes"
   },
   "intake.Q0.text": {
     "en": "For whom do you want to fill this survey",
@@ -138,7 +134,7 @@
   },
   "intake.Q19.helpGroup.asking_reason": {
     "en": "To know your body mass index",
-    "fr": "Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales.)"
+    "fr": "Pour savoir si votre indice de masse corporelle est supérieur à 40, et si vous faites donc partie d’une catégorie de personnes ciblées par les recommandations vaccinales."
   },
   "intake.Q19.helpGroup.answer_tip": {
     "en": "Enter your approximative height in cm",

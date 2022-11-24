@@ -105,7 +105,7 @@
   },
   "weekly.QFRmask1.option.fear_transmit": {
     "en": "By fear of transmitting to household",
-    "fr": "Chez vous pour ne pas contaminer votre entourage (enfants, parents, conjoint"
+    "fr": "Chez vous pour ne pas contaminer votre entourage (enfants, parents, conjoint)"
   },
   "weekly.QFRmask1.option.oustide": {
     "en": "Oustide home",
@@ -157,7 +157,7 @@
   },
   "weekly.QFRmaskE.text": {
     "en": "Why did you not always wear a mask in this context",
-    "fr": "pour quelle(s) raison(s) n’avez-vous pas systématiquement porté un masque, tant que vous aviez des symptômes ?"
+    "fr": "Pour quelle(s) raison(s) n’avez-vous pas systématiquement porté un masque, tant que vous aviez des symptômes ?"
   },
   "weekly.QFRmask3.option.at_home": {
     "en": "At home",
@@ -177,7 +177,7 @@
   },
   "weekly.QFRmask3.option.other_look": {
     "en": "Because of other people's opinion when seeing me",
-    "fr": "A cause du regard des autres sur moi"
+    "fr": "A cause du regard des autres"
   },
   "weekly.QFRmask3.option.other": {
     "en": "Other reason",
