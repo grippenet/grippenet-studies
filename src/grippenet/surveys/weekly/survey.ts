@@ -123,6 +123,10 @@ export class WeeklyDef extends SurveyBuilder {
         // Qcov18 reasons no medical services 
         const Q_visitedNoMedicalService = new pool.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false, useAnswerTip: false});
         Q_visitedNoMedicalService.setOptions({topDisplayCompoments: [ transTextComponent("common.only_single_response","Only single response")] });
+        Q_visitedNoMedicalService.setCondition(
+            Q_visitedMedicalService.getCov18Condition()
+        );
+        
         hasMoreGroup.addItem(Q_visitedNoMedicalService.get());
 
         // // Q9 took medication --------------------------------------
@@ -178,7 +182,7 @@ export class WeeklyDef extends SurveyBuilder {
        const QMaskWhyNotWearing = new weekly.MaskWhyNotWearing({parentKey: hasMoreGroupKey});
        QMaskWhyNotWearing.setCondition(
             ce.logic.and(
-                Q_symptoms.createSymptomCondition("cough"),
+                Q_symptoms.createAnySymptomCondition(),
                 Q_covidHabits.createDontWearMaskCondition(),
             )
        );

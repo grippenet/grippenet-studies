@@ -141,6 +141,12 @@ export class VisitedMedicalService extends pool.VisitedMedicalService {
             ];
         }
 
+        getCov18Condition(): Expression {
+            const codes = responses.visit_medical;
+            return client.multipleChoice.none(this.key, codes.other_community, codes.gynecologist, codes.emergency, codes.gp)
+        }
+
+
         /**
          * Get List visits labels of by code
          * @returns 
@@ -591,6 +597,7 @@ export class MaskWhyNotWearing extends BaseChoiceQuestion {
             option_def("7", _T("weekly.QFRmask5.option.spend.money", "I don't want to spend money for that"), {disabled: exclusiveCondition}),
             option_def("8", _T("weekly.QFRmask5.option.keep.mask", "I find hard to keep the mask a long time on my face"), {disabled: exclusiveCondition}),
             option_def("9", _T("weekly.QFRmask5.option.concerned", "I dont feel concerned"), {disabled: exclusiveCondition}),
+            option_def("12", _T("weekly.QFRmask5.option.nosympt", "I dont have any respiratory symptom"), {disabled: exclusiveDontKnow}),
             option_input_other("10", _T("weekly.QFRmask5.option.other", "Other"), "weekly.QFRmask5.option.other.desc", {disabled: exclusiveCondition}),
             option_def("11", _T("weekly.QFRmask5.option.dnk", "I dont know"), {disabled: exclusiveDontKnow})
         ];
