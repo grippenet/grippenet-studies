@@ -75,10 +75,13 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
         );
 
         list.insertAfterKey(codes.minor_illness,
-            as_option(codes.bad_experience, _T("vaccination.Q10d.option.bad_experience","I had a bad experience with vaccination")),
             as_option(codes.avoid_healthseek, _T("vaccination.Q10d.option.avoid_healthseeking","Because of pandemic, I avoid to visit doctor or pharmacy")),
             as_option(codes.risk_covid,  _T("vaccination.Q10d.option.increase_risk_covid", "I fear the influenza vaccine to increase my risk to get Covid19")),
             option_input_other(codes.covid_other, _T( "vaccination.Q10d.option.other_covid19", "Other reason related to Covid19"), "none")
+        );
+
+        list.insertAfterKey(codes.doctor,
+            as_option(codes.bad_experience, _T("vaccination.Q10d.option.bad_experience","I had a bad experience with vaccination")),
         );
         
         return list.values();        
