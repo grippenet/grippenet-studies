@@ -37,7 +37,7 @@ export class IntakeDef extends SurveyBuilder {
         const impersonate = new intake.SurveyImpersonateResponse({parentKey: rootKey});
         
         this.push(impersonate, ce.logic.or(
-            QFillingforReprensetative.createYesCondition(),
+            QForWhom.createConditionMyself(),
             QFillingforHoushold.createYesCondition(),
         ) );
 
@@ -148,9 +148,11 @@ export class IntakeDef extends SurveyBuilder {
         items.push(Q_highest_education);
 
         const Q_people_met = new intake.PeopleMet({parentKey:rootKey, isRequired:true});
+        this.prefillWithLastResponse(Q_people_met);
         items.push(Q_people_met);
 
         const Q_age_groups = new pool.AgeGroups({parentKey:rootKey, isRequired:false, useAlone: true, useAnswerTip: true});
+        this.prefillWithLastResponse(Q_age_groups);
         items.push(Q_age_groups);
 
         const Q_people_at_risk = new pool.PeopleAtRisk({parentKey:rootKey, ageGroupQuestion: Q_age_groups, isRequired:false});
