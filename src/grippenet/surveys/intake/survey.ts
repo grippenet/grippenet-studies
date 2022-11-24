@@ -158,7 +158,7 @@ export class IntakeDef extends SurveyBuilder {
         this.prefillWithLastResponse(Q_age_groups);
         items.push(Q_age_groups);
 
-        const Q_people_at_risk = new pool.PeopleAtRisk({parentKey:rootKey, ageGroupQuestion: Q_age_groups, isRequired:false});
+        const Q_people_at_risk = new intake.PeopleAtRisk({parentKey:rootKey, ageGroupQuestion: Q_age_groups, isRequired:false});
         items.push(Q_people_at_risk);
 
         const Q_children_in_school = new pool.ChildrenInSchool({parentKey:rootKey, ageGroupQuestion: Q_age_groups, isRequired:false});

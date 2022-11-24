@@ -65,6 +65,13 @@ export class UnsupervisedMinorWarning extends ItemQuestion {
 }
 
 
+export class PeopleAtRisk extends pool.intake.PeopleAtRisk {
+
+    getHelpGroupContent(){
+        return undefined;
+    }
+}
+
 export class SurveyImpersonateResponse extends ItemQuestion {
     
     constructor(props: ItemProps) {
