@@ -21,6 +21,7 @@ import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 
 import ResponseEncoding from "./responses";
+import { text_how_answer, text_why_asking } from "../../../../common/studies/common/questionPools";
 
 export class SurveyPrelude extends ItemQuestion {
     
@@ -333,6 +334,69 @@ export class PostalCodeWorkLocation extends ItemQuestion {
     }
 
 }
+export class HighestEducation extends ItemQuestion {
+
+    constructor(props: ItemProps) {
+        super(props, 'Q4dfr');
+    }
+
+    buildItem() {
+
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: _T("intake.Q4d.title.0", "What is the highest level of formal education/qualification that you have?"),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses(): OptionDef[] {
+       return [
+            {
+                key: '0', role: 'option',
+                content: _T("intake.Q4d.rg.mcg.option.0", "I have no formal qualification")
+            },
+            {
+                key: '1', role: 'option',
+                content: _T("intake.Q4d.rg.mcg.option.1", "GCSE's, levels, CSEs or equivalent")
+            },
+            {
+                key: '2', role: 'option',
+                content: _T("intake.Q4d.rg.mcg.option.2", "A-levels or equivalent (e.g. Higher, NVQ Level3, BTEC)")
+            },
+            {
+                key: '3', role: 'option',
+                content: _T("intake.Q4d.rg.mcg.option.3", "Bachelors Degree (BA, BSc) or equivalent")
+            },
+            {
+                key: '4', role: 'option',
+                content: _T("intake.Q4d.rg.mcg.option.4", "Higher Degree or equivalent (e.g. Masters Degree, PGCE, PhD, Medical Doctorate, Advanced Professional Award)")
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return [
+            text_why_asking( "intake.Q4d.helpGroup.text.0"),
+            {
+                content: _T("intake.Q4d.helpGroup.text.1", "To check how representative our sample is compared to the population of the UK (Italy, Belgium..) as a whole."),
+                style: [{ key: 'variant', value: 'p' }],
+            },
+            text_how_answer("intake.Q4d.helpGroup.text.2"),
+            {
+                content: _T(
+                    "intake.Q4d.helpGroup.text.3",
+                    "Please choose the box that represents your HIGHEST level of educational achievements. The different option rougly equate to: 1 - no qualifications, 2 - school-leaving exams at around 16 years of age, 3 - school-leaving exams at around 18 years of age, 4 - University degree or equivalent professional qualification, 5 - Higher degree or advanced professional qualification. If you are an adult who is currently undergoing part - time training(e.g.night school) then tick the box that represents your current highest level of education."),
+            },
+        ];
+    }
+}
+
+
+
 
 export class PeopleMet extends pool.intake.PeopleMet {
 

@@ -143,7 +143,10 @@ export class IntakeDef extends SurveyBuilder {
         this.prefillWithLastResponse(Q_work_type);
         items.push(Q_work_type);
 
-        const Q_highest_education = new pool.HighestEducation({parentKey:rootKey, keyQBirthday:Q_birthdate.key, isRequired:false});
+        const Q_highest_education = new intake.HighestEducation({parentKey:rootKey,isRequired:false});
+        Q_highest_education.setCondition(
+            ce.compare.gte(Q_birthdate.getAgeExpression('years'), 16)
+        );
         this.prefillWithLastResponse(Q_highest_education);
         items.push(Q_highest_education);
 
