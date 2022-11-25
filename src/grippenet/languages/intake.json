@@ -3,6 +3,8 @@
     "#comment": "",
     "en": "Intake survey prelude text in markdown",
     "fr": [
+      "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet.fr/COVIDnet.fr, et vous prendra entre 5 et 10 minutes. Son remplissage n’a lieu qu’une fois par saison. Vous pourrez revenir sur le questionnaire pour nous indiquer un changement de situation (situation professionnelle, lieu d’habitation…).",
+      "",
       "Les réponses aux questions précédées d’un astérisque (*) sont obligatoires pour pouvoir valider le questionnaire.",
       "",
       "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
@@ -14,7 +16,7 @@
   },
   "intake.Q0.text": {
     "en": "For whom do you want to fill this survey",
-    "fr": "Pour qui remplissez vous ce questionnaire ?"
+    "fr": "Pour qui remplissez-vous ce questionnaire ?"
   },
   "intake.Q0.option.0": {
     "en": "Myself",
@@ -202,7 +204,7 @@
   },
   "intake.Q17.helpGroup.text.answer_tip": {
     "en": "Answer tip",
-    "fr": "_TODO_"
+    "fr": "Sélectionnez tous les supports grâce auxquels vous avez entendu parler de GrippeNet.fr/COVIDnet.fr avant de vous inscrire."
   },
   "intake.QEnd.option": {
     "en": "",

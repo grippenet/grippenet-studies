@@ -151,12 +151,12 @@ export class WeeklyDef extends SurveyBuilder {
 
         // // Q10c daily routine days-----------------------------------------
         const Q_dailyRoutineDaysMissed = new pool.DailyRoutineDaysMissed({parentKey:hasMoreGroupKey, keyDailyRoutine: Q_dailyRoutine.key, isRequired:false});
+        Q_dailyRoutineDaysMissed.setOptions({topDisplayCompoments: [ transTextComponent("weekly.Q10c.top.text.1", "Select the corresponding delay from the menu") ]})
         hasMoreGroup.addItem(Q_dailyRoutineDaysMissed.get());
 
         // // Qcov7 Covid 19 habits change question ------------------------------------------------------
         const Q_covidHabits = new weekly.CovidHabitsChange({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_covidHabits.get());
-
 
         /**
          * CovidMask

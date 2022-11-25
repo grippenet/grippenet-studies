@@ -1,4 +1,11 @@
 {
+  "weekly.prelude": {
+    "en": "weekly survey prelude text in markdown",
+    "fr": [
+      "Les réponses aux questions précédées d’un astérisque (*) sont obligatoires pour pouvoir valider le questionnaire.",
+      "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
+    ]
+  },
   "weekly.EX.Qcov18.helpGroup.text.3": {
     "en": "Multiple answers are possible.",
     "fr": "Vous pouvez choisir plusieurs réponses."
@@ -63,6 +70,10 @@
     "en": "I dont know",
     "fr": "Je ne sais pas / je ne souhaite pas répondre"
   },
+  "weekly.QFRmask5.option.nosympt": {
+    "en": "I dont have any respiratory symptom",
+    "fr": "Je n’ai pas de symptôme(s) respiratoire(s)"
+  },
   "weekly.Q16.text": {
     "en": "How many stool a day did you have",
     "fr": "Combien de selles par jour avez-vous ?"
@@ -98,6 +109,10 @@
   "weekly.Q9d.option.from_home": {
     "en": "You already have them at home",
     "fr": "Vous les aviez déjà chez vous"
+  },
+  "weekly.Q10c.top.text.1": {
+    "en": "Select the corresponding delay from the menu",
+    "fr": "Sélectionnez votre réponse à partir du menu déroulant"
   },
   "weekly.QFRmask1.text": {
     "en": "Under what circumstances did you wear a mask",
@@ -141,7 +156,7 @@
   },
   "weekly.QFRmask2.text": {
     "en": "In this context, did you always wear a mask",
-    "fr": "Dans ces circonstances, avez-vous systématiquement porté un masque, tant que vous aviez des symptômes ?"
+    "fr": "Dans ces circonstances, avez-vous systématiquement porté un masque en présence d’autres personnes, tant que vous aviez des symptômes ?"
   },
   "weekly.QFRmask2.option.yes": {
     "en": "Yes",
@@ -233,11 +248,11 @@
   },
   "weekly.Q17.sliderLabel": {
     "en": "Slider label",
-    "fr": "Tirer sur le curseur pour choisir"
+    "fr": "Tirer sur le curseur pour choisir une valeur corresponsant à votre ressenti (0 = Très mal -> 100 = Tout va bien)"
   },
   "weekly.Q17.noResponseLabel": {
     "en": "noResponseLabel",
-    "fr": "Pour répondre "
+    "fr": "(Note choisie)"
   },
   "weekly.Q17.helpGroup.asking_reason": {
     "en": "How do you feel asking reason",
@@ -245,6 +260,6 @@
   },
   "weekly.Q17.helpGroup.answer_tip": {
     "en": "How do you feel answer tip",
-    "fr": "Tirer sur le curseur pour noter votre ressenti aujourd'hui sur une échèlle de 0 à 100"
+    "fr": "Tirer sur le curseur pour noter votre ressenti aujourd'hui sur une échelle de 0 à 100. La note 0 correspondant à 'cela va très mal', la note 100 correspondant à 'Tout va très bien/Je me sens parfaitement bien'"
   }
 }

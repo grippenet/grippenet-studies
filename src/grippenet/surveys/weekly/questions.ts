@@ -1,5 +1,7 @@
 import {  questionPools, _T, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion,
-     GroupQuestion, GroupProps, ClientExpression as client, trans_text, as_input_option, as_option, OptionList, MatrixRow, textComponent, option_def, option_input_other }  from "../../../common"
+     GroupQuestion, GroupProps, ClientExpression as client, trans_text, as_input_option, as_option, OptionList, MatrixRow, 
+     markdownComponent,
+     textComponent, option_def, option_input_other }  from "../../../common"
 import {  Expression, ItemComponent, SurveySingleItem } from "survey-engine/data_types";
 import { OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
@@ -24,6 +26,28 @@ import { GrippenetFlags } from "../../flags";
 // [ ] Qcov7 4a=>4, 4b=>17, 18=>, 12=>()
 // [ ] Q11 => +7, +8
 // [ ] +Q17
+
+export class SurveyPrelude extends ItemQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'prelude');
+    }
+
+    buildItem(): SurveySingleItem {
+        return SurveyItems.display({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            content: [
+                markdownComponent({
+                    key: 'prelude',
+                    content: _T("weekly.prelude", "weekly survey prelude text in markdown")
+                })
+            ]
+        });
+    }
+}
+
+
 
 interface SymptomDependentProps extends ItemProps {
     SymptomQuestion: pool.Symptoms
@@ -236,31 +260,39 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
 
         const visits = responses.visit_medical;
 
-        const displayCondition = (code:string) => {
-            return client.multipleChoice.any(this.visiteMedicalService.key, code);
+        const displayCondition = (...codes:string[]) => {
+            return client.multipleChoice.any(this.visiteMedicalService.key, ...codes);
+        }
+
+        interface rowDef {
+            row: string;
+            codes: string|string[];
+            label_from?: string;
         }
 
         const conditionCodes: string[] = [];
 
         // Wanted entries
         // Row id, visit code to show (label is auto from the visit question)
-        const rows = [
-            ['r1', visits.gp],
-            ['r2', visits.emergency],
-            ['r4', visits.other],
-            ['r5', visits.other_community]
+        const rows: rowDef[] = [
+            {row:'r1', codes:visits.gp},
+            {row:'r2', codes: visits.emergency},
+            {row:'r4', codes:[ visits.other, visits.midwife, visits.pharmacist, visits.scholar,  ], label_from: visits.other},
+            {row:'r5', codes:[visits.other_community, visits.gynecologist ], label_from:visits.other_community }
         ];
 
         const matrixRows: MatrixRow[] =  rows.map(r =>  {
-            const visitCode = r[1];
-            const key = r[0];
+            const visitCode = r.codes;
+            const key = r.row;
             
-            const label = visitTypes.get(visitCode);
+            const label_from = r.label_from ? r.label_from : ( Array.isArray(r.codes) ? r.codes[0] : r.codes);
+            
+            const label = visitTypes.get(label_from);
             if(!label) {
                 throw new Error("weekly.Q7b: no visit code known for "+ visitCode);
             }
             
-            conditionCodes.push(visitCode);
+            conditionCodes.push(...visitCode);
 
             return {
                 key: key, role: 'responseRow', cells: [
@@ -269,7 +301,7 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
                     },
                     { ...ddOptions }
                 ],
-                displayCondition: displayCondition(visitCode)
+                displayCondition: displayCondition(...visitCode)
             }
         });
 

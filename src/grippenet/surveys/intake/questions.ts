@@ -84,7 +84,7 @@ export class SurveyImpersonateResponse extends ItemQuestion {
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             content: [
-                transTextComponent("vaccination.impersonate", "Please fill this form as if you were the person your are filling it for")
+                transTextComponent("intake.impersonate", "Please fill this form as if you were the person your are filling it for")
             ]
         });
     }
@@ -110,6 +110,10 @@ export class FillingForWhom extends BaseChoiceQuestion {
 
     createConditionMyself(): Expression {
         return client.singleChoice.any(this.key, this.codes.myself);
+    }
+
+    createConditionMajor(): Expression {
+        return client.singleChoice.any(this.key, this.codes.someone, this.codes.household);
     }
 
     createConditionSomeoneElse(): Expression {
@@ -147,8 +151,8 @@ export class FillingForWhomLegalRepresentative extends BaseChoiceQuestion {
     
     getResponses() {
             return  [
-                as_option(this.codes.no, _T("intake.Q23.option.0", "No")),
                 as_option(this.codes.yes, _T("intake.Q23.option.1", "Yes")),
+                as_option(this.codes.no, _T("intake.Q23.option.0", "No")),
             ];        
     }  
     
@@ -213,8 +217,8 @@ export class FillingForWhomHousold extends BaseChoiceQuestion {
     
     getResponses() {
             return  [
-                as_option(this.codes.no,  _T("intake.Q22.option.0", "No")),
                 as_option(this.codes.yes, _T("intake.Q22.option.1", "Yes")),
+                as_option(this.codes.no,  _T("intake.Q22.option.0", "No")),
             ];        
     }
     

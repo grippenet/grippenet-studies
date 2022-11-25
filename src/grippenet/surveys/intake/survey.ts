@@ -32,12 +32,12 @@ export class IntakeDef extends SurveyBuilder {
 
         const QFillingforHoushold = new intake.FillingForWhomHousold({parentKey: rootKey, isRequired: true});
         
-        this.push(QFillingforHoushold, QForWhom.createConditionHousehold());
+        this.push(QFillingforHoushold, QForWhom.createConditionMajor());
 
         const impersonate = new intake.SurveyImpersonateResponse({parentKey: rootKey});
         
         this.push(impersonate, ce.logic.or(
-            QForWhom.createConditionMyself(),
+            QFillingforReprensetative.createYesCondition(),
             QFillingforHoushold.createYesCondition(),
         ) );
 
@@ -48,7 +48,7 @@ export class IntakeDef extends SurveyBuilder {
             ce.logic.or(
                 QForWhom.createConditionMyself(),
                 QFillingforReprensetative.createYesCondition(),
-                QFillingforHoushold.createYesCondition()
+                QFillingforHoushold.createYesCondition(),
             )
         );
 
@@ -73,7 +73,6 @@ export class IntakeDef extends SurveyBuilder {
 
         const QSurveyEnd = new intake.NotPossibleToContinue({parentKey: rootKey});
         this.push(QSurveyEnd, ce.logic.or(
-          QForWhom.createConditionSomeoneElse(),
           QFillingforReprensetative.createNoCondition(),
           QFillingforHoushold.createNoCondition() 
         ));
