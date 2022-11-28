@@ -121,7 +121,7 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
 
         // Qcov18 reasons no medical services 
-        const Q_visitedNoMedicalService = new pool.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false, useAnswerTip: false});
+        const Q_visitedNoMedicalService = new weekly.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false, useAnswerTip: false});
         Q_visitedNoMedicalService.setOptions({topDisplayCompoments: [ transTextComponent("common.only_single_response","Only single response")] });
         Q_visitedNoMedicalService.setCondition(
             Q_visitedMedicalService.getCov18Condition()

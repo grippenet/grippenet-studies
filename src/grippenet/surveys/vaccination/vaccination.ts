@@ -49,11 +49,11 @@ export class VaccinationDef extends SurveyBuilder {
         const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_when);
 
-        const Q_flu_vaccin_by_whom = new vaccination.FluVaccinationByWhom({parentKey: rootKey, isRequired: true});
+        const Q_flu_vaccin_by_whom = new vaccination.FluVaccinationByWhom({parentKey: rootKey, isRequired: false});
         Q_flu_vaccin_by_whom.setCondition(Q_flu_vaccine_this_season.createIsVaccinatedCondition());
         items.push(Q_flu_vaccin_by_whom);
 
-        const Q_flu_vaccine_this_season_reasons_for = new vaccination.FluVaccineThisSeasonReasonFor({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:true});
+        const Q_flu_vaccine_this_season_reasons_for = new vaccination.FluVaccineThisSeasonReasonFor({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_reasons_for);
 
         const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:rootKey, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:false});
@@ -73,7 +73,7 @@ export class VaccinationDef extends SurveyBuilder {
         items.push(Q_vaccineShots.get());
         */
 
-        const Q_dateLastVaccine = new pool.CovidDateLastVaccine({parentKey:rootKey, keyVac:Q_covidVac.key, isRequired:true});
+        const Q_dateLastVaccine = new pool.CovidDateLastVaccine({parentKey:rootKey, keyVac:Q_covidVac.key, isRequired:false});
         items.push(Q_dateLastVaccine);
 
         /*
@@ -90,7 +90,7 @@ export class VaccinationDef extends SurveyBuilder {
         const Q_vaccineContra = new vaccination.CovidVaccineAgainstReasons({parentKey:rootKey, keyVac:Q_covidVac.key, isRequired:false});
         items.push(Q_vaccineContra);
         
-        const Q_lastCovidInfection = new vaccination.LastCovid19Infection({parentKey: rootKey});
+        const Q_lastCovidInfection = new vaccination.LastCovid19Infection({parentKey: rootKey, isRequired: false});
         items.push(Q_lastCovidInfection);
 
         return items;

@@ -65,9 +65,9 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
 
 
     getResponses(): OptionDef[] {
-        const options = super.getResponses();
+        const prev_options = super.getResponses();
         const codes = encoding.flu_notvac_reason; 
-        const list = new OptionList(options);
+        const list = new OptionList(prev_options);
         
         list.insertAfterKey(codes.offer, 
             as_option(codes.advised_pregnancy,  _T("vaccination.Q10d.option.advisory_pregnant", "advised_not_to_pregnant")),
@@ -84,7 +84,20 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
             as_option(codes.bad_experience, _T("vaccination.Q10d.option.bad_experience","I had a bad experience with vaccination")),
         );
         
-        return list.values();        
+        const exclusiveDontknow =client.multipleChoice.any(this.key, codes.no_reason);
+        const exclusiveOthers = client.multipleChoice.none(this.key, codes.no_reason);
+
+        const new_options = list.values()
+
+        new_options.forEach(o => {
+            if(o.key == codes.no_reason) {
+                o.disabled = client.multipleChoice.none(this.key, codes.no_reason);
+            } else {
+                o.disabled = client.multipleChoice.any(this.key, codes.no_reason);
+            }
+        });
+
+        return new_options;     
     }
 
     getResponseOverrides(): ResponseOveriddes { 
@@ -112,7 +125,16 @@ export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAga
 
         list.without(codes.counter_indication, codes.not_free);
 
-        return list.values();
+        const new_options = list.values();
+        new_options.forEach(o => {
+            if(o.key == codes.dontknow) {
+                o.disabled = client.multipleChoice.none(this.key, codes.dontknow);
+            } else {
+                o.disabled = client.multipleChoice.any(this.key, codes.dontknow);
+            }
+        });
+
+        return new_options;
 
     }
 }
@@ -184,7 +206,7 @@ export class LastCovid19Infection extends ItemQuestion {
                     key: '1', role: 'dateInput',
                     optionProps: {
                         dateInputMode: { str: 'YM' },
-                        min: exp_as_arg( client.timestampWithOffset({'years': -1})),
+                        min: 1577836800, // 2020-01-01
                         max: exp_as_arg( client.timestampWithOffset({'minutes': 1}) )
                     },
                     content: _T("vaccination.Q37.rg.scg.option.1.text", "Choose date"),

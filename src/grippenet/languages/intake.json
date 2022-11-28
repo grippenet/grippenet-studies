@@ -10,6 +10,10 @@
       "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
     ]
   },
+  "intake.impersonate": {
+    "en": "Please fill this form as if you were the person your are filling it for",
+    "fr": "Répondez s-il-vous-plaît à toutes les questions comme si vous étiez la personne pour laquelle vous remplissez ce questionnaire."
+  },
   "intake.unsupervised.minor": {
     "en": "Minor people must use supervised",
     "fr": "Les questionnaires de personnes mineurs doivent être remplis par des adultes"

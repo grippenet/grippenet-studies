@@ -64,7 +64,7 @@
   },
   "weekly.QFRmask5.option.other": {
     "en": "Other",
-    "fr": "Autre (précisez)"
+    "fr": "Autre"
   },
   "weekly.QFRmask5.option.dnk": {
     "en": "I dont know",
@@ -148,7 +148,7 @@
   },
   "weekly.QFRmask1.option.other": {
     "en": "Other",
-    "fr": "Dans d’autres circonstances (précisez)"
+    "fr": "Dans d’autres circonstances"
   },
   "weekly.QFRmask1.option.dnk": {
     "en": "I dont know",
@@ -172,7 +172,7 @@
   },
   "weekly.QFRmaskE.text": {
     "en": "Why did you not always wear a mask in this context",
-    "fr": "Pour quelle(s) raison(s) n’avez-vous pas systématiquement porté un masque, tant que vous aviez des symptômes ?"
+    "fr": "Pour quelle(s) raison(s) n’avez-vous pas systématiquement porté un masque en présence d’autres personnes, tant que vous aviez des symptômes ?"
   },
   "weekly.QFRmask3.option.at_home": {
     "en": "At home",
@@ -196,7 +196,7 @@
   },
   "weekly.QFRmask3.option.other": {
     "en": "Other reason",
-    "fr": "Pour une autre raison (précisez)"
+    "fr": "Pour une autre raison"
   },
   "weekly.QFRmask3.option.dnk": {
     "en": "I dont know",
@@ -224,7 +224,7 @@
   },
   "weekly.QFRmask4.option.other": {
     "en": "Other",
-    "fr": "Autre (précisez)"
+    "fr": "Autre"
   },
   "weekly.QFRmask4.option.dnk": {
     "en": "I dont know",
