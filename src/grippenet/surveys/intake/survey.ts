@@ -24,13 +24,15 @@ export class IntakeDef extends SurveyBuilder {
         this.push(prelude);
 
         const QForWhom = new intake.FillingForWhom({parentKey: rootKey, isRequired: true});
+        this.prefillWithLastResponse(QForWhom);
         this.push(QForWhom);
 
         const QFillingforReprensetative = new intake.FillingForWhomLegalRepresentative({parentKey: rootKey, isRequired: true});
-        
+        this.prefillWithLastResponse(QFillingforReprensetative);
         this.push(QFillingforReprensetative, QForWhom.createConditionLegalRepresentative());
 
         const QFillingforHoushold = new intake.FillingForWhomHousold({parentKey: rootKey, isRequired: true});
+        this.prefillWithLastResponse(QFillingforHoushold);
         
         this.push(QFillingforHoushold, QForWhom.createConditionMajor());
 
@@ -51,7 +53,6 @@ export class IntakeDef extends SurveyBuilder {
                 QFillingforHoushold.createYesCondition(),
             )
         );
-
        
         const QBirthDate = this.getBirthDateItem();
 
@@ -76,7 +77,6 @@ export class IntakeDef extends SurveyBuilder {
           QFillingforReprensetative.createNoCondition(),
           QFillingforHoushold.createNoCondition() 
         ));
-
         
     }
 
