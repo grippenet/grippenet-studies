@@ -82,7 +82,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             se.checkSurveyResponseKey(vacKey),
             // remove vaccination and re-add it with a new timeout
             assignedSurveys.remove(vacKey, 'all'),
-            assignedSurveys.add(vacKey, 'prio', se.timestampWithOffset({hours: 1})),
+            assignedSurveys.add(vacKey, 'optional', se.timestampWithOffset({hours: 1})),
             // update vaccinationCompleted flag
             updateFlag(flags.vaccinationCompleted.key, flags.vaccinationCompleted.values.yes)
         );
