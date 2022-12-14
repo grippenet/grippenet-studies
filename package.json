@@ -9,6 +9,7 @@
     "start": "node  --report-uncaught-exception build/src/index.js",
     "common": "npm run-script build && node  --report-uncaught-exception build/src/build_common.js",
     "grippenet": "npm run-script build && node  --report-uncaught-exception build/src/build_grippenet.js",
+    "mozart": "npm run-script build && node  --report-uncaught-exception build/src/build_mozart.js",
     "build-test": "npm run-script build && node  --report-uncaught-exception build/src/build_test.js",
     "build-rules": "npm run-script build && node  --report-uncaught-exception build/src/build_rules.js"
   },
