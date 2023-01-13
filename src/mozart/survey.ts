@@ -25,25 +25,28 @@ export class MozartSurvey extends SurveyDefinition {
 
     buildSurvey(): void {
         const rootKey = this.key;
-
+        /*
         const Q0 = this.Q0(rootKey);
         this.addItem(Q0);
+        */
 
-        const Q0_no_dnk = client.singleChoice.any(Q0.key, responses.Q0.dnk, responses.Q0.no);
+        const hasRespondedBackground = client.logic.not(client.participantFlags.hasKeyAndValue('mozartS0', '1'));
+        
+        //client.singleChoice.any(Q0.key, responses.Q0.dnk, responses.Q0.no);
 
-        const Q1 = this.Q1(rootKey, Q0_no_dnk);
+        const Q1 = this.Q1(rootKey, hasRespondedBackground);
         this.addItem(Q1);
 
-        const Q2 = this.Q2(rootKey, Q0_no_dnk);
+        const Q2 = this.Q2(rootKey, hasRespondedBackground);
         this.addItem(Q2);
 
         const Q2b = this.Q2b(rootKey, client.singleChoice.any(Q2.key, responses.Q2.yes));
         this.addItem(Q2b);
 
-        const Q3 = this.Q3(rootKey, Q0_no_dnk);
+        const Q3 = this.Q3(rootKey, hasRespondedBackground);
         this.addItem(Q3);
 
-        const Q4 = this.Q4(rootKey, Q0_no_dnk);
+        const Q4 = this.Q4(rootKey, hasRespondedBackground);
         this.addItem(Q4);
 
         //const bitenLifetime = client.singleChoice.any(Q4.key, responses.yes_no.yes);
