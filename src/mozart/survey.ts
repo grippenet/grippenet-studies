@@ -66,21 +66,21 @@ export class MozartSurvey extends SurveyDefinition {
         const AtLeastOneCondition =client.singleChoice.any(Q6.key, responses.Q6.un, responses.Q6.deux, responses.Q6.trois, responses.Q6.quatre_plus);
         const hasFourCondition =client.singleChoice.any(Q6.key, responses.Q6.quatre_plus);
         
-        const Q6_1 = new PiqureGroup(rootKey, 'Q6_1', '[Première piqûre]', 1, AtLeastOneCondition);
+        const Q6_1 = new PiqureGroup(rootKey, 'Q6_1', 1, AtLeastOneCondition);
         this.addItem(Q6_1.get());
         
         this.addPageBreak();
 
-        const Q6_2 = new PiqureGroup(rootKey, 'Q6_2', '[Deuxième piqûre]', 2, AtLeastTwoCondition);
+        const Q6_2 = new PiqureGroup(rootKey, 'Q6_2', 2, AtLeastTwoCondition);
         this.addItem(Q6_2.get());
 
         this.addPageBreak();
 
-        const Q6_3 = new PiqureGroup(rootKey, 'Q6_3', '[Troisième piqûre]', 3, AtLeastThreeCondition);
+        const Q6_3 = new PiqureGroup(rootKey, 'Q6_3', 3, AtLeastThreeCondition);
         this.addItem(Q6_3.get());
         this.addPageBreak();
 
-        const Q6_4 = new PiqureGroup(rootKey, 'Q6_4', '[Quatrième piqûre]', 4, hasFourCondition);
+        const Q6_4 = new PiqureGroup(rootKey, 'Q6_4', 4, hasFourCondition);
         this.addItem(Q6_4.get());
 
         this.addPageBreak();

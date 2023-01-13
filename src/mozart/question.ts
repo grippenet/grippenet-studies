@@ -73,16 +73,20 @@ const orders: OrderLabels = {
   '4': { masc:'quatrième'}
 };
 
+
+
 export const common_other = _T("common.other", "Précisez");
+
+const ucfirst = (s:string)=>{
+  return  s.charAt(0).toUpperCase() + s.slice(1);
+}
 
 export class PiqureGroup extends Group {
 
-    labelPrefix: string;
     index : number;
 
-    constructor(parent: string, key: string, labelPrefix: string, index: number, condition: Expression) {
+    constructor(parent: string, key: string, index: number, condition: Expression) {
        super(parent, key);
-       this.labelPrefix = labelPrefix;
        this.index = index;
        this.groupEditor.setCondition(condition);
     }
@@ -100,24 +104,33 @@ export class PiqureGroup extends Group {
       
       const [orderMasc, orderFem] = this.orderLabels();
      
+      const titlePrelude = ucfirst(orderMasc) + " épisode de piqûre(s)";
+
       const textPrelude = "Les questions suivantes permettront d’en savoir plus sur votre "+  orderMasc + " épisode de piqûre(s) de tiques au cours de ces 4 derniers mois. Répondez le plus précisément possible";
 
       const prelude = SurveyItems.display({
         parentKey: this.key,
         itemKey: 'prelude',
+        
         content: [
+          textComponent({
+            content: _T(this.key+ '.prelude.title', titlePrelude),
+            variant: 'h1'
+          }),
           textComponent({
             content: _T(this.key + '.prelude', textPrelude)
           })
         ]
       });
       this.addItem(prelude);
+
+      const textPrefix = '[' + orderMasc + ' épisode]';
       
       const t1 = this.key + '.1';
       const Q1 = SurveyItems.singleChoice({
         parentKey: this.key,
         itemKey: '1',
-        questionText: _T(t1 + '.text', this.labelPrefix+ ' combien de tiques vous ont piqué lors de ce '+ orderMasc +' épisode de piqûre(s)'),
+        questionText: _T(t1 + '.text', textPrefix + ' combien de tiques vous ont piqué lors de ce '+ orderMasc +' épisode de piqûre(s)'),
         responseOptions: [
           as_option('1', _T(t1 + '.option.1', 'Une tique')),
           option_def('2', _T(t1 + '.option.2', 'Deux tiques ou plus (i.e. piqûres multiples)'), {
@@ -148,7 +161,7 @@ export class PiqureGroup extends Group {
       const Q2 = SurveyItems.singleChoice({
         parentKey: this.key,
         itemKey: '2',
-        questionText: _T(t2 + '.text', this.labelPrefix+ " Quand a eu lieu ce "+ orderMasc +" épisode de piqûre(s)"),
+        questionText: _T(t2 + '.text', textPrefix + " Quand a eu lieu ce "+ orderMasc +" épisode de piqûre(s)"),
         questionSubText: _T(t2 + ".subtext","Répondez dans le champs date qui correspond le mieux à la précision dont vous vous souvenez pour cette épisode"),
         responseOptions: [
           date_input("1", "La date exacte"),
@@ -163,25 +176,25 @@ export class PiqureGroup extends Group {
 
       const t3 = this.key + '.3';
 
-      const Q4 = SurveyItems.singleChoice({
+      const Q3 = SurveyItems.singleChoice({
         parentKey: this.key,
-        itemKey: '4',
-        questionText: _T(t2 + '.text', this.labelPrefix + " Où étiez-vous au moment de ce(s) piqûre(s)"),
+        itemKey: '3',
+        questionText: _T(t3 + '.text', textPrefix + " Où étiez-vous au moment de ce(s) piqûre(s)"),
         responseOptions: [
           as_input_option("1", _T(t3, "Code postal ou commune")),
           as_option("99", _T(t3 + ".option.nsp", "Je ne sais pas/Je ne m'en souviens pas"))
         ]
       });
 
+      this.addItem(Q3);
+
+      const Q4 = YesNo(this.key, '4', _T(this.key + '.4', textPrefix + ' Le lieu de piqûre(s) se trouvait-il dans votre commune de résidence ?'));
       this.addItem(Q4);
 
-      const Q5 = YesNo(this.key, '5', _T(this.key + '.5', this.labelPrefix + ' Le lieu de piqûre(s) se trouvait-il dans votre commune de résidence ?'));
+      const Q5 = YesNo(this.key, '5', _T(this.key + '.5', textPrefix + ' Le lieu de piqûre(s) se trouvait-il dans votre département de résidence ?'));
       this.addItem(Q5);
 
-      const Q6 = YesNo(this.key, '6', _T(this.key + '.6', this.labelPrefix + ' Le lieu de piqûre(s) se trouvait-il dans votre département de résidence ?'));
-      this.addItem(Q6);
-
-      const t7 = this.key + '.7';
+      const t6 = this.key + '.6';
 
       const oo = options_french([
         ['1', 'Forêt (lisière de forêt, bois, bosquet, …)'], 
@@ -192,96 +205,96 @@ export class PiqureGroup extends Group {
         ['6', 'Intérieur d’une habitation'], 
         ['7', 'Ferme d’élevage'], 
         ['8', 'Plan d’eau'], 
-      ], t7 + '.option.');
+      ], t6 + '.option.');
 
-      oo.push(as_input_option('9', _T(t7 + '.option.other','Autre'), common_other ));
-      oo.push(option_def('99', _T(t7 + '.option.nsp', "Je ne sais pas/ne me souviens pas")))
+      oo.push(as_input_option('9', _T(t6 + '.option.other','Autre'), common_other ));
+      oo.push(option_def('99', _T(t6 + '.option.nsp', "Je ne sais pas/ne me souviens pas")))
 
-      const Q7 = SurveyItems.multipleChoice({
+      const Q6 = SurveyItems.multipleChoice({
         parentKey: this.key,
-        itemKey: '7',
-        questionText: _T(t7 + ".text", this.labelPrefix + " Dans quel(s) environnement(s) vous êtes-vous fait piquer ?"),
+        itemKey: '6',
+        questionText: _T(t6 + ".text", textPrefix + " Dans quel(s) environnement(s) vous êtes-vous fait piquer ?"),
         responseOptions: oo
       });
 
-      this.addItem(Q7);
+      this.addItem(Q6);
       
-      const t8 = this.key + '.8';
+      const t7 = this.key + '.7';
 
-      const o8 = options_french([
+      const o7 = options_french([
         ['1', 'Activité professionnelle'],
         ['2', 'Chasse, pêche',],
         ['3', 'Activité scolaire: précisez',],
         ['4', 'Activité sportive: précisez',],
         ['5', 'Loisir (randonnée, promenade, pique-nique…)',],
-      ], t8 + '.option.');
+      ], t7 + '.option.');
 
-      o8.push(as_input_option('6', _T(t8 + '.option.other','Autre'), common_other));
-      o8.push(option_def('99', _T(t8 + '.option.nsp', "Je ne sais pas/ne me souviens pas")))
+      o7.push(as_input_option('6', _T(t7 + '.option.other','Autre'), common_other));
+      o7.push(option_def('99', _T(t7 + '.option.nsp', "Je ne sais pas/ne me souviens pas")))
 
-      const Q8 = SurveyItems.singleChoice({
+      const Q7 = SurveyItems.singleChoice({
         parentKey: this.key,
-        itemKey: '8',
-        questionText: _T(t8 + ".text", this.labelPrefix +" A quelle occasion vous êtes-vous fait piquer?"),
-        responseOptions: o8
+        itemKey: '7',
+        questionText: _T(t7 + ".text", textPrefix +" A quelle occasion vous êtes-vous fait piquer?"),
+        responseOptions: o7
       });
       
-      this.addItem(Q8);
+      this.addItem(Q7);
 
-      const t9 = this.key + '.9';
+      const t8 = this.key + '.8';
 
-      const o9 = options_french([
+      const o8 = options_french([
         ['1', "Le jour même (< 24h)"],
         ['2', "Le lendemain ou plus tard (> 24h)"],
         ['3', "Elle est tombée toute seule"],
         ['99', "Je ne sais pas/ ne me souviens pas"],
-      ], t9 + '.option.');
+      ], t8 + '.option.');
+
+      const Q8 = SurveyItems.multipleChoice({
+        parentKey: this.key,
+        itemKey: '8',
+        questionText: _T(t8 + ".text", textPrefix +" Lors de ce " + orderMasc+ " épisode de piqûre(s), avez-vous retiré la/les tique(s)"),
+        responseOptions: o8
+      });
+
+      this.addItem(Q8);
+
+      const t9 = this.key + '.9';
 
       const Q9 = SurveyItems.multipleChoice({
         parentKey: this.key,
         itemKey: '9',
-        questionText: _T(t9 + ".text", this.labelPrefix +" Lors de ce " + orderMasc+ " épisode de piqûre(s), avez-vous retiré la/les tique(s)"),
-        responseOptions: o9
+        questionText: _T(t9 + ".text", textPrefix + " Comment la/les tique(s) ont-elles été retirées ?"),
+        responseOptions: [
+          option_def('1', _T(t9 + '.option.1', "Avec un tire-tique")),
+          option_def('2', _T(t9 + '.option.2' , "Avec une pince à écharde")),
+          as_input_option('3', _T(t9 + '.option.3', "Avec un autre outil"), common_other),
+          option_def('4', _T(t9 + '.option.4', "Sans outil (à la main)"))
+        ]
       });
 
       this.addItem(Q9);
 
-      const t10 = this.key + '.10';
+      const t10 = this.key + '.11';
 
-      const Q10 = SurveyItems.multipleChoice({
-        parentKey: this.key,
-        itemKey: '10',
-        questionText: _T(t10 + ".text", this.labelPrefix + " Comment la/les tique(s) ont-elles été retirées ?"),
-        responseOptions: [
-          option_def('1', _T(t10 + '.option.1', "Avec un tire-tique")),
-          option_def('2', _T(t10 + '.option.2' , "Avec une pince à écharde")),
-          as_input_option('3', _T(t10 + '.option.3', "Avec un autre outil"), common_other),
-          option_def('4', _T(t10 + '.option.4', "Sans outil (à la main)"))
-        ]
-      });
-
-      this.addItem(Q10);
-
-      const t11 = this.key + '.11';
-
-      const o11 = options_french([
+      const o10 = options_french([
         ["1","Vous-même"],
         ["2","Un de vos proches"],
         ["3","Un professionnel de santé"],
         ["99","Je ne sais pas/ ne me souviens pas"],    
-      ], t11 + '.option.');
+      ], t10 + '.option.');
 
-      const Q11 = SurveyItems.multipleChoice({
+      const Q10 = SurveyItems.multipleChoice({
         parentKey: this.key,
-        itemKey: '11',
-        questionText: _T(t11 + ".text", this.labelPrefix +" Par qui la/les tique(s) ont-elles été retirées ?"),
-        responseOptions: o11
+        itemKey: '10',
+        questionText: _T(t10 + ".text", textPrefix + " Par qui la/les tique(s) ont-elles été retirées ?"),
+        responseOptions: o10
       });
 
-      this.addItem(Q11);
+      this.addItem(Q10);
 
-      const Q12 = YesNo(this.key, '12', _T(this.key + '.12', this.labelPrefix + " Êtes-vous allé consulter un médecin suite à cet épisode de piqûre ?"));
-      this.addItem(Q12);
+      const Q11 = YesNo(this.key, '11', _T(this.key + '.11',textPrefix + " Êtes-vous allé consulter un médecin suite à cet épisode de piqûre ?"));
+      this.addItem(Q11);
 
     }
 
