@@ -1,7 +1,7 @@
 import { SurveyItems } from "case-editor-tools/surveys"
 import { Group } from "case-editor-tools/surveys/types";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
-import { ItemQuestion, exp_as_arg, ClientExpression as client, as_option, as_input_option, option_def, textComponent } from "../common";
+import { ItemQuestion, exp_as_arg, ClientExpression as client, as_option, as_input_option, option_def, textComponent, optionRoles } from "../common";
 import { _T, options_french } from "./helpers";
 import responses from "./responses";
 
@@ -123,7 +123,7 @@ export class PiqureGroup extends Group {
           option_def('2', _T(t1 + '.option.2', 'Deux tiques ou plus (i.e. piqûres multiples)'), {
             'role':'numberInput', 
             optionProps: { 'min': 2},
-            'description': _T(t1, 'Precisez le nombre')
+            'description': _T(t1, 'Précisez le nombre')
           })
         ]
       });
@@ -136,7 +136,8 @@ export class PiqureGroup extends Group {
 
       const date_input = (key:string,  label: string) => {
           return option_def(key, _T(this.key + '.option.' + key, label), {
-            role: 'dateInput',
+            role: optionRoles.date,
+            description: _T(this.key + '.option.' + key, label),
             optionProps: {
               min: exp_as_arg(minDate),
               max: exp_as_arg(client.timestampWithOffset({minutes:0}))
@@ -147,7 +148,8 @@ export class PiqureGroup extends Group {
       const Q2 = SurveyItems.singleChoice({
         parentKey: this.key,
         itemKey: '2',
-        questionText: _T(t2 + '.text', this.labelPrefix+ "Quand a eu lieu ce "+ orderMasc +" épisode de piqûre(s)"),
+        questionText: _T(t2 + '.text', this.labelPrefix+ " Quand a eu lieu ce "+ orderMasc +" épisode de piqûre(s)"),
+        questionSubText: _T(t2 + ".subtext","Répondez dans le champs date qui correspond le mieux à la précision dont vous vous souvenez pour cette épisode"),
         responseOptions: [
           date_input("1", "La date exacte"),
           date_input("2", "à 2- 3 jours près"),
@@ -161,24 +163,22 @@ export class PiqureGroup extends Group {
 
       const t3 = this.key + '.3';
 
-      const Q3 = SurveyItems.singleChoice({
+      const Q4 = SurveyItems.singleChoice({
         parentKey: this.key,
-        itemKey: '3',
-        questionText: _T(t2 + '.text', this.labelPrefix+ " Quand a eu lieu ce "+ orderMasc +" épisode de piqûre(s)"),
+        itemKey: '4',
+        questionText: _T(t2 + '.text', this.labelPrefix + " Où étiez-vous au moment de ce(s) piqûre(s)"),
         responseOptions: [
           as_input_option("1", _T(t3, "Code postal ou commune")),
           as_option("99", _T(t3 + ".option.nsp", "Je ne sais pas/Je ne m'en souviens pas"))
         ]
       });
 
-      this.addItem(Q3);
+      this.addItem(Q4);
 
-      const hasLocation = client.singleChoice.any(Q3.key, '1');
-      
-      const Q5 = YesNo(this.key, '5', _T(this.key + '.5', this.labelPrefix + ' Le lieu de piqûre(s) se trouvait-il dans votre commune de résidence ?'), hasLocation);
+      const Q5 = YesNo(this.key, '5', _T(this.key + '.5', this.labelPrefix + ' Le lieu de piqûre(s) se trouvait-il dans votre commune de résidence ?'));
       this.addItem(Q5);
 
-      const Q6 = YesNo(this.key, '6', _T(this.key + '.6', this.labelPrefix + ' Le lieu de piqûre(s) se trouvait-il dans votre département de résidence ?'), hasLocation);
+      const Q6 = YesNo(this.key, '6', _T(this.key + '.6', this.labelPrefix + ' Le lieu de piqûre(s) se trouvait-il dans votre département de résidence ?'));
       this.addItem(Q6);
 
       const t7 = this.key + '.7';
@@ -223,7 +223,7 @@ export class PiqureGroup extends Group {
         parentKey: this.key,
         itemKey: '8',
         questionText: _T(t8 + ".text", this.labelPrefix +" A quelle occasion vous êtes-vous fait piquer?"),
-        responseOptions: oo
+        responseOptions: o8
       });
       
       this.addItem(Q8);
@@ -240,7 +240,7 @@ export class PiqureGroup extends Group {
       const Q9 = SurveyItems.multipleChoice({
         parentKey: this.key,
         itemKey: '9',
-        questionText: _T(t9 + ".text", this.labelPrefix +" Lors de ce premier épisode de piqûre(s), avez-vous retiré la/les tique(s)"),
+        questionText: _T(t9 + ".text", this.labelPrefix +" Lors de ce " + orderMasc+ " épisode de piqûre(s), avez-vous retiré la/les tique(s)"),
         responseOptions: o9
       });
 
@@ -251,7 +251,7 @@ export class PiqureGroup extends Group {
       const Q10 = SurveyItems.multipleChoice({
         parentKey: this.key,
         itemKey: '10',
-        questionText: _T(t10 + ".text", this.labelPrefix + " Lors de ce premier épisode de piqûre(s), avez-vous retiré la/les tique(s)"),
+        questionText: _T(t10 + ".text", this.labelPrefix + " Comment la/les tique(s) ont-elles été retirées ?"),
         responseOptions: [
           option_def('1', _T(t10 + '.option.1', "Avec un tire-tique")),
           option_def('2', _T(t10 + '.option.2' , "Avec une pince à écharde")),
@@ -274,7 +274,7 @@ export class PiqureGroup extends Group {
       const Q11 = SurveyItems.multipleChoice({
         parentKey: this.key,
         itemKey: '11',
-        questionText: _T(t11 + ".text", this.labelPrefix +" Lors de ce premier épisode de piqûre(s), avez-vous retiré la/les tique(s)"),
+        questionText: _T(t11 + ".text", this.labelPrefix +" Par qui la/les tique(s) ont-elles été retirées ?"),
         responseOptions: o11
       });
 

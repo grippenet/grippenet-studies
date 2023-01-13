@@ -1,12 +1,12 @@
 import { Expression, ExpressionName, SurveyItem } from "survey-engine/data_types";
 import { Group, Item, SurveyDefinition } from "case-editor-tools/surveys/types";
-import {  SimpleGroupQuestion, ClientExpression as client,   as_input_option, as_option} from "../../common";
+import {  SimpleGroupQuestion, ClientExpression as client,   as_input_option, as_option, option_def} from "../../common";
 import { SurveyItems } from "case-editor-tools/surveys";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { _T, options_french } from "./helpers";
 import { common_other, PiqureGroup, YesNo } from "./question";
 import responses from "./responses";
-import { textComponent } from "../common";
+import { optionRoles, textComponent } from "../common";
 
 export class MozartSurvey extends SurveyDefinition {
 
@@ -46,8 +46,9 @@ export class MozartSurvey extends SurveyDefinition {
         const Q4 = this.Q4(rootKey, Q0_no_dnk);
         this.addItem(Q4);
 
-        const bitenLifetime = client.singleChoice.any(Q4.key, responses.yes_no.yes);
-        const Q5 = this.Q5(rootKey, bitenLifetime);
+        //const bitenLifetime = client.singleChoice.any(Q4.key, responses.yes_no.yes);
+        
+        const Q5 = this.Q5(rootKey);
         this.addItem(Q5);
 
         const hasBite = client.singleChoice.any(Q5.key, responses.yes_no.yes);
@@ -80,6 +81,9 @@ export class MozartSurvey extends SurveyDefinition {
         this.addItem(Q6_4.get());
 
         this.addPageBreak();
+
+        const pS3 = this.preludeS3(rootKey, "preludeS3");
+        this.addItem(pS3);
         
         const Q7 = YesNo(rootKey, 'Q7', _T('Q7.text', 'Avez-vous pratiqué une activité de plein air au cours des 4 derniers mois ? '));
         this.addItem(Q7);
@@ -90,6 +94,20 @@ export class MozartSurvey extends SurveyDefinition {
 
         this.addItem(s3.get());
 
+        this.addPageBreak();
+
+        const Q13 = this.Q13(rootKey);
+
+        this.addItem(Q13);
+
+    }
+
+    Q13(parent: string): SurveyItem {
+        return SurveyItems.textInput({
+            parentKey: parent,
+            itemKey: 'Q13',
+            questionText: _T("Q13.text", "Avez vous des remarques ou commentaires à partager ?")
+        });
     }
 
     Q0(parent:string): SurveyItem {
@@ -141,7 +159,7 @@ export class MozartSurvey extends SurveyDefinition {
             responseOptions: [
                     as_option(codes.jardin, _T('Q3.option.1','Un jardin')),
                     as_option(codes.terrain, _T('Q3.option.2',"Un champs/un terrain")),
-                    as_option(codes.terrasse, _T('Q3.option.3',"Une terrasse/un balcon")),
+                    as_option(codes.terrasse, _T('Q3.option.3',"Une terrasse/un balcon/une cour")),
                     as_option(codes.no, _T('Q3.option.4',"Pas d’extérieur")),
                 ]
         });
@@ -177,7 +195,13 @@ export class MozartSurvey extends SurveyDefinition {
                 as_option(codes.un, _T('Q6.option.un', 'Une fois')),
                 as_option(codes.deux, _T('Q6.option.deux', 'Deux fois')),
                 as_option(codes.trois, _T('Q6.option.trois', 'Trois fois')),
-                as_input_option(codes.quatre_plus, _T('Q4.option.quatre', 'Quatre fois ou plus')),
+                option_def(codes.quatre_plus, _T('Q4.option.quatre', 'Quatre fois ou plus'), {
+                    role: optionRoles.number,
+                    description: _T('Q4.option.how_many_times', 'Précisez combien de fois'),
+                    optionProps: {
+                        min: 4
+                    }
+                }),
                 as_option(codes.dnk, _T('Q6.option.nsp', 'Je ne sais pas')),
             ]
         });
@@ -190,6 +214,25 @@ export class MozartSurvey extends SurveyDefinition {
             content: [
                 ComponentGenerators.markdown({
                     content: _T( "prelude", "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte.") 
+                })
+            ]
+        });
+    }
+
+    preludeS3(parentKey: string, itemKey: string) {
+
+        const texts : string[] = [
+            "Une activité de plein air est définie ici comme l’ensemble des activités professionnelles, de sports et de loisirs pratiquées en extérieur, dans un milieu naturel ou dans un espace vert.",
+            "",    
+"Exemples d’activités de plein air : jardinage, promenade en forêt, course à pied en milieu naturel ou parc, course d’orientation, promenade dans un parc municipal ou jardin public, pique-nique en extérieur, sports et jeux dans un jardin ou sur pelouse, etc."
+        ];
+
+        return SurveyItems.display({
+            parentKey: parentKey,
+            itemKey: itemKey,
+            content: [
+                ComponentGenerators.markdown({
+                    content: _T( "prelude.S3", texts.join("\n")) 
                 })
             ]
         });
@@ -217,12 +260,13 @@ class Section3 extends Group {
         const Q10 = this.Q10(this.key);
         this.addItem(Q10);
 
-        const Q11 = YesNo(this.key, 'Q11', _T('Q11.text', "). Lors de ces activités de plein air, avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (e.g., pantalons longs, tshirt manches longues, utilisations d’insecticides…) ") )
+        const Q11 = YesNo(this.key, 'Q11', _T('Q11.text', "Lors de ces activités de plein air, avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (e.g., pantalons longs, t-shirt manches longues, utilisation d’insecticides…) ") )
         this.addItem(Q11);
 
-        const Q12 = this.Q12(this.key);
+        const YesOnQ11 = client.singleChoice.any(Q11.key, responses.yes_no.yes);
+        const Q12 = this.Q12(this.key, YesOnQ11);
         this.addItem(Q12);
-    
+
     }
         
     Q8(parent:string, condition?: Expression):SurveyItem {
@@ -297,7 +341,7 @@ class Section3 extends Group {
         return SurveyItems.singleChoice({
             parentKey: parent,
             itemKey: 'Q12',
-            questionText: _T("Q12.text", "Dans quel(s) environnement(s) avez-vous pratiqué cette ou ces activités de plein air, au cours des 4 derniers mois ?"),
+            questionText: _T("Q12.text", "A quelle fréquence avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (e.g., pantalons longs, t-shirt manches longues, utilisation d’insecticides…) "),
             responseOptions: oo,
             condition: condition
         });
