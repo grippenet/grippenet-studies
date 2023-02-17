@@ -49,9 +49,9 @@ export class MozartSurvey extends SurveyDefinition {
         const Q4 = this.Q4(rootKey, hasRespondedBackground);
         this.addItem(Q4);
 
-        //const bitenLifetime = client.singleChoice.any(Q4.key, responses.yes_no.yes);
+        const bitenLifetime = client.singleChoice.any(Q4.key, responses.yes_no.yes);
         
-        const Q5 = this.Q5(rootKey);
+        const Q5 = this.Q5(rootKey, bitenLifetime);
         this.addItem(Q5);
 
         const hasBite = client.singleChoice.any(Q5.key, responses.yes_no.yes);
@@ -123,7 +123,7 @@ export class MozartSurvey extends SurveyDefinition {
             parentKey: parent,
             itemKey: 'Q1',
             condition: condition,
-            questionText: _T("Q1.text", "Avez-vous déjà entendu parler des tiques ou des maladies transmises par les tiques (exemple : la borréliose de Lyme, l'encéphalite à tiques) ?"),
+            questionText: _T("Q1.text", "Avez-vous déjà entendu parler des tiques ou des maladies transmises par les tiques (exemples : la borréliose de Lyme, l'encéphalite à tiques) ?"),
             responseOptions: [
                 as_option(codes.yes, _T('Q1.option.yes', 'Oui')),
                 as_option(codes.no, _T('Q1.option.no', 'Non')),
@@ -133,7 +133,7 @@ export class MozartSurvey extends SurveyDefinition {
     }
     
     Q2 = (parent: string, condition?: Expression)=> {
-        return YesNo(parent, 'Q2', _T("Q2.text", "Avez-vous déjà été eu une maladie transmise par une tique dans votre vie ?"), condition);
+        return YesNo(parent, 'Q2', _T("Q2.text", "Avez-vous déjà eu une maladie transmise par une tique dans votre vie ?"), condition);
     }
     
     Q2b = (parent: string, condition?: Expression)=> {
@@ -142,11 +142,11 @@ export class MozartSurvey extends SurveyDefinition {
             parentKey: parent,
             condition: condition,
             itemKey: 'Q2b',
-            questionText: _T("Q2b.text", "De quelle(s) maladie(s) s’agissait-il ? Si plusieurs, indiquez la plus récente"),
+            questionText: _T("Q2b.text", "De quelle maladie s’agissait-il ? Si plusieurs, indiquez la plus récente"),
             responseOptions: [
                 as_option(codes.lyme, _T('Q2b.option.lyme', 'Borréliose de Lyme')),
                 as_option(codes.encephalitis, _T('Q2b.option.encephalitis', 'Encéphalite à tique')),
-                as_input_option(codes.other, _T('Q2b.option.other', 'Autre, préciser (champ libre)')),   
+                as_input_option(codes.other, _T('Q2b.option.other', 'Autre, Précisez')),   
             ]
         });
     }
@@ -154,26 +154,30 @@ export class MozartSurvey extends SurveyDefinition {
     Q3(parent: string, condition?: Expression) {
         const codes = responses.Q3;     
 
+        const itemKey = 'Q3';
+
+        const noneCondition = client.multipleChoice.any(this.key + '.' + itemKey, codes.no );
+
         return SurveyItems.multipleChoice({
             parentKey: parent,
             condition: condition,
-            itemKey: 'Q3',
+            itemKey: itemKey,
             questionText: _T("Q3.text", "Votre lieu de résidence a-t-il ?"),
             responseOptions: [
-                    as_option(codes.jardin, _T('Q3.option.1','Un jardin')),
-                    as_option(codes.terrain, _T('Q3.option.2',"Un champs/un terrain")),
-                    as_option(codes.terrasse, _T('Q3.option.3',"Une terrasse/un balcon/une cour")),
+                    option_def(codes.jardin, _T('Q3.option.1','Un jardin'), {'disabled': noneCondition}),
+                    option_def(codes.terrain, _T('Q3.option.2',"Un champs/un terrain"), {'disabled': noneCondition}),
+                    option_def(codes.terrasse, _T('Q3.option.3',"Une terrasse/un balcon/une cour"), {'disabled': noneCondition}),
                     as_option(codes.no, _T('Q3.option.4',"Pas d’extérieur")),
-                ]
+            ]
         });
     }
     
     Q4(parent: string, condition?: Expression) {
-        return YesNo(parent, 'Q4', _T('Q4.text', 'Vous êtes-vous déjà fait piquer par une tique au cours de votre vie ?'), condition);
+        return YesNo(parent, 'Q4', _T('Q4.text', 'Vous êtes-vous déjà fait piquer par une tique (ou plusieurs tiques) au cours de votre vie ?'), condition);
     }
 
     Q5(parent: string, condition?: Expression) {
-        return YesNo(parent, 'Q5', _T('Q5.text', 'Vous êtes-vous fait piquer par au moins une tique au cours des 4 derniers mois '), condition);
+        return YesNo(parent, 'Q5', _T('Q5.text', 'Vous êtes-vous fait piquer par une tique (ou plusieurs tiques) au cours des 4 derniers mois ?'), condition);
     }
 
     Q6(parent:string, condition?: Expression) {
@@ -205,7 +209,7 @@ export class MozartSurvey extends SurveyDefinition {
                         min: 4
                     }
                 }),
-                as_option(codes.dnk, _T('Q6.option.nsp', 'Je ne sais pas')),
+                as_option(codes.dnk, _T('Q6.option.nsp', "Je ne sais pas/Je ne m'en souviens pas")),
             ]
         });
     }
@@ -263,7 +267,7 @@ class Section3 extends Group {
         const Q10 = this.Q10(this.key);
         this.addItem(Q10);
 
-        const Q11 = YesNo(this.key, 'Q11', _T('Q11.text', "Lors de ces activités de plein air, avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (e.g., pantalons longs, t-shirt manches longues, utilisation d’insecticides…) ") )
+        const Q11 = YesNo(this.key, 'Q11', _T('Q11.text', "Lors de ces activités de plein air, avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (par ex., pantalons longs, t-shirt manches longues, utilisation d’insecticides…) ") )
         this.addItem(Q11);
 
         const YesOnQ11 = client.singleChoice.any(Q11.key, responses.yes_no.yes);
@@ -344,7 +348,7 @@ class Section3 extends Group {
         return SurveyItems.singleChoice({
             parentKey: parent,
             itemKey: 'Q12',
-            questionText: _T("Q12.text", "A quelle fréquence avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (e.g., pantalons longs, t-shirt manches longues, utilisation d’insecticides…) "),
+            questionText: _T("Q12.text", "A quelle fréquence avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (par ex., pantalons longs, t-shirt manches longues, utilisation d’insecticides…) "),
             responseOptions: oo,
             condition: condition
         });
