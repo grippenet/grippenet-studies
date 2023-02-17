@@ -8,6 +8,8 @@ export class IntakeDef extends SurveyBuilder {
 
     Q_birthdate?: pool.DateOfBirth;
 
+    Q_postal?: intake.PostalCode;
+
     constructor(meta:Map<string,string>) {
 
         super({
@@ -110,6 +112,7 @@ export class IntakeDef extends SurveyBuilder {
         const Q_postal = new intake.PostalCode({parentKey:rootKey, isRequired:true});
         this.prefillWithLastResponse(Q_postal);
         items.push(Q_postal);
+        this.Q_postal = Q_postal;
 
         const Q_main_activity = new pool.MainActivity({parentKey:rootKey, isRequired:true});
         items.push(Q_main_activity);
@@ -214,6 +217,13 @@ export class IntakeDef extends SurveyBuilder {
             throw new Error("Birthday not initialized");
         }
         return this.Q_birthdate;
+    }
+
+    getPostalCodeItem(): Item {
+        if(!this.Q_postal) {
+            throw new Error("Postal not initialized");
+        }
+        return this.Q_postal;
     }
 }
 
