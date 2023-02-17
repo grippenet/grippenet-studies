@@ -1,4 +1,8 @@
 {
+  "common.lastsubmission.text": {
+    "en":"last submission at ",
+    "fr":"Une précédente réponse à ce questionnaire a été fournie par ce participant le "
+  },
   "common.other_specify": {
     "en": "Other (specify)",
     "fr": "Autre (préciser)"
