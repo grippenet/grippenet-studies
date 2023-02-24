@@ -28,11 +28,12 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
         const updateFlag = se.participantActions.updateFlag;
         const hasParticipantFlagKeyAndValue = se.participantState.hasParticipantFlagKeyAndValue
         const hasSurveyKeyAssigned = se.participantState.hasSurveyKeyAssigned;
-
+       
         const intakeKey = this.keys.intake.key;
         const weeklyKey = this.keys.weekly.key;
         const vacKey = this.keys.vaccination.key;
-
+        const mozartKey = this.keys.mozart?.key;
+        
         /**
          * Define what should happen, when persons enter the study first time:
          */
@@ -40,6 +41,8 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             assignedSurveys.add(intakeKey, 'normal')
         ];
        
+        const postalCodeKey = this.keys.intake.getPostalCodeItem().key;
+
         /**
          * Define what should happen, when persons submit an intake survey:
          */
@@ -54,8 +57,13 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
                 ),
                 assignedSurveys.add(weeklyKey, 'prio')
             ),
+            se.ifThen(
+                se.hasResponseKey(postalCodeKey,'rg.0'),
+                updateFlag(flags.needLocation.key, flags.needLocation.values.no),
+            ),
             // add optional intake
-            assignedSurveys.add(intakeKey, 'optional')
+            assignedSurveys.add(intakeKey, 'optional'),
+            updateFlag(flags.lastIntake.key, se.timestampWithOffset({seconds:0}) )
         );
 
         const hasOnGoingSymptoms = flags.hasOnGoingSymptoms;
@@ -75,7 +83,8 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
                 updateFlag(hasOnGoingSymptoms.key, hasOnGoingSymptoms.values.yes),
                 // else:
                 updateFlag(hasOnGoingSymptoms.key, hasOnGoingSymptoms.values.no)
-            )
+            ),
+            updateFlag(flags.lastWeekly.key, se.timestampWithOffset({seconds:0}) )
         );
 
         const handleVaccination = se.ifThen(
@@ -84,9 +93,10 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             assignedSurveys.remove(vacKey, 'all'),
             assignedSurveys.add(vacKey, 'optional', se.timestampWithOffset({hours: 1})),
             // update vaccinationCompleted flag
-            updateFlag(flags.vaccinationCompleted.key, flags.vaccinationCompleted.values.yes)
+            updateFlag(flags.vaccinationCompleted.key, flags.vaccinationCompleted.values.yes),
+            updateFlag(flags.lastVaccination.key, se.timestampWithOffset({seconds:0}) )
         );
-
+        
         const ageResponseComp = responseGroupKey + '.' + IntakeResponses.birthDate.date;
 
         const underAgeFlag = flags.underAgeVac;
@@ -158,13 +168,21 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             ) // do
         );
 
-
         const submitRules: Expression[] = [
             handleIntake,
             handleWeekly,
             handleVaccination,
-            handleChild
+            handleChild,
         ];
+
+        if(mozartKey) {
+            const handleMozart = se.ifThen(
+                se.checkSurveyResponseKey(mozartKey),
+                updateFlag(flags.mozartS0.key, '1')
+            );
+            
+            submitRules.push(handleMozart);
+        }
 
         this.rules.entry = entryRules;
         this.rules.submit = submitRules;
