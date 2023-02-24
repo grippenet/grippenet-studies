@@ -22,6 +22,29 @@ export const GrippenetFlags = {
             no: '0'
         } as const
     } as const,
+    lastIntake: {
+        key: 'lastIntakeTime',
+    },
+    lastVaccination: {
+        key: 'lastVacTime'
+    },
+    lastWeekly: {
+        key: 'lastWeeklyTime',
+    },
+    mozartS0: {
+        key: 'mozartS0'
+    },
+    reminderTester: {
+        // Tester of reminder
+        key: 'reminderTester'
+    },
+    needLocation: {
+        key: 'needLocation',
+        values: {
+            yes: '1',
+            no: '0'
+        }
+    },
     hasOnGoingSymptoms: flags.hasOnGoingSymptoms,
     vaccinationCompleted: flags.vaccinationCompleted
 } as const;
