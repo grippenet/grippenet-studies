@@ -1,6 +1,8 @@
 import { StudyBuilder } from "./common";
 import { MozartSurvey } from "./mozart/survey";
 import { study_exporter } from "../common/tools/exporter";
+import "../common/studies/common/languages/fr";
+import "./grippenet/languages";
 
 class MozartStudy extends StudyBuilder {
     constructor() {
