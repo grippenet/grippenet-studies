@@ -2,7 +2,7 @@ import {  _T } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import { questionPools, SurveyBuilder, SimpleGroupQuestion, ClientExpression as ce } from "../../../common";
 import * as intake from "./questions";
-
+import { GrippenetFlags } from "../../flags";
 import pool = questionPools.intake;
 export class IntakeDef extends SurveyBuilder {
 
@@ -22,6 +22,13 @@ export class IntakeDef extends SurveyBuilder {
 
         const rootKey = this.key;
 
+        const needLocationFlag = GrippenetFlags.needLocation;
+
+        const hasNeedLocation = ce.participantFlags.hasKeyAndValue(needLocationFlag.key, needLocationFlag.values.yes);
+        
+        const warningLocation = new intake.SurveyLocationWarning({parentKey: rootKey});
+        this.push(warningLocation, hasNeedLocation);
+        
         const prelude = new intake.SurveyPrelude({parentKey: rootKey})
         this.push(prelude);
 

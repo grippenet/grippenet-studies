@@ -43,6 +43,30 @@ export class SurveyPrelude extends ItemQuestion {
     }
 }
 
+
+export class SurveyLocationWarning extends ItemQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'w1');
+    }
+
+    buildItem(): SurveySingleItem {
+        return SurveyItems.display({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            condition: this.condition,
+            content: [
+                markdownComponent({
+                    key: 'w1',
+                    className: 'alert alert-warning my-1',
+                    content: _T("intake.warning.location", "Warning about location catch-up")
+                })
+            ]
+        });
+    }
+}
+
+
 export class UnsupervisedMinorWarning extends ItemQuestion {
     
     constructor(props: ItemProps) {

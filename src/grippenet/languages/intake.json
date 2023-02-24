@@ -10,6 +10,17 @@
       "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
     ]
   },
+  "intake.warning.location": {
+    "en": "Intake survey warning for location catch-up",
+    "fr": [
+      "### Des informations importantes sont manquantes pour ce participant",
+      "Lors du remplissage de votre questionnaire préliminaire en début de saison, vous avez omis de renseigner votre code commune, alors que cette question est normalement obligatoire. Nous avons corrigé cela par la suite, mais nous vous serions reconnaissants de bien vouloir prendre quelques minutes pour mettre à jour votre questionnaire avec ces informations.",
+      "",
+      "Cette question est importante car elle nous permet de vérifier la représentativité de la cohorte GrippeNet.fr/COVIDnet.fr, et d’étudier la propagation de la COVID-19 et de la grippe au niveau spatial.",
+      "",
+      "En vous remerciant par avance pour votre aide !"
+    ]
+  },
   "intake.impersonate": {
     "en": "Please fill this form as if you were the person your are filling it for",
     "fr": "Répondez s-il-vous-plaît à toutes les questions comme si vous étiez la personne pour laquelle vous remplissez ce questionnaire."
