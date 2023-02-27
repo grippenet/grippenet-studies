@@ -135,7 +135,7 @@ export class MozartSurvey extends SurveyDefinition {
             parentKey: parent,
             itemKey: 'Q1',
             condition: condition,
-            questionText: _T("Q1.text", "Avez-vous déjà entendu parler des tiques ou des maladies transmises par les tiques ((exemples : borréliose de Lyme, encéphalite à tiques, babésiose, anaplasmose)) ?"),
+            questionText: _T("Q1.text", "Avez-vous déjà entendu parler des tiques ou des maladies transmises par les tiques (exemples : borréliose de Lyme, encéphalite à tiques, babésiose, anaplasmose) ?"),
             responseOptions: [
                 as_option(codes.yes, _T('Q1.option.yes', 'Oui')),
                 as_option(codes.no, _T('Q1.option.no', 'Non')),

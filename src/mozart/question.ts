@@ -202,7 +202,8 @@ export class PiqureGroup extends Group {
         questionSubText: _T(t3 + '.subtext', "Indiquez le code postal correspondant à la localité la plus proche"),
         responseOptions: [
           option_def(Q3_reponses.postalcode, _T(t3, "Code postal"), {
-            role: optionRoles.input
+            role: optionRoles.input,
+            description: _T(t3 + ".option.1.desc", "Entrez un code postal")
           }),
           as_option(Q3_reponses.dnk, _T(t3 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
         ],
@@ -253,7 +254,8 @@ export class PiqureGroup extends Group {
         questionText: _T(t5, textPrefix + ' Si vous ne souvenez pas du code postal, pouvez-vous vous rappeler dans quel département vous vous êtes fait piquer'),
         responseOptions: [
           option_def(Q5_responses.postalCode, _T(t5 + '.option.1', ""), {
-            role:optionRoles.input
+            role:optionRoles.input,
+            description: _T(t5 + ".option.1.desc", "Entrez un numéroe de département")
           }),
           as_option(Q5_responses.dnk, _T(t5 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
         ],
@@ -263,7 +265,7 @@ export class PiqureGroup extends Group {
               'type':'hard',
               rule: client.logic.or(
                 client.logic.not(client.hasResponse(Q5_key, responseGroupKey)),
-                client.checkResponseValueWithRegex(Q5_key, singleChoicePrefix + '.' + Q5_responses.postalCode, '^(([0-9]{2})|(2[ABab])|97[12346])$'),
+                client.checkResponseValueWithRegex(Q5_key, singleChoicePrefix + '.' + Q5_responses.postalCode, '^(([0-9]{2})|(2[ABab])|(97[12346]))$'),
                 client.singleChoice.any(Q5_key, Q5_responses.dnk)
               ) 
             },
@@ -271,6 +273,7 @@ export class PiqureGroup extends Group {
         bottomDisplayCompoments: [
             textComponent({
               displayCondition: client.logic.not(client.getSurveyItemValidation(Q5_key, 'pc1')),
+              className: "text-danger mt-1",
               content: _T(t5 + ".postalCodeError", "Entrez un numéro de département valide")
             })
         ]
