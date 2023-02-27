@@ -207,15 +207,22 @@ export class PiqureGroup extends Group {
           as_option(Q3_reponses.dnk, _T(t3 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
         ],
         customValidations: [
-          {
-            'key': 'pc1',
-            'type':'hard',
-            rule: client.logic.or(
-              client.logic.not(client.hasResponse(Q3_key, responseGroupKey)),
-              client.checkResponseValueWithRegex(Q3_key, singleChoicePrefix + '.' + Q3_reponses.postalcode, '^(([0-9]{2})|(2[ABab]))[0-9][0-9][0-9]$'),
-              client.singleChoice.any(Q3_key, Q3_reponses.dnk)
-            ) 
-        }
+            {
+                'key': 'pc1',
+                'type':'hard',
+                rule: client.logic.or(
+                  client.logic.not(client.hasResponse(Q3_key, responseGroupKey)),
+                  client.checkResponseValueWithRegex(Q3_key, singleChoicePrefix + '.' + Q3_reponses.postalcode, '^(([0-9]{2})|(2[ABab]))[0-9][0-9][0-9]$'),
+                  client.singleChoice.any(Q3_key, Q3_reponses.dnk)
+                ) 
+            },
+        ],
+        bottomDisplayCompoments: [
+          textComponent({
+            displayCondition: client.logic.not(client.getSurveyItemValidation(Q3_key, 'pc1')),
+            content: _T(t3 + ".postalCodeError", "Entrez les 5 chiffres du code postal (pour la code 2A/2B acceptés)"),
+            className: "text-danger",
+          })
         ]
       });
       
@@ -242,6 +249,7 @@ export class PiqureGroup extends Group {
       const Q5 = SurveyItems.singleChoice({
         parentKey: this.key,
         itemKey: Q5_itemKey,
+        condition: postalUnknown,
         questionText: _T(t5, textPrefix + ' Si vous ne souvenez pas du code postal, pouvez-vous vous rappeler dans quel département vous vous êtes fait piquer'),
         responseOptions: [
           option_def(Q5_responses.postalCode, _T(t5 + '.option.1', ""), {
@@ -250,15 +258,21 @@ export class PiqureGroup extends Group {
           as_option(Q5_responses.dnk, _T(t5 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
         ],
         customValidations: [
-          {
-            'key': 'pc1',
-            'type':'hard',
-            rule: client.logic.or(
-              client.logic.not(client.hasResponse(Q5_key, responseGroupKey)),
-              client.checkResponseValueWithRegex(Q5_key, singleChoicePrefix + '.' + Q5_responses.postalCode, '^(([0-9]{2})|(2[ABab]))$'),
-              client.singleChoice.any(Q5_key, Q5_responses.dnk)
-            ) 
-        }
+            {
+              'key': 'pc1',
+              'type':'hard',
+              rule: client.logic.or(
+                client.logic.not(client.hasResponse(Q5_key, responseGroupKey)),
+                client.checkResponseValueWithRegex(Q5_key, singleChoicePrefix + '.' + Q5_responses.postalCode, '^(([0-9]{2})|(2[ABab])|97[12346])$'),
+                client.singleChoice.any(Q5_key, Q5_responses.dnk)
+              ) 
+            },
+        ],
+        bottomDisplayCompoments: [
+            textComponent({
+              displayCondition: client.logic.not(client.getSurveyItemValidation(Q5_key, 'pc1')),
+              content: _T(t5 + ".postalCodeError", "Entrez un numéro de département valide")
+            })
         ]
       });
        
