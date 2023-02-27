@@ -5,6 +5,12 @@ const flags = CommonStudy.flags.ParticipantFlags;
 
 const monthInSeconds = 60 * 60 * 24 * 30;
 
+const booleanValues = {
+    yes: '1',
+    no: '0'
+} as const;
+
+
 export const GrippenetFlags = {
     underAgeVac: {
         key: 'ageVac',
@@ -32,19 +38,17 @@ export const GrippenetFlags = {
         key: 'lastWeeklyTime',
     },
     mozartS0: {
-        key: 'mozartS0'
-    },
+        key: 'mozartS0',
+        values: booleanValues
+    } as const,
     reminderTester: {
         // Tester of reminder
         key: 'reminderTester'
     },
     needLocation: {
         key: 'needLocation',
-        values: {
-            yes: '1',
-            no: '0'
-        }
-    },
+        values: booleanValues
+    } as const,
     hasOnGoingSymptoms: flags.hasOnGoingSymptoms,
     vaccinationCompleted: flags.vaccinationCompleted
 } as const;

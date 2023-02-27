@@ -8,6 +8,7 @@ import { common_other, PiqureGroup, YesNo } from "./question";
 import responses from "./responses";
 import { optionRoles, textComponent } from "../common";
 import { postalCode } from "../grippenet/questions";
+import { GrippenetFlags } from "../grippenet/flags";
 
 export class MozartSurvey extends SurveyDefinition {
 
@@ -37,11 +38,20 @@ export class MozartSurvey extends SurveyDefinition {
         this.addItem(Q0);
         */
 
-        const hasRespondedBackground = client.logic.not(client.participantFlags.hasKeyAndValue('mozartS0', '1'));
+        const hasRespondedBackground = client.logic.not(client.participantFlags.hasKeyAndValue(GrippenetFlags.mozartS0.key, GrippenetFlags.mozartS0.values.yes));
         
         //client.singleChoice.any(Q0.key, responses.Q0.dnk, responses.Q0.no);
 
-        const Q14 = postalCode({parentKey: rootKey, itemKey: 'Q14', isRequired: true, responseKey: '1', questionText: _T("Q14.text", "Quelle est votre commune de résidence")});
+        const needLocation = client.participantFlags.hasKeyAndValue(GrippenetFlags.needLocation.key, GrippenetFlags.needLocation.values.yes);
+
+        const Q14 = postalCode({
+            parentKey: rootKey, 
+            itemKey: 'Q14', 
+            isRequired: true, 
+            responseKey: '1', 
+            questionText: _T("Q14.text", "Quelle est votre commune de résidence"),
+            condition: needLocation
+        });
         this.addItem(Q14);
 
         const Q1 = this.Q1(rootKey, hasRespondedBackground);
