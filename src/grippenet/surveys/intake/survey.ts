@@ -4,6 +4,7 @@ import { questionPools, SurveyBuilder, SimpleGroupQuestion, ClientExpression as 
 import * as intake from "./questions";
 import { GrippenetFlags } from "../../flags";
 import pool = questionPools.intake;
+import { intakeSurveyKey } from "../../constants";
 export class IntakeDef extends SurveyBuilder {
 
     Q_birthdate?: pool.DateOfBirth;
@@ -13,7 +14,7 @@ export class IntakeDef extends SurveyBuilder {
     constructor(meta:Map<string,string>) {
 
         super({
-            surveyKey: 'intake',
+            surveyKey: intakeSurveyKey,
             name:_T("intake.name.0", "Intake questionnaire"),
             description: _T("intake.description.0", "The purpose of the background questionnaire is to find out a little more about each user."),
             durationText: _T("intake.typicalDuration.0", "Duration 5-10 minutes"),
