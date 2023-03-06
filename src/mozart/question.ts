@@ -3,9 +3,19 @@ import { SurveyItems } from "case-editor-tools/surveys"
 import { Group } from "case-editor-tools/surveys/types";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { singleChoicePrefix } from "../../common/studies/common/questionPools";
-import { ItemQuestion, exp_as_arg, ClientExpression as client, as_option, as_input_option, option_def, textComponent, optionRoles } from "../common";
+import { ItemQuestion, exp_as_arg, ClientExpression as client, as_option, as_input_option, option_def, textComponent, optionRoles, surveyItemKey } from "../common";
 import { _T, options_french, ObservationPeriod } from "./helpers";
 import responses from "./responses";
+
+export const DontKnowLabel = "Je ne sais pas / me souviens pas";
+
+export const several_answers = _T("common.multiple_choice", "Plusieurs réponses possibles");
+
+export const common_other = _T("common.other", "Précisez");
+
+export const create_period_label = (p: ObservationPeriod) => {
+  return "au cours la période de " + p.label;
+}
 
 interface QProps {
     condition?: Expression
@@ -80,9 +90,6 @@ const orders: OrderLabels = {
   '4': { masc:'quatrième'}
 };
 
-const several_answer = _T("common.multiple_choice", "Plusieurs réponses possibles");
-
-export const common_other = _T("common.other", "Précisez");
 
 const ucfirst = (s:string)=>{
   return  s.charAt(0).toUpperCase() + s.slice(1);
@@ -110,12 +117,15 @@ export class PiqureGroup extends Group {
     }
 
     buildGroup() {
+
+      const periodLabel = create_period_label(this.observationPeriod);
+
       
       const [orderMasc, orderFem] = this.orderLabels();
      
       const titlePrelude = ucfirst(orderMasc) + " épisode de piqûre(s)";
 
-      const textPrelude = "Les questions suivantes permettront d’en savoir plus sur votre "+  orderMasc + " épisode de piqûre(s) de tiques de "+ this.observationPeriod.label +". Répondez le plus précisément possible";
+      const textPrelude = "Les questions suivantes permettront d’en savoir plus sur votre "+  orderMasc + " épisode de piqûre(s) de tiques "+ periodLabel +". Répondez le plus précisément possible";
 
       const prelude = SurveyItems.display({
         parentKey: this.key,
@@ -139,11 +149,11 @@ export class PiqureGroup extends Group {
       const Q1 = SurveyItems.singleChoice({
         parentKey: this.key,
         itemKey: '1',
-        questionText: _T(t1 + '.text', textPrefix + ' combien de tiques vous ont piqué lors de ce '+ orderMasc +' épisode de piqûre(s) sur la période de '+ this.observationPeriod.label+' ?'),
-        questionSubText: _T(t1 + '.subtext', "Note importante: Si vous vous êtes fait piquer par plusieurs tiques au cours de la même sortie, ne comptez cet épisode de piqûres que comme une seule fois."),
+        questionText: _T(t1 + '.text', textPrefix + ' Combien de tiques vous ont piqué lors de ce '+ orderMasc +' épisode de piqûre(s) '+ periodLabel +' ?'),
+        //questionSubText: _T(t1 + '.subtext', "Note importante: Si vous vous êtes fait piquer par plusieurs tiques au cours de la même sortie, ne comptez cet épisode de piqûres que comme une seule fois."),
         responseOptions: [
           as_option('1', _T(t1 + '.option.1', 'Une tique')),
-          option_def('2', _T(t1 + '.option.2', 'Deux tiques ou plus (i.e. piqûres multiples)'), {
+          option_def('2', _T(t1 + '.option.2', "Deux tiques ou plus (c'est-à-dire des piqûres multiples)"), {
             'role':'numberInput', 
             optionProps: { 'min': 2},
             'description': _T(t1, 'Précisez le nombre')
@@ -172,13 +182,13 @@ export class PiqureGroup extends Group {
       const Q2 = SurveyItems.singleChoice({
         parentKey: this.key,
         itemKey: '2',
-        questionText: _T(t2 + '.text', textPrefix + " Quand a eu lieu ce " + orderMasc + " épisode de piqûre(s)"),
-        questionSubText: _T(t2 + ".subtext", "Répondez dans le champs date qui correspond le mieux à la précision dont vous vous souvenez pour cette épisode"),
+        questionText: _T(t2 + '.text', textPrefix + " Quand a eu lieu ce " + orderMasc + " épisode de piqûre(s) ?"),
+        questionSubText: _T(t2 + ".subtext", "Répondez dans le champ date qui correspond le mieux à la précision dont vous vous souvenez pour cet épisode"),
         responseOptions: [
           date_input("1", "La date exacte"),
-          date_input("2", "à 2- 3 jours près"),
-          date_input("3", "à une semaine près"),
-          date_input("4", "à un mois près", 'YM'),
+          date_input("2", "A 2- 3 jours près"),
+          date_input("3", "A une semaine près"),
+          date_input("4", "A un mois près", 'YM'),
           as_option("99", _T(t2 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
         ]
       });
@@ -188,7 +198,7 @@ export class PiqureGroup extends Group {
       const t3 = this.key + '.3';
 
       const Q3_itemKey = '3';
-      const Q3_key = this.key + '.' + Q3_itemKey;
+      const Q3_key = surveyItemKey(this.key , Q3_itemKey);
 
       const Q3_reponses = {
         'postalcode': '1',
@@ -198,7 +208,7 @@ export class PiqureGroup extends Group {
       const Q3 = SurveyItems.singleChoice({
         parentKey: this.key,
         itemKey: Q3_itemKey,
-        questionText: _T(t3 + '.text', textPrefix + " Où étiez-vous au moment de ce(s) piqûre(s)"),
+        questionText: _T(t3 + '.text', textPrefix + " Où étiez-vous au moment de ce(s) piqûre(s) ?"),
         questionSubText: _T(t3 + '.subtext', "Indiquez le code postal correspondant à la localité la plus proche"),
         responseOptions: [
           option_def(Q3_reponses.postalcode, _T(t3, "Code postal"), {
@@ -240,7 +250,7 @@ export class PiqureGroup extends Group {
       
       const Q5_itemKey = '5';
       const t5= this.key + '.' + Q5_itemKey;
-      const Q5_key = this.key + '.' + Q5_itemKey;
+      const Q5_key = surveyItemKey(this.key , Q5_itemKey);
 
       const Q5_responses = {
         postalCode: '1',
@@ -255,7 +265,7 @@ export class PiqureGroup extends Group {
         responseOptions: [
           option_def(Q5_responses.postalCode, _T(t5 + '.option.1', ""), {
             role:optionRoles.input,
-            description: _T(t5 + ".option.1.desc", "Entrez un numéroe de département")
+            description: _T(t5 + ".option.1.desc", "Entrez un numéro de département")
           }),
           as_option(Q5_responses.dnk, _T(t5 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
         ],
@@ -282,12 +292,13 @@ export class PiqureGroup extends Group {
       this.addItem(Q5);
 
       const t6 = this.key + '.6';
-      const Q6_key = '6';
+      const Q6_itemKey = '6';
+      const Q6_key = surveyItemKey(this.key, Q6_itemKey);
       const Q6_unknown = '99';
      
       const oo = options_french([
-        ['1', 'Forêt (lisière de forêt, bois, bosquet, …)'], 
-        ['2', 'Prairie (herbes hautes, champs, …)'], 
+        ['1', 'Forêt (lisière de forêt, bois, bosquet…)'], 
+        ['2', 'Prairie (herbes hautes, champs…)'], 
         ['3', 'Jardin privé'], 
         ['4', 'Zone agricole cultivée'], 
         ['5', 'Parc public/municipal'], 
@@ -298,18 +309,18 @@ export class PiqureGroup extends Group {
 
       //oo.push(as_input_option('9', _T(t6 + '.option.other','Autre'), common_other ));
 
-       const Q6_exclusive = client.multipleChoice.any(this.key + '.' + Q6_key, Q6_unknown)
+       const Q6_exclusive = client.multipleChoice.any(Q6_key, Q6_unknown)
       oo.forEach(o=>{
         o.disabled = Q6_exclusive;
       });
 
-      oo.push(option_def(Q6_unknown, _T(t6 + '.option.nsp', "Je ne sais pas/ne me souviens pas")))
+      oo.push(option_def(Q6_unknown, _T(t6 + '.option.nsp', DontKnowLabel)))
 
       const Q6 = SurveyItems.multipleChoice({
         parentKey: this.key,
-        itemKey: Q6_key,
+        itemKey: Q6_itemKey,
         questionText: _T(t6 + ".text", textPrefix + " Dans quel(s) environnement(s) vous êtes-vous fait piquer ?"),
-        questionSubText: several_answer,
+        questionSubText: several_answers,
         responseOptions: oo
       });
 
@@ -320,13 +331,13 @@ export class PiqureGroup extends Group {
       const o7 = options_french([
         ['1', 'Activité professionnelle'],
         ['2', 'Chasse, pêche'],
-        ['3', 'Activité scolaire'],
-        ['4', 'Activité sportive (course à pied en milieu naturel ou jeu collectif sur gazon)'],
-        ['5', 'Loisir (randonnée, promenade, pique-nique, jardinage, …)'],
+        ['3', 'Sport (course à pied en milieu naturel ou jeu collectif sur gazon… )'],
+        ['4', 'Loisir (randonnée, promenade, pique-nique, jardinage…)'],
+        ['5', 'Autre'],
       ], t7 + '.option.');
 
       //o7.push(as_input_option('6', _T(t7 + '.option.other','Autre'), common_other));
-      o7.push(option_def('99', _T(t7 + '.option.nsp', "Je ne sais pas/ne me souviens pas")))
+     // o7.push(option_def('99', _T(t7 + '.option.nsp', DontKnowLabel)))
 
       const Q7 = SurveyItems.singleChoice({
         parentKey: this.key,
@@ -339,48 +350,59 @@ export class PiqureGroup extends Group {
 
       const t8 = this.key + '.8';
 
-      const Q8_key = '8';
-      const Q8_unknown = '99';
-      const Q8_fallenAlone = '3';
+      const Q8_itemKey = '8';
+      const Q8_responses = responses.Q6_8;
       const o8 = options_french([
-        ['1', "Le jour même (< 24h)"],
-        ['2', "Le lendemain ou plus tard (> 24h)"],
-        [Q8_fallenAlone, "Elle est tombée toute seule"],
+        [Q8_responses.sameday, "Le jour même (< 24h)"],
+        [Q8_responses.nextday, "Le lendemain ou plus tard (> 24h)"],
+        [Q8_responses.fallenAlone, "Elle est tombée toute seule"],
       ], t8 + '.option.');
 
-      const Q8_exclusive = client.multipleChoice.any(this.key + '.' + Q8_key, Q8_unknown);
+      const Q8_key = surveyItemKey(this.key, Q8_itemKey);
+      const Q8_exclusive = client.multipleChoice.any(Q8_key, Q8_responses.dnk);
 
       o8.forEach(o=>{
         o.disabled = Q8_exclusive;
-      })
+      });
 
-      o8.push(option_def(Q8_unknown, _T(t8 + '.option.nsp', "Je ne sais pas/ne m'en souviens pas")))
+      o8.push(option_def(Q8_responses.dnk, _T(t8 + '.option.nsp', DontKnowLabel)))
 
       const Q8 = SurveyItems.multipleChoice({
         parentKey: this.key,
-        itemKey: Q8_key,
-        questionText: _T(t8 + ".text", textPrefix +" Lors de ce " + orderMasc+ " épisode de piqûre(s), quand avez-vous retiré la/les tique(s)"),
-        questionSubText: several_answer,
+        itemKey: Q8_itemKey,
+        questionText: _T(t8 + ".text", textPrefix +" Lors de ce " + orderMasc+ " épisode de piqûre(s), quand avez-vous retiré la/les tique(s) ?"),
+        questionSubText: several_answers,
         responseOptions: o8
       });
 
       this.addItem(Q8);
 
-      const removedCondition = client.multipleChoice.none(Q8.key, Q8_fallenAlone);
+      const removedCondition = client.multipleChoice.any(Q8.key, Q8_responses.nextday, Q8_responses.sameday);
 
       const t9 = this.key + '.9';
 
+      const Q9_resp = {
+        tiretique: '1',
+        tool: '2',
+        hand: '3',
+        dnk: '99'
+      } as const;
+
+      const Q9_itemKey = '9';
+      const Q9_key = surveyItemKey(this.key,  Q9_itemKey);
+      const Q9_exclusive = client.multipleChoice.any(Q9_key, Q9_resp.dnk);
+
       const Q9 = SurveyItems.multipleChoice({
         parentKey: this.key,
-        itemKey: '9',
+        itemKey: Q9_itemKey,
         questionText: _T(t9 + ".text", textPrefix + " Comment la/les tique(s) ont-elles été retirées ?"),
-        questionSubText: several_answer,
+        questionSubText: several_answers,
         condition: removedCondition,
         responseOptions: [
-          option_def('1', _T(t9 + '.option.1', "Avec un tire-tique")),
-          option_def('2', _T(t9 + '.option.2' , "Avec un outil (ex: pince à écharde ou à épiler")),
-          option_def('4', _T(t9 + '.option.4', "Sans outil (à la main)")),
-          option_def('99', _T(t9 + '.option.nsp', "Je ne sais pas/ne m'en souviens pas"))
+          option_def('1', _T(t9 + '.option.1', "Avec un tire-tique"), {disabled: Q9_exclusive}),
+          option_def('2', _T(t9 + '.option.2' , "Avec un outil (ex : pince à écharde ou à épiler)"), {disabled: Q9_exclusive}),
+          option_def('3', _T(t9 + '.option.3', "Sans outil (à la main)"), {disabled: Q9_exclusive}),
+          option_def('99', _T(t9 + '.option.nsp', DontKnowLabel), {disabled: client.multipleChoice.any(Q9_key, Q9_resp.tiretique, Q9_resp.tool, Q9_resp.hand)})
         ]
       });
 
@@ -388,17 +410,28 @@ export class PiqureGroup extends Group {
 
       const t10 = this.key + '.11';
 
+      const Q10_dnk ='99';
+      const Q10_itemKey = '10';
+      const Q10_key = surveyItemKey(this.key , Q10_itemKey);
       const o10 = options_french([
         ["1","Vous-même"],
         ["2","Un de vos proches"],
         ["3","Un professionnel de santé"],
-        ["99","Je ne sais pas/ne m'en souviens pas"],    
+        [Q10_dnk, DontKnowLabel],    
       ], t10 + '.option.');
+
+      o10.forEach(o => {
+        if(o.key != Q10_dnk) {
+          o.disabled = client.multipleChoice.any(Q10_key, Q10_dnk)
+        } else {
+          o.disabled = client.multipleChoice.none(Q10_key, Q10_dnk);
+        } 
+      });
 
       const Q10 = SurveyItems.multipleChoice({
         parentKey: this.key,
-        questionSubText: several_answer,
-        itemKey: '10',
+        questionSubText: several_answers,
+        itemKey: Q10_itemKey,
         condition: removedCondition,
         questionText: _T(t10 + ".text", textPrefix + " Par qui la/les tique(s) ont-elles été retirées ?"),
         responseOptions: o10
@@ -406,7 +439,7 @@ export class PiqureGroup extends Group {
 
       this.addItem(Q10);
 
-      const Q11 = YesNo(this.key, '11', _T(this.key + '.11',textPrefix + " Êtes-vous allé consulter un médecin suite à cet épisode de piqûre(s) ?"));
+      const Q11 = YesNo(this.key, '11', _T(this.key + '.11', textPrefix + " Avez-vous consulté un médecin suite à cet épisode de piqûre(s) ?"));
       this.addItem(Q11);
 
     }

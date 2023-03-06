@@ -4,11 +4,12 @@ import {  SimpleGroupQuestion, ClientExpression as client,   as_input_option, as
 import { SurveyItems } from "case-editor-tools/surveys";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { _T, options_french, ObservationPeriod, createPeriod } from "./helpers";
-import { common_other, PiqureGroup, YesNo } from "./question";
+import { common_other, create_period_label, DontKnowLabel, PiqureGroup, several_answers, YesNo } from "./question";
 import responses from "./responses";
 import { optionRoles, textComponent } from "../common";
 import { postalCode } from "../grippenet/questions";
 import { GrippenetFlags } from "../grippenet/flags";
+import { french } from "../utils";
 
 export class MozartSurvey extends SurveyDefinition {
 
@@ -53,6 +54,20 @@ export class MozartSurvey extends SurveyDefinition {
             condition: needLocation
         });
         this.addItem(Q14);
+
+        const Section1Head = SurveyItems.display({
+            parentKey: this.key,
+            itemKey: 'S1',
+            content: [ 
+                textComponent({
+                    content: _T("section1.title","Questions générales"),
+                    variant: 'h1',
+                })
+            ],
+            condition: hasRespondedBackground
+        });
+
+        this.addItem(Section1Head);
 
         const Q1 = this.Q1(rootKey, hasRespondedBackground);
         this.addItem(Q1);
@@ -110,7 +125,7 @@ export class MozartSurvey extends SurveyDefinition {
         const pS3 = this.preludeS3(rootKey, "preludeS3");
         this.addItem(pS3);
         
-        const Q7 = YesNo(rootKey, 'Q7', _T('Q7.text', 'Avez-vous pratiqué une activité de plein air de ' + this.period.label + ' ? '));
+        const Q7 = YesNo(rootKey, 'Q7', _T('Q7.text', 'Avez-vous pratiqué une activité de plein air ' + this.periodLabel() + ' ? '), undefined, {isRequired: true});
         this.addItem(Q7);
 
         const hasOutsideOccupation = client.singleChoice.any(Q7.key, responses.yes_no.yes);
@@ -121,8 +136,9 @@ export class MozartSurvey extends SurveyDefinition {
 
         const surveyEnd  = SurveyItems.surveyEnd(
            rootKey,
-            _T("surveyEnd", "Nous vous remercions vivement pour votre participation à cette enquête. Il est possible vous soyez sollicités au début de l’été pour répondre à un questionnaire similaire sur la période mars-juin. Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
+            _T("surveyEnd", "Nous vous remercions vivement pour votre participation à cette enquête. Il est possible vous soyez sollicités au début de l’été pour répondre à un questionnaire similaire concernant la période mars-juin. Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
         );
+        this.addItem(surveyEnd);
     }
 
     Q0(parent:string): SurveyItem {
@@ -179,6 +195,7 @@ export class MozartSurvey extends SurveyDefinition {
             itemKey: itemKey,
             isRequired: true,
             questionText: _T("Q3.text", "Votre lieu de résidence a-t-il"),
+            questionSubText: several_answers,
             responseOptions: [
                     option_def(codes.jardin, _T('Q3.option.1','Un jardin'), {'disabled': noneCondition}),
                     option_def(codes.terrain, _T('Q3.option.2',"Un champ/un terrain"), {'disabled': noneCondition}),
@@ -193,24 +210,23 @@ export class MozartSurvey extends SurveyDefinition {
     }
 
     Q5(parent: string, condition?: Expression) {
-        return YesNo(parent, 'Q5', _T('Q5.text', 'Vous êtes-vous fait piquer par une tique (ou plusieurs tiques) sur la période de '+  this.period.label +' ?'), condition, {isRequired: true});
+        return YesNo(parent, 'Q5', _T('Q5.text', 'Vous êtes-vous fait piquer par une tique (ou plusieurs tiques) '+  this.periodLabel() +' ?'), condition, {isRequired: true});
     }
 
     Q6(parent:string, condition?: Expression) {
 
         const codes = responses.Q6;
 
-        const note = "Note importante: Si vous vous êtes fait piquer par plusieurs tiques au cours de la même sortie, ne comptez cet épisode de piqûres que comme une seule fois";
-
+        const note = "Note importante : Si vous vous êtes fait piquer par plusieurs tiques au cours de la même sortie, ne comptez cet épisode de piqûres que comme une seule fois";
 
         return SurveyItems.singleChoice({
             parentKey: parent,
             condition: condition,
             itemKey: 'Q6',
-            questionText: _T("Q6.text", "Combien de fois vous êtes-vous fait piquer par une tique (ou plusieurs tiques) sur la période de "+ this.period.label+" ?"),
+            questionText: _T("Q6.text", "Combien de fois vous êtes-vous fait piquer par une tique (ou plusieurs tiques) "+ this.periodLabel() +" ?"),
             topDisplayCompoments: [
                 textComponent({
-                    'className':'mb-1',
+                    'className':'mb-2 fw-bold',
                     key: 'note',
                     content: _T("Q6.note", note)
                 })
@@ -226,7 +242,7 @@ export class MozartSurvey extends SurveyDefinition {
                         min: 4
                     }
                 }),
-                as_option(codes.dnk, _T('Q6.option.nsp', "Je ne sais pas/Je ne m'en souviens pas")),
+                as_option(codes.dnk, _T('Q6.option.nsp', DontKnowLabel)),
             ],
             isRequired: true
         });
@@ -247,7 +263,7 @@ export class MozartSurvey extends SurveyDefinition {
     preludeS3(parentKey: string, itemKey: string) {
 
         const texts : string[] = [
-            "## A propos de vos activités de plein air sur la période de " + this.period.label,
+            "## A propos de vos activités de plein air " + this.periodLabel(),
             "",
             "Une activité de plein air est définie ici comme l’ensemble des activités professionnelles, de sports et de loisirs pratiquées en extérieur, dans un milieu naturel ou dans un espace vert.",
             "",    
@@ -263,6 +279,10 @@ export class MozartSurvey extends SurveyDefinition {
                 })
             ]
         });
+    }
+
+    periodLabel() {
+        return create_period_label(this.period);
     }
 
 }
@@ -289,7 +309,7 @@ class Section3 extends Group {
         const Q10 = this.Q10(this.key);
         this.addItem(Q10);
 
-        const Q11 = YesNo(this.key, 'Q11', _T('Q11.text', "Lors de ces activités de plein air, avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (par ex., pantalons longs, t-shirt manches longues, utilisation d’insecticides…) ") )
+        const Q11 = YesNo(this.key, 'Q11', _T('Q11.text', "Lors de ces activités de plein air, avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (exemples : pantalons longs, t-shirt manches longues, utilisation d’insecticides…) ") )
         this.addItem(Q11);
 
         const YesOnQ11 = client.singleChoice.any(Q11.key, responses.yes_no.yes);
@@ -299,16 +319,16 @@ class Section3 extends Group {
     }
         
     periodLabel() {
-        return "sur la période de " + this.observationPeriod.label;
+        return create_period_label(this.observationPeriod);
     }
 
     Q8(parent:string, condition?: Expression):SurveyItem {
         const oo =  options_french([
             ['1', "Activité professionnelle"],
             ['2', "Chasse, pêche"],
-            ['3', "Activité scolaire"],
-            ['4', "Sport (course à pied en milieu naturel ou jeu collectif sur gazon)"],
-            ['5', "Loisir (randonnée, promenade, pique-nique, jardinage, etc.)"],
+            ['3', "Sport (course à pied en milieu naturel ou jeu collectif sur gazon, etc.)"],
+            ['4', "Loisir (randonnée, promenade, pique-nique, jardinage, etc.)"],
+            ['5', "Autre"]
         ], 'Q8.option.');
 
        // oo.push(as_input_option("6", _T("Q8.option.autre", "Autre"), common_other))
@@ -316,7 +336,8 @@ class Section3 extends Group {
         return SurveyItems.multipleChoice({
             parentKey: parent,
             itemKey: 'Q8',
-            questionText: _T("Q8.text", "Quel type d'activité de plein air avez-vous pratiqué " + this.periodLabel() + " (toute confondues)"),
+            questionText: _T("Q8.text", "Quel(s) type(s) d'activité de plein air avez-vous pratiqué " + this.periodLabel() + " (toutes confondues)"),
+            questionSubText: several_answers,
             responseOptions: oo,
             condition: condition,
             isRequired: true
@@ -325,7 +346,7 @@ class Section3 extends Group {
     
     Q9(parent:string, condition?: Expression) {
         const oo =  options_french([
-            ['1',"Forêt (Lisière de forêt, bois, bosquet…)"],
+            ['1',"Forêt (lisière de forêt, bois, bosquet…)"],
             ['2',"Prairie (herbes hautes, champs, …)"],
             ['3',"Jardin privé"],
             ['4',"Zone agricole cultivée"],
@@ -339,6 +360,7 @@ class Section3 extends Group {
             parentKey: parent,
             itemKey: 'Q9',
             questionText: _T("Q9.text", "Dans quel(s) environnement(s) avez-vous pratiqué cette ou ces activités de plein air " + this.periodLabel() +" ?"),
+            questionSubText: several_answers,
             responseOptions: oo,
             condition: condition,
             isRequired: true
@@ -352,7 +374,7 @@ class Section3 extends Group {
             ["3", "Une fois par semaine"],
             ["4", "Une ou deux fois par mois"],
             ["5", "Moins d’une fois par mois"],
-            ["6", "Je ne sais pas/je ne me souviens pas"],          
+            ["99", DontKnowLabel],          
         ], 'Q10.option.');
        
         return SurveyItems.singleChoice({
@@ -377,7 +399,7 @@ class Section3 extends Group {
         return SurveyItems.singleChoice({
             parentKey: parent,
             itemKey: 'Q12',
-            questionText: _T("Q12.text", "A quelle fréquence avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (exemples: pantalons longs, t-shirt manches longues, utilisation d’insecticides…) "),
+            questionText: _T("Q12.text", "A quelle fréquence avez-vous mis en place des mesures de prévention contre les piqûres d'insectes ou de tiques (exemples : pantalons longs, t-shirt manches longues, utilisation d’insecticides…) "),
             responseOptions: oo,
             condition: condition,
             isRequired: true

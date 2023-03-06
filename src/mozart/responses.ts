@@ -32,6 +32,13 @@ export const responses = {
         'quatre_plus': '4',
         'dnk': '99'
     } as const,
+    'Q6_8': {
+        sameday: '1',
+        nextday:'2',
+        fallenAlone: '3',
+        dnk: '99',
+    } as const, 
+    
 
 } as const;
 
