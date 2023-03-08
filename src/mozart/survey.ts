@@ -6,7 +6,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { _T, options_french, ObservationPeriod, createPeriod } from "./helpers";
 import { common_other, create_period_label, DontKnowLabel, PiqureGroup, several_answers, YesNo } from "./question";
 import responses from "./responses";
-import { optionRoles, textComponent } from "../common";
+import { optionRoles, surveyItemKey, textComponent } from "../common";
 import { postalCode } from "../grippenet/questions";
 import { GrippenetFlags } from "../grippenet/flags";
 import { french } from "../utils";
@@ -45,13 +45,24 @@ export class MozartSurvey extends SurveyDefinition {
 
         const needLocation = client.participantFlags.hasKeyAndValue(GrippenetFlags.needLocation.key, GrippenetFlags.needLocation.values.yes);
 
+        const Q14_itemKey = 'Q14';
+        
+        const Q14_key = surveyItemKey(rootKey, Q14_itemKey);
+        
         const Q14 = postalCode({
             parentKey: rootKey, 
-            itemKey: 'Q14', 
+            itemKey: Q14_itemKey, 
             isRequired: true, 
             responseKey: '1', 
             questionText: _T("Q14.text", "Quelle est votre commune de résidence"),
-            condition: needLocation
+            condition: needLocation,
+            customValidations: [
+                {
+                  key: 'v2',
+                  'type': 'hard',
+                 rule: client.compare.gt(client.countResponseItems(Q14_key, 'rg'), 0)
+                }
+            ]
         });
         this.addItem(Q14);
 
