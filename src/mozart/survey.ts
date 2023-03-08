@@ -147,7 +147,7 @@ export class MozartSurvey extends SurveyDefinition {
 
         const surveyEnd  = SurveyItems.surveyEnd(
            rootKey,
-            _T("surveyEnd", "Nous vous remercions vivement pour votre participation à cette enquête. Il est possible vous soyez sollicités au début de l’été pour répondre à un questionnaire similaire concernant la période mars-juin. Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
+            _T("surveyEnd", "Nous vous remercions vivement pour votre participation à cette enquête. Il est possible que vous soyez sollicités au début de l’été pour répondre à un questionnaire similaire concernant la période mars-juin. Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
         );
         this.addItem(surveyEnd);
     }
@@ -205,7 +205,7 @@ export class MozartSurvey extends SurveyDefinition {
             condition: condition,
             itemKey: itemKey,
             isRequired: true,
-            questionText: _T("Q3.text", "Votre lieu de résidence a-t-il"),
+            questionText: _T("Q3.text", "Votre lieu de résidence a-t-il : "),
             questionSubText: several_answers,
             responseOptions: [
                     option_def(codes.jardin, _T('Q3.option.1','Un jardin'), {'disabled': noneCondition}),
@@ -275,6 +275,7 @@ export class MozartSurvey extends SurveyDefinition {
 
         const texts : string[] = [
             "## A propos de vos activités de plein air " + this.periodLabel(),
+            "(activités professionnelles, de sport ou de loisirs)",
             "",
             "Une activité de plein air est définie ici comme l’ensemble des activités professionnelles, de sports et de loisirs pratiquées en extérieur, dans un milieu naturel ou dans un espace vert.",
             "",    
@@ -337,7 +338,7 @@ class Section3 extends Group {
         const oo =  options_french([
             ['1', "Activité professionnelle"],
             ['2', "Chasse, pêche"],
-            ['3', "Sport (course à pied en milieu naturel ou jeu collectif sur gazon, etc.)"],
+            ['3', "Sport (course à pied en milieu naturel, jeu collectif sur gazon, etc.)"],
             ['4', "Loisir (randonnée, promenade, pique-nique, jardinage, etc.)"],
             ['5', "Autre"]
         ], 'Q8.option.');

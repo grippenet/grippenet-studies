@@ -331,7 +331,7 @@ export class PiqureGroup extends Group {
       const o7 = options_french([
         ['1', 'Activité professionnelle'],
         ['2', 'Chasse, pêche'],
-        ['3', 'Sport (course à pied en milieu naturel ou jeu collectif sur gazon… )'],
+        ['3', 'Sport (course à pied en milieu naturel, jeu collectif sur gazon… )'],
         ['4', 'Loisir (randonnée, promenade, pique-nique, jardinage…)'],
         ['5', 'Autre'],
       ], t7 + '.option.');
