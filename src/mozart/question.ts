@@ -70,7 +70,7 @@ export const YesNo = (parent: string, key: string, text: Map<string, string>, co
       responseOptions: [
           as_option(codes.yes, _T('common.yes_no.yes', 'Oui')),
           as_option(codes.no, _T('common.yes_no.no', 'Non')),
-          as_option(codes.dnk, _T('common.yes_no.dnk', 'Je ne sais pas/ne m’en souviens pas')),   
+          as_option(codes.dnk, _T('common.yes_no.dnk', DontKnowLabel)),   
       ],
       ...opts
   });
@@ -158,7 +158,7 @@ export class PiqureGroup extends Group {
             optionProps: { 'min': 2},
             'description': _T(t1, 'Précisez le nombre')
           }),
-          as_option('99', _T(t1 + '.option.nsp', "Je ne sais pas/ne m'en souviens pas"))
+          as_option('99', _T(t1 + '.option.nsp', DontKnowLabel))
         ]
       });
 
@@ -189,7 +189,7 @@ export class PiqureGroup extends Group {
           date_input("2", "A 2- 3 jours près"),
           date_input("3", "A une semaine près"),
           date_input("4", "A un mois près", 'YM'),
-          as_option("99", _T(t2 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
+          as_option("99", _T(t2 + ".option.nsp", DontKnowLabel))
         ]
       });
 
@@ -215,7 +215,7 @@ export class PiqureGroup extends Group {
             role: optionRoles.input,
             description: _T(t3 + ".option.1.desc", "Entrez un code postal")
           }),
-          as_option(Q3_reponses.dnk, _T(t3 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
+          as_option(Q3_reponses.dnk, _T(t3 + ".option.nsp", DontKnowLabel))
         ],
         customValidations: [
             {
@@ -267,7 +267,7 @@ export class PiqureGroup extends Group {
             role:optionRoles.input,
             description: _T(t5 + ".option.1.desc", "Entrez un numéro de département")
           }),
-          as_option(Q5_responses.dnk, _T(t5 + ".option.nsp", "Je ne sais pas/ne m'en souviens pas"))
+          as_option(Q5_responses.dnk, _T(t5 + ".option.nsp", DontKnowLabel))
         ],
         customValidations: [
             {
