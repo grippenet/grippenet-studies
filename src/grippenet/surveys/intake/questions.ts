@@ -274,6 +274,7 @@ export class PostalCode extends ItemQuestion {
 
     buildItem() {
 
+        const itemValidation = client.compare.gt(client.countResponseItems(this.key, 'rg'), 0);
         return postalCode({
             parentKey: this.parentKey,
             responseKey: '0',
@@ -282,6 +283,13 @@ export class PostalCode extends ItemQuestion {
             condition: this.condition,
             questionText: _T("intake.Q3.title.0", "What is your home postal code?"),
             helpGroupContent: this.getHelpGroupContent(),
+            customValidations: [
+                {
+                    key: 'v2',
+                    type: "hard",
+                    rule: itemValidation
+                }
+            ]
         });
 
         /*
