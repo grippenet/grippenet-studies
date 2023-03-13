@@ -332,7 +332,7 @@ export class PiqureGroup extends Group {
         ['1', 'Activité professionnelle'],
         ['2', 'Chasse, pêche'],
         ['3', 'Sport (course à pied en milieu naturel, jeu collectif sur gazon… )'],
-        ['4', 'Loisir (randonnée, promenade, pique-nique, jardinage…)'],
+        ['4', 'Loisir (promenade, pique-nique, jardinage…)'],
         ['5', 'Autre'],
       ], t7 + '.option.');
 

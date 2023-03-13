@@ -339,7 +339,7 @@ class Section3 extends Group {
             ['1', "Activité professionnelle"],
             ['2', "Chasse, pêche"],
             ['3', "Sport (course à pied en milieu naturel, jeu collectif sur gazon, etc.)"],
-            ['4', "Loisir (randonnée, promenade, pique-nique, jardinage, etc.)"],
+            ['4', "Loisir (promenade, pique-nique, jardinage, etc.)"],
             ['5', "Autre"]
         ], 'Q8.option.');
 
