@@ -10,6 +10,7 @@ import { num_as_arg, optionRoles, surveyItemKey, textComponent } from "../common
 import { postalCode } from "../grippenet/questions";
 import { GrippenetFlags } from "../grippenet/flags";
 import { french } from "../utils";
+import { singleChoicePrefix } from "../../common/studies/common/questionPools";
 
 export class MozartSurvey extends SurveyDefinition {
 
@@ -242,10 +243,14 @@ export class MozartSurvey extends SurveyDefinition {
 
         const note = "Note importante : Si vous vous êtes fait piquer par plusieurs tiques au cours de la même sortie, ne comptez cet épisode de piqûres que comme une seule fois";
 
+        const itemKey = 'Q6';
+
+        const Q6_key = surveyItemKey(parent, 'Q6');
+    
         return SurveyItems.singleChoice({
             parentKey: parent,
             condition: condition,
-            itemKey: 'Q6',
+            itemKey: itemKey,
             questionText: _T("Q6.text", "Combien de fois vous êtes-vous fait piquer par une tique (ou plusieurs tiques) "+ this.periodLabel() +" ?"),
             topDisplayCompoments: [
                 textComponent({
@@ -267,6 +272,25 @@ export class MozartSurvey extends SurveyDefinition {
                 }),
                 as_option(codes.dnk, _T('Q6.option.nsp', DontKnowLabel)),
             ],
+            /*
+            customValidations: [
+                {
+                    key: 'v2',
+                    'type': 'hard',
+                   rule: client.logic.or(
+                        client.singleChoice.none(Q6_key, codes.quatre_plus),
+                        client.checkResponseValueWithRegex(Q6_key, singleChoicePrefix + '.' + codes.quatre_plus, '^([0-9]+)$')
+                   )
+                }
+            ],
+            bottomDisplayCompoments: [
+                textComponent({
+                  displayCondition: client.logic.not(client.getSurveyItemValidation(Q6_key, 'v2')),
+                  content: _T("number-error", "Entrez uniquement des chiffres"),
+                  className: "text-danger",
+                })
+            ],
+            */
             isRequired: true
         });
     }

@@ -289,7 +289,7 @@ export class PiqureGroup extends Group {
                 'type':'hard',
                 rule: client.logic.or(
                   client.logic.not(client.hasResponse(Q3_key, responseGroupKey)),
-                  client.checkResponseValueWithRegex(Q3_key, singleChoicePrefix + '.' + Q3_reponses.postalcode, '^(([0-9]{2})|(2[ABab]))[0-9][0-9][0-9]$'),
+                  client.checkResponseValueWithRegex(Q3_key, singleChoicePrefix + '.' + Q3_reponses.postalcode, '^[0-9]{5}$'),
                   client.singleChoice.any(Q3_key, Q3_reponses.dnk)
                 ) 
             },
@@ -297,7 +297,7 @@ export class PiqureGroup extends Group {
         bottomDisplayCompoments: [
           textComponent({
             displayCondition: client.logic.not(client.getSurveyItemValidation(Q3_key, 'pc1')),
-            content: _T(t3 + ".postalCodeError", "Entrez les 5 chiffres du code postal (pour la code 2A/2B acceptés)"),
+            content: _T(t3 + ".postalCodeError", "Entrez les 5 chiffres du code postal"),
             className: "text-danger",
           })
         ]
@@ -350,7 +350,7 @@ export class PiqureGroup extends Group {
             textComponent({
               displayCondition: client.logic.not(client.getSurveyItemValidation(Q5_key, 'pc1')),
               className: "text-danger mt-1",
-              content: _T(t5 + ".postalCodeError", "Entrez un numéro de département valide")
+              content: _T(t5 + ".postalCodeError", "Entrez un numéro de département valide (pour la corse les codes 2A/2B sont acceptés)")
             })
         ]
       });
