@@ -29,7 +29,7 @@ export const postalCode = (props: postalCodeProps): SurveyItem => {
         "content": text("common.postalcodes.modify_response", "Modify your response")
       },
       {
-        "role": "selectLabel",
+        "role": "selectEntry",
         "content": text("common.postalcodes.select_label", "Select you municipality in the following list")
       },
       {
