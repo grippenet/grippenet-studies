@@ -19,8 +19,8 @@ export class MozartSurvey extends SurveyDefinition {
         
         super({
             surveyKey: 'mozart',
-            name:_T("name.0", "Questionnaire Mozart"),
-            description: _T("description.0", ""),
+            name:_T("name.0", "Questionnaire sur votre santé et vos activités de plein air"),
+            description: _T("description.0", "Etude épidémiologique sur votre santé et les activités de plein air que vous avez pratiquées au cours de la période du 1er novembre 2022 au 28 février 2023."),
             durationText: _T("typicalDuration.0", "5 à 10 minutes"),
         });
 
@@ -56,6 +56,18 @@ export class MozartSurvey extends SurveyDefinition {
         });
 
         this.addItem(Section1Head);
+
+        const mainParticipantWarning = SurveyItems.display({
+            parentKey: this.key,
+            itemKey: 'n1',
+            content: [
+                textComponent({
+                    content: _T("n1.text", "Si plusieurs membres de votre foyer sont inscrits sur ce compte, merci de remplir le questionnaire uniquement pour le participant principal (dont le nom figure en haut de cette page, après la mention \"Répondre aux questions pour\". Contactez-nous si vous souhaitez changer le participant principal de ce compte."),
+                })
+            ]
+        });
+
+        this.addItem(mainParticipantWarning);
 
         const needLocation = client.participantFlags.hasKeyAndValue(GrippenetFlags.needLocation.key, GrippenetFlags.needLocation.values.yes);
 
