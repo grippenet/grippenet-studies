@@ -6,7 +6,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 import { _T, options_french, ObservationPeriod, createPeriod } from "./helpers";
 import { common_other, create_period_label, DontKnowLabel, PiqureGroup, several_answers, YesNo } from "./question";
 import responses from "./responses";
-import { optionRoles, surveyItemKey, textComponent } from "../common";
+import { num_as_arg, optionRoles, surveyItemKey, textComponent } from "../common";
 import { postalCode } from "../grippenet/questions";
 import { GrippenetFlags } from "../grippenet/flags";
 import { french } from "../utils";
@@ -43,6 +43,20 @@ export class MozartSurvey extends SurveyDefinition {
         
         //client.singleChoice.any(Q0.key, responses.Q0.dnk, responses.Q0.no);
 
+        const Section1Head = SurveyItems.display({
+            parentKey: this.key,
+            itemKey: 'S1',
+            content: [ 
+                textComponent({
+                    content: _T("section1.title","Questions générales"),
+                    variant: 'h1',
+                })
+            ],
+            condition: hasRespondedBackground
+        });
+
+        this.addItem(Section1Head);
+
         const needLocation = client.participantFlags.hasKeyAndValue(GrippenetFlags.needLocation.key, GrippenetFlags.needLocation.values.yes);
 
         const Q14_itemKey = 'Q14';
@@ -65,20 +79,6 @@ export class MozartSurvey extends SurveyDefinition {
             ]
         });
         this.addItem(Q14);
-
-        const Section1Head = SurveyItems.display({
-            parentKey: this.key,
-            itemKey: 'S1',
-            content: [ 
-                textComponent({
-                    content: _T("section1.title","Questions générales"),
-                    variant: 'h1',
-                })
-            ],
-            condition: hasRespondedBackground
-        });
-
-        this.addItem(Section1Head);
 
         const Q1 = this.Q1(rootKey, hasRespondedBackground);
         this.addItem(Q1);
@@ -147,7 +147,7 @@ export class MozartSurvey extends SurveyDefinition {
 
         const surveyEnd  = SurveyItems.surveyEnd(
            rootKey,
-            _T("surveyEnd", "Nous vous remercions vivement pour votre participation à cette enquête. Il est possible que vous soyez sollicités au début de l’été pour répondre à un questionnaire similaire concernant la période mars-juin. Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
+            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête. Il est possible que vous soyez sollicités au début de l’été pour répondre à un questionnaire similaire concernant la période mars-juin. Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
         );
         this.addItem(surveyEnd);
     }
@@ -250,7 +250,7 @@ export class MozartSurvey extends SurveyDefinition {
                     role: optionRoles.number,
                     description: _T('Q4.option.how_many_times', 'Précisez combien de fois'),
                     optionProps: {
-                        min: 4
+                        min: num_as_arg(4),
                     }
                 }),
                 as_option(codes.dnk, _T('Q6.option.nsp', DontKnowLabel)),

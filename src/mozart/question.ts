@@ -1,20 +1,20 @@
 import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
-import { SurveyItems } from "case-editor-tools/surveys"
+import { SingleChoiceOptionTypes, SurveyItems } from "case-editor-tools/surveys"
 import { Group } from "case-editor-tools/surveys/types";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { singleChoicePrefix } from "../../common/studies/common/questionPools";
-import { ItemQuestion, exp_as_arg, ClientExpression as client, as_option, as_input_option, option_def, textComponent, optionRoles, surveyItemKey } from "../common";
+import { ItemQuestion, exp_as_arg, ClientExpression as client, as_option, as_input_option, option_def, textComponent, optionRoles, surveyItemKey, num_as_arg } from "../common";
 import { _T, options_french, ObservationPeriod } from "./helpers";
 import responses from "./responses";
 
-export const DontKnowLabel = "Je ne sais pas / me souviens pas";
+export const DontKnowLabel = "Je ne sais pas / ne me souviens pas";
 
 export const several_answers = _T("common.multiple_choice", "Plusieurs réponses possibles");
 
 export const common_other = _T("common.other", "Précisez");
 
 export const create_period_label = (p: ObservationPeriod) => {
-  return "au cours la période de " + p.label;
+  return "au cours de la période de " + p.label;
 }
 
 interface QProps {
@@ -155,7 +155,7 @@ export class PiqureGroup extends Group {
           as_option('1', _T(t1 + '.option.1', 'Une tique')),
           option_def('2', _T(t1 + '.option.2', "Deux tiques ou plus (c'est-à-dire des piqûres multiples)"), {
             'role':'numberInput', 
-            optionProps: { 'min': 2},
+            optionProps: { 'min': num_as_arg(2)},
             'description': _T(t1, 'Précisez le nombre')
           }),
           as_option('99', _T(t1 + '.option.nsp', DontKnowLabel))
@@ -168,15 +168,24 @@ export class PiqureGroup extends Group {
 
       const date_input = (key:string,  label: string, mode?: 'YMD' | 'YM') => {
           
+          return SingleChoiceOptionTypes.dateInput({
+            key: key,
+            inputLabelText: _T(this.key + '.option.' + key, label),
+            dateInputMode: mode ?? 'YMD',
+            minRelativeDate: {delta: {'seconds': 0}, reference: this.observationPeriod.start},
+            maxRelativeDate: {delta: {'seconds': 0}, reference: this.observationPeriod.end},
+          });
+        /*
           return option_def(key, _T(this.key + '.option.' + key, label), {
             role: optionRoles.date,
             description: _T(this.key + '.option.' + key, label),
             optionProps: {
-              min: this.observationPeriod.start,
-              max: this.observationPeriod.end,
-              dateInputMode: mode
+              min: num_as_arg(),
+              max: num_as_arg(this.observationPeriod.end),
+              dateInputMode: {'str': mode ?? 'YMD'}
             }
-          })
+          });
+        */
       }
       
       const Q2 = SurveyItems.singleChoice({
