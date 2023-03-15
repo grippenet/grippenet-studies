@@ -1,9 +1,12 @@
 import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { SingleChoiceOptionTypes, SurveyItems } from "case-editor-tools/surveys"
-import { Group } from "case-editor-tools/surveys/types";
+import { Group, OptionDef } from "case-editor-tools/surveys/types";
+import { addMonths, format, fromUnixTime } from "date-fns";
+import { fr } from "date-fns/locale";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { singleChoicePrefix } from "../../common/studies/common/questionPools";
 import { ItemQuestion, exp_as_arg, ClientExpression as client, as_option, as_input_option, option_def, textComponent, optionRoles, surveyItemKey, num_as_arg } from "../common";
+import { french } from "../utils";
 import { _T, options_french, ObservationPeriod } from "./helpers";
 import responses from "./responses";
 
@@ -20,6 +23,44 @@ export const create_period_label = (p: ObservationPeriod) => {
 interface QProps {
     condition?: Expression
 }
+
+const dropDown = (props: { key: string, placeholder?: Map<string, string>, displayCondition?: Expression, options: Array<OptionDef> }): OptionDef => {
+  return {
+    key: props.key,
+    role: 'dropDownGroup',
+    displayCondition: props.displayCondition,
+    description: props.placeholder,
+    items: props.options,
+  }
+}
+
+interface monthOptionsProps {
+  start: Date
+  end: Date
+  key: string
+  displayCondition?: Expression
+}
+
+const monthDropdonwOptions = (props: monthOptionsProps): OptionDef => {
+  const oo: OptionDef[] = [];
+  var d : Date = props.start;
+  if(props.end < props.start) {
+    throw new Error("Starting date is after ending date");
+  }
+  while(d <= props.end) {
+    const m = format(d, 'yyyy-MM');
+    const label = format(d, 'MMMM yyyy', {locale: fr});
+    const o = option_def(m, _T(m, label));
+    oo.push(o);
+    d = addMonths(d, 1);
+  }
+  return dropDown({
+    key: props.key,
+    displayCondition: props.displayCondition,
+    placeholder: _T('month_selector', 'Sélectionnez un mois'),
+    options: oo
+  });
+};
 
 export class Q10a extends ItemQuestion {
 
@@ -167,7 +208,7 @@ export class PiqureGroup extends Group {
       const t2 = this.key + '.1';
 
       const date_input = (key:string,  label: string, mode?: 'YMD' | 'YM') => {
-          
+         /* 
           return SingleChoiceOptionTypes.dateInput({
             key: key,
             inputLabelText: _T(this.key + '.option.' + key, label),
@@ -175,18 +216,27 @@ export class PiqureGroup extends Group {
             minRelativeDate: {delta: {'seconds': 0}, reference: this.observationPeriod.start},
             maxRelativeDate: {delta: {'seconds': 0}, reference: this.observationPeriod.end},
           });
-        /*
+
+        */
           return option_def(key, _T(this.key + '.option.' + key, label), {
             role: optionRoles.date,
             description: _T(this.key + '.option.' + key, label),
             optionProps: {
-              min: num_as_arg(),
+              min: num_as_arg(this.observationPeriod.start),
               max: num_as_arg(this.observationPeriod.end),
               dateInputMode: {'str': mode ?? 'YMD'}
             }
           });
-        */
       }
+
+      const start_date = fromUnixTime(this.observationPeriod.start);
+      const end_date = fromUnixTime(this.observationPeriod.end);
+
+      const monthOptions: monthOptionsProps = {
+        key: "month", 
+        start: start_date,
+        end: end_date,
+      };
       
       const Q2 = SurveyItems.singleChoice({
         parentKey: this.key,
@@ -197,7 +247,14 @@ export class PiqureGroup extends Group {
           date_input("1", "La date exacte"),
           date_input("2", "A 2- 3 jours près"),
           date_input("3", "A une semaine près"),
-          date_input("4", "A un mois près", 'YM'),
+          // date_input("3", "A une semaine près"),
+          SingleChoiceOptionTypes.cloze({
+            key: '4',
+            items: [
+              option_def('0', _T(t2 + '.month', "A un mois près"), {'role':'text'} ),
+              monthDropdonwOptions(monthOptions) 
+            ]
+          }),
           as_option("99", _T(t2 + ".option.nsp", DontKnowLabel))
         ]
       });
