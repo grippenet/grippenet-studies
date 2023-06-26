@@ -49,6 +49,10 @@ export const GrippenetFlags = {
         key: 'needLocation',
         values: booleanValues
     } as const,
+    main: {
+        key: 'main',
+        values: booleanValues
+    } as const,
     hasOnGoingSymptoms: flags.hasOnGoingSymptoms,
     vaccinationCompleted: flags.vaccinationCompleted
 } as const;

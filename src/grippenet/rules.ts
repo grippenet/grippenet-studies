@@ -32,7 +32,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
         const intakeKey = this.keys.intake.key;
         const weeklyKey = this.keys.weekly.key;
         const vacKey = this.keys.vaccination.key;
-        const mozartKey = this.keys.mozart?.key;
+        const mozartKey = 'mozart';
         
         /**
          * Define what should happen, when persons enter the study first time:
@@ -178,7 +178,10 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
         if(mozartKey) {
             const handleMozart = se.ifThen(
                 se.checkSurveyResponseKey(mozartKey),
-                updateFlag(flags.mozartS0.key, '1')
+                se.do(
+                    updateFlag(flags.mozartS0.key, '1'),
+                    assignedSurveys.remove(mozartKey, 'all'),
+                ),
             );
             
             submitRules.push(handleMozart);

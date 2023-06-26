@@ -3,7 +3,7 @@ import {  OptionDef } from "case-editor-tools/surveys/types";
 import { SurveySingleItem } from "survey-engine/data_types";
 import { questionPools as pool, 
     _T, ItemQuestion, ItemProps, BaseChoiceQuestion, 
-    ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList, markdownComponent, transTextComponent, trans_text } from "../../../common"
+    ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList, markdownComponent, transTextComponent, trans_text, num_as_arg } from "../../../common"
 import {  OverridenResponses, ResponseOveriddes } from "../../../utils";
 import ResponseEncoding from "./responses";
 
@@ -206,7 +206,7 @@ export class LastCovid19Infection extends ItemQuestion {
                     key: '1', role: 'dateInput',
                     optionProps: {
                         dateInputMode: { str: 'YM' },
-                        min: 1577836800, // 2020-01-01
+                        min: num_as_arg(1577836800), // 2020-01-01
                         max: exp_as_arg( client.timestampWithOffset({'minutes': 1}) )
                     },
                     content: _T("vaccination.Q37.rg.scg.option.1.text", "Choose date"),
