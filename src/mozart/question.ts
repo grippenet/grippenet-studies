@@ -41,7 +41,7 @@ interface monthOptionsProps {
   displayCondition?: Expression
 }
 
-const monthDropdonwOptions = (props: monthOptionsProps): OptionDef => {
+const createMonthOptions = (props: monthOptionsProps): OptionDef[] => {
   const oo: OptionDef[] = [];
   var d : Date = props.start;
   if(props.end < props.start) {
@@ -54,6 +54,11 @@ const monthDropdonwOptions = (props: monthOptionsProps): OptionDef => {
     oo.push(o);
     d = addMonths(d, 1);
   }
+  return oo;
+}
+
+const monthDropdonwOptions = (props: monthOptionsProps): OptionDef => {
+  const oo = createMonthOptions(props);
   return dropDown({
     key: props.key,
     displayCondition: props.displayCondition,
@@ -238,29 +243,22 @@ export class PiqureGroup extends Group {
         end: end_date,
       };
       
+      const oo2 = createMonthOptions(monthOptions);
+
       const Q2 = SurveyItems.singleChoice({
         parentKey: this.key,
-        itemKey: '2',
+        itemKey: '2b',
         questionText: _T(t2 + '.text', textPrefix + " Quand a eu lieu ce " + orderMasc + " épisode de piqûre(s) ?"),
-        questionSubText: _T(t2 + ".subtext", "Répondez dans le champ date qui correspond le mieux à la précision dont vous vous souvenez pour cet épisode"),
+        questionSubText: _T(t2 + ".subtext", "Donnez la date approximative de votre épisode de piqûre au mois près"),
         responseOptions: [
-          date_input("1", "La date exacte"),
-          date_input("2", "A 2- 3 jours près"),
-          date_input("3", "A une semaine près"),
-          // date_input("3", "A une semaine près"),
-          SingleChoiceOptionTypes.cloze({
-            key: '4',
-            items: [
-              option_def('0', _T(t2 + '.month', "A un mois près"), {'role':'text'} ),
-              monthDropdonwOptions(monthOptions) 
-            ]
-          }),
+          ...oo2,
           as_option("99", _T(t2 + ".option.nsp", DontKnowLabel))
         ]
       });
 
       this.addItem(Q2);
-
+      
+      
       const t3 = this.key + '.3';
 
       const Q3_itemKey = '3';

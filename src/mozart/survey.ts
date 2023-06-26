@@ -30,7 +30,7 @@ export class MozartSurvey extends SurveyDefinition {
             this.editor.setMetadata(m);
         }
 
-        this.period = createPeriod("2022-11-01", "2023-02-28", "Novembre 2022 à Février 2023");
+        this.period = createPeriod("2023-03-01", "2023-06-30", "Mars 2023 à Juin 2023");
     }
 
     buildSurvey(): void {
