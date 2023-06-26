@@ -4,4 +4,5 @@ build:
 	yarn grippenet
 
 html:
-	python scripts/build-html.py
+	python scripts/build-html.py --debug
+
