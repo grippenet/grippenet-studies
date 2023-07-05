@@ -16,6 +16,8 @@ export class MozartSurvey extends SurveyDefinition {
 
     period: ObservationPeriod
 
+    next_period: string
+
     constructor(meta?:Map<string,string>) {
         
         super({
@@ -29,7 +31,7 @@ export class MozartSurvey extends SurveyDefinition {
             const m = Object.fromEntries(meta.entries());
             this.editor.setMetadata(m);
         }
-
+        this.next_period = "Il est possible que vous soyez sollicités à l'automne pour répondre à un questionnaire similaire concernant la période juillet-octobre.";
         this.period = createPeriod("2023-03-01", "2023-06-30", "Mars 2023 à Juin 2023");
     }
 
@@ -49,7 +51,7 @@ export class MozartSurvey extends SurveyDefinition {
             itemKey: 'S1',
             content: [ 
                 textComponent({
-                    content: _T("section1.title","Questions générales"),
+                    content: _T("section1.title", "Questions générales"),
                     variant: 'h1',
                 })
             ],
@@ -63,7 +65,7 @@ export class MozartSurvey extends SurveyDefinition {
             itemKey: 'n1',
             content: [
                 textComponent({
-                    content: _T("n1.text", "Si plusieurs membres de votre foyer sont inscrits sur ce compte, merci de remplir le questionnaire uniquement pour le participant principal (dont le nom figure en haut de cette page, après la mention \"Répondre aux questions pour\". Contactez-nous si vous souhaitez changer le participant principal de ce compte."),
+                    content: _T("n1.text", "Si plusieurs membres de votre foyer sont inscrits sur ce compte, merci de remplir le questionnaire uniquement pour le participant principal (dont le nom figure en haut de cette page, après la mention \"Répondre aux questions pour\"). Contactez-nous si vous souhaitez changer le participant principal de ce compte."),
                 })
             ]
         });
@@ -104,10 +106,10 @@ export class MozartSurvey extends SurveyDefinition {
         this.addItem(Q2b);
         */
 
-        const Q3 = this.Q3(rootKey, hasRespondedBackground);
+        const Q3 = this.Q3(rootKey);
         this.addItem(Q3);
 
-        const Q4 = this.Q4(rootKey, hasRespondedBackground);
+        const Q4 = this.Q4(rootKey);
         this.addItem(Q4);
 
         const bitenLifetime = client.singleChoice.any(Q4.key, responses.yes_no.yes);
@@ -160,7 +162,7 @@ export class MozartSurvey extends SurveyDefinition {
 
         const surveyEnd  = SurveyItems.surveyEnd(
            rootKey,
-            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête. Il est possible que vous soyez sollicités au début de l’été pour répondre à un questionnaire similaire concernant la période mars-juin. Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
+            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête." + this.next_period + "Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
         );
         this.addItem(surveyEnd);
     }
