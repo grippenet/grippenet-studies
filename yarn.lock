@@ -839,10 +839,10 @@ caniuse-lite@^1.0.30001400:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001402.tgz#aa29e1f47f5055b0d0c07696a67b8b08023d14c8"
   integrity sha512-Mx4MlhXO5NwuvXGgVb+hg65HZ+bhUYsz8QtDGDo2QmaJS2GBX47Xfi2koL86lc8K+l+htXeTEB/Aeqvezoo6Ew==
 
-case-editor-tools@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.3.0.tgz#f1e2c0e195148a8c41448e6fc06a6382bc7ac34c"
-  integrity sha512-Z1FmceH5iOWmOVj0828nI2TXvHCyMN8e+vQZnDKlI2t82o6nGtrq6yoKVpWryNgl/iwA81ZyMg8Uv27F3KZLAQ==
+case-editor-tools@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.6.0.tgz#905ec702c7419731c5a43aa3e196abf446186e63"
+  integrity sha512-B2y7ZHPBZPJteXWZiw+TF9nxCMNi0Oxw0jWR8/BEG9oj6GXK4uXqDAzGWaM4enRRkIRNl/t2DvD9+PP1Ta0LYg==
   dependencies:
     survey-engine "^1.2.0"
 
@@ -2054,6 +2054,13 @@ survey-engine@^1.2.0:
   dependencies:
     date-fns "^2.29.3"
 
+survey-engine@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/survey-engine/-/survey-engine-1.2.1.tgz#214099ca904782c454e14962b43624f3899b16f9"
+  integrity sha512-q+9m16D+Zfu5F7u0BMol5HcrfXwQaVbrfQgEyo7HMt5BLsSL6aOwvznvQaHT0wdfCruAY3Dc3LHr/ZQ6qjVdyQ==
+  dependencies:
+    date-fns "^2.29.3"
+
 terminal-link@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/terminal-link/-/terminal-link-2.1.1.tgz#14a64a27ab3c0df933ea546fba55f2d078edc994"
@@ -2112,10 +2119,10 @@ type-fest@^0.21.3:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
   integrity sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==
 
-typescript@^4.4.4:
-  version "4.6.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.3.tgz#eefeafa6afdd31d725584c67a0eaba80f6fc6c6c"
-  integrity sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==
+typescript@^4.5.5:
+  version "4.9.5"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
+  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 update-browserslist-db@^1.0.9:
   version "1.0.9"
