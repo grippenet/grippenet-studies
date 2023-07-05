@@ -11,6 +11,7 @@ import { postalCode } from "../grippenet/questions";
 import { GrippenetFlags } from "../grippenet/flags";
 import { french } from "../utils";
 import { singleChoicePrefix } from "../../common/studies/common/questionPools";
+import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 
 export class MozartSurvey extends SurveyDefinition {
 
@@ -23,7 +24,7 @@ export class MozartSurvey extends SurveyDefinition {
         super({
             surveyKey: 'mozart',
             name:_T("name.0", "Questionnaire sur votre santé et vos activités de plein air"),
-            description: _T("description.0", "Etude épidémiologique sur votre santé et les activités de plein air que vous avez pratiquées au cours de la période du 1er novembre 2022 au 28 février 2023."),
+            description: new Map<string,string>(),
             durationText: _T("typicalDuration.0", "5 à 10 minutes"),
         });
 
@@ -33,6 +34,11 @@ export class MozartSurvey extends SurveyDefinition {
         }
         this.next_period = "Il est possible que vous soyez sollicités à l'automne pour répondre à un questionnaire similaire concernant la période juillet-octobre.";
         this.period = createPeriod("2023-03-01", "2023-06-30", "Mars 2023 à Juin 2023");
+
+        this.editor.setSurveyDescription(generateLocStrings(
+            _T("description.0", "Etude épidémiologique sur votre santé et les activités de plein air que vous avez pratiquées au cours de la période "+ this.period.toRange() + ".")
+        ));
+        console.log(this.period.toRange());
     }
 
     buildSurvey(): void {
