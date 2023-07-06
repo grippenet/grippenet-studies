@@ -49,7 +49,7 @@ const createMonthOptions = (props: monthOptionsProps): OptionDef[] => {
   }
   while(d <= props.end) {
     const m = format(d, 'yyyy-MM');
-    const label = format(d, 'MMMM yyyy', {locale: fr});
+    const label = ucfirst(format(d, 'MMMM yyyy', {locale: fr}));
     const o = option_def(m, _T(m, label));
     oo.push(o);
     d = addMonths(d, 1);
@@ -179,7 +179,7 @@ export class PiqureGroup extends Group {
         
         content: [
           textComponent({
-            content: _T(this.key+ '.prelude.title', titlePrelude),
+             content: _T(this.key+ '.prelude.title', titlePrelude),
             variant: 'h1'
           }),
           textComponent({

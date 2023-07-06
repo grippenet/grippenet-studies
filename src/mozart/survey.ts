@@ -57,6 +57,7 @@ export class MozartSurvey extends SurveyDefinition {
             itemKey: 'S1',
             content: [ 
                 textComponent({
+                    key: 'S1txt',
                     content: _T("section1.title", "Questions générales"),
                     variant: 'h1',
                 })
@@ -71,6 +72,7 @@ export class MozartSurvey extends SurveyDefinition {
             itemKey: 'n1',
             content: [
                 textComponent({
+                    key: 'n1txt',
                     content: _T("n1.text", "Si plusieurs membres de votre foyer sont inscrits sur ce compte, merci de remplir le questionnaire uniquement pour le participant principal (dont le nom figure en haut de cette page, après la mention \"Répondre aux questions pour\"). Contactez-nous si vous souhaitez changer le participant principal de ce compte."),
                 })
             ]
@@ -309,6 +311,7 @@ export class MozartSurvey extends SurveyDefinition {
             itemKey: itemKey,
             content: [
                 ComponentGenerators.markdown({
+                    key: itemKey+'.md',
                     content: _T( "prelude", "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte.") 
                 })
             ]
@@ -331,6 +334,7 @@ export class MozartSurvey extends SurveyDefinition {
             itemKey: itemKey,
             content: [
                 ComponentGenerators.markdown({
+                    key: itemKey+'.md.S3',
                     content: _T( "prelude.S3", texts.join("\n")) 
                 })
             ]
@@ -408,6 +412,7 @@ class Section3 extends Group {
             ['4',"Zone agricole cultivée"],
             ['5',"Parc public/municipal"],
             ['6',"Zones montagneuses"],
+            ['7', "Autre"]
         ], 'Q9.option.');
 
         //oo.push(as_input_option("7", _T("Q9.option.autre", "Autre"), common_other))
