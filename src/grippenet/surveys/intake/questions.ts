@@ -391,6 +391,11 @@ export class HighestEducation extends ItemQuestion {
             isRequired: this.isRequired,
             condition: this.condition,
             questionText: _T("intake.Q4d.title.0", "What is the highest level of formal education/qualification that you have?"),
+            topDisplayCompoments: [
+                textComponent({
+                    content: _T("intake.Q4dfr.top.0", "If you are still in education")
+                })
+            ],
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });

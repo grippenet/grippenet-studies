@@ -1,4 +1,6 @@
 import {  ItemBuilder, _T,questionPools, SurveyBuilder } from "../../../common"
+import { GrippenetFlags } from "../../flags";
+import { lastSubmissionQuestion } from "../../questions/lastSubmission";
 import * as vaccination from "./questions";
 
 const pool = questionPools.vaccination;
@@ -27,6 +29,10 @@ export class VaccinationDef extends SurveyBuilder {
 
         const Prelude = new vaccination.SurveyPrelude({parentKey: rootKey}, 'P0');
         this.items.push(Prelude);
+
+        const QLastSubmit = new lastSubmissionQuestion({parentKey: rootKey, itemKey:'submission', flagKey: GrippenetFlags.lastVaccination.key, trans:'weekly.lastsubmission'});
+        this.items.push(QLastSubmit);
+
 
         const vaccGroup = this.buildVaccGroup(rootKey);
 

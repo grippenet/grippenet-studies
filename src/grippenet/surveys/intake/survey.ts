@@ -94,7 +94,7 @@ export class IntakeDef extends SurveyBuilder {
         
         const items: Item[] = [];
         
-        const Q_gender = new pool.Gender({parentKey: rootKey, isRequired:true, useOther:false});
+        const Q_gender = new pool.Gender({parentKey: rootKey, isRequired:true, useOther:false, useDontWantAnswer: true});
 
         items.push(Q_gender);
         this.prefillWithLastResponse(Q_gender);
@@ -140,6 +140,11 @@ export class IntakeDef extends SurveyBuilder {
         const Q_healthProfPractice = new intake.HealthProfessionalPractice({parentKey:rootKey, isRequired:true});
         items.push(Q_healthProfPractice, HumanHealthProf);
         */
+
+        const Q_work_type = new pool.WorkTypeEurostat({parentKey:rootKey, keyMainActivity:Q_main_activity.key, isRequired:false});
+        this.prefillWithLastResponse(Q_work_type);
+        items.push(Q_work_type);
+
         const Q_postal_work = new intake.PostalCodeWork({parentKey:rootKey, isRequired:false});
         Q_postal_work.setCondition(working_condition)
         this.prefillWithLastResponse(Q_postal_work);
@@ -149,10 +154,7 @@ export class IntakeDef extends SurveyBuilder {
         this.prefillWithLastResponse(Q_postal_work_location);
         items.push(Q_postal_work_location);
 
-        const Q_work_type = new pool.WorkTypeEurostat({parentKey:rootKey, keyMainActivity:Q_main_activity.key, isRequired:false});
-        this.prefillWithLastResponse(Q_work_type);
-        items.push(Q_work_type);
-
+        
         const Q_highest_education = new intake.HighestEducation({parentKey:rootKey,isRequired:false});
         Q_highest_education.setCondition(
             ce.compare.gte(Q_birthdate.getAgeExpression('years'), 16)

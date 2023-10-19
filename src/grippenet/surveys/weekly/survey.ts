@@ -1,6 +1,9 @@
-import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce } from "../../../common"
+import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce, GroupQuestion, ItemBuilder } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
+import { lastSubmissionQuestion } from "../../questions/lastSubmission";
+import { GrippenetFlags } from "../../flags";
+import { weeklySurveyKey } from "../../constants";
 
 const pool = questionPools.weekly;
 
@@ -8,9 +11,11 @@ export class WeeklyDef extends SurveyBuilder {
 
     Q_symptomsEnd: Item;
 
+    Q_AnsmDeliveryFailure:Item;
+
     constructor(meta:Map<string,string>) {
         super({
-            surveyKey: 'weekly',
+            surveyKey: weeklySurveyKey,
             name:  _T( "weekly.name.0", "Weekly questionnaire"),
             description:_T("weekly.description.0", "Please also report if you had no complaints."),
             durationText: _T( "weekly.typicalDuration.0", "Duration 1-5 minutes"),
@@ -19,8 +24,11 @@ export class WeeklyDef extends SurveyBuilder {
         
         const rootKey = this.key
 
+        const QLastSubmit = new lastSubmissionQuestion({parentKey: rootKey, itemKey:'submission', flagKey: GrippenetFlags.lastWeekly.key, trans:'weekly.lastsubmission'});
+        this.items.push(QLastSubmit);
+
         // Symptoms Q1
-        const Q_symptoms = new pool.Symptoms({parentKey: rootKey, isRequired: true, useRash: false, noteOnTop: true});
+        const Q_symptoms = new pool.Symptoms({parentKey: rootKey, isRequired: true, useRash: false, noteOnTop: true, useMarkdownNote: true});
         this.items.push(Q_symptoms);
 
         // // -------> HAS SYMPTOMS GROUP
@@ -129,13 +137,34 @@ export class WeeklyDef extends SurveyBuilder {
         
         hasMoreGroup.addItem(Q_visitedNoMedicalService.get());
 
+        const Q1ansm = new weekly.Q1ANSM({parentKey: hasMoreGroupKey});
+        Q1ansm.setCondition(Q_visitedMedicalService.getQ1AnsmCondition());
+
+        hasMoreGroup.addItem(Q1ansm.get());
+
+        const Q2ansm = new weekly.Q2ANSM({parentKey: hasMoreGroupKey});
+        Q2ansm.setCondition(Q1ansm.getYesCondition());
+        hasMoreGroup.addItem(Q2ansm.get());
+
+        const QDeliveryGroup3 = new weekly.AnsmDeliveryGroup(
+            {
+                parentKey: hasMoreGroupKey, 
+                NotDeliveredKey: 'Q3ansm',
+                DelivedyReplaced: 'Q4ansm',
+                ProposedAlternative: 'Q5ansm'
+            }
+        );
+
+        QDeliveryGroup3.setCondition(Q2ansm.getYesCondition());
+
+        hasMoreGroup.addItem(QDeliveryGroup3.get());
+
         // // Q9 took medication --------------------------------------
-        const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:false, useOtherTextInput: true});
+        const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:false, useOtherTextInput: true, useCovidAntiviral: true});
         hasMoreGroup.addItem(Q_tookMedication.get());
 
-        const Q_antibioFrom = new weekly.AntibioticFrom({parentKey:hasMoreGroupKey, isRequired: false, medicationQuestion: Q_tookMedication } )
-
-        hasMoreGroup.addItem(Q_antibioFrom.get());
+        //const Q_antibioFrom = new weekly.AntibioticFrom({parentKey:hasMoreGroupKey, isRequired: false, medicationQuestion: Q_tookMedication } )
+        //hasMoreGroup.addItem(Q_antibioFrom.get());
 
         // // Q14 hospitalized ------------------------------------------------
         const Q_hospitalized = new pool.Hospitalized({parentKey:hasMoreGroupKey, isRequired:false});
@@ -161,6 +190,7 @@ export class WeeklyDef extends SurveyBuilder {
         /**
          * CovidMask
          */
+        /*
         const maskGroup = new weekly.MaskGroup({parentKey: hasMoreGroupKey});
         maskGroup.setCondition(Q_covidHabits.createWearMaskCondition());
 
@@ -178,6 +208,7 @@ export class WeeklyDef extends SurveyBuilder {
         maskGroup.addItem(QMaskProvidedFrom.get());
 
         hasMoreGroup.addItem(maskGroup.get());
+        */
 
        const QMaskWhyNotWearing = new weekly.MaskWhyNotWearing({parentKey: hasMoreGroupKey});
        QMaskWhyNotWearing.setCondition(
@@ -192,11 +223,21 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_causeOfSymptoms = new weekly.CauseOfSymptoms({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_causeOfSymptoms.get());
 
+
         this.items.push(hasMoreGroup);
 
         const Q_Howdoyoufeel = new weekly.HowDoYouFeel({parentKey: rootKey, isRequired: false});
         
         this.items.push(Q_Howdoyoufeel);
+
+        const minorFlags = GrippenetFlags.minor;
+        const MajorExpression = ce.participantFlags.hasKeyAndValue(minorFlags.key, minorFlags.values.no);
+
+        const QAnsmGroup2 = new weekly.AnsmEndGroup({parentKey: rootKey});
+        QAnsmGroup2.setCondition(ce.logic.and(Q_wantsMore.getYesCondition(), MajorExpression));
+    
+        this.Q_AnsmDeliveryFailure = QAnsmGroup2.getDeliveryFailureItem();
+        this.items.push(QAnsmGroup2);
 
         const surveyEndText = new pool.SurveyEnd({parentKey:rootKey});
         this.items.push(surveyEndText);
@@ -206,4 +247,7 @@ export class WeeklyDef extends SurveyBuilder {
         return this.Q_symptomsEnd;
     }
 
+    getAnsmDeliveryFailureItem(): Item {
+        return this.Q_AnsmDeliveryFailure;
+    }
 }

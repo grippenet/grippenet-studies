@@ -22,6 +22,38 @@
     "en": "Please specify",
     "fr": "Précisez"
   },
+  "weekly.Q11.option.doctor_said_flu": {
+    "en": "My doctor said they are caused by flu",
+    "fr": "Mon médecin m'a dit qu'il s'agissait de la grippe"
+  },
+  "weekly.Q16.option.less3": {
+    "en": "Less than 3",
+    "fr": "Moins de 3"
+  },
+  "weekly.Q16.option.more3": {
+    "en": "More than 3",
+    "fr": "Plus de 3"
+  },
+  "weekly.Q17.text": {
+    "en": "Globally, how do you feel today",
+    "fr": "Globalement, comment vous sentez-vous ?"
+  },
+  "weekly.Q17.sliderLabel": {
+    "en": "Slider label",
+    "fr": "Tirer sur le curseur pour choisir une valeur correspondant à votre ressenti (0 = Très mal -> 100 = Tout va bien)"
+  },
+  "weekly.Q17.noResponseLabel": {
+    "en": "noResponseLabel",
+    "fr": "(Note choisie)"
+  },
+  "weekly.Q17.helpGroup.asking_reason": {
+    "en": "How do you feel asking reason",
+    "fr": "Comment vous sentez-vous ? "
+  },
+  "weekly.Q17.helpGroup.answer_tip": {
+    "en": "How do you feel answer tip",
+    "fr": "Tirer sur le curseur pour noter votre ressenti aujourd'hui sur une échelle de 0 à 100. La note 0 correspondant à 'cela va très mal', la note 100 correspondant à 'Tout va très bien/Je me sens parfaitement bien'"
+  },
   "weekly.QFRmask5.text": {
     "en": "Why did you not wear a mask",
     "fr": "Vous avez indiqué ne pas avoir porté de masque à votre domicile et/ou à l'extérieur de votre domicile. Pour quelle(s) raison(s) n'avez-vous pas porté de masque dans ces circonstances ?"
@@ -80,27 +112,19 @@
   },
   "weekly.EX.Q7.rg.mcg.option.other_community_pract": {
     "en": "Other community practitioner",
-    "fr": "Autre médecin de ville (pédiatre, ORL, cardiologue…)"
-  },
-  "weekly.EX.Q7.rg.mcg.option.gynecologist": {
-    "en": "Gynecologist",
-    "fr": "Gynécologue/obstétricien"
-  },
-  "weekly.EX.Q7.rg.mcg.option.midwife": {
-    "en": "Midwife",
-    "fr": "Sage-femme"
+    "fr": "Autre médecin de ville (pédiatre, ORL, cardiologue, Gynécologue/obstétricien…)"
   },
   "weekly.EX.Q7.rg.mcg.option.pharmacist": {
     "en": "Pharmacist",
     "fr": "Pharmacien"
   },
-  "weekly.EX.Q7.rg.mcg.option.scholar_nurse": {
-    "en": "Scholar nurse",
-    "fr": "Infirmier scolaire"
-  },
   "weekly.Q9d.text": {
     "en": "About the antibiotic you used",
     "fr": "Concernant les antibiotiques que vous avez pris :"
+  },
+  "weekly.EX.Q9.rg.mcg.option.9": {
+    "en": "Antivirals against Covid (eg: Paxlovid)",
+    "fr": "Antiviraux contre la Covid 19 (Paxlovid)"
   },
   "weekly.Q9d.option.from_doctor": {
     "en": "They have just been prescribed by a doctor",
@@ -230,36 +254,187 @@
     "en": "I dont know",
     "fr": "Je ne sais pas / je ne souhaite pas répondre"
   },
-  "weekly.Q11.option.doctor_said_flu": {
-    "en": "My doctor said they are caused by flu",
-    "fr": "Mon médecin m'a dit qu'il s'agissait de la grippe"
-  },
-  "weekly.Q16.option.less3": {
-    "en": "Less than 3",
-    "fr": "Moins de 3"
-  },
-  "weekly.Q16.option.more3": {
-    "en": "More than 3",
-    "fr": "Plus de 3"
-  },
-  "weekly.Q17.text": {
-    "en": "Globally, how do you feel today",
-    "fr": "Globalement, comment vous sentez-vous ?"
-  },
-  "weekly.Q17.sliderLabel": {
-    "en": "Slider label",
-    "fr": "Tirer sur le curseur pour choisir une valeur corresponsant à votre ressenti (0 = Très mal -> 100 = Tout va bien)"
-  },
-  "weekly.Q17.noResponseLabel": {
-    "en": "noResponseLabel",
-    "fr": "(Note choisie)"
-  },
-  "weekly.Q17.helpGroup.asking_reason": {
-    "en": "How do you feel asking reason",
-    "fr": "Comment vous sentez-vous ? "
-  },
-  "weekly.Q17.helpGroup.answer_tip": {
-    "en": "How do you feel answer tip",
-    "fr": "Tirer sur le curseur pour noter votre ressenti aujourd'hui sur une échelle de 0 à 100. La note 0 correspondant à 'cela va très mal', la note 100 correspondant à 'Tout va très bien/Je me sens parfaitement bien'"
-  }
+  
+  "weekly.Q1ansm.text": {
+    "en": "Q1ansm",
+    "fr": "Suite à cette (ou ces) consultation(s), le professionnel de santé vous a-t-il prescrit un ou plusieurs produits de santé tel qu’un médicament, un dispositif médical (exemples : chambres d'inhalation, dispositif d'oxygénothérapie, etc.) ou un vaccin ?"
+},
+"weekly.Q1ansm.option.no": {
+    "en": "No",
+    "fr": "Non"
+},
+"weekly.Q1ansm.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+},
+"weekly.Q1ansm.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas"
+},
+"weekly.Q2ansm.text": {
+    "en": "Q2ansm",
+    "fr": "Est-ce qu’au moins un produit de santé figurant sur votre ordonnance n’a pas pu vous être délivré du tout, en raison d’une rupture de stock ?"
+},
+"weekly.Q2ansm.option.no": {
+    "en": "No",
+    "fr": "Non"
+},
+"weekly.Q2ansm.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+},
+"weekly.Q2ansm.helpGroup.asking_reason": {
+    "en": "weekly.Q2ansm Question asking reason",
+    "fr": "Pour nous aider à connaître la disponibilité des produits de santé dans les pharmacies de ville."
+},
+"weekly.Q2ansm.helpGroup.answer_tip": {
+    "en": "weekly.Q2ansm Question answer tip",
+    "fr": "Cochez « Oui » si vous avez été confronté à la non délivrance de tout ou partie de votre ordonnance pour raison de rupture de stock, qu'il s'agisse de médicaments (ex : paracétamol, antibiotique), de dispositif médical (ex : chambres d'inhalation, dispositif d'oxygénothérapie, etc.) ou d'un vaccin."
+},
+"weekly.QAnsmNotDelivered.text": {
+    "en": "QAnsmNotDelivered",
+    "fr": "Qu’est-ce qui ne vous a pas été délivré ?"
+},
+"weekly.QAnsmNotDelivered.option.text.painkiller": {
+    "en": "Pain killer",
+    "fr": "Médicament contre la douleur ou la fièvre"
+},
+"weekly.QAnsmNotDelivered.option.desc.painkiller": {
+  "en": "tylenol, ...",
+  "fr": "Précisez si possible (paracétamol, ibuprofène, aspirine...)"
+},
+"weekly.QAnsmNotDelivered.option.text.cough": {
+    "en": "Cough medication",
+    "fr": "Médicament contre la toux "
+},
+"weekly.QAnsmNotDelivered.option.text.flu": {
+    "en": "Influenza antiviral",
+    "fr": "Antiviral contre la grippe (Tamiflu)"
+},
+"weekly.QAnsmNotDelivered.option.text.covid19": {
+    "en": "Covid19 antiviral",
+    "fr": "Antiviral contre la Covid-19 (Paxlovid)"
+},
+"weekly.QAnsmNotDelivered.option.text.antibiotic.": {
+    "en": "Antibiotic",
+    "fr": "Antibiotique"
+},
+"weekly.QAnsmNotDelivered.option.text.device": {
+    "en": "Medical device",
+    "fr": "Dispositif médical"
+},
+"weekly.QAnsmNotDelivered.option.desc.device": {
+  "en": "inhalation chamber, ...",
+  "fr": "Précisez si possible (chambre d’inhalation, dispositif d’oxygénothérapie...)"
+},
+"weekly.QAnsmNotDelivered.option.text.vaccine": {
+    "en": "Vaccine",
+    "fr": "Vaccin"
+},
+"weekly.QAnsmNotDelivered.option.text.other": {
+    "en": "Other",
+    "fr": "Autre"
+},
+"weekly.QAnsmNotDelivered.option.input_desc": {
+  "en": "Name it if possible",
+  "fr": "Précisez si possible"
+},
+"weekly.QAnsmDelivedyReplaced.text": {
+    "en": "QAnsmDelivedyReplaced",
+    "fr": "Est-ce qu'au moins un autre produit de santé vous a été proposé par votre pharmacien, pour remplacer le(s) produit(s) non délivré(s) ?"
+},
+"weekly.QAnsmDelivedyReplaced.option.no": {
+    "en": "No",
+    "fr": "Non"
+},
+"weekly.QAnsmDelivedyReplaced.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+},
+"weekly.QAnsmProposedAlternative.text": {
+    "en": "QAnsmProposedAlternative",
+    "fr": "Quelle(s) alternative(s) le pharmacien vous a-t-il proposé ?"
+},
+"weekly.QAnsmProposedAlternative.option.dose": {
+    "en": "Other dose",
+    "fr": "Autre dosage"
+},
+"weekly.QAnsmProposedAlternative.option.medication": {
+    "en": "Other medication",
+    "fr": "Autre médicament (hors générique) (si possible préciser le nom du médicament)"
+},
+"weekly.QAnsmProposedAlternative.option.preparation": {
+    "en": "Magistral preparation",
+    "fr": "Préparation magistrale (préparation médicamenteuse effectuée juste pour vous par le pharmacien ou le préparateur)"
+},
+"weekly.QAnsmProposedAlternative.option.generic": {
+    "en": "Generic",
+    "fr": "Un générique (même médicament, mais d’une autre marque)"
+},
+"weekly.QAnsmProposedAlternative.option.text.other": {
+    "en": "Other",
+    "fr": "Autre"
+},
+"weekly.QAnsmProposedAlternative.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas"
+},
+"weekly.QAnsmProposedAlternative.option.input_desc": {
+  "en": "Name it if possible",
+  "fr": "Précisez si possible"
+},
+"weekly.Q6ansm.text": {
+  "en": "Q6ansm",
+  "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si cela est votre première visite de la saison), à votre connaissance, vous ou un membre de votre famille proche (conjoint(e), enfant, parent, petit-enfant) a-t-il renoncé à se procurer un médicament SANS ordonnance (ex : paracétamol ou ibuprofène) pour cause de rupture de stock?"
+},
+"weekly.Q7ansm.text": {
+  "en": "Q7ansm",
+  "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si c’est votre première visite de la saison), à votre connaissance, au moins un mineur de votre famille proche (enfant de votre foyer, petit-enfant, neveu/nièce) a-t-il été confronté à une rupture de stock concernant un produit de santé figurant sur une de ses ordonnances ?"
+},
+"weekly.Qansm.prelude": {
+  "en": "ANSM ancillary study",
+  "fr": "Cette saison, GrippeNet.fr/COVIDnet.fr aide l’Agence nationale de sécurité du médicament et des produits de santé (ANSM) à évaluer la disponibilité de certains produits de santé en pharmacie, en particulier pour les plus jeunes. Les questions figurant ci-dessous permettent d’explorer cette question."
+},
+"weekly.Q6ansm.option.no": {
+  "en": "No",
+  "fr": "Non"
+},
+"weekly.Q6ansm.option.yes": {
+  "en": "Yes",
+  "fr": "Oui"
+},
+"weekly.Q6ansm.helpGroup.asking_reason": {
+  "en": "weekly.Q6ansm Question asking reason",
+  "fr": "Pour nous aider à connaître la disponibilité des produits de santé disponibles sans ordonnance dans les pharmacies de ville."
+},
+"weekly.Q6ansm.helpGroup.answer_tip": {
+  "en": "weekly.Q6ansm Question answer tip",
+  "fr": ""
+},
+"weekly.Q7ansm.option.no": {
+  "en": "No",
+  "fr": "Non"
+},
+"weekly.Q7ansm.option.yes": {
+  "en": "Yes",
+  "fr": "Oui"
+},
+"weekly.Q7ansm.option.not_concerned": {
+  "en": "Not concerned",
+  "fr": "Je ne suis pas concerné, je n’ai pas de mineur dans ma famille proche"
+},
+"weekly.Q7ansm.option.dnk": {
+  "en": "I dont know",
+  "fr": "Je ne sais pas / ne me souviens pas"
+},
+"weekly.Q7ansm.helpGroup.asking_reason": {
+  "en": "weekly.Q7ansm Question asking reason",
+  "fr": "Pour nous aider à connaître la disponibilité des produits de santé pédiatriques dans les pharmacies de ville."
+},
+"weekly.Q7ansm.helpGroup.answer_tip": {
+  "en": "weekly.Q7ansm Question answer tip",
+  "fr": "Cochez « Oui » si un mineur de votre entourage a été confronté à la non délivrance de tout ou partie d’une de ses ordonnances pour raison de rupture de stock, qu'il s'agisse de médicaments (ex : paracétamol, antibiotique), de dispositif médical (ex : chambres d'inhalation, dispositif d'oxygénothérapie, etc.) ou d'un vaccin."
+}
+
+
 }
