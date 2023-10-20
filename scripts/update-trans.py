@@ -1,6 +1,8 @@
 import json
 import argparse
 import sys
+import os
+import datetime
 
 def read_json(file):
     return json.load(open(file, 'r', encoding='UTF-8'))
@@ -11,6 +13,8 @@ def save_json(file, data):
         f.write(output)
         f.close()
 
+def file_exits(file):
+    return os.path.isfile(file)
 
 def show_help():
     print("update-trans.py target_name")
@@ -66,7 +70,14 @@ conf = config.get(target)
 
 target_files = conf['targets']
 update_file = conf['update']
-updates = read_json(update_file)
+
+if file_exits(update_file):
+    updates = read_json(update_file)
+else:
+    print("Update file %s doesnt exists, using an empty update" % update_file)
+    updates = {}
+
+meta_keys = ['__meta__', '__instructions__']
 
 targets = []
 for file in target_files:
@@ -74,6 +85,8 @@ for file in target_files:
 
 for name, trans in updates.items():
     found = False
+    if name in meta_keys:
+        continue
     for target in targets:
         if target.has(name):
             #print("%s found in %s" % (name, target.file))
@@ -90,11 +103,26 @@ for target in targets:
 
 ## Recompute all trans files with all targets
 ## First target has priority
-data = {}
+data = {
+    '__meta__': {
+        "built_at": datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        "target": args.target_name,
+    },
+    "__instructions__": [
+        "Ne pas modifier la version anglaise des textes qui sert de référence (même si il y'a des coquilles)",
+        "Attention aux guillements, si vous mettez des doubles guillemets dans le textes, ils doivent être précédés un anti-slash (\)",
+    ]
+}
 for target in targets:
     for name, trans in target.data.items():
         if name in data:
             continue
         data[name] = trans
         # data[name]['_from_'] = target.file
-save_json(update_file + '.new', data)
+
+dir = os.path.dirname(update_file)
+new_dir = dir + '/new'
+if not os.path.exists(  new_dir ):
+    os.mkdir(new_dir)
+print("New version of trans file in %s" % new_dir)
+save_json(new_dir + '/' + os.path.basename(update_file), data)
