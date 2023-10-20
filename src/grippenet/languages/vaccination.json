@@ -4,7 +4,7 @@
     "fr": [
       "Les réponses aux questions précédées d’un astérisque (*) sont obligatoires pour pouvoir valider le questionnaire.",
       "",
-      "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet.fr/COVIDnet.fr, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la COVID-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire.",
+      "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet.fr/COVIDnet.fr, et vous prendra entre 2 et 5 minutes. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la Covid-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire.",
       "",
       "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
     ]
@@ -31,7 +31,7 @@
   },
   "vaccination.Q10c.helpGroup.answer_tip": {
     "en": "Select all options which have counted to make your decision",
-    "fr": "Choisissez toutes les affirmations qui ont comptées pour prendre votre décision."
+    "fr": "Choisissez toutes les affirmations qui ont compté pour prendre votre décision."
   },
   "vaccination.Q10d.option.advisory_pregnant": {
     "fr": "On m'a déconseillé de me faire vacciner car je suis enceinte",
@@ -43,15 +43,15 @@
   },
   "vaccination.Q10d.option.avoid_healthseeking": {
     "en": "Because of pandemic, I avoid to visit doctor or pharmacy",
-    "fr": "Du fait de la pandémie de COVID-19, j’évite de me rendre chez le médecin ou à la pharmacie"
+    "fr": "Du fait de la circulation du virus responsable de la Covid-19, j’évite de me rendre chez le médecin ou à la pharmacie"
   },
   "vaccination.Q10d.option.increase_risk_covid": {
     "en": "I fear the influenza vaccine to increase my risk to get Covid19",
-    "fr": "Je crains que le vaccin contre la grippe saisonnière augmente mon risque d’attraper la COVID-19 "
+    "fr": "Je crains que le vaccin contre la grippe augmente mon risque d’attraper la Covid-19 "
   },
   "vaccination.Q10d.option.other_covid19": {
     "en": "Other reason related to Covid19",
-    "fr": "Autre raison en lien avec la COVID-19"
+    "fr": "Autre raison en lien avec la Covid-19"
   },
   "vaccination.Q10d.option.bad_experience": {
     "en": "I had a bad experience with vaccination",
@@ -70,7 +70,7 @@
     "en": "By a nurse"
   },
   "vaccination.Q10e.option.midwife": {
-    "fr": "Par un sage-femme",
+    "fr": "Par une sage-femme",
     "en": "By a midwife"
   },
   "vaccination.Q10e.option.pharmacist": {
@@ -87,7 +87,7 @@
   },
   "vaccination.Q18.text": {
     "en": "Do you have a voucher for influenza vaccine since last october",
-    "fr": "Avez-vous eu un bon de vaccination contre la grippe cette année (depuis octobre 2022)?"
+    "fr": "Avez-vous eu un bon de vaccination contre la grippe cette année (depuis octobre 2023)?"
   },
   "vaccination.Q18.option.yes": {
     "fr": "Oui",
@@ -98,7 +98,7 @@
     "en": "No"
   },
   "vaccination.Q18.option.dnk": {
-    "fr": "Je ne sais pas / ne me souviens pas",
+    "fr": "Je ne sais pas / Je ne me souviens pas",
     "en": "I dont know"
   },
   "vaccination.Q35m.option.18": {
@@ -115,7 +115,7 @@
   },
   "vaccination.Q18.answer_tip": {
     "en": "how_answer",
-    "fr": "Cochez « Oui » si vous avez reçu un bon de vaccination contre la grippe depuis le mois d'octobre indiqué, envoyé par l’assurance maladie ou si votre médecin vous a fait un bon."
+    "fr": "Cochez « Oui » si vous avez reçu un bon de vaccination contre la grippe depuis le mois d'octobre, envoyé par l’assurance maladie ou si votre médecin vous a fait un bon."
   },
   "vaccination.Q37.rg.scg.option.1.text": {
     "en": "Choose date",
@@ -123,7 +123,7 @@
   },
   "vaccination.Q37.text": {
     "en": "Did you get a COVID19 infection in the past last months",
-    "fr": "Avez-vous été infecté par le SARS-CoV-2 (COVID-19) au cours des derniers mois ? (L’infection doit avoir été confirmée par un test PCR ou un test antigénique ou auto-test)"
+    "fr": "Avez-vous été infecté par le SARS-CoV-2 (Covid-19) au cours des derniers mois ? (L’infection doit avoir été confirmée par un test PCR ou un test antigénique ou auto-test)"
   },
   "vaccination.Q37.rg.scg.option.0.text": {
     "en": "No",
@@ -131,7 +131,7 @@
   },
   "vaccination.Q37.rg.scg.option.2.text": {
     "en": "I don't know (anymore)",
-    "fr": "Je ne sais plus"
+    "fr": "Je ne sais pas / Je ne me souviens pas"
   },
   "vaccination.Q37.helpGroup.text.1": {
     "en": "Knowing where is your last infection",
@@ -139,10 +139,10 @@
   },
   "vaccination.Q37.helpGroup.text.3": {
     "en": "Response as precisely as possible",
-    "fr": "Répondez « Oui » si vous avez été infecté par le virus.Si vous ne connaissez pas la date exacte, merci de donner la meilleure estimation possible. "
+    "fr": "Répondez « Oui » si vous avez été infecté par le virus. Si vous ne connaissez pas la date exacte, merci de donner la meilleure estimation possible. "
   },
   "vaccination.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses.",
-    "fr": "Merci pour vos réponses, vous pouvez maintenant valider votre questionnaire en cliquant sur le bouton ci-dessous."
+    "fr": "Merci pour vos réponses ! Vous pouvez maintenant valider votre questionnaire en cliquant sur le bouton ci-dessous."
   }
 }

@@ -27,7 +27,7 @@
   },
   "intake.unsupervised.minor": {
     "en": "Minor people must use supervised",
-    "fr": "Les questionnaires de personnes mineurs doivent être remplis par des adultes"
+    "fr": "Les questionnaires des personnes mineures doivent être remplis par des adultes"
   },
   "intake.Q0.text": {
     "en": "For whom do you want to fill this survey",
@@ -51,7 +51,7 @@
   },
   "intake.Q1.rg.scg.option.3": {
     "en": "I dont want to answer",
-    "fr":"Je ne souhaite pas répondre"
+    "fr": "Je ne souhaite pas répondre"
   },
   "intake.Q4b.option.0": {
     "en": "I know this postal code",
@@ -63,7 +63,7 @@
   },
   "intake.Q4dfr.top.0": {
     "en": "If you are still in education",
-    "fr":"Si vous êtes toujours scolarisé ou étudiant, cochez s'il-vous-plaît la case correspondant au diplôme le plus élevé que vous avez obtenu jusqu'à maintenant."
+    "fr": "Si vous êtes toujours scolarisé ou étudiant, merci de cocher la case correspondant au diplôme le plus élevé que vous avez obtenu jusqu'à maintenant."
   },
   "intake.Q5.option.5": {
     "fr": "Entre 1 et 9 enfants ou adolescents dans la même journée (en ne comptant pas vos propres enfants)",
@@ -86,7 +86,7 @@
     "en": "Your height"
   },
   "intake.Q20.text": {
-    "fr": "Quelle est votre poids (en kilogrammes)?",
+    "fr": "Quel est votre poids (en kilogrammes)?",
     "en": "What is your body weight"
   },
   "intake.Q20.inputlabel": {
@@ -127,7 +127,7 @@
   },
   "intake.Q13.option.4": {
     "en": "Dont know/would rather not answer",
-    "fr": "Je ne sais pas / préfère ne pas répondre"
+    "fr": "Je ne sais pas / Je ne souhaite pas répondre"
   },
   "intake.Q22.text": {
     "en": "Q22.text",
