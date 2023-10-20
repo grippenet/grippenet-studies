@@ -38,5 +38,50 @@
   "common.postalcodes.label": {
     "en": "Enter the 5 letters of your postal code",
     "fr": "Indiquez votre code postal"
+  },
+  "common.bmi.text.not_stored": {
+    "en": "Weight and height value will not be stored",
+    "fr": "La valeur de votre taille et poids ne seront pas envoyées ni stockée sur notre plateforme, seule la valeur calculée de l'IMC sera envoyée comme réponse"
+  },
+  "common.bmi.weightLabel": {
+      "en": "Weight",
+      "fr": "Votre poids"
+  },
+  "common.bmi.weightUnit":{
+    "en":"kg",
+    "fr":"en kilogrammes"
+  },
+  "common.bmi.heightLabel": {
+      "en": "Height",
+      "fr": "Votre taille"
+  },
+  "common.bmi.heightUnit": {
+      "en": "Height",
+      "fr": "en centimètres"
+  },
+  "common.bmi.bmiLabel": {
+      "en": "Your Body Mass Index is",
+      "fr": "Votre Indice de Masse Corporelle (IMC) est"
+  },
+  "common.bmi.extremeValues": {
+      "en": "Those values are extreme and very rare, please check your body values",
+      "fr": "Ces valeurs extrêmes sont très rares. Vérifiez votre taille et poids notamment les unités. La taille doit être en centimètres (si vous mesurez 1 mètre 70 indiquez 170) et votre poids en kilogramme"
+  },
+  "common.bmi.alreadyProvided": {
+      "en": "A value has already been provided from you last response",
+      "fr": "Une valeur a déjà été fournie lors de votre précédente réponse"
+  },
+  "common.bmi.modifyButton": {
+      "en": "Modify my response",
+      "fr": "Modifier votre réponse"
+  },
+  "common.bmi.previousValue": {
+      "en": "Your previous value was",
+      "fr": "Votre réponse précédente était"
+  },
+  "common.bmi.label": {
+      "en": "Enter you weight and height to compute Body Mass Index",
+      "fr": "Indiquez votre taille et poids pour calculer votre Indice de Masse Corporelle"
   }
+
 }
