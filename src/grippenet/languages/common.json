@@ -82,6 +82,13 @@
   "common.bmi.label": {
       "en": "Enter you weight and height to compute Body Mass Index",
       "fr": "Indiquez votre taille et poids pour calculer votre Indice de Masse Corporelle"
-  }
+  },
+ "common.qcov16.several_test_realized": {
+    "en": "If you have realized several test",
+    "fr": "Si vous avez réalisé plusieurs tests et que vous en avez obtenu au moins un positif, considérez ce test pour la réponse"
+ }
+
+
+
 
 }

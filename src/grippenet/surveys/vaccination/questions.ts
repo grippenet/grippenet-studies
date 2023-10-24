@@ -125,7 +125,7 @@ export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAga
             as_option(codes.bad_experience, _T("vaccination.Q35m.option.19", "bad experience with previous vaccine"))
         )
 
-        list.without(codes.counter_indication, codes.not_free);
+        list.without(codes.counter_indication, codes.not_free, codes.pregnant_disc);
 
         const new_options = list.values();
         new_options.forEach(o => {

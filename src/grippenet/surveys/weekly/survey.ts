@@ -1,4 +1,4 @@
-import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce, GroupQuestion, ItemBuilder } from "../../../common"
+import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce, GroupQuestion, ItemBuilder, textComponent, ItemQuestion } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
 import { lastSubmissionQuestion } from "../../questions/lastSubmission";
@@ -95,16 +95,25 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_symptomImpliedCovidTest = new pool.SymptomImpliedCovidTest({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_symptomImpliedCovidTest.get());
 
+        const severalTestRealized = textComponent({"content": _T("common.qcov16.several_test_realized", "If you have realized several test"), className:'mb-1'});
+        
+        const addQcov16notes= (item: ItemQuestion) => {
+            item.setOptions({topDisplayCompoments: [severalTestRealized]});
+        }
+
         // Qcov16i test type -----------------------------------------------------
         const Q_covidTestType = new pool.CovidTestType({parentKey: hasMoreGroupKey, keySymptomImpliedCovidTest: Q_symptomImpliedCovidTest.key, isRequired: false, useSerology: false});
+        addQcov16notes(Q_covidTestType);
         hasMoreGroup.addItem(Q_covidTestType.get());
 
         // Qcov16b PCR test result
         const Q_resultPCRTest = new pool.ResultPCRTest({parentKey:hasMoreGroupKey, keyTestType: Q_covidTestType.key, isRequired: false})
+        addQcov16notes(Q_resultPCRTest);
         hasMoreGroup.addItem(Q_resultPCRTest.get());
 
         //Qcov16f Serological test result
         const Q_resultAntigenicTest = new pool.ResultAntigenicTest({parentKey:hasMoreGroupKey, keyTestType: Q_covidTestType.key, isRequired: false})
+        addQcov16notes(Q_resultAntigenicTest);
         hasMoreGroup.addItem(Q_resultAntigenicTest.get());
 
         //Qcov16k Serological test result

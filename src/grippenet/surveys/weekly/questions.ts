@@ -429,15 +429,6 @@ export class CovidHabitsChange extends pool.CovidHabitsChange {
 }
 
 export class CauseOfSymptoms extends pool.CauseOfSymptoms {
-
-    getResponses(): Array<OptionDef> {
-    
-        const list = new OptionList(super.getResponses());
-        
-        list.insertAfterKey('9',  as_option("7", _T("weekly.Q11.option.doctor_said_flu", "My doctor said they are caused by flu")) );
-
-        return list.values();
-    }
 }
 
 export class HowDoYouFeel extends ItemQuestion {
