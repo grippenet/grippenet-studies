@@ -208,7 +208,7 @@ export class LastCovid19Infection extends ItemQuestion {
                     key: '1', role: 'dateInput',
                     optionProps: {
                         dateInputMode: { str: 'YM' },
-                        min: num_as_arg(1577836800), // 2020-01-01
+                        min: exp_as_arg( client.timestampWithOffset({'years': -2}) ), // 2020-01-01
                         max: exp_as_arg( client.timestampWithOffset({'minutes': 1}) )
                     },
                     content: _T("vaccination.Q37.rg.scg.option.1.text", "Choose date"),
