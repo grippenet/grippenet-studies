@@ -69,13 +69,11 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
         const codes = encoding.flu_notvac_reason; 
         const list = new OptionList(prev_options);
         
-        /* Removed in 2023
         list.insertAfterKey(codes.offer, 
-            as_option(codes.advised_pregnancy,  _T("vaccination.Q10d.option.advisory_pregnant", "advised_not_to_pregnant")),
+           // as_option(codes.advised_pregnancy,  _T("vaccination.Q10d.option.advisory_pregnant", "advised_not_to_pregnant")), // Removed 2023
             as_option(codes.pregnant_baby, _T("vaccination.Q10d.option.pregnant_baby", "I'm pregnant and fear for my baby"))
         );
-        */
-
+       
         list.insertAfterKey(codes.minor_illness,
             as_option(codes.avoid_healthseek, _T("vaccination.Q10d.option.avoid_healthseeking","Because of pandemic, I avoid to visit doctor or pharmacy")),
             as_option(codes.risk_covid,  _T("vaccination.Q10d.option.increase_risk_covid", "I fear the influenza vaccine to increase my risk to get Covid19")),
