@@ -236,5 +236,13 @@
   "intake.Q38fr.title": {
     "en": "Compute your Body Mass Index",
     "fr": "Quel est votre indice de masse corporelle (IMC) ?"
+  },
+  "intake.Q38fr.helpGroup.asking_reason": {
+    "en": "asking reason for the question",
+    "fr": "_TODO_"
+  },
+  "intake.Q38fr.helpGroup.answer_tip": {
+    "en": "answer howto for the question",
+    "fr": "_TODO_"
   }
 }
