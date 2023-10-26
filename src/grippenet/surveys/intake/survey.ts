@@ -5,6 +5,7 @@ import * as intake from "./questions";
 import { GrippenetFlags } from "../../flags";
 import pool = questionPools.intake;
 import { intakeSurveyKey } from "../../constants";
+import { BMIQuestion } from "../../questions/bmi";
 export class IntakeDef extends SurveyBuilder {
 
     Q_birthdate?: pool.DateOfBirth;
@@ -33,14 +34,17 @@ export class IntakeDef extends SurveyBuilder {
         const prelude = new intake.SurveyPrelude({parentKey: rootKey})
         this.push(prelude);
 
+        // Q0
         const QForWhom = new intake.FillingForWhom({parentKey: rootKey, isRequired: true});
         this.prefillWithLastResponse(QForWhom);
         this.push(QForWhom);
 
+        // Q23
         const QFillingforReprensetative = new intake.FillingForWhomLegalRepresentative({parentKey: rootKey, isRequired: true});
         this.prefillWithLastResponse(QFillingforReprensetative);
         this.push(QFillingforReprensetative, QForWhom.createConditionLegalRepresentative());
 
+        // Q22
         const QFillingforHoushold = new intake.FillingForWhomHousold({parentKey: rootKey, isRequired: true});
         this.prefillWithLastResponse(QFillingforHoushold);
         
@@ -94,17 +98,29 @@ export class IntakeDef extends SurveyBuilder {
         
         const items: Item[] = [];
         
+        // Q1
         const Q_gender = new pool.Gender({parentKey: rootKey, isRequired:true, useOther:false, useDontWantAnswer: true});
 
         items.push(Q_gender);
         this.prefillWithLastResponse(Q_gender);
 
+        // Q2
         const Q_birthdate = new pool.DateOfBirth({parentKey:rootKey, isRequired:true});
         this.Q_birthdate = Q_birthdate;
         items.push(Q_birthdate);
         this.prefillWithLastResponse(Q_birthdate);
 
+        const QBMI = new BMIQuestion({
+            parentKey: rootKey, 
+            isRequired: false, 
+            itemKey: 'Q38fr', 
+            responseKey:'bmi',
+            questionText: _T("intake.Q38fr.title", "Compute your Body Mass Index"),
+        });
+        items.push(QBMI);
+        this.prefillWithLastResponse(QBMI);
 
+        /*
         const Q_Height = new intake.BodyHeight({parentKey: rootKey, isRequired: false});
         items.push(Q_Height);
         this.prefillWithLastResponse(Q_Height);
@@ -112,6 +128,7 @@ export class IntakeDef extends SurveyBuilder {
         const Q_Weight = new intake.BodyWeight({parentKey: rootKey, isRequired: false});
         items.push(Q_Weight);
         this.prefillWithLastResponse(Q_Weight, {'years': 1} );
+        */
 
         const Q_pregnancy = new pool.Pregnancy({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, isRequired:false});
         this.prefillWithLastResponse(Q_pregnancy, {months: 3} );
@@ -153,7 +170,6 @@ export class IntakeDef extends SurveyBuilder {
         const Q_postal_work_location = new intake.PostalCodeWorkLocation({parentKey: rootKey, isRequired: false}, Q_postal_work);
         this.prefillWithLastResponse(Q_postal_work_location);
         items.push(Q_postal_work_location);
-
         
         const Q_highest_education = new intake.HighestEducation({parentKey:rootKey,isRequired:false});
         Q_highest_education.setCondition(

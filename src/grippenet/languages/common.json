@@ -41,7 +41,7 @@
   },
   "common.bmi.text.not_stored": {
     "en": "Weight and height value will not be stored",
-    "fr": "La valeur de votre taille et poids ne seront pas envoyées ni stockée sur notre plateforme, seule la valeur calculée de l'IMC sera envoyée comme réponse"
+    "fr": "Les valeurs de votre taille et de votre poids ne seront pas envoyées, ni stockées sur notre plateforme. Elles servent juste à calculer la valeur de votre IMC. Seul l’IMC sera envoyé et stocké."
   },
   "common.bmi.weightLabel": {
       "en": "Weight",
@@ -65,7 +65,7 @@
   },
   "common.bmi.extremeValues": {
       "en": "Those values are extreme and very rare, please check your body values",
-      "fr": "Ces valeurs extrêmes sont très rares. Vérifiez votre taille et poids notamment les unités. La taille doit être en centimètres (si vous mesurez 1 mètre 70 indiquez 170) et votre poids en kilogramme"
+      "fr": "Ces valeurs extrêmes sont très rares. Vérifiez votre taille et/ou votre poids,  notamment les unités. La taille doit être en centimètres (par exemple, si vous mesurez 1 mètre 70, indiquez 170) et le poids en kilogrammes."
   },
   "common.bmi.alreadyProvided": {
       "en": "A value has already been provided from you last response",

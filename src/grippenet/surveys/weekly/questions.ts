@@ -718,7 +718,7 @@ export class QAnsmNotDelivered extends BaseChoiceQuestion {
 export class QAnsmDelivedyReplaced extends BaseChoiceQuestion {
     
     constructor(props: ItemProps, defaultKey: string) {
-        super(props, 'Q4ansm', 'single');
+        super(props, defaultKey, 'single');
         this.setOptions({
             questionText: _T("weekly.QAnsmDelivedyReplaced.text", "QAnsmDelivedyReplaced")
         });
@@ -892,7 +892,7 @@ export class Q6ANSM extends BaseChoiceQuestion {
     getResponses(): OptionDef[] { 
         return [
             option_def("0", _T("weekly.Q6ansm.option.no", "No")),
-            as_input_option("1", _T("weekly.Q6ansm.option.yes", "Yes")),
+            as_input_option("1", _T("weekly.Q6ansm.option.yes", "Yes"), _T('weekly.Q6ansm.option.text.other_desc', "If possible describe it")),
         ];
     }
 

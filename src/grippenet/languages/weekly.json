@@ -40,7 +40,7 @@
   },
   "weekly.Q17.sliderLabel": {
     "en": "Slider label",
-    "fr": "Tirer sur le curseur pour choisir une valeur correspondant à votre ressenti (0 = Très mal -> 100 = Très bien)"
+    "fr": "Tirer sur le curseur pour choisir une valeur correspondant à votre ressenti (0 = Très mal , 100 = Très bien)"
   },
   "weekly.Q17.noResponseLabel": {
     "en": "noResponseLabel",
@@ -256,7 +256,7 @@
   },
   "weekly.Q1ansm.text": {
     "en": "Q1ansm",
-    "fr": "Suite à cette (ou ces) consultation(s), le professionnel de santé vous a-t-il prescrit un ou plusieurs produits de santé tel qu’un médicament, un dispositif médical (ex : chambre d'inhalation, dispositif d'oxygénothérapie, etc.) ou un vaccin ?"
+    "fr": "Suite à cette (ou ces) consultation(s), le professionnel de santé vous a-t-il prescrit un ou plusieurs produits de santé tel qu’un médicament, un dispositif médical (chambre d'inhalation, dispositif d'oxygénothérapie, etc.) ou un vaccin ?"
   },
   "weekly.Q1ansm.option.no": {
     "en": "No",
@@ -296,11 +296,11 @@
   },
   "weekly.QAnsmNotDelivered.option.text.painkiller": {
     "en": "Pain killer",
-    "fr": "Médicament contre la douleur ou la fièvre"
+    "fr": "Médicament contre la douleur ou la fièvre (paracétamol, ibuprofène, aspirine, etc.)"
   },
   "weekly.QAnsmNotDelivered.option.desc.painkiller": {
     "en": "tylenol, ...",
-    "fr": "Préciser si possible (paracétamol, ibuprofène, aspirine, etc.) "
+    "fr": "Préciser si possible"
   },
   "weekly.QAnsmNotDelivered.option.text.cough": {
     "en": "Cough medication",
@@ -360,7 +360,7 @@
   },
   "weekly.QAnsmProposedAlternative.option.medication": {
     "en": "Other medication",
-    "fr": "Autre médicament (hors générique) (si possible préciser le nom du médicament)"
+    "fr": "Autre médicament (hors générique)"
   },
   "weekly.QAnsmProposedAlternative.option.preparation": {
     "en": "Magistral preparation",
@@ -409,6 +409,10 @@
   "weekly.Q6ansm.helpGroup.answer_tip": {
     "en": "weekly.Q6ansm Question answer tip",
     "fr": ""
+  },
+  "weekly.Q6ansm.option.text.other_desc": {
+    "en": "If possible describe it",
+    "fr": "Précisez si possible"
   },
   "weekly.Q7ansm.option.no": {
     "en": "No",
