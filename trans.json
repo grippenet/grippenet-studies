@@ -1,0 +1,30 @@
+{
+    "intake": {
+        "targets": [
+            "src/grippenet/languages/intake.json",
+            "common/studies/common/languages/fr/intake.json"
+        ],
+        "update": "output/trans/intake.json"
+    },
+    "weekly": {
+        "targets": [
+            "src/grippenet/languages/weekly.json",
+            "common/studies/common/languages/fr/weekly.json"
+        ],
+        "update": "output/trans/weekly.json"
+    },
+    "vaccination": {
+        "targets": [
+            "src/grippenet/languages/vaccination.json",
+            "common/studies/common/languages/fr/vaccination.json"
+        ],
+        "update": "output/trans/vaccination.json"
+    },
+    "common": {
+        "targets": [
+            "src/grippenet/languages/common.json",
+            "common/studies/common/languages/fr/common.json"
+        ],
+        "update": "output/trans/common.json"
+    }
+}
