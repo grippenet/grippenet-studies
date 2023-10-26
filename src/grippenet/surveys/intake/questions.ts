@@ -11,7 +11,7 @@
 // [X] Q17 +8, +9, +10, +11 ....
 // [X] Q34 GastroEnteritisFrequency
 
-import {  questionPools as pool, _T,  ItemQuestion,  ItemProps, BaseChoiceQuestion,transTextComponent,  } from "../../../common"
+import {  questionPools as pool, _T,  ItemQuestion,  ItemProps, BaseChoiceQuestion,transTextComponent, HelpGroupContentType,  } from "../../../common"
 import { ClientExpression as client, as_option, as_input_option,OptionList, markdownComponent, textComponent } from "../../../common";
 import { Item, OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
@@ -22,6 +22,7 @@ import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGe
 
 import ResponseEncoding from "./responses";
 import { text_how_answer, text_why_asking } from "../../../../common/studies/common/questionPools";
+import { BaseBMIQuestion } from "../../questions/bmi";
 
 export class SurveyPrelude extends ItemQuestion {
     
@@ -825,3 +826,33 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
         return o;
     }
 }
+
+
+export class IntakeBMIQuestion extends BaseBMIQuestion {
+
+    constructor(props: ItemProps) {
+        super(props, 'Q38fr');
+    }
+
+    getQuestionText(): Map<string, string> {
+        return _T("intake.Q38fr.title", "Compute your Body Mass Index");
+    }
+
+    getResponseKey(): string {
+        return 'bmi';
+    }
+
+    getHelpGroupContent(): HelpGroupContentType | undefined {
+        return [
+            pool.text_why_asking("intake.Q38fr.helpGroup.why_asking"),
+            {
+                content: _T("intake.Q38fr.helpGroup.asking_reason", "asking reason for the question"),
+            },
+            pool.text_how_answer("intake.Q38fr.helpGroup.how_answer"),
+            {
+                content: _T("intake.Q38fr.helpGroup.answer_tip", "answer howto for the question")
+            }
+        ];
+    }
+}
+

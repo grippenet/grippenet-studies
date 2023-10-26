@@ -3,7 +3,7 @@ import { SurveyItems } from 'case-editor-tools/surveys';
 import { GenericQuestionProps } from "case-editor-tools/surveys/types";
 import { ItemComponent, SurveyItem } from "survey-engine/data_types";
 import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
-import { ItemQuestion, ItemProps, _T, textComponent } from '../../common';
+import { ItemQuestion, ItemProps, _T, textComponent, HelpGroupContentType } from '../../common';
 
 interface bmiProps extends GenericQuestionProps {
     responseKey: string;
@@ -54,6 +54,14 @@ export const bmiItem = (props: bmiProps): SurveyItem => {
         "role": "previousValue",
         "content": text("common.bmi.previousValue", 'Your previous value was')
       },
+      {
+        "role": "notDefined",
+        "content": text("common.bmi.notDefined", 'BMI not defined')
+      },
+      {
+        "role": "keepLastValue",
+        "content": text("common.bmi.keepLastValue", 'I prefer to keep my last value')
+      },
     ];
 
     const mapToRole: MapToRoleType = 'input';
@@ -74,33 +82,21 @@ export const bmiItem = (props: bmiProps): SurveyItem => {
 
 };
 
-interface BMIQuestionProps extends ItemProps {
-    itemKey: string
-    responseKey: string;
-    questionText: Map<string, string> 
-}
-
-export class BMIQuestion extends ItemQuestion {
+export abstract  class BaseBMIQuestion extends ItemQuestion {
     
-    responseKey: string;
-
-    questionText: Map<string, string> 
-   
-    constructor(props: BMIQuestionProps) {
-        super(props, props.itemKey);
-        this.responseKey = props.responseKey;
-        this.questionText = props.questionText;
-    }
+    abstract getResponseKey(): string;
+    abstract getQuestionText(): Map<string,string>;
 
     buildItem(): SurveyItem {
         return bmiItem({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
-            responseKey: this.responseKey,
-            questionText: this.questionText,
+            responseKey: this.getResponseKey(),
+            questionText: this.getQuestionText(),
             topDisplayCompoments: [
                 textComponent({key:'nts', content: _T('common.bmi.text.not_stored', "Weight and height value will not be stored")})
-            ]
+            ],
+            helpGroupContent: this.getHelpGroupContent()
         });
     }
 }
