@@ -350,6 +350,10 @@
     "en": "Yes",
     "fr": "Oui"
   },
+  "weekly.QAnsmDelivedyReplaced.option.dnk": {
+    "en": "I dont' know",
+    "fr": "Je ne sais pas"
+  },
   "weekly.QAnsmProposedAlternative.text": {
     "en": "QAnsmProposedAlternative",
     "fr": "Quelle(s) alternative(s) le pharmacien vous a-t-il proposée(s) ?"
@@ -437,5 +441,17 @@
   "weekly.Q7ansm.helpGroup.answer_tip": {
     "en": "weekly.Q7ansm Question answer tip",
     "fr": "Cochez « Oui » si un mineur de votre entourage a été confronté à la non délivrance de tout ou une partie d’une de ses ordonnances pour raison de rupture de stock, qu'il s'agisse de médicaments (ex : paracétamol, antibiotique), de dispositif médical (ex : chambre d'inhalation, dispositif d'oxygénothérapie, etc.) ou d'un vaccin."
+  },
+  "weekly.Q8ansm.text": {
+    "en": "QAnsmNotDelivered",
+    "fr": "Qu’est-ce qui n'a a pas été délivré ?"
+  },
+  "weekly.Q9ansm.text": {
+    "en": "QAnsmDelivedyReplaced",
+    "fr": "Est-ce qu'au moins un autre produit de santé a été proposé par le pharmacien à la place de celui ou ceux prescrits ?"
+  },
+  "weekly.Q10ansm.text": {
+    "en": "QAnsmDelivedyReplaced",
+    "fr": "Quelle(s) alternative(s) le pharmacien a-t-il proposée(s) ?"
   }
 }

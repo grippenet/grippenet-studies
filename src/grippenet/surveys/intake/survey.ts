@@ -5,7 +5,6 @@ import * as intake from "./questions";
 import { GrippenetFlags } from "../../flags";
 import pool = questionPools.intake;
 import { intakeSurveyKey } from "../../constants";
-import { BMIQuestion } from "../../questions/bmi";
 export class IntakeDef extends SurveyBuilder {
 
     Q_birthdate?: pool.DateOfBirth;
@@ -110,13 +109,7 @@ export class IntakeDef extends SurveyBuilder {
         items.push(Q_birthdate);
         this.prefillWithLastResponse(Q_birthdate);
 
-        const QBMI = new BMIQuestion({
-            parentKey: rootKey, 
-            isRequired: false, 
-            itemKey: 'Q38fr', 
-            responseKey:'bmi',
-            questionText: _T("intake.Q38fr.title", "Compute your Body Mass Index"),
-        });
+        const QBMI = new intake.IntakeBMIQuestion({parentKey: rootKey});
         items.push(QBMI);
         this.prefillWithLastResponse(QBMI);
 

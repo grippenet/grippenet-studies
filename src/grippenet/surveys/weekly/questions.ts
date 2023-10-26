@@ -693,14 +693,13 @@ export class QAnsmNotDelivered extends BaseChoiceQuestion {
     constructor(props: ItemProps, defaultKey: string) {
         super(props, defaultKey, 'multiple');
         this.setOptions({
-            questionText: _T("weekly.QAnsmNotDelivered.text", "Q3ansm")
+            questionText: _T("weekly." + defaultKey + ".text", "Q3ansm", "weekly.QAnsmNotDelivered.text")
         });
     }
 
     getResponses(): OptionDef[] { 
 
         const desc = _T("weekly.QAnsmNotDelivered.option.input_desc","Name it if possible");
-
 
         return [
             as_input_option('1', _T('weekly.QAnsmNotDelivered.option.text.painkiller','Pain killer'), _T("weekly.QAnsmNotDelivered.option.desc.painkiller", "tylenol, ...")),
@@ -710,7 +709,7 @@ export class QAnsmNotDelivered extends BaseChoiceQuestion {
             as_input_option('4', _T('weekly.QAnsmNotDelivered.option.text.antibiotic.', 'Antibiotic'), desc),
             as_input_option('8', _T('weekly.QAnsmNotDelivered.option.text.device', 'Medical device'), _T("weekly.QAnsmNotDelivered.option.desc.device", "inhalation chamber, ...")),
             as_input_option('9', _T('weekly.QAnsmNotDelivered.option.text.vaccine', 'Vaccine'), desc),
-            option_input_other('5', _T('weekly.QAnsmNotDelivered.option.text.other', 'Other'), 'weekly.QAnsmNotDelivered.option.text.other_desc'),            
+            as_input_option('5', _T('weekly.QAnsmNotDelivered.option.text.other', 'Other'), desc),            
         ];
     }
 }
@@ -720,7 +719,7 @@ export class QAnsmDelivedyReplaced extends BaseChoiceQuestion {
     constructor(props: ItemProps, defaultKey: string) {
         super(props, defaultKey, 'single');
         this.setOptions({
-            questionText: _T("weekly.QAnsmDelivedyReplaced.text", "QAnsmDelivedyReplaced")
+            questionText: _T("weekly." + defaultKey + ".text", "QAnsmDelivedyReplaced", "weekly.QAnsmDelivedyReplaced.text")
         });
     }
 
@@ -728,6 +727,7 @@ export class QAnsmDelivedyReplaced extends BaseChoiceQuestion {
         return [
             option_def("0", _T("weekly.QAnsmDelivedyReplaced.option.no", "No")),
             option_def("1", _T("weekly.QAnsmDelivedyReplaced.option.yes", "Yes")),
+            option_def("99", _T("weekly.QAnsmDelivedyReplaced.option.dnk", "I dont know")),
         ];
     }
 
@@ -742,7 +742,7 @@ export class QAnsmProposedAlternative extends BaseChoiceQuestion {
     constructor(props: ItemProps, defautlKey:string) {
         super(props, defautlKey, 'multiple');
         this.setOptions({
-            questionText: _T("weekly.QAnsmProposedAlternative.text", "QAnsmProposedAlternative")
+            questionText: _T("weekly." + defautlKey + ".text", "QAnsmProposedAlternative", "weekly.QAnsmProposedAlternative.text")
         });
     }
 
@@ -757,7 +757,7 @@ export class QAnsmProposedAlternative extends BaseChoiceQuestion {
             option_def("2", _T("weekly.QAnsmProposedAlternative.option.medication", "Other medication"), {role:'input', description:desc}),
             option_def("3", _T("weekly.QAnsmProposedAlternative.option.preparation", "Magistral preparation")),
             option_def("4", _T("weekly.QAnsmProposedAlternative.option.generic", "Generic"), {role:'input', description:desc}),
-            option_input_other('5', _T('weekly.QAnsmProposedAlternative.option.text.other', 'Other'), 'QAnsmProposedAlternative.option.text.other_desc'),
+            option_def('5', _T('weekly.QAnsmProposedAlternative.option.text.other', 'Other'), {role:'input', description:desc}),
             option_def("99", _T("weekly.QAnsmProposedAlternative.option.dnk", "I dont know")),
         ];
 

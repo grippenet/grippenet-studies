@@ -44,17 +44,38 @@ export class VaccinationDef extends SurveyBuilder {
 
     buildVaccGroup(rootKey: string): ItemBuilder[] {
 
+        /**
+         * "SurveyPrelude": "vaccination.P0",
+        "lastSubmissionQuestion": "vaccination.submission",
+        "FluVaccinationVoucher": "vaccination.Q18",
+        "FluVaccineThisSeason": "vaccination.Q10",
+        "FluVaccineThisSeasonWhen": "vaccination.Q10b",
+        "FluVaccinationByWhom": "vaccination.Q10e",
+        "FluVaccineThisSeasonReasonFor": "vaccination.Q10c",
+        "FluVaccineThisSeasonReasonAgainst": "vaccination.Q10d",
+        "FluVaccineLastSeason": "vaccination.Q9",
+        "CovidVac": "vaccination.Q35",
+        "CovidDateLastVaccine": "vaccination.Q35j",
+        "CovidVaccineAgainstReasons": "vaccination.Q35m",
+        "LastCovid19Infection": "vaccination.Q37",
+        "FinalText": "vaccination.surveyEnd"
+         */
+
         const items : ItemBuilder[] = [];
 
+        // Q18
         const Q_flu_vaccin_voucher = new vaccination.FluVaccinationVoucher({parentKey:rootKey, isRequired:true});
         items.push(Q_flu_vaccin_voucher);
         
+        //Q10
         const Q_flu_vaccine_this_season = new pool.FluVaccineThisSeason({parentKey:rootKey, isRequired:true});
         items.push(Q_flu_vaccine_this_season);
         
+        // Q10b
         const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_when);
 
+        // Q10e
         const Q_flu_vaccin_by_whom = new vaccination.FluVaccinationByWhom({parentKey: rootKey, isRequired: false});
         Q_flu_vaccin_by_whom.setCondition(Q_flu_vaccine_this_season.createIsVaccinatedCondition());
         items.push(Q_flu_vaccin_by_whom);
@@ -62,6 +83,7 @@ export class VaccinationDef extends SurveyBuilder {
         const Q_flu_vaccine_this_season_reasons_for = new vaccination.FluVaccineThisSeasonReasonFor({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_reasons_for);
 
+        // Q10d
         const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:rootKey, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_reasons_against);
 
