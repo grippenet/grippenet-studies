@@ -232,5 +232,9 @@
   "intake.QEnd.option": {
     "en": "",
     "fr": ""
+  },
+  "intake.Q38fr.title": {
+    "en": "Compute your Body Mass Index",
+    "fr": "Quel est votre indice de masse corporelle (IMC) ?"
   }
 }
