@@ -16,6 +16,7 @@ export const lastSubmissionItem = (props: lastSubmissionItemProps): SurveyItem =
     const ge = new ComponentEditor(undefined, {isGroup: true, role:'text'});
     
     ge.addItemComponent(textComponent({
+        'key':'text',
         'content':_T(props.trans + '.text', "last submission at ", "common.lastsubmission.text")
     }));
 
