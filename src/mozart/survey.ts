@@ -9,8 +9,6 @@ import responses from "./responses";
 import { num_as_arg, optionRoles, surveyItemKey, textComponent } from "../common";
 import { postalCode } from "../grippenet/questions";
 import { GrippenetFlags } from "../grippenet/flags";
-import { french } from "../utils";
-import { singleChoicePrefix } from "../../common/studies/common/questionPools";
 import { generateLocStrings } from "case-editor-tools/surveys/utils/simple-generators";
 
 export class MozartSurvey extends SurveyDefinition {
@@ -32,8 +30,8 @@ export class MozartSurvey extends SurveyDefinition {
             const m = Object.fromEntries(meta.entries());
             this.editor.setMetadata(m);
         }
-        this.next_period = "Il est possible que vous soyez sollicités à l'automne pour répondre à un questionnaire similaire concernant la période juillet-octobre.";
-        this.period = createPeriod("2023-03-01", "2023-06-30", "Mars 2023 à Juin 2023");
+        this.next_period = "Il est possible que vous soyez sollicités au printemps prochain pour répondre à un questionnaire similaire concernant la période novembre 2023 à février 2024.";
+        this.period = createPeriod("2023-07-01", "2023-10-31", "Juillet 2023 à Octobre 2023");
 
         this.editor.setSurveyDescription(generateLocStrings(
             _T("description.0", "Etude épidémiologique sur votre santé et les activités de plein air que vous avez pratiquées au cours de la période "+ this.period.toRange() + ".")
