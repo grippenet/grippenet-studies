@@ -262,8 +262,9 @@ export class VisitedMedicalServiceWhen extends ItemQuestion {
         const rows: rowDef[] = [
             {row:'r1', codes:visits.gp},
             {row:'r2', codes: visits.emergency},
-            {row:'r4', codes:[ visits.other, visits.midwife, visits.pharmacist, visits.scholar,  ], label_from: visits.other},
-            {row:'r5', codes:[visits.other_community, visits.gynecologist ], label_from:visits.other_community }
+            {row:'r4', codes:[ visits.other, visits.midwife, visits.scholar,  ], label_from: visits.other},
+            {row:'r5', codes:[visits.other_community, visits.gynecologist ], label_from:visits.other_community },
+            {row:'r6', codes:[visits.pharmacist ], label_from:visits.pharmacist },
         ];
 
         const matrixRows: MatrixRow[] =  rows.map(r =>  {
