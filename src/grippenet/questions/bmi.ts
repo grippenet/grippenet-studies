@@ -62,6 +62,18 @@ export const bmiItem = (props: bmiProps): SurveyItem => {
         "role": "keepLastValue",
         "content": text("common.bmi.keepLastValue", 'I prefer to keep my last value')
       },
+      {
+        "role": "heightError",
+        "content": text("common.bmi.heightError", "Your height is out of possible bounds. Please indicate a value between 25 and 250")
+      },
+      {
+        "role": "weightError",
+        "content": text("common.bmi.weightError", "Your weight is out of possible bounds. Please indicate a value between 1 and 600")
+      },
+      {
+        "role": "cancelButton",
+        "content": text("common.bmi.cancelButton", "Cancel response")
+      },
     ];
 
     const mapToRole: MapToRoleType = 'input';

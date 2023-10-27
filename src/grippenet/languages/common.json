@@ -91,6 +91,18 @@
       "en": "I prefer to keep my last value",
       "fr": "Je préfère garder ma valeur précédente"
   },
+  "common.bmi.heightError": {
+    "en": "Your height is out of possible bounds. Please indicate a value between 25 and 250",
+    "fr": "Indiquez une valeur entre 25 et 250cm pour la taille. Si vous ne souhaitez pas répondre vous pouvez laisser le champs vide."
+},
+  "common.bmi.weightError": {
+      "en": "Your weight is out of possible bounds. Please indicate a value between 1 and 600",
+      "fr": "Indiquez une valeur de plus de 1 Kg pour le poids. Si vous ne souhaitez pas répondre vous pouvez laisser le champs vide."
+  },
+  "common.bmi.cancelButton": {
+      "en": "Cancel response",
+      "fr": "Annuler ma réponse"
+  },
  "common.qcov16.several_test_realized": {
     "en": "If you have realized several test",
     "fr": "Si vous avez réalisé plusieurs tests et que vous en avez obtenu au moins un positif, considérez ce test pour la réponse"
