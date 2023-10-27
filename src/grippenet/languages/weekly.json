@@ -453,5 +453,29 @@
   "weekly.Q10ansm.text": {
     "en": "QAnsmDelivedyReplaced",
     "fr": "Quelle(s) alternative(s) le pharmacien a-t-il proposée(s) ?"
+  },
+  "weekly.Qcov20.text": {
+    "en": "Did you do a Covid test before to visit a medical service",
+    "fr": "Au moins un des tests réalisés pour savoir si vous aviez la Covid-19 a-t-il été effectué AVANT la première consultation du professionnel de santé ?"
+  },
+  "weekly.Qcov20.option.1": {
+      "en": "Yes, it was negative",
+      "fr": "Oui, le résultat était négatif"
+  },
+  "weekly.Qcov20.option.2": {
+      "en": "Yes, it was positive",
+      "fr": "Oui, le résultat était positif"
+  },
+  "weekly.Qcov20.option.3": {
+      "en": "Yes, result is not known or not interpretable",
+      "fr": "Oui, mais je n’ai pas encore le résultat / le résultat est non interprétable"
+  },
+  "weekly.Qcov20.option.4": {
+      "en": "No",
+      "fr": "Non"
+  },
+  "weekly.Qcov20.option.dnk": {
+      "en": "I dont remember / I dont know",
+      "fr": "Je ne sais pas / Je ne me souviens pas"
   }
 }

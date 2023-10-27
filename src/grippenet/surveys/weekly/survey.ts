@@ -1,6 +1,7 @@
-import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce, GroupQuestion, ItemBuilder, textComponent, ItemQuestion } from "../../../common"
+import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce,  textComponent, ItemQuestion } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
+import * as ansm from "./ansm";
 import { lastSubmissionQuestion } from "../../questions/lastSubmission";
 import { GrippenetFlags } from "../../flags";
 import { weeklySurveyKey } from "../../constants";
@@ -137,6 +138,15 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_visitedMedicalServiceWhen = new weekly.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, isRequired: false, visiteMedicalService: Q_visitedMedicalService});
         hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
 
+        const Q_testBeforeMedical = new weekly.TestBeforeMedicalVisit({parentKey: hasMoreGroupKey, isRequired: false});
+        Q_testBeforeMedical.setCondition(
+            ce.logic.and(
+                Q_symptomImpliedCovidTest.getYesResponseCondition(),
+                Q_visitedMedicalService.getResponseCondition('gp', 'emergency', 'other','other_community')
+            )
+        )
+        hasMoreGroup.addItem(Q_testBeforeMedical.get());
+
         // Qcov18 reasons no medical services 
         const Q_visitedNoMedicalService = new weekly.WhyVisitedNoMedicalService({parentKey:hasMoreGroupKey, keyVisitedMedicalServ: Q_visitedMedicalService.key, isRequired: false, useAnswerTip: false});
         Q_visitedNoMedicalService.setOptions({topDisplayCompoments: [ transTextComponent("common.only_single_response","Only single response")] });
@@ -146,16 +156,16 @@ export class WeeklyDef extends SurveyBuilder {
         
         hasMoreGroup.addItem(Q_visitedNoMedicalService.get());
 
-        const Q1ansm = new weekly.Q1ANSM({parentKey: hasMoreGroupKey});
+        const Q1ansm = new ansm.Q1ANSM({parentKey: hasMoreGroupKey});
         Q1ansm.setCondition(Q_visitedMedicalService.getQ1AnsmCondition());
 
         hasMoreGroup.addItem(Q1ansm.get());
 
-        const Q2ansm = new weekly.Q2ANSM({parentKey: hasMoreGroupKey});
+        const Q2ansm = new ansm.Q2ANSM({parentKey: hasMoreGroupKey});
         Q2ansm.setCondition(Q1ansm.getYesCondition());
         hasMoreGroup.addItem(Q2ansm.get());
 
-        const QDeliveryGroup3 = new weekly.AnsmDeliveryGroup(
+        const QDeliveryGroup3 = new ansm.AnsmDeliveryGroup(
             {
                 parentKey: hasMoreGroupKey, 
                 NotDeliveredKey: 'Q3ansm',
@@ -242,7 +252,7 @@ export class WeeklyDef extends SurveyBuilder {
         const minorFlags = GrippenetFlags.minor;
         const MajorExpression = ce.participantFlags.hasKeyAndValue(minorFlags.key, minorFlags.values.no);
 
-        const QAnsmGroup2 = new weekly.AnsmEndGroup({parentKey: rootKey});
+        const QAnsmGroup2 = new ansm.AnsmEndGroup({parentKey: rootKey});
         QAnsmGroup2.setCondition(ce.logic.and(Q_wantsMore.getYesCondition(), MajorExpression));
     
         this.Q_AnsmDeliveryFailure = QAnsmGroup2.getDeliveryFailureItem();
