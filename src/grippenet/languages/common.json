@@ -93,11 +93,11 @@
   },
   "common.bmi.heightError": {
     "en": "Your height is out of possible bounds. Please indicate a value between 25 and 250",
-    "fr": "Indiquez une valeur entre 25 et 250cm pour la taille. Si vous ne souhaitez pas répondre vous pouvez laisser le champs vide."
+    "fr": "Indiquez une valeur entre 25 et 250 cm pour la taille. Si vous ne souhaitez pas répondre vous pouvez laisser le champ vide."
 },
   "common.bmi.weightError": {
       "en": "Your weight is out of possible bounds. Please indicate a value between 1 and 600",
-      "fr": "Indiquez une valeur de plus de 1 Kg pour le poids. Si vous ne souhaitez pas répondre vous pouvez laisser le champs vide."
+      "fr": "Indiquez une valeur de plus de 1 Kg et de moins de 600Kg pour le poids. Si vous ne souhaitez pas répondre vous pouvez laisser le champ vide."
   },
   "common.bmi.cancelButton": {
       "en": "Cancel response",

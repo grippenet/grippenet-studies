@@ -388,7 +388,7 @@
   },
   "weekly.QAnsmProposedAlternative.option.input_desc": {
     "en": "Name it if possible",
-    "fr": "Précisez si possible"
+    "fr": "Précisez si possible le nom du médicament"
   },
   "weekly.Q6ansm.text": {
     "en": "Q6ansm",
@@ -448,7 +448,7 @@
   },
   "weekly.Q8ansm.text": {
     "en": "QAnsmNotDelivered",
-    "fr": "Qu’est-ce qui n'a a pas été délivré ?"
+    "fr": "Qu’est-ce qui n'a pas été délivré ?"
   },
   "weekly.Q9ansm.text": {
     "en": "QAnsmDelivedyReplaced",

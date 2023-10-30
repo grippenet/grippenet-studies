@@ -235,7 +235,7 @@
   },
   "intake.Q38fr.title": {
     "en": "Compute your Body Mass Index",
-    "fr": "Quels sont votre taille et votre poids ? Cela nous permettra de calculer votre indice de masse corporelle (IMC). ?"
+    "fr": "Quels sont votre taille et votre poids ? Cela nous permettra de calculer votre indice de masse corporelle (IMC)."
   },
   "intake.Q38fr.helpGroup.asking_reason": {
     "en": "asking reason for the question",
