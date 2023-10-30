@@ -43,7 +43,8 @@ export const GrippenetFlags = {
     } as const,
     reminderTester: {
         // Tester of reminder
-        key: 'reminderTester'
+        key: 'reminderTester',
+        values: booleanValues,
     },
     ansmNoChild:{
         key:"ansmQ7skip",
