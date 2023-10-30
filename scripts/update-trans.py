@@ -2,6 +2,7 @@ import json
 import argparse
 import sys
 import os
+import hashlib
 import datetime
 
 def read_json(file):
@@ -21,6 +22,14 @@ def show_help():
     print("  trans.json: trans file to modify")
     print("  target_name: name in trans.json to use")
 
+
+def hash_text(text): 
+    text = trans['fr']
+    if isinstance(text, list):
+        text = '|'.join(text)
+    return hashlib.sha1(text.encode(), usedforsecurity=False).hexdigest()
+
+
 class Target:
 
     def __init__(self, file) -> None:
@@ -37,10 +46,20 @@ class Target:
             print("Reference text is not the same for '%s' : '%s' <=> '%s'" % (name, trans['en'], t['en'] ))
             return 
         text = ""
+        hash = ''
         if 'fr' in trans:
             text = trans['fr']
+            hash = hash_text(text)
+        can_update = True
+        if '_sha1.fr' in trans:
+            old_hash = trans['_sha1.fr']
+            if hash != old_hash:
+                can_update = False
+                print("Initial text has changed in the local version, cannot update '%s'" % name)
         is_todo = isinstance(text, str) and (text == "" or text.startswith('TODO'))
-        if not is_todo:
+        if is_todo:
+           can_update = False
+        if can_update: 
             t['fr'] = trans['fr']
         self.updated.append(name)
 
@@ -113,12 +132,19 @@ data = {
         "Attention aux guillements, si vous mettez des doubles guillemets dans le textes, ils doivent être précédés un anti-slash (\)",
     ]
 }
+
 for target in targets:
     for name, trans in target.data.items():
         if name in data:
+            print("'%s' already in data for %s" % (name, target.file))
             continue
         data[name] = trans
         # data[name]['_from_'] = target.file
+
+for name, trans in data.items():
+    if 'fr' in trans:
+        trans['_sha1.fr'] = hash_text(trans['fr'])
+        
 
 dir = os.path.dirname(update_file)
 new_dir = dir + '/new'
