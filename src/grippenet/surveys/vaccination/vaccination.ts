@@ -1,4 +1,5 @@
 import {  ItemBuilder, _T,questionPools, SurveyBuilder } from "../../../common"
+import { vaccinationSurveyKey } from "../../constants";
 import { GrippenetFlags } from "../../flags";
 import { lastSubmissionQuestion } from "../../questions/lastSubmission";
 import * as vaccination from "./questions";
@@ -11,7 +12,7 @@ export class VaccinationDef extends SurveyBuilder {
 
     constructor(meta:Map<string,string>) {
         super({
-            surveyKey: 'vaccination',
+            surveyKey: vaccinationSurveyKey,
             name: _T( "vaccination.name.0", "Vaccination questionnaire"),
             description: _T(
                 "vaccination.description.0",

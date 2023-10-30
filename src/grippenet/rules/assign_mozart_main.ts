@@ -2,6 +2,7 @@ import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngin
 import { Expression } from "survey-engine/data_types";
 import { RuleSet } from "./base"
 import { GrippenetFlags } from "../flags";
+import { mozartSurveyKey } from "../constants";
 
 const create = (): Expression[]=> {
 
@@ -10,7 +11,7 @@ const create = (): Expression[]=> {
     const mainFlag = GrippenetFlags.main;
     const out: Expression[] = [];
 
-    const mozartKey = 'mozart'
+    const mozartKey = mozartSurveyKey;
 
     const exp = se.ifThen(
         hasParticipantFlagKeyAndValue(mainFlag.key, mainFlag.values.yes),
