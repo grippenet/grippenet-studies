@@ -169,6 +169,7 @@ export class WeeklyDef extends SurveyBuilder {
             {
                 parentKey: hasMoreGroupKey, 
                 NotDeliveredKey: 'Q3ansm',
+                NotDeliveredIdontKnow: false,
                 DelivedyReplaced: 'Q4ansm',
                 ProposedAlternative: 'Q5ansm'
             }
@@ -228,7 +229,7 @@ export class WeeklyDef extends SurveyBuilder {
 
         hasMoreGroup.addItem(maskGroup.get());
         */
-
+       // Qm5
        const QMaskWhyNotWearing = new weekly.MaskWhyNotWearing({parentKey: hasMoreGroupKey});
        QMaskWhyNotWearing.setCondition(
             ce.logic.and(

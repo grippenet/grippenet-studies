@@ -1,5 +1,4 @@
 import { export_json, ExpressionGenerator } from "./grippenet/rules/base";
-import { ruleset } from "./grippenet/rules/update_reminder_weekly";
 import { Expression } from 'survey-engine/data_types';
 
 function as_exp(exp: ExpressionGenerator): Expression[] {
@@ -9,4 +8,21 @@ function as_exp(exp: ExpressionGenerator): Expression[] {
     return exp as Expression[];
 }
 
-export_json(as_exp(ruleset.rules), "output/grippenet/rules/" + ruleset.name);
+const modules: string[] = [
+    "./grippenet/rules/assign_mozart",
+    "./grippenet/rules/assign_mozart_main",
+    "./grippenet/rules/location_catchup"
+];
+
+
+for(const name of modules) {    
+    import(name).then((m)=> {
+        console.log('Building ' + m.ruleset.name);
+        export_json(as_exp(m.ruleset.rules), "output/grippenet/rules/" + m.ruleset.name + ".json");
+    });
+}
+
+
+
+
+

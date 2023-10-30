@@ -85,7 +85,7 @@
   },
   "common.bmi.notDefined": {
     "en": "BMI not defined",
-    "fr": "L'IMC n'est pas défini / Je ne souhaite pas répondre"
+    "fr": "Aucune valeur n'est définie comme réponse à cette question"
   },
   "common.bmi.keepLastValue": {
       "en": "I prefer to keep my last value",

@@ -74,27 +74,37 @@ o	Autre (préciser) Champ libre 5
 
 export class QAnsmNotDelivered extends BaseChoiceQuestion {
     
-    constructor(props: ItemProps, defaultKey: string) {
+    useIdontKnow: boolean;
+
+    constructor(props: ItemProps, defaultKey: string, useIdontKnow: boolean) {
         super(props, defaultKey, 'multiple');
         this.setOptions({
             questionText: _T("weekly." + defaultKey + ".text", "Q3ansm", "weekly.QAnsmNotDelivered.text")
         });
+        this.useIdontKnow = useIdontKnow;
     }
 
     getResponses(): OptionDef[] { 
 
         const desc = _T("weekly.QAnsmNotDelivered.option.input_desc","Name it if possible");
 
-        return [
+        const oo = [
             as_input_option('1', _T('weekly.QAnsmNotDelivered.option.text.painkiller','Pain killer'), _T("weekly.QAnsmNotDelivered.option.desc.painkiller", "tylenol, ...")),
             as_input_option('2', _T('weekly.QAnsmNotDelivered.option.text.cough','Cough medication'), desc),
             as_input_option('3', _T('weekly.QAnsmNotDelivered.option.text.flu', 'Influenza antiviral'), desc),
-            as_input_option('7', _T('weekly.QAnsmNotDelivered.option.text.covid19', 'Covid19 antiviral'), desc),
-            as_input_option('4', _T('weekly.QAnsmNotDelivered.option.text.antibiotic.', 'Antibiotic'), desc),
-            as_input_option('8', _T('weekly.QAnsmNotDelivered.option.text.device', 'Medical device'), _T("weekly.QAnsmNotDelivered.option.desc.device", "inhalation chamber, ...")),
-            as_input_option('9', _T('weekly.QAnsmNotDelivered.option.text.vaccine', 'Vaccine'), desc),
-            as_input_option('5', _T('weekly.QAnsmNotDelivered.option.text.other', 'Other'), desc),            
+            as_input_option('4', _T('weekly.QAnsmNotDelivered.option.text.covid19', 'Covid19 antiviral'), desc),
+            as_input_option('5', _T('weekly.QAnsmNotDelivered.option.text.antibiotic.', 'Antibiotic'), desc),
+            as_input_option('6', _T('weekly.QAnsmNotDelivered.option.text.device', 'Medical device'), _T("weekly.QAnsmNotDelivered.option.desc.device", "inhalation chamber, ...")),
+            as_input_option('7', _T('weekly.QAnsmNotDelivered.option.text.vaccine', 'Vaccine'), desc),
+            as_input_option('9', _T('weekly.QAnsmNotDelivered.option.text.other', 'Other'), desc),
         ];
+
+        if(this.useIdontKnow) {
+            oo.push(option_def('99', _T('weekly.QAnsmNotDelivered.option.text.dnk', 'I dont know')));
+            make_exclusive_options(this.key, oo, ['99']);
+        }
+       
+        return oo;
     }
 }
 
@@ -155,8 +165,10 @@ export class QAnsmProposedAlternative extends BaseChoiceQuestion {
 
 interface AsnmDeliveryProps extends GroupProps {
     NotDeliveredKey: string;
+    NotDeliveredIdontKnow: boolean;
     DelivedyReplaced: string;
     ProposedAlternative: string;
+
 }
 
 export class AnsmDeliveryGroup extends SimpleGroupQuestion {
@@ -164,7 +176,7 @@ export class AnsmDeliveryGroup extends SimpleGroupQuestion {
     constructor(props: AsnmDeliveryProps) {
         super(props, 'AnsmG');
         
-        const QNotDelivered = new QAnsmNotDelivered({parentKey: this.key}, props.NotDeliveredKey);
+        const QNotDelivered = new QAnsmNotDelivered({parentKey: this.key}, props.NotDeliveredKey, props.NotDeliveredIdontKnow);
         this.add(QNotDelivered);
         
         const QDelivedyReplaced = new QAnsmDelivedyReplaced({parentKey: this.key}, props.DelivedyReplaced);
@@ -202,6 +214,7 @@ export class AnsmEndGroup extends SimpleGroupQuestion {
         const deliveryGroup = new AnsmDeliveryGroup({
             parentKey: this.key, 
             NotDeliveredKey: 'Q8ansm',
+            NotDeliveredIdontKnow: true,
             DelivedyReplaced: 'Q9ansm',
             ProposedAlternative: 'Q10ansm'
         });

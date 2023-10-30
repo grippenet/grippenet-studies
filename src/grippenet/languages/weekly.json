@@ -40,7 +40,7 @@
   },
   "weekly.Q17.sliderLabel": {
     "en": "Slider label",
-    "fr": "Tirer sur le curseur pour choisir une valeur correspondant à votre ressenti (0 = Très mal , 100 = Très bien)"
+    "fr": "Tirez sur le curseur pour choisir une valeur correspondant à votre ressenti (0 = Très mal , 100 = Très bien)"
   },
   "weekly.Q17.noResponseLabel": {
     "en": "noResponseLabel",
@@ -300,7 +300,7 @@
   },
   "weekly.QAnsmNotDelivered.option.desc.painkiller": {
     "en": "tylenol, ...",
-    "fr": "Préciser si possible"
+    "fr": "Précisez si possible"
   },
   "weekly.QAnsmNotDelivered.option.text.cough": {
     "en": "Cough medication",
@@ -320,11 +320,11 @@
   },
   "weekly.QAnsmNotDelivered.option.text.device": {
     "en": "Medical device",
-    "fr": "Dispositif médical"
+    "fr": "Dispositif médical (chambre d'inhalation, dispositif d'oxygénothérapie, etc.)"
   },
   "weekly.QAnsmNotDelivered.option.desc.device": {
     "en": "inhalation chamber, ...",
-    "fr": "Préciser si possible (chambre d'inhalation, dispositif d'oxygénothérapie, etc.)"
+    "fr": "Précisez si possible"
   },
   "weekly.QAnsmNotDelivered.option.text.vaccine": {
     "en": "Vaccine",
@@ -336,7 +336,11 @@
   },
   "weekly.QAnsmNotDelivered.option.input_desc": {
     "en": "Name it if possible",
-    "fr": "Préciser si possible"
+    "fr": "Précisez si possible"
+  },
+  "weekly.QAnsmNotDelivered.option.text.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas"
   },
   "weekly.QAnsmDelivedyReplaced.text": {
     "en": "QAnsmDelivedyReplaced",
@@ -384,7 +388,7 @@
   },
   "weekly.QAnsmProposedAlternative.option.input_desc": {
     "en": "Name it if possible",
-    "fr": "Préciser si possible"
+    "fr": "Précisez si possible"
   },
   "weekly.Q6ansm.text": {
     "en": "Q6ansm",
@@ -459,23 +463,23 @@
     "fr": "Au moins un des tests réalisés pour savoir si vous aviez la Covid-19 a-t-il été effectué AVANT la première consultation du professionnel de santé ?"
   },
   "weekly.Qcov20.option.1": {
-      "en": "Yes, it was negative",
-      "fr": "Oui, le résultat était négatif"
+    "en": "Yes, it was negative",
+    "fr": "Oui, le résultat était négatif"
   },
   "weekly.Qcov20.option.2": {
-      "en": "Yes, it was positive",
-      "fr": "Oui, le résultat était positif"
+    "en": "Yes, it was positive",
+    "fr": "Oui, le résultat était positif"
   },
   "weekly.Qcov20.option.3": {
-      "en": "Yes, result is not known or not interpretable",
-      "fr": "Oui, mais je n’ai pas encore le résultat / le résultat est non interprétable"
+    "en": "Yes, result is not known or not interpretable",
+    "fr": "Oui, mais je n’avais pas encore le résultat / le résultat était non interprétable"
   },
   "weekly.Qcov20.option.4": {
-      "en": "No",
-      "fr": "Non"
+    "en": "No",
+    "fr": "Non"
   },
   "weekly.Qcov20.option.dnk": {
-      "en": "I dont remember / I dont know",
-      "fr": "Je ne sais pas / Je ne me souviens pas"
+    "en": "I dont remember / I dont know",
+    "fr": "Je ne sais pas / Je ne me souviens pas"
   }
 }

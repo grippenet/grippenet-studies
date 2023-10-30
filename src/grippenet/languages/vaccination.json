@@ -82,7 +82,7 @@
     "en": "By an occupational med practitioner"
   },
   "vaccination.Q10e.option.other": {
-    "fr": "Par un professionnel d’une autre spécialité (préciser)",
+    "fr": "Par un professionnel d’une autre spécialité",
     "en": "By another kind of practitioner"
   },
   "vaccination.Q18.text": {
@@ -143,6 +143,6 @@
   },
   "vaccination.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses.",
-    "fr": "Merci pour vos réponses ! Vous pouvez maintenant valider votre questionnaire en cliquant sur le bouton ci-dessous."
+    "fr": "Merci pour vos réponses ! Vous pouvez maintenant valider votre questionnaire en cliquant ci-dessous."
   }
 }
