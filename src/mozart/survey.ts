@@ -4,7 +4,7 @@ import {  SimpleGroupQuestion, ClientExpression as client,   as_input_option, as
 import { SurveyItems } from "case-editor-tools/surveys";
 import { ComponentGenerators } from "case-editor-tools/surveys/utils/componentGenerators";
 import { _T, options_french, ObservationPeriod, createPeriod } from "./helpers";
-import { common_other, create_period_label, DontKnowLabel, PiqureGroup, several_answers, YesNo } from "./question";
+import { common_other, create_period_label, DontKnowLabel, PiqureGroup, QAge, QSexe, several_answers, YesNo } from "./question";
 import responses from "./responses";
 import { num_as_arg, optionRoles, surveyItemKey, textComponent } from "../common";
 import { postalCode } from "../grippenet/questions";
@@ -30,8 +30,8 @@ export class MozartSurvey extends SurveyDefinition {
             const m = Object.fromEntries(meta.entries());
             this.editor.setMetadata(m);
         }
-        this.next_period = "Il est possible que vous soyez sollicités au printemps prochain pour répondre à un questionnaire similaire concernant la période novembre 2023 à février 2024.";
-        this.period = createPeriod("2023-07-01", "2023-10-31", "Juillet 2023 à Octobre 2023");
+        this.next_period = "Il est possible que vous soyez sollicités au début de l'été prochain pour répondre à un questionnaire similaire concernant la période mars à juin 2024.";
+        this.period = createPeriod("2023-11-01", "2024-02-29", "Novembre 2023 à Février 2024");
 
         this.editor.setSurveyDescription(generateLocStrings(
             _T("description.0", "Etude épidémiologique sur votre santé et les activités de plein air que vous avez pratiquées au cours de la période "+ this.period.toRange() + ".")
@@ -45,6 +45,10 @@ export class MozartSurvey extends SurveyDefinition {
         const Q0 = this.Q0(rootKey);
         this.addItem(Q0);
         */
+
+        const asGroup = new AgeSexe(this.key, 'AS0');
+
+        this.addItem(asGroup.get());
 
         const hasRespondedBackground = client.logic.not(client.participantFlags.hasKeyAndValue(GrippenetFlags.mozartS0.key, GrippenetFlags.mozartS0.values.yes));
         
@@ -344,7 +348,35 @@ export class MozartSurvey extends SurveyDefinition {
     }
 
 }
+
+class AgeSexe extends Group {
+    constructor(parentKey:string, groupKey: string, condition?:Expression) {
+        super(parentKey, groupKey);
+    }
+
+    buildGroup(): void {
+
+        const help = SurveyItems.display({
+            parentKey: this.key,
+            itemKey:'n0',
+            content: [
+                textComponent({
+                    content:  _T('age_sexe_help', "Pour les deux questions suivantes, indiquez l'âge et le sexe de la personne concernée par les réponses à ce questionnaire (de vous-même si vous répondez pour vous même ou ceux de la personne pour laquelle vous répondez si il s'agit d'une autre personne de votre foyer). Nous avons rajouté ces deux questions afin de pouvoir nous assurer du participant concerné par les réponses")
+                })
+            ]
+        });
+
+        this.addItem(help);
+
+        const qSexe = new QSexe(this.key, 'sexe');
+        this.addItem(qSexe.get());
+
+        const qAge = new QAge(this.key, 'age');
+        this.addItem(qAge.get());
+    }
     
+}
+
 
 class Section3 extends Group {
     observationPeriod : ObservationPeriod

@@ -13,7 +13,7 @@ builder.build();
 
 const study = builder.getStudy();
 
-study_exporter([study], {'check': true, 'missing': true, 'classNames': true});
+study_exporter([study], {'check': true, 'missing': true, 'classNames': true, 'document': true, languages: ['fr']});
 
 const extra = Object.fromEntries(Array.from(extra_texts.entries()).map((v) => {
     return [v[0], Object.fromEntries(v[1].entries())];

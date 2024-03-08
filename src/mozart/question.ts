@@ -6,7 +6,6 @@ import { fr } from "date-fns/locale";
 import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { singleChoicePrefix } from "../../common/studies/common/questionPools";
 import { ItemQuestion, exp_as_arg, ClientExpression as client, as_option, as_input_option, option_def, textComponent, optionRoles, surveyItemKey, num_as_arg } from "../common";
-import { french } from "../utils";
 import { _T, options_french, ObservationPeriod } from "./helpers";
 import responses from "./responses";
 
@@ -66,6 +65,50 @@ const monthDropdonwOptions = (props: monthOptionsProps): OptionDef => {
     options: oo
   });
 };
+
+const french_text = (text: string)=> {
+  return new Map<string,string>([ ['fr', text]] )
+}
+
+export class QAge extends ItemQuestion {
+  constructor(parent: string, itemKey:string ) {
+    super({parentKey: parent }, itemKey);
+   } 
+
+   buildItem(): SurveySingleItem {
+    return SurveyItems.numericInput({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      questionText: french_text('Age du répondant'),
+      inputLabel: french_text( 'Age en année'),
+      componentProperties: {
+        min: num_as_arg(18),
+        max: num_as_arg(120)
+      }
+    })
+   }
+}
+
+export class QSexe extends ItemQuestion {
+  constructor(parent: string, itemKey:string ) {
+    super({parentKey: parent }, itemKey);
+   } 
+
+   buildItem(): SurveySingleItem {
+    return SurveyItems.singleChoice({
+      parentKey: this.parentKey,
+      itemKey: this.itemKey,
+      isRequired: this.isRequired,
+      questionText: french_text('Sexe du répondant'),
+      responseOptions: [
+        option_def('M', french_text('Homme')),
+        option_def('F', french_text('Femme')),
+        option_def('I', french_text('Je ne souhaite pas répondre'))
+      ]
+    })
+   }
+}
 
 export class Q10a extends ItemQuestion {
 
