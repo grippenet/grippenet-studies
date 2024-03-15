@@ -29,5 +29,5 @@ builder.build();
 
 const study = builder.getStudy();
 
-study_exporter([study]);
+study_exporter([study], {'check': true, 'missing': true, 'classNames': true, 'document': true, languages: ['fr']});
 
