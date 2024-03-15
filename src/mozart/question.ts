@@ -81,7 +81,8 @@ export class QAge extends ItemQuestion {
       itemKey: this.itemKey,
       isRequired: this.isRequired,
       questionText: french_text('Age du répondant'),
-      inputLabel: french_text( 'Age en année'),
+      inputLabel: french_text('Age en année'),
+      inputMaxWidth: '10em',
       componentProperties: {
         min: num_as_arg(18),
         max: num_as_arg(120)

@@ -46,6 +46,23 @@ export class MozartSurvey extends SurveyDefinition {
         this.addItem(Q0);
         */
 
+        const mainParticipantWarning = SurveyItems.display({
+            parentKey: this.key,
+            itemKey: 'n1',
+            content: [
+                textComponent({
+                    key: 'n1txt',
+                    content: _T("n1.text", "Si plusieurs membres de votre foyer sont inscrits sur ce compte, merci de remplir le questionnaire uniquement pour le participant principal (dont le nom figure en haut de cette page, après la mention \"Répondre aux questions pour\"). Contactez-nous si vous souhaitez changer le participant principal de ce compte (le participant principal doit avoir au moins 18 ans, et est censé être la personne qui remplit les questionnaires du foyer si une seule personne remplit les questionnaires de tout le foyer)."),
+                }),
+                textComponent({
+                    content:  _T('age_sexe_help', "Pour les deux questions suivantes, indiquez l'âge et le sexe de la personne concernée par les réponses à ce questionnaire. Nous avons rajouté ces deux questions afin de pouvoir vérifier le participant concerné par les réponses."),
+                    className: 'mt-1'
+                })
+            ]
+        });
+
+        this.addItem(mainParticipantWarning);
+
         const asGroup = new AgeSexe(this.key, 'AS0');
 
         this.addItem(asGroup.get());
@@ -68,20 +85,7 @@ export class MozartSurvey extends SurveyDefinition {
         });
 
         this.addItem(Section1Head);
-
-        const mainParticipantWarning = SurveyItems.display({
-            parentKey: this.key,
-            itemKey: 'n1',
-            content: [
-                textComponent({
-                    key: 'n1txt',
-                    content: _T("n1.text", "Si plusieurs membres de votre foyer sont inscrits sur ce compte, merci de remplir le questionnaire uniquement pour le participant principal (dont le nom figure en haut de cette page, après la mention \"Répondre aux questions pour\"). Contactez-nous si vous souhaitez changer le participant principal de ce compte."),
-                })
-            ]
-        });
-
-        this.addItem(mainParticipantWarning);
-
+       
         const needLocation = client.participantFlags.hasKeyAndValue(GrippenetFlags.needLocation.key, GrippenetFlags.needLocation.values.yes);
 
         const Q14_itemKey = 'Q14';
@@ -356,18 +360,7 @@ class AgeSexe extends Group {
 
     buildGroup(): void {
 
-        const help = SurveyItems.display({
-            parentKey: this.key,
-            itemKey:'n0',
-            content: [
-                textComponent({
-                    content:  _T('age_sexe_help', "Pour les deux questions suivantes, indiquez l'âge et le sexe de la personne concernée par les réponses à ce questionnaire (de vous-même si vous répondez pour vous même ou ceux de la personne pour laquelle vous répondez si il s'agit d'une autre personne de votre foyer). Nous avons rajouté ces deux questions afin de pouvoir nous assurer du participant concerné par les réponses")
-                })
-            ]
-        });
-
-        this.addItem(help);
-
+        
         const qSexe = new QSexe(this.key, 'sexe');
         this.addItem(qSexe.get());
 
