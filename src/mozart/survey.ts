@@ -30,7 +30,7 @@ export class MozartSurvey extends SurveyDefinition {
             const m = Object.fromEntries(meta.entries());
             this.editor.setMetadata(m);
         }
-        this.next_period = "Il est possible que vous soyez sollicités au début de l'été prochain pour répondre à un questionnaire similaire concernant la période mars à juin 2024.";
+        this.next_period = "Il est possible que vous soyez sollicité(e)s au début de l'été prochain pour répondre à un questionnaire similaire concernant la période mars à juin 2024.";
         this.period = createPeriod("2023-11-01", "2024-02-29", "Novembre 2023 à Février 2024");
 
         this.editor.setSurveyDescription(generateLocStrings(
@@ -55,7 +55,7 @@ export class MozartSurvey extends SurveyDefinition {
                     content: _T("n1.text", "Si plusieurs membres de votre foyer sont inscrits sur ce compte, merci de remplir le questionnaire uniquement pour le participant principal (dont le nom figure en haut de cette page, après la mention \"Répondre aux questions pour\"). Contactez-nous si vous souhaitez changer le participant principal de ce compte (le participant principal doit avoir au moins 18 ans, et est censé être la personne qui remplit les questionnaires du foyer si une seule personne remplit les questionnaires de tout le foyer)."),
                 }),
                 textComponent({
-                    content:  _T('age_sexe_help', "Pour les deux questions suivantes, indiquez l'âge et le sexe de la personne concernée par les réponses à ce questionnaire. Nous avons rajouté ces deux questions afin de pouvoir vérifier le participant concerné par les réponses."),
+                    content:  _T('age_sexe_help', "Pour les deux questions suivantes, indiquez l'âge et le sexe de la personne concernée par les réponses à ce questionnaire."),
                     className: 'mt-1'
                 })
             ]
@@ -176,7 +176,7 @@ export class MozartSurvey extends SurveyDefinition {
 
         const surveyEnd  = SurveyItems.surveyEnd(
            rootKey,
-            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête." + this.next_period + "Comme d’habitude, nous vous tiendrons bien sûr informés des résultats.")
+            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête. " + this.next_period + " Comme d’habitude, nous vous tiendrons bien sûr informé(e)s des résultats.")
         );
         this.addItem(surveyEnd);
     }
