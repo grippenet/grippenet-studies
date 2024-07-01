@@ -17,6 +17,8 @@ export class MozartSurvey extends SurveyDefinition {
 
     next_period: string
 
+    extra_ending: string;
+
     constructor(meta?:Map<string,string>) {
         
         super({
@@ -30,8 +32,9 @@ export class MozartSurvey extends SurveyDefinition {
             const m = Object.fromEntries(meta.entries());
             this.editor.setMetadata(m);
         }
-        this.next_period = "Il est possible que vous soyez sollicité(e)s au début de l'été prochain pour répondre à un questionnaire similaire concernant la période mars à juin 2024.";
-        this.period = createPeriod("2023-11-01", "2024-02-29", "Novembre 2023 à Février 2024");
+        this.extra_ending = " Il est également possible que vous receviez d'ici là un autre questionnaire, portant sur une autre thématique en lien avec l'actualité. Nous vous souhaitons un très bel été !";
+        this.next_period = "Il est possible que vous soyez sollicité(e) à l'automne prochain pour répondre à un questionnaire similaire concernant la période de juillet à octobre 2024.";
+        this.period = createPeriod("2024-03-01", "2024-06-30", "Mars 2024 à Juin 2024");
 
         this.editor.setSurveyDescription(generateLocStrings(
             _T("description.0", "Etude épidémiologique sur votre santé et les activités de plein air que vous avez pratiquées au cours de la période "+ this.period.toRange() + ".")
@@ -176,7 +179,7 @@ export class MozartSurvey extends SurveyDefinition {
 
         const surveyEnd  = SurveyItems.surveyEnd(
            rootKey,
-            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête. " + this.next_period + " Comme d’habitude, nous vous tiendrons bien sûr informé(e)s des résultats.")
+            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête. " + this.next_period + " Comme d’habitude, nous vous tiendrons bien sûr informé(e) des résultats." + this.extra_ending)
         );
         this.addItem(surveyEnd);
     }
