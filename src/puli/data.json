@@ -1,0 +1,1033 @@
+{
+  "q1": {
+    "title": "Avez-vous été confronté à une infestation de punaises de lit depuis avril 2024, que ce soit chez vous ou hors de votre domicile, que vous ayez été piqué ou non ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "_1": " caracteristiques de l'infestation ",
+  "q2o1": {
+    "title": "L’infestation était-elle à votre domicile ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q3o2": {
+    "title": "A quelle date a débuté l’infestation ? ",
+    "options": [
+      {
+        "key": "date",
+        "label": "MM-AAAA"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q4o2": {
+    "title": "L’infestation est-elle toujours en cours ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      }
+    ]
+  },
+  "q5n4": {
+    "title": "A quelle date a-t-elle pris fin ?",
+    "options": [
+      {
+        "key": "date",
+        "label": "MM-AAAA"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q6o2": {
+    "title": "Au total, combien de semaines se sont écoulées entre le moment où vous avez remarqué votre infestation à domicile et l’éradication ?",
+    "options": [
+      {
+        "key": "temps",
+        "label": "xx_Semaines"
+      }
+    ]
+  },
+  "q7o2": {
+    "title": "Les punaises de lit ont-elles été vues dans votre logement ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      }
+    ]
+  },
+  "q8o7": {
+    "title": "Avez-vous une ou plusieurs photos et seriez-vous disposé à nous les envoyer par e-mail ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      }
+    ]
+  },
+  "q9o7": {
+    "title": "Précisez le(s) zone(s) de votre logement où elles ont été vues (plusieurs réponses possibles):",
+    "options": [
+      {
+        "key": "4",
+        "label": "Au niveau du lit"
+      },
+      {
+        "key": "5",
+        "label": "Dans la chambre murs mobilier autour du lit"
+      },
+      {
+        "key": "6",
+        "label": "Autres pièces de l'appartement"
+      },
+      {
+        "key": "7",
+        "label": "Autre (précisez)"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q10a9": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "q11o2": {
+    "title": "Cette infestation due aux punaises de lit a-t-elle été confirmée par un professionnel  ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui, il a vu les punaises de lit"
+      },
+      {
+        "key": "2",
+        "label": "Oui, mais il n'a pas vu les punaises de lit"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q12o11": {
+    "title": "Précisez le(s) professionnel(s) qui ont confirmé(s) l’infestation (plusieurs réponses possibles):",
+    "options": [
+      {
+        "key": "4",
+        "label": "Médecin generaliste"
+      },
+      {
+        "key": "5",
+        "label": "Pharmacien"
+      },
+      {
+        "key": "6",
+        "label": "Biologiste"
+      },
+      {
+        "key": "8",
+        "label": "Désinsectiseur"
+      },
+      {
+        "key": "9",
+        "label": "Détecteur canin"
+      },
+      {
+        "key": "7",
+        "label": "Autre (précisez)"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q13a12": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "q14o2": {
+    "title": "D'après vous, d'ou venaient ces punaises de lit ?",
+    "options": [
+      {
+        "key": "4",
+        "label": "Location de vacances (Airbnb, camping, auberge de jeunesse...)"
+      },
+      {
+        "key": "5",
+        "label": "Hôtel"
+      },
+      {
+        "key": "6",
+        "label": "Hôpital"
+      },
+      {
+        "key": "8",
+        "label": "Transports en commun"
+      },
+      {
+        "key": "9",
+        "label": "Lieu collectif (cinéma...)"
+      },
+      {
+        "key": "10",
+        "label": "Séjour chez un tiers (famille,amis)"
+      },
+      {
+        "key": "11",
+        "label": "Par un voisin touché"
+      },
+      {
+        "key": "12",
+        "label": "Vêtements ou mobilier d'occasion"
+      },
+      {
+        "key": "7",
+        "label": "Autre (précisez)"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q15a14": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "q16o2": {
+    "title": "Ce lieu était-il en France métropolitaine ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q17o2": {
+    "title": "Combien de temps s’est écoulé entre le contact avec la source d’exposition et le moment où vous avez remarqué l’infestation à votre domicile ? (en chiffre)",
+    "options": [
+      {
+        "key": "temps",
+        "label": "xx_Semaines"
+      }
+    ]
+  },
+  "q18o2": {
+    "title": "Etait-ce la première fois que votre logement était infesté par des punaises de lit ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q19n18": {
+    "title": "Combien de fois par le passé votre logement a-t-il connu des infestations de punaises de lit  ?",
+    "options": [
+      {
+        "key": "valeur",
+        "label": "x"
+      }
+    ]
+  },
+  "q20o2": {
+    "title": "Dans quel type de logement vivez-vous ?",
+    "options": [
+      {
+        "key": "4",
+        "label": "Maison"
+      },
+      {
+        "key": "5",
+        "label": "Appartement"
+      },
+      {
+        "key": "6",
+        "label": "Chambre dans un logement partagé (colocation, chambre d'hôtel...)"
+      },
+      {
+        "key": "7",
+        "label": "Autre (précisez)"
+      }
+    ]
+  },
+  "q21a20": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "q22n2": {
+    "title": "D'après vous, d'ou venaient ces punaises de lit ?",
+    "options": [
+      {
+        "key": "4",
+        "label": "Location de vacances (Airbnb, camping, auberge de jeunesse...)"
+      },
+      {
+        "key": "5",
+        "label": "Hôtel"
+      },
+      {
+        "key": "6",
+        "label": "Hôpital"
+      },
+      {
+        "key": "8",
+        "label": "Transports en commun"
+      },
+      {
+        "key": "9",
+        "label": "Lieu collectif (cinéma...)"
+      },
+      {
+        "key": "10",
+        "label": "Séjour chez un tiers (famille,amis)"
+      },
+      {
+        "key": "11",
+        "label": "Par un voisin touché"
+      },
+      {
+        "key": "12",
+        "label": "Vêtements ou mobilier d'occasion"
+      },
+      {
+        "key": "7",
+        "label": "Autre (précisez)"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q23a22": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "q24n2": {
+    "title": "Ce lieu était-il en France métropolitaine ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q25n2": {
+    "title": "A quelle date avez-vous été exposé ?",
+    "options": [
+      {
+        "key": "date",
+        "label": "MM-AAAA"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "_2": "Lesions cutanees",
+  "q26o1": {
+    "title": " Dans le cadre de cette infestation, avez-vous été piqué par les punaises de lit ? ",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q27o26": {
+    "title": " Les zones touchées étaient-elles des zones couvertes ou découvertes par des vêtements la nuit ? (plusieurs réponses possibles) :",
+    "options": [
+      {
+        "key": "4",
+        "label": "Zones couvertes"
+      },
+      {
+        "key": "5",
+        "label": "Zones découvertes"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q28o26": {
+    "title": "Quelles étaient la ou les zones touchées (plusieurs réponses possibles) :",
+    "options": [
+      {
+        "key": "4",
+        "label": "Bras"
+      },
+      {
+        "key": "5",
+        "label": "Jambes"
+      },
+      {
+        "key": "6",
+        "label": "Tronc (torse,ventre,dos)"
+      },
+      {
+        "key": "8",
+        "label": "Tête ou cou"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q29o26": {
+    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présenté en même temps",
+    "options": [
+      {
+        "key": "4",
+        "label": "moins de 10"
+      },
+      {
+        "key": "5",
+        "label": "entre 10 et 50"
+      },
+      {
+        "key": "6",
+        "label": "Plus de 50"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "q30o26": {
+    "title": " Les piqûres semblaient-elles regroupées par 3 ou plus ( que cela soit alignées ou en triangle) ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "_3": " Impact psychologique",
+  "q31o1": {
+    "title": " Dans quelle mesure avez-vous ressenti une dégradation de votre état de santé psychologique en lien avec cette infestation ?",
+    "options": [
+      {
+        "key": "0",
+        "label": "Aucune"
+      },
+      {
+        "key": "4",
+        "label": "Légère"
+      },
+      {
+        "key": "5",
+        "label": "Modéré"
+      },
+      {
+        "key": "6",
+        "label": "Important"
+      }
+    ]
+  },
+  "q32o1": {
+    "title": "Quel impact cette infestation a-t-elle eu sur votre sommeil ?",
+    "options": [
+      {
+        "key": "0",
+        "label": "Aucune"
+      },
+      {
+        "key": "4",
+        "label": "Légère"
+      },
+      {
+        "key": "5",
+        "label": "Modéré"
+      },
+      {
+        "key": "6",
+        "label": "Important"
+      }
+    ]
+  },
+  "qxo1": {
+    "title": "Au cours de la période d’infestation par des punaises de lit, à quelle fréquence avez-vous été dérangé par les problèmes suivants ?",
+    "options": [
+      {
+        "key": "sqx_1",
+        "label": "Sentiment de nervosité, d’anxiété ou de tension"
+      },
+      {
+        "key": "sqx_2",
+        "label": "Incapable d’arrêter de s’inquiéter ou de contrôler ses inquiétude"
+      },
+      {
+        "key": "sqx_3",
+        "label": "Se sentir triste, déprimé(e) ou désespéré(e)"
+      },
+      {
+        "key": "sqx_4",
+        "label": "Peu d’intérêt ou de plaisir à faire des choses"
+      }
+    ],
+    "scale": [
+      {
+        "key": "0",
+        "label": "Jamais"
+      },
+      {
+        "key": "4",
+        "label": "Plusieurs jours"
+      },
+      {
+        "key": "5",
+        "label": "Plus de 7 jours"
+      },
+      {
+        "key": "6",
+        "label": "Presque tout les jours"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "qx1o1": {
+    "title": "Avez-vous évité certains lieux du fait de l’infestation due aux punaises de lit ?",
+    "options": [
+      {
+        "key": "4",
+        "label": "Très souvent"
+      },
+      {
+        "key": "5",
+        "label": "Souvent"
+      },
+      {
+        "key": "6",
+        "label": "Parfois"
+      },
+      {
+        "key": "0",
+        "label": "Jamais"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "qx2oqx1": {
+    "title": "Pouvez-vous préciser les lieux concernés ? (plusieurs réponses possibles)",
+    "options": [
+      {
+        "key": "4",
+        "label": "Votre habitation"
+      },
+      {
+        "key": "5",
+        "label": "L'habitation de vos proches"
+      },
+      {
+        "key": "6",
+        "label": "Les transports en commun"
+      },
+      {
+        "key": "8",
+        "label": "Les hôtels"
+      },
+      {
+        "key": "9",
+        "label": "Les cinémas"
+      },
+      {
+        "key": "7",
+        "label": "Autre(précisez)"
+      }
+    ]
+  },
+  "qx3aqx2": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "_4": "Impact sur les activités",
+  "note_cotation": "Pour les questions ci-dessous, utiliser la cotation suivante : 0 : « pas du tout » ; 1, 2 ou 3 : « légèrement » ; 4, 5 ou 6 : « moyennement » ; 7, 8 ou 9 : « beaucoup » ; 10 « énormément ».",
+  "qx4o1": {
+    "title": " Au cours de la période d’infestation par des punaises de lit, les symptômes ou signes cliniques liés aux punaises de lit ont:",
+    "options": [
+      {
+        "key": "sqx4_1",
+        "label": " perturbé votre travail (rémunéré, bénévolat ou formation) et /ou vos études :"
+      },
+      {
+        "key": "sqx4_2",
+        "label": " perturbé votre vie sociale et/ ou vos loisirs :"
+      },
+      {
+        "key": "sqx4_3",
+        "label": " perturbé votre vie familiale et/ou vos tâches domestiques :"
+      }
+    ],
+    "scale": [
+      {
+        "key": "0",
+        "label": 0
+      },
+      {
+        "key": "1",
+        "label": 1
+      },
+      {
+        "key": "2",
+        "label": 2
+      },
+      {
+        "key": "3",
+        "label": 3
+      },
+      {
+        "key": "4",
+        "label": 4
+      },
+      {
+        "key": "5",
+        "label": 5
+      },
+      {
+        "key": "6",
+        "label": 6
+      },
+      {
+        "key": "7",
+        "label": 7
+      },
+      {
+        "key": "8",
+        "label": 8
+      },
+      {
+        "key": "9",
+        "label": 9
+      },
+      {
+        "key": "10",
+        "label": 10
+      },
+      {
+        "key": "11",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "_5": "Recours aux soins",
+  "qx5o1": {
+    "title": " Avez-vous consulté un ou plusieurs médecins généralistes pour des symptômes (démangeaisons, anxiété, insomnie…) en lien avec cette infestation ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "qx6ox5": {
+    "title": "Pour quel type de symptômes avez-vous consulté ?",
+    "options": [
+      {
+        "key": "4",
+        "label": "Symptômes physiques"
+      },
+      {
+        "key": "5",
+        "label": "Symptômes psychologiques"
+      },
+      {
+        "key": "6",
+        "label": "Les deux"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "qx7oqx5": {
+    "title": "Combien de fois avez-vous consulté ce ou ces médecins ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "1 fois"
+      },
+      {
+        "key": "2",
+        "label": "2 fois"
+      },
+      {
+        "key": "3",
+        "label": "3 fois"
+      },
+      {
+        "key": "4",
+        "label": "3 fois ou plus"
+      }
+    ]
+  },
+  "qx8o1": {
+    "tilte": "Avez-vous consulté un médecin d’une autre spécialité (hors médecine générale) pour des symptômes en lien avec cette infestation (dermatologue, psychiatre…) ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "qx9oqx8": {
+    "title": "De quelle(s) spécialité(s) médicale(s) ? (plusieurs réponses possibles)",
+    "options": [
+      {
+        "key": "4",
+        "label": "Dermatologue"
+      },
+      {
+        "key": "5",
+        "label": "Psychiatre"
+      },
+      {
+        "key": "7",
+        "label": "Autre(précisez)"
+      }
+    ]
+  },
+  "qx10aqx9": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "qx11o1": {
+    "title": "Avez-vous consulté un autre professionnel de santé pour des symptômes en lien avec cette infestation (pharmacien, infirmier …) ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "qx12oqx11": {
+    "title": "Quel(s) autre(s) professionnel(s) de santé avez-vous consulté ? (plusieurs réponses possibles)",
+    "options": [
+      {
+        "key": "4",
+        "label": "Pharmacien"
+      },
+      {
+        "key": "5",
+        "label": "Infirmier"
+      },
+      {
+        "key": "7",
+        "label": "Autre(précisez)"
+      }
+    ]
+  },
+  "qx13aqx12": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "qx14oqx5qx8": {
+    "title": "Avez-vous eu une prescription médicale en lien avec cette infestation ?",
+    "options": [
+      {
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "qx15oqx14": {
+    "title": "Qu'est-ce-que le médecin vous a prescrit ? (plusieurs réponses possibles)",
+    "options": [
+      {
+        "key": "4",
+        "label": "Antihistaminique"
+      },
+      {
+        "key": "5",
+        "label": "Antibiotique en application cutanée"
+      },
+      {
+        "key": "6",
+        "label": "Antibiotique par voie générale"
+      },
+      {
+        "key": "8",
+        "label": "Corticothérapie locale (crème)"
+      },
+      {
+        "key": "9",
+        "label": "Antiseptique"
+      },
+      {
+        "key": "10",
+        "label": "Anxiolytique"
+      },
+      {
+        "key": "11",
+        "label": "Hypnotique"
+      },
+      {
+        "key": "12",
+        "label": "Antidépresseur"
+      },
+      {
+        "key": "7",
+        "label": "Autre"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+  },
+  "qx16oqx5qx8": {
+    "title": "Pendant la période de l’infestation, vous a-t-on préscrit un arrêt de travail en lien avec l’infestation ?",
+    "options": [
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "1",
+        "label": "Oui, un seul"
+      },
+      {
+        "key": "2",
+        "label": "Oui, plusieurs"
+      }
+    ]
+  },
+  "qx17oqx16": {
+    "title": "Quelle a été la durée totale du ou des arrêts de travail que l’on vous a prescrit(s) ?",
+    "options": [
+      {
+        "key": "temps",
+        "label": "xx_Semaines"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      },
+      {
+        "key": "0",
+        "label": "Je ne souhaite pas répondre"
+      }
+    ]
+  },
+  "_6": "Eradication",
+  "qx18oq1": {
+    "title": "Comment avez-vous trouvé les informations nécessaires pour éradiquer l’infestation ?",
+    "options": [
+      {
+        "key": "4",
+        "label": "Bouche à oreille"
+      },
+      {
+        "key": "5",
+        "label": "Site internet du gouvernement"
+      },
+      {
+        "key": "6",
+        "label": "Autre site internet"
+      },
+      {
+        "key": "8",
+        "label": "Numéro vert national"
+      },
+      {
+        "key": "9",
+        "label": "Pharmacien"
+      },
+      {
+        "key": "10",
+        "label": "Médecin"
+      },
+      {
+        "key": "11",
+        "label": "Désinsectiseur"
+      },
+      {
+        "key": "7",
+        "label": "Autre(précisez)"
+      }
+    ]
+  },
+  "qx19aqx18": {
+    "title": "Précisez",
+    "options": [
+      {
+        "key": "champ_libre",
+        "label": "réponse grippenaute"
+      }
+    ]
+  }
+}
