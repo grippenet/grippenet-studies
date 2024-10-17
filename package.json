@@ -5,11 +5,12 @@
   "scripts": {
     "build": "tsc",
     "prestart": "npm run-script build",
-    "test": "jest --config jestconfig.json",
+    "test": "jest",
     "start": "node  --report-uncaught-exception build/src/index.js",
     "common": "npm run-script build && node  --report-uncaught-exception build/src/build_common.js",
     "grippenet": "npm run-script build && node  --report-uncaught-exception build/src/build_grippenet.js",
     "mozart": "npm run-script build && node  --report-uncaught-exception build/src/build_mozart.js",
+    "puli": "npm run-script build && node  --report-uncaught-exception build/src/build_puli.js",
     "build-test": "npm run-script build && node  --report-uncaught-exception build/src/build_test.js",
     "build-rules": "npm run-script build && node  --report-uncaught-exception build/src/build_rules.js"
   },
@@ -19,7 +20,8 @@
     "case-editor-tools": "^1.6.0",
     "survey-engine": "^1.2.1",
     "date-fns": "^2.29.3",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "ifn-survey-tools":"^0.0.1"
   },
   "devDependencies": {
     "jest": "^29.0.3",
