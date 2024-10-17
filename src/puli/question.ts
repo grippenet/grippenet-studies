@@ -1,10 +1,13 @@
 import { SurveyItem, Expression, SurveySingleItem } from "survey-engine/data_types";
-import { as_option, BaseChoiceQuestion, exp_as_arg, ItemQuestion, option_def, ClientExpression as client, textComponent, as_input_option, } from "../common";
+import { as_option, BaseChoiceQuestion, exp_as_arg, ItemQuestion, option_def, ClientExpression as client, textComponent, as_input_option, make_exclusive_options, } from "../common";
 import { SurveyItems } from "case-editor-tools/surveys";
 import { _T } from "./helpers";
 import { QuestionInfo, question_info } from "./data";
-import { Item, OptionDef } from "case-editor-tools/surveys/types";
+import { Item, OptionDef, StyledTextComponentProp, ResponsiveSingleChoiceArrayProps } from "case-editor-tools/surveys/types";
 import { QuestionType } from "../../common/types/item";
+import { likertScaleKey } from "case-editor-tools/constants/key-definitions";
+import { initResponsiveSingleChoiceArray } from "case-editor-tools/surveys/responseTypeGenerators/likertGroupComponents";
+import { RandomCodeQuestion as BaseRandomCodeQuestion } from "../grippenet/questions";
 
 interface ItemWithKey {
     key: string;
@@ -43,6 +46,25 @@ type ResponseHandler = (options: OptionDef[])=>OptionDef[];
 interface ChoiceQuestionOptions {
     otherOptions?: string[];
     exclusive?: string[];
+}
+
+export class RandomCodeQuestion extends BaseRandomCodeQuestion {
+    
+    constructor(parentKey:string, itemKey: string, responseKey: string, text: Map<string,string>) {
+        super({
+            parentKey: parentKey,
+            questionText: text,
+            codeConfig: {
+                responseKey: responseKey,
+                codeLabel: _T(itemKey +'.code', "Code à nous communiquer :"),
+                codeAlphabet: "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ",
+                codeSize: 5,
+                codeLink: 'mailto:puli@grippenet.fr?subject=%code%',
+                linkLabel: _T(itemKey + '.link', "Cliquez ici pour envoyer un courriel")
+            }
+        }, itemKey);
+    }
+    
 }
 
 export class ChoiceQuestion extends BaseChoiceQuestion {
@@ -93,6 +115,11 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
                 oo.push(create_option(key, text));                
             });
         }
+
+        if(this.exclusiveOptions) {
+            make_exclusive_options(this.key, oo, this.exclusiveOptions);
+        }
+
         return oo;
     }
 
@@ -166,7 +193,120 @@ export class NumericQuestion extends ItemQuestion {
     }
 }
 
+interface ScaleOption {
+    key: string;
+    className?: string;
+    content: Map<string, string> | Array<StyledTextComponentProp>;
+}
 
+type LikertRow = ResponsiveSingleChoiceArrayProps['rows'][0];
+
+export class LikertQuestion extends ItemQuestion {
+    
+    info: QuestionInfo;
+    
+    constructor(parentKey: string, key: string) {
+        super({"parentKey": parentKey}, key);
+        this.info = question_info(key);
+        if(!this.info.hasScale()) {
+            throw new Error("Cannot use Likert without scale in " + key);
+        }
+        if(!this.info.hasOptions()) {
+            throw new Error("Cannot use Likert without options in " + key);
+        }
+    }
+
+    getScaleOptions() {
+        if(!this.info.scale) {
+            return [];
+        }
+        const oo : ScaleOption[] = [];
+        this.info.scale.forEach((value, key) => {
+            oo.push({"key":  key, content: _T(this.key + '.scale.' + key, value)});
+        });
+        return oo;
+    }
+
+    getRows(): LikertRow[] {
+        if(!this.info.options) {
+            return [];
+        }
+        const oo: LikertRow[] = [];
+        this.info.options.forEach((value, key)=> {
+            oo.push({"key": key, "content": text(this, "opt." + key, value)});
+        });
+        return oo;
+    }
+
+    getTopDisplay() {
+        if(this.info.top) {
+            return [textComponent({
+                'key': 'top',
+                content: text(this, 'top', this.info.top)
+            })];
+        }
+        return undefined;
+    }
+
+    buildItem() {
+        return SurveyItems.responsiveSingleChoiceArray({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            scaleOptions: this.getScaleOptions(),
+            questionText: text(this, 'title', this.info.title),
+            rows: this.getRows(),
+            defaultMode: "horizontal",
+            topDisplayCompoments: this.getTopDisplay()
+        })
+    }
+} 
+
+    
+interface NumberDontKnowQuestionOpts {
+    inputLabel?:string;
+}
+
+export class NumberDontKnowQuestion extends ItemQuestion {
+
+    static readonly DateComponent = 'rg.1';
+ 
+    info: QuestionInfo;
+
+    inputLabel: string;
+    
+   constructor(parent: string, itemKey:string, opts?: NumberDontKnowQuestionOpts) {
+     super({parentKey: parent }, itemKey);
+     this.info = question_info(itemKey);
+     this.inputLabel = "Entrez un nombre";
+     if(opts) {
+        if(opts.inputLabel) {
+            this.inputLabel = opts.inputLabel;
+        }
+     }
+   } 
+   
+   buildItem(): SurveySingleItem {
+         return SurveyItems.singleChoice({
+         parentKey: this.parentKey,
+         itemKey: this.itemKey,
+         isRequired: this.isRequired,
+         condition: this.getCondition(),
+         questionText: _T(this.key, this.info.title),
+         responseOptions: [
+             {
+                 key: '1', role: 'numberInput',
+                 optionProps: {
+                     min: 1,
+                 },
+                 content: _T(this.key + '.num', this.inputLabel),
+                 //description: _T("Q10a.option.date.desc","desc")
+             },
+             as_option('3', _T(this.key + '.option.idk.title', "Je ne sais pas")),
+             as_option('0', _T(this.key + '.option.dwa.title', "Je ne souhaite pas répondre")),
+         ]
+     });
+   }
+ }
 
 
 export class SurveyEnd extends Item {

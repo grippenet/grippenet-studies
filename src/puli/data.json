@@ -673,9 +673,9 @@
     ]
   },
   "_4": "Impact sur les activités",
-  "note_cotation": "Pour les questions ci-dessous, utiliser la cotation suivante : 0 : « pas du tout » ; 1, 2 ou 3 : « légèrement » ; 4, 5 ou 6 : « moyennement » ; 7, 8 ou 9 : « beaucoup » ; 10 « énormément ».",
   "qx4o1": {
     "title": " Au cours de la période d’infestation par des punaises de lit, les symptômes ou signes cliniques liés aux punaises de lit ont:",
+    "top": "Pour les questions ci-dessous, utiliser la cotation suivante : 0 : « pas du tout » ; 1, 2 ou 3 : « légèrement » ; 4, 5 ou 6 : « moyennement » ; 7, 8 ou 9 : « beaucoup » ; 10 « énormément ».",
     "options": [
       {
         "key": "sqx4_1",

@@ -1,6 +1,6 @@
 import { SurveyEngine as client, SurveyItems } from 'case-editor-tools/surveys';
-import {  SurveyItem, SurveySingleItem } from "survey-engine/data_types";
-import {  generateDateDisplayComp, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
+import { SurveyItem, SurveySingleItem } from "survey-engine/data_types";
+import { generateDateDisplayComp, generateLocStrings, generateTitleComponent } from "case-editor-tools/surveys/utils/simple-generators";
 import { ItemQuestion, ItemProps, _T, textComponent } from '../../common';
 import { ComponentEditor } from 'case-editor-tools/surveys/survey-editor/component-editor';
 
