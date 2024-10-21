@@ -78,8 +78,14 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
     constructor(parentKey: string, name:string, type: QuestionType, opts?: ChoiceQuestionOptions ) {
         super({parentKey: parentKey}, name, type);
         this.info = question_info(name);
+
+        const top = type == "multiple" ? [
+            textComponent({"content": text(this, 'several', "Plusieurs réponses possibles"), className:"mt-0 mb-1"})
+        ] : undefined;
+
         this.setOptions({
             questionText: text(this, 'title', this.info.title),
+            topDisplayCompoments: top,
         });
         this.otherOptions = [];
         this.exclusiveOptions = [];
@@ -150,7 +156,7 @@ interface MonthDateOptions {
 
 export class MonthDateQuestion extends ItemQuestion {
 
-   static readonly DateComponent = 'rg.scg.1';
+   static readonly DateComponent = 'rg.scg.date';
 
    info: QuestionInfo;
 
@@ -201,7 +207,7 @@ export class MonthDateQuestion extends ItemQuestion {
         questionText: _T(this.key, this.info.title),
         responseOptions: [
             {
-                key: '1', role: 'dateInput',
+                key: 'date', role: 'dateInput',
                 optionProps: {
                     dateInputMode: { str: 'YM' },
                     min: exp_as_arg( client.timestampWithOffset({'years': -1})),

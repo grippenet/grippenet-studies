@@ -16,8 +16,8 @@
       }
     ]
   },
-  "_1": " caracteristiques de l'infestation ",
-  "q2o1": {
+  "_1": " caracteristiques de l'infestation",
+  "q2": {
     "title": "L’infestation était-elle à votre domicile ?",
     "options": [
       {
@@ -34,12 +34,12 @@
       }
     ]
   },
-  "q3o2": {
-    "title": "A quelle date a débuté l’infestation ? ",
+  "q3": {
+    "title": "A quelle date a débuté l’infestation ?",
     "options": [
       {
         "key": "date",
-        "label": "MM-AAAA"
+        "label": "MM_AAAA"
       },
       {
         "key": "3",
@@ -47,7 +47,7 @@
       }
     ]
   },
-  "q4o2": {
+  "q4": {
     "title": "L’infestation est-elle toujours en cours ?",
     "options": [
       {
@@ -60,12 +60,12 @@
       }
     ]
   },
-  "q5n4": {
+  "q5": {
     "title": "A quelle date a-t-elle pris fin ?",
     "options": [
       {
         "key": "date",
-        "label": "MM-AAAA"
+        "label": "MM_AAAA"
       },
       {
         "key": "3",
@@ -73,16 +73,16 @@
       }
     ]
   },
-  "q6o2": {
-    "title": "Au total, combien de semaines se sont écoulées entre le moment où vous avez remarqué votre infestation à domicile et l’éradication ?",
+  "q6": {
+    "title": "Selon vous, combien de semaines se sont écoulées entre le moment où vous avez remarqué  l’infestation à votre domicile et l’éradication ?",
     "options": [
       {
-        "key": "temps",
+        "key": "duree",
         "label": "xx_Semaines"
       }
     ]
   },
-  "q7o2": {
+  "q7": {
     "title": "Les punaises de lit ont-elles été vues dans votre logement ?",
     "options": [
       {
@@ -95,8 +95,8 @@
       }
     ]
   },
-  "q8o7": {
-    "title": "Avez-vous une ou plusieurs photos et seriez-vous disposé à nous les envoyer par e-mail ?",
+  "q8": {
+    "title": "Avez-vous une ou plusieurs photos et seriez-vous disposé à nous les envoyer par e-mail ?",
     "options": [
       {
         "key": "1",
@@ -108,8 +108,12 @@
       }
     ]
   },
-  "q9o7": {
-    "title": "Précisez le(s) zone(s) de votre logement où elles ont été vues (plusieurs réponses possibles):",
+  "q8b": {
+    "code": "genérer aleatoirement un code_xxxxx",
+    "title": "Merci de nous envoyer la/les photo(s) par e-mail à punaisedelit@iplesp.upmc.fr avec le code xxxxx de la question en objet"
+  },
+  "q9": {
+    "title": "Précisez le(s) zone(s) de votre logement où elles ont été vues:",
     "options": [
       {
         "key": "4",
@@ -133,7 +137,7 @@
       }
     ]
   },
-  "q10a9": {
+  "q10": {
     "title": "Précisez",
     "options": [
       {
@@ -142,7 +146,7 @@
       }
     ]
   },
-  "q11o2": {
+  "q11": {
     "title": "Cette infestation due aux punaises de lit a-t-elle été confirmée par un professionnel  ?",
     "options": [
       {
@@ -163,8 +167,8 @@
       }
     ]
   },
-  "q12o11": {
-    "title": "Précisez le(s) professionnel(s) qui ont confirmé(s) l’infestation (plusieurs réponses possibles):",
+  "q12": {
+    "title": "Précisez le(s) professionnel(s) qui ont confirmé(s) l’infestation :",
     "options": [
       {
         "key": "4",
@@ -196,7 +200,7 @@
       }
     ]
   },
-  "q13a12": {
+  "q13": {
     "title": "Précisez",
     "options": [
       {
@@ -205,8 +209,8 @@
       }
     ]
   },
-  "q14o2": {
-    "title": "D'après vous, d'ou venaient ces punaises de lit ? (plusieurs réponses possibles)",
+  "q14": {
+    "title": "D'après vous, d'où venaient ces punaises de lit ?",
     "options": [
       {
         "key": "4",
@@ -250,7 +254,7 @@
       }
     ]
   },
-  "q15a14": {
+  "q15": {
     "title": "Précisez",
     "options": [
       {
@@ -259,7 +263,7 @@
       }
     ]
   },
-  "q16o2": {
+  "q16": {
     "title": "Ce lieu était-il en France métropolitaine ?",
     "options": [
       {
@@ -276,7 +280,7 @@
       }
     ]
   },
-  "q17o2": {
+  "q17": {
     "title": "Combien de semaines se sont écoulées entre le contact avec la source d’exposition et le moment où vous avez remarqué l’infestation à votre domicile ? (en chiffre)",
     "options": [
       {
@@ -285,7 +289,7 @@
       }
     ]
   },
-  "q18o2": {
+  "q18": {
     "title": "Etait-ce la première fois que votre logement était infesté par des punaises de lit ?",
     "options": [
       {
@@ -302,8 +306,8 @@
       }
     ]
   },
-  "q19n18": {
-    "title": "Combien de fois par le passé votre logement a-t-il connu des infestations de punaises de lit  ?",
+  "q19": {
+    "title": "Combien de fois par le passé votre logement a-t-il déjà connu des infestations de punaises de lit ?",
     "options": [
       {
         "key": "valeur",
@@ -311,7 +315,7 @@
       }
     ]
   },
-  "q20o2": {
+  "q20": {
     "title": "Dans quel type de logement vivez-vous ?",
     "options": [
       {
@@ -332,7 +336,7 @@
       }
     ]
   },
-  "q21a20": {
+  "q21": {
     "title": "Précisez",
     "options": [
       {
@@ -341,7 +345,7 @@
       }
     ]
   },
-  "q22n2": {
+  "q22": {
     "title": "D'après vous, d'ou venaient ces punaises de lit ?",
     "options": [
       {
@@ -386,7 +390,7 @@
       }
     ]
   },
-  "q23a22": {
+  "q23": {
     "title": "Précisez",
     "options": [
       {
@@ -395,7 +399,7 @@
       }
     ]
   },
-  "q24n2": {
+  "q24": {
     "title": "Ce lieu était-il en France métropolitaine ?",
     "options": [
       {
@@ -412,7 +416,7 @@
       }
     ]
   },
-  "q25n2": {
+  "q25": {
     "title": "A quelle date avez-vous été exposé ?",
     "options": [
       {
@@ -426,8 +430,8 @@
     ]
   },
   "_2": "Lesions cutanees",
-  "q26o1": {
-    "title": " Dans le cadre de cette infestation, avez-vous été piqué par les punaises de lit ? ",
+  "q26": {
+    "title": "Dans le cadre de cette infestation, avez-vous été piqué par les punaises de lit ? ",
     "options": [
       {
         "key": "1",
@@ -443,8 +447,8 @@
       }
     ]
   },
-  "q27o26": {
-    "title": " Les zones touchées étaient-elles des zones couvertes ou découvertes par des vêtements la nuit ? (plusieurs réponses possibles) :",
+  "q27": {
+    "title": "Les zones touchées étaient-elles des zones couvertes ou découvertes par des vêtements la nuit ? :",
     "options": [
       {
         "key": "4",
@@ -460,8 +464,8 @@
       }
     ]
   },
-  "q28o26": {
-    "title": "Quelles étaient la ou les zones touchées (plusieurs réponses possibles) :",
+  "q28": {
+    "title": "Quelles étaient la ou les zones touchées :",
     "options": [
       {
         "key": "4",
@@ -485,8 +489,8 @@
       }
     ]
   },
-  "q29o26": {
-    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présenté en même temps ?",
+  "q29": {
+    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présenté en même temps",
     "options": [
       {
         "key": "4",
@@ -506,8 +510,8 @@
       }
     ]
   },
-  "q30o26": {
-    "title": " Les piqûres semblaient-elles regroupées par 3 ou plus ( que cela soit alignées ou en triangle) ?",
+  "q30": {
+    "title": "Les piqûres semblaient-elles regroupées par 3 ou plus (que cela soit alignées ou en triangle) ?",
     "options": [
       {
         "key": "1",
@@ -523,9 +527,9 @@
       }
     ]
   },
-  "_3": " Impact psychologique",
-  "q31o1": {
-    "title": " Dans quelle mesure avez-vous ressenti une dégradation de votre état de santé psychologique en lien avec cette infestation ?",
+  "_3": "Impact psychologique",
+  "q31": {
+    "title": "Dans quelle mesure avez-vous ressenti une dégradation de votre état de santé psychologique en lien avec cette infestation ?",
     "options": [
       {
         "key": "0",
@@ -545,7 +549,7 @@
       }
     ]
   },
-  "q32o1": {
+  "q32": {
     "title": "Quel impact cette infestation a-t-elle eu sur votre sommeil ?",
     "options": [
       {
@@ -566,10 +570,10 @@
       }
     ]
   },
-  "q33":{
-		"title": "Une insomnie liée aux punaises de loit est-elle apparue ou s'est-elle aggravée  ?",
-		"options":[
-			{
+  "q33": {
+    "title": "Une insomnie liée aux punaises de lit est-elle apparue ou s’est-elle aggravée ?",
+    "options": [
+      {
         "key": "1",
         "label": "Oui"
       },
@@ -582,24 +586,24 @@
         "label": "Je ne sais pas"
       }
     ]
-	},
-  "qxo1": {
+  },
+  "q34": {
     "title": "Au cours de la période d’infestation par des punaises de lit, à quelle fréquence avez-vous été dérangé par les problèmes suivants ?",
     "options": [
       {
-        "key": "sqx_1",
+        "key": "sq34_1",
         "label": "Sentiment de nervosité, d’anxiété ou de tension"
       },
       {
-        "key": "sqx_2",
+        "key": "sq34_2",
         "label": "Incapable d’arrêter de s’inquiéter ou de contrôler ses inquiétude"
       },
       {
-        "key": "sqx_3",
+        "key": "sq34_3",
         "label": "Se sentir triste, déprimé(e) ou désespéré(e)"
       },
       {
-        "key": "sqx_4",
+        "key": "sq34_4",
         "label": "Peu d’intérêt ou de plaisir à faire des choses"
       }
     ],
@@ -618,7 +622,7 @@
       },
       {
         "key": "6",
-        "label": "Presque tout les jours"
+        "label": "Presque tous les jours"
       },
       {
         "key": "3",
@@ -626,7 +630,7 @@
       }
     ]
   },
-  "qx1o1": {
+  "q35": {
     "title": "Avez-vous évité certains lieux du fait de l’infestation due aux punaises de lit ?",
     "options": [
       {
@@ -651,8 +655,8 @@
       }
     ]
   },
-  "qx2oqx1": {
-    "title": "Pouvez-vous préciser les lieux concernés ? (plusieurs réponses possibles)",
+  "q36": {
+    "title": "Pouvez-vous préciser les lieux concernés ?",
     "options": [
       {
         "key": "4",
@@ -680,7 +684,7 @@
       }
     ]
   },
-  "qx3aqx2": {
+  "q37": {
     "title": "Précisez",
     "options": [
       {
@@ -690,21 +694,21 @@
     ]
   },
   "_4": "Impact sur les activités",
-  "qx4o1": {
-    "title": " Au cours de la période d’infestation par des punaises de lit, les symptômes ou signes cliniques liés aux punaises de lit ont:",
-    "top": "Pour les questions ci-dessous, utiliser la cotation suivante : 0 : « pas du tout » ; 1, 2 ou 3 : « légèrement » ; 4, 5 ou 6 : « moyennement » ; 7, 8 ou 9 : « beaucoup » ; 10 « énormément ».",
+  "note_cotation": "Pour les questions ci-dessous, utiliser la cotation suivante : 0 : « pas du tout » ; 1, 2 ou 3 : « légèrement » ; 4, 5 ou 6 : « moyennement » ; 7, 8 ou 9 : « beaucoup » ; 10 « énormément ».",
+  "q38": {
+    "title": " Au cours de la période d’infestation par des punaises de lit, les symptômes ou signes cliniques liés aux punaises de lit ont :",
     "options": [
       {
-        "key": "sqx4_1",
-        "label": " perturbé votre travail (rémunéré, bénévolat ou formation) et /ou vos études :"
+        "key": "sq38_1",
+        "label": "perturbé votre travail (rémunéré, bénévolat ou formation) et/ou vos études :"
       },
       {
-        "key": "sqx4_2",
-        "label": " perturbé votre vie sociale et/ ou vos loisirs :"
+        "key": "sq38_2",
+        "label": "perturbé votre vie sociale et/ou vos loisirs :"
       },
       {
-        "key": "sqx4_3",
-        "label": " perturbé votre vie familiale et/ou vos tâches domestiques :"
+        "key": "sq38_3",
+        "label": "perturbé votre vie familiale et/ou vos tâches domestiques :"
       }
     ],
     "scale": [
@@ -759,8 +763,8 @@
     ]
   },
   "_5": "Recours aux soins",
-  "qx5o1": {
-    "title": " Avez-vous consulté un ou plusieurs médecins généralistes pour des symptômes (démangeaisons, anxiété, insomnie…) en lien avec cette infestation ?",
+  "q39": {
+    "title": "Avez-vous consulté un ou plusieurs médecins généralistes pour des symptômes (démangeaisons, anxiété, insomnie…) en lien avec cette infestation ?",
     "options": [
       {
         "key": "1",
@@ -776,7 +780,7 @@
       }
     ]
   },
-  "qx6ox5": {
+  "q40": {
     "title": "Pour quel type de symptômes avez-vous consulté ?",
     "options": [
       {
@@ -797,7 +801,7 @@
       }
     ]
   },
-  "qx7oqx5": {
+  "q41": {
     "title": "Combien de fois avez-vous consulté ce ou ces médecins ?",
     "options": [
       {
@@ -818,7 +822,7 @@
       }
     ]
   },
-  "qx8o1": {
+  "q42": {
     "title": "Avez-vous consulté un médecin d’une autre spécialité (hors médecine générale) pour des symptômes en lien avec cette infestation (dermatologue, psychiatre…) ?",
     "options": [
       {
@@ -835,8 +839,8 @@
       }
     ]
   },
-  "qx9oqx8": {
-    "title": "De quelle(s) spécialité(s) médicale(s) ? (plusieurs réponses possibles)",
+  "q43": {
+    "title": "De quelle(s) spécialité(s) médicale(s) ?",
     "options": [
       {
         "key": "4",
@@ -852,7 +856,7 @@
       }
     ]
   },
-  "qx10aqx9": {
+  "q44": {
     "title": "Précisez",
     "options": [
       {
@@ -861,7 +865,7 @@
       }
     ]
   },
-  "qx11o1": {
+  "q45": {
     "title": "Avez-vous consulté un autre professionnel de santé pour des symptômes en lien avec cette infestation (pharmacien, infirmier …) ?",
     "options": [
       {
@@ -878,8 +882,8 @@
       }
     ]
   },
-  "qx12oqx11": {
-    "title": "Quel(s) autre(s) professionnel(s) de santé avez-vous consulté ? (plusieurs réponses possibles)",
+  "q46": {
+    "title": "Quel(s) autre(s) professionnel(s) de santé avez-vous consulté ?",
     "options": [
       {
         "key": "4",
@@ -895,7 +899,7 @@
       }
     ]
   },
-  "qx13aqx12": {
+  "q47": {
     "title": "Précisez",
     "options": [
       {
@@ -904,7 +908,7 @@
       }
     ]
   },
-  "qx14oqx5qx8": {
+  "q48": {
     "title": "Avez-vous eu une prescription médicale en lien avec cette infestation ?",
     "options": [
       {
@@ -921,8 +925,8 @@
       }
     ]
   },
-  "qx15oqx14": {
-    "title": "Qu'est-ce-que le médecin vous a prescrit ? (plusieurs réponses possibles)",
+  "q49": {
+    "title": "Qu'est-ce-que le médecin vous a prescrit ?",
     "options": [
       {
         "key": "4",
@@ -966,7 +970,7 @@
       }
     ]
   },
-  "qx16oqx5qx8": {
+  "q50": {
     "title": "Pendant la période de l’infestation, vous a-t-on préscrit un arrêt de travail en lien avec l’infestation ?",
     "options": [
       {
@@ -983,7 +987,7 @@
       }
     ]
   },
-  "qx17oqx16": {
+  "q51": {
     "title": "Quelle a été la durée totale du ou des arrêts de travail que l’on vous a prescrit(s) ?",
     "options": [
       {
@@ -1001,7 +1005,7 @@
     ]
   },
   "_6": "Eradication",
-  "qx18oq1": {
+  "q52": {
     "title": "Comment avez-vous trouvé les informations nécessaires pour éradiquer l’infestation ?",
     "options": [
       {
@@ -1034,16 +1038,37 @@
       },
       {
         "key": "7",
-        "label": "Autre(précisez)"
+        "label": "Autre"
       }
     ]
   },
-  "qx19aqx18": {
+  "q53": {
     "title": "Précisez",
     "options": [
       {
         "key": "champ_libre",
         "label": "réponse grippenaute"
+      }
+    ]
+  },
+  "q54": {
+    "title": "Quel impact financier a eu pour vous cette infestation due aux punaises de lit ?",
+    "options": [
+      {
+        "key": "0",
+        "label": "Aucun"
+      },
+      {
+        "key": "4",
+        "label": "Léger"
+      },
+      {
+        "key": "5",
+        "label": "Modéré"
+      },
+      {
+        "key": "6",
+        "label": "Important"
       }
     ]
   }
