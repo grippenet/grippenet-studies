@@ -1,4 +1,4 @@
-import { SurveyItem, Expression, SurveySingleItem } from "survey-engine/data_types";
+import { SurveyItem, Expression, SurveySingleItem, Validation } from "survey-engine/data_types";
 import { as_option, BaseChoiceQuestion, exp_as_arg, ItemQuestion, option_def, ClientExpression as client, textComponent, as_input_option, make_exclusive_options, } from "../common";
 import { SurveyItems } from "case-editor-tools/surveys";
 import { _T } from "./helpers";
@@ -138,18 +138,61 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
 
 }
 
+interface QuestionValidation {
+        condition: Expression,
+        message: string
+}
+
+interface MonthDateOptions {
+    validation?: QuestionValidation
+}
+
+
 export class MonthDateQuestion extends ItemQuestion {
 
-   static readonly DateComponent = 'rg.1';
+   static readonly DateComponent = 'rg.scg.1';
 
    info: QuestionInfo;
+
+   validation?: QuestionValidation
    
   constructor(parent: string, itemKey:string) {
     super({parentKey: parent }, itemKey);
     this.info = question_info(itemKey);
   } 
+
+  setValication(validation?: QuestionValidation) {
+    this.validation = validation;
+  }
   
+  getValidations(): Validation[]|undefined {
+    if(!this.validation) {
+        return undefined;
+    }
+    return [
+        {
+            'key': 'pc1',
+            'type':'hard',
+            rule: this.validation.condition
+        },
+    ];
+  } 
+
+  getBottomComponents() {
+    if(!this.validation) {
+        return undefined;
+    }
+    return [
+        textComponent({
+            displayCondition: client.logic.not(client.getSurveyItemValidation(this.key, 'pc1')),
+            content: text(this, 'validationError', this.validation.message),
+            className: "text-danger",
+        })
+    ]
+  }
+
   buildItem(): SurveySingleItem {
+
         return SurveyItems.singleChoice({
         parentKey: this.parentKey,
         itemKey: this.itemKey,
@@ -168,9 +211,16 @@ export class MonthDateQuestion extends ItemQuestion {
                 //description: _T("Q10a.option.date.desc","desc")
             },
             as_option('3', _T(this.key + '.option.idk.title', "Je ne sais pas")),
-        ]
+        ],
+        customValidations: this.getValidations(),
+        bottomDisplayCompoments: this.getBottomComponents(),
     });
   }
+
+  getDateValue() {
+    return client.getResponseValueAsNum(this.key, MonthDateQuestion.DateComponent);
+  }
+
 }
 
 export class NumericQuestion extends ItemQuestion {

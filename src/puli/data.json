@@ -206,7 +206,7 @@
     ]
   },
   "q14o2": {
-    "title": "D'après vous, d'ou venaient ces punaises de lit ?",
+    "title": "D'après vous, d'ou venaient ces punaises de lit ? (plusieurs réponses possibles)",
     "options": [
       {
         "key": "4",
@@ -277,7 +277,7 @@
     ]
   },
   "q17o2": {
-    "title": "Combien de temps s’est écoulé entre le contact avec la source d’exposition et le moment où vous avez remarqué l’infestation à votre domicile ? (en chiffre)",
+    "title": "Combien de semaines se sont écoulées entre le contact avec la source d’exposition et le moment où vous avez remarqué l’infestation à votre domicile ? (en chiffre)",
     "options": [
       {
         "key": "temps",
@@ -473,7 +473,7 @@
       },
       {
         "key": "6",
-        "label": "Tronc (torse,ventre,dos)"
+        "label": "Tronc (torse, ventre, dos)"
       },
       {
         "key": "8",
@@ -486,7 +486,7 @@
     ]
   },
   "q29o26": {
-    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présenté en même temps",
+    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présenté en même temps ?",
     "options": [
       {
         "key": "4",
@@ -537,11 +537,11 @@
       },
       {
         "key": "5",
-        "label": "Modéré"
+        "label": "Modérée"
       },
       {
         "key": "6",
-        "label": "Important"
+        "label": "Importante"
       }
     ]
   },
@@ -550,11 +550,11 @@
     "options": [
       {
         "key": "0",
-        "label": "Aucune"
+        "label": "Aucun"
       },
       {
         "key": "4",
-        "label": "Légère"
+        "label": "Léger"
       },
       {
         "key": "5",
@@ -566,6 +566,23 @@
       }
     ]
   },
+  "q33":{
+		"title": "Une insomnie liée aux punaises de loit est-elle apparue ou s'est-elle aggravée  ?",
+		"options":[
+			{
+        "key": "1",
+        "label": "Oui"
+      },
+      {
+        "key": "0",
+        "label": "Non"
+      },
+      {
+        "key": "3",
+        "label": "Je ne sais pas"
+      }
+    ]
+	},
   "qxo1": {
     "title": "Au cours de la période d’infestation par des punaises de lit, à quelle fréquence avez-vous été dérangé par les problèmes suivants ?",
     "options": [
@@ -802,7 +819,7 @@
     ]
   },
   "qx8o1": {
-    "tilte": "Avez-vous consulté un médecin d’une autre spécialité (hors médecine générale) pour des symptômes en lien avec cette infestation (dermatologue, psychiatre…) ?",
+    "title": "Avez-vous consulté un médecin d’une autre spécialité (hors médecine générale) pour des symptômes en lien avec cette infestation (dermatologue, psychiatre…) ?",
     "options": [
       {
         "key": "1",

@@ -63,11 +63,19 @@ class SurveyInfo {
             if(name.startsWith("_")) {
                 return;
             }
+            if(name == "default") {
+                return;
+            }
             if(this.data.has(name)) {
                 console.warn("Duplicate entry for "+ name);
             }
             if(typeof(info) == "object") {
                 const title = info['title'];
+                if(!title) {
+                    console.log(info);
+                    throw new Error("Title not found for " + name);
+                }
+
                 const options = info['options'] ?? undefined;
                 const scale = info['scale'] ?? undefined;
                 let oo: Map<string,string>|undefined = undefined;

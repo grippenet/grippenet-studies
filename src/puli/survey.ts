@@ -69,21 +69,34 @@ export class PuliSurvey extends SurveyBuilder {
         g.add(still);
 
         const endDate = new MonthDateQuestion(groupKey, 'q5n4');
-        g.add(endDate, still.createConditionFrom(['0']));
-        
-        const lessThan3month = client.compare.lt(
-            client.timestampWithOffset({months: 3}, client.getResponseValueAsNum(startDate.key, MonthDateQuestion.DateComponent)),
-            client.getResponseValueAsNum(endDate.key, MonthDateQuestion.DateComponent)
+          
+        const endDateAfterStart = client.compare.gte(
+            endDate.getDateValue(),
+            startDate.getDateValue(),
         );
 
-        const delay = new ChoiceQuestion(groupKey, 'q6o2', 'single');
+        endDate.setValication({"condition": endDateAfterStart, "message": "La date de fin doit être postérieure à la date de début"});
+
+        g.add(endDate, still.createConditionFrom(['0']));
+        
+
+        // EndDate > StartDate && StartDate + 3 month > EndDate
+        const lessThan3month = client.logic.and(
+            endDateAfterStart,
+            client.compare.gt(
+                client.timestampWithOffset({months: 3}, client.getResponseValueAsNum(startDate.key, MonthDateQuestion.DateComponent)),
+                client.getResponseValueAsNum(endDate.key, MonthDateQuestion.DateComponent)
+            )
+        )
+
+        const delay = new NumericQuestion(groupKey, 'q6o2');
         g.add(delay, lessThan3month);
 
-        const q1 = new ChoiceQuestion(groupKey, 'q7o2', 'single');
-        g.add(q1);
-        const inHouseCondition = q1.createConditionFrom(["1"]);
+        // Q7 : "Les punaises de lit ont-elles été vues dans votre logement
+        const q7 = new ChoiceQuestion(groupKey, 'q7o2', 'single');
+        g.add(q7);
+        const inHouseCondition = q7.createConditionFrom(["1"]);
 
-        // TODO: Question avec code
         const q8 = new ChoiceQuestion(groupKey, 'q8o7', 'single');
         g.add(q8, inHouseCondition);
 
@@ -91,19 +104,19 @@ export class PuliSurvey extends SurveyBuilder {
         g.add(qCode, q8.createConditionFrom(["1"]));
 
         // TODO: Exclusive option 
-        const q9 = new ChoiceQuestion(groupKey, 'q9o7', 'multiple', {'otherOptions': ["7"]});
-        g.add(q9);
+        const q9 = new ChoiceQuestion(groupKey, 'q9o7', 'multiple', {'otherOptions': ["7"], exclusive: ['3']});
+        g.add(q9, inHouseCondition);
 
         // Professionnal seen
         const qProf = new ChoiceQuestion(groupKey, "q11o2", "single");
         g.add(qProf);
         const profCond = qProf.createConditionFrom(['1','2']);
 
-        const qProfQuels = new ChoiceQuestion(groupKey, "q12o11", "multiple", {'otherOptions': ["7"]})
+        const qProfQuels = new ChoiceQuestion(groupKey, "q12o11", "multiple", {'otherOptions': ["7"], exclusive: ['3']})
         g.add(qProfQuels, profCond);
 
 
-        const qProvenance = new ChoiceQuestion(groupKey, "q14o2", "multiple",  {'otherOptions': ["7"]});
+        const qProvenance = new ChoiceQuestion(groupKey, "q14o2", "multiple",  {'otherOptions': ["7"], exclusive: ['3']});
         g.add(qProvenance);
 
         const qLieu = new ChoiceQuestion(groupKey, "q16o2", "single");
@@ -175,6 +188,9 @@ export class PuliSurvey extends SurveyBuilder {
 
         const q32 = new ChoiceQuestion(root, "q32o1", "single");
         g.add(q32, hasImpactCond);
+
+        const q33 = new ChoiceQuestion(root, "q33", "single");
+        g.add(q33, q32.createConditionFrom(['4','5','6']));
 
         const qx = new LikertQuestion(root, "qxo1");
         g.add(qx);
