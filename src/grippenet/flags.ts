@@ -46,10 +46,6 @@ export const GrippenetFlags = {
         key: 'reminderTester',
         values: booleanValues,
     },
-    ansmNoChild:{
-        key:"ansmQ7skip",
-        values: booleanValues
-    },
     needLocation: {
         key: 'needLocation',
         values: booleanValues

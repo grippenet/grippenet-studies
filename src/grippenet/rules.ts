@@ -70,8 +70,6 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
 
         const WeeklySymptomEndKey = this.keys.weekly.getSymptomEnd().key;
 
-        const AnsmDeliveryFailureKey = this.keys.weekly.getAnsmDeliveryFailureItem().key;
-
         const handleWeekly = se.ifThen(
             se.checkSurveyResponseKey(weeklyKey),
             // remove weekly and re-add it with new a new timeout
@@ -86,12 +84,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
                 // else:
                 updateFlag(hasOnGoingSymptoms.key, hasOnGoingSymptoms.values.no)
             ),
-            updateFlag(flags.lastWeekly.key, se.timestampWithOffset({seconds:0}) ),
-            se.if(
-                se.singleChoice.any(AnsmDeliveryFailureKey, '2'),
-                updateFlag(flags.ansmNoChild.key, flags.ansmNoChild.values.yes),
-                updateFlag(flags.ansmNoChild.key, flags.ansmNoChild.values.no),
-            )
+            updateFlag(flags.lastWeekly.key, se.timestampWithOffset({seconds:0}) )
         );
 
         const handleVaccination = se.ifThen(
