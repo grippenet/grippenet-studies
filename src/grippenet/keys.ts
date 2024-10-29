@@ -8,7 +8,8 @@ interface GrippenetIntakeDefinition extends IntakeSurveyDefinition {
 }
 
 interface GrippenetWeeklyDefinition extends WeeklySurveyDefinition {
-    getAnsmDeliveryFailureItem(): Item
+   // getAnsmDeliveryFailureItem(): Item
+   getHasMoreQuestion(): Item
 }
 
 

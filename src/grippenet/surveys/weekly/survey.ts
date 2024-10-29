@@ -1,7 +1,7 @@
 import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce,  textComponent, ItemQuestion } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
-import * as ansm from "./ansm";
+//import * as ansm from "./ansm";
 import { lastSubmissionQuestion } from "../../questions/lastSubmission";
 import { GrippenetFlags } from "../../flags";
 import { weeklySurveyKey } from "../../constants";
@@ -12,7 +12,9 @@ export class WeeklyDef extends SurveyBuilder {
 
     Q_symptomsEnd: Item;
 
-    Q_AnsmDeliveryFailure:Item;
+    Q_wantsMore: Item;
+
+    //Q_AnsmDeliveryFailure:Item;
 
     constructor(meta:Map<string,string>) {
         super({
@@ -85,6 +87,9 @@ export class WeeklyDef extends SurveyBuilder {
 
         // Q36 optional information
         const Q_wantsMore = new pool.ConsentForMore({parentKey: hasSymptomGroupKey, isRequired: false});
+
+        this.Q_wantsMore = Q_wantsMore;
+
         hasSymptomGroup.addItem(Q_wantsMore.get());
 
         this.items.push(hasSymptomGroup);
@@ -156,6 +161,7 @@ export class WeeklyDef extends SurveyBuilder {
         
         hasMoreGroup.addItem(Q_visitedNoMedicalService.get());
 
+        /** 
         const Q1ansm = new ansm.Q1ANSM({parentKey: hasMoreGroupKey});
         Q1ansm.setCondition(Q_visitedMedicalService.getQ1AnsmCondition());
 
@@ -178,6 +184,7 @@ export class WeeklyDef extends SurveyBuilder {
         QDeliveryGroup3.setCondition(Q2ansm.getYesCondition());
 
         hasMoreGroup.addItem(QDeliveryGroup3.get());
+        */
 
         // // Q9 took medication --------------------------------------
         const Q_tookMedication = new pool.TookMedication({parentKey:hasMoreGroupKey, isRequired:false, useOtherTextInput: true, useCovidAntiviral: true});
@@ -250,6 +257,7 @@ export class WeeklyDef extends SurveyBuilder {
         
         this.items.push(Q_Howdoyoufeel);
 
+        /*
         const minorFlags = GrippenetFlags.minor;
         const MajorExpression = ce.participantFlags.hasKeyAndValue(minorFlags.key, minorFlags.values.no);
 
@@ -258,6 +266,7 @@ export class WeeklyDef extends SurveyBuilder {
     
         this.Q_AnsmDeliveryFailure = QAnsmGroup2.getDeliveryFailureItem();
         this.items.push(QAnsmGroup2);
+        */
 
         const surveyEndText = new pool.SurveyEnd({parentKey:rootKey});
         this.items.push(surveyEndText);
@@ -267,7 +276,12 @@ export class WeeklyDef extends SurveyBuilder {
         return this.Q_symptomsEnd;
     }
 
-    getAnsmDeliveryFailureItem(): Item {
+    /*getAnsmDeliveryFailureItem(): Item {
         return this.Q_AnsmDeliveryFailure;
-    }
+    }*/
+
+   getHasMoreQuestion(): Item {
+    return this.Q_wantsMore;
+   }
+
 }
