@@ -1,7 +1,7 @@
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { Expression } from "survey-engine/data_types";
-import { intakeSurveyKey } from "../constants";
-import { GrippenetFlags } from "../flags";
+import { intakeSurveyKey } from "../../constants";
+import { GrippenetFlags } from "../../flags";
 import { RuleSet } from "./base"
 
 const create = (): Expression[]=> {

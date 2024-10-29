@@ -1,11 +1,13 @@
-import { AbstractStudyRulesBuilder, responses } from "../common";
-import { GrippenetKeys } from "./keys";
+import { AbstractStudyRulesBuilder, responses } from "../../common";
+import { GrippenetKeys } from "../keys";
 import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
-import { ServerExpression as se } from "../common";
+import { ServerExpression as se } from "../../common";
 import { Expression } from "survey-engine/data_types";
-import WeeklyResponses from "./surveys/weekly/responses";
-import { GrippenetFlags as flags } from "./flags";
+import WeeklyResponses from "../surveys/weekly/responses";
+import { GrippenetFlags as flags } from "../flags";
 import { Duration,  } from "case-editor-tools/types/duration";
+import { assignedSurveys, updateFlag, hasParticipantFlagKeyAndValue, hasSurveyKeyAssigned, updateLastSubmission} from "./helpers";
+import { ExtraStudyRulesBuilder } from "./extra_study";
 
 export function response_item_key(name:string) {
     return responseGroupKey + '.' + name;
@@ -24,15 +26,10 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
 
     create(): void {
      
-        const assignedSurveys = se.participantActions.assignedSurveys;
-        const updateFlag = se.participantActions.updateFlag;
-        const hasParticipantFlagKeyAndValue = se.participantState.hasParticipantFlagKeyAndValue
-        const hasSurveyKeyAssigned = se.participantState.hasSurveyKeyAssigned;
-       
+        
         const intakeKey = this.keys.intake.key;
         const weeklyKey = this.keys.weekly.key;
         const vacKey = this.keys.vaccination.key;
-        const mozartKey = 'mozart';
         
         /**
          * Define what should happen, when persons enter the study first time:
@@ -42,7 +39,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
         ];
        
         const postalCodeKey = this.keys.intake.getPostalCodeItem().key;
-
+        
         /**
          * Define what should happen, when persons submit an intake survey:
          */
@@ -63,7 +60,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             ),
             // add optional intake
             assignedSurveys.add(intakeKey, 'optional'),
-            updateFlag(flags.lastIntake.key, se.timestampWithOffset({seconds:0}) )
+            updateLastSubmission(flags.lastIntake.key)
         );
 
         const hasOnGoingSymptoms = flags.hasOnGoingSymptoms;
@@ -84,7 +81,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
                 // else:
                 updateFlag(hasOnGoingSymptoms.key, hasOnGoingSymptoms.values.no)
             ),
-            updateFlag(flags.lastWeekly.key, se.timestampWithOffset({seconds:0}) )
+            updateLastSubmission(flags.lastWeekly.key),
         );
 
         const handleVaccination = se.ifThen(
@@ -94,7 +91,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             assignedSurveys.add(vacKey, 'optional', se.timestampWithOffset({hours: 1})),
             // update vaccinationCompleted flag
             updateFlag(flags.vaccinationCompleted.key, flags.vaccinationCompleted.values.yes),
-            updateFlag(flags.lastVaccination.key, se.timestampWithOffset({seconds:0}) )
+            updateLastSubmission(flags.lastVaccination.key)
         );
         
         const ageResponseComp = responseGroupKey + '.' + IntakeResponses.birthDate.date;
@@ -175,17 +172,9 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             handleChild,
         ];
 
-        if(mozartKey) {
-            const handleMozart = se.ifThen(
-                se.checkSurveyResponseKey(mozartKey),
-                se.do(
-                    updateFlag(flags.mozartS0.key, '1'),
-                    assignedSurveys.remove(mozartKey, 'all'),
-                ),
-            );
-            
-            submitRules.push(handleMozart);
-        }
+        const extra = new ExtraStudyRulesBuilder();
+
+        submitRules.push(...extra.getSubmitRules());
 
         this.rules.entry = entryRules;
         this.rules.submit = submitRules;

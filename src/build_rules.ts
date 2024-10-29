@@ -1,4 +1,4 @@
-import { export_json, ExpressionGenerator } from "./grippenet/rules/base";
+import { export_json, ExpressionGenerator } from "./grippenet/rules/standalone/base";
 import { Expression } from 'survey-engine/data_types';
 
 function as_exp(exp: ExpressionGenerator): Expression[] {
@@ -9,18 +9,23 @@ function as_exp(exp: ExpressionGenerator): Expression[] {
 }
 
 const modules: string[] = [
-    "./grippenet/rules/assign_mozart",
-    "./grippenet/rules/assign_mozart_main",
-    "./grippenet/rules/location_catchup"
+    "./grippenet/rules/standalone/assign_mozart",
+    "./grippenet/rules/standalone/assign_mozart_main",
+    "./grippenet/rules/standalone/remove_mozart",
+    //"./grippenet/rules/standalone/location_catchup",
+    "./grippenet/rules/standalone/assign_surveys_all",
+    "./grippenet/rules/standalone/assign_surveys_tester",
 ];
 
 
-for(const name of modules) {    
+
+
+modules.forEach(name => {    
     import(name).then((m)=> {
         console.log('Building ' + m.ruleset.name);
         export_json(as_exp(m.ruleset.rules), "output/grippenet/rules/" + m.ruleset.name + ".json");
     });
-}
+});
 
 
 

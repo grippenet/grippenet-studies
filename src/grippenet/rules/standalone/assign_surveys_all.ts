@@ -1,26 +1,20 @@
 import { StudyEngine as se } from "case-editor-tools/expression-utils/studyEngineExpressions";
 import { Expression } from "survey-engine/data_types";
 import { RuleSet } from "./base"
-import { GrippenetFlags } from "../flags";
-import { intakeSurveyKey, vaccinationSurveyKey, weeklySurveyKey } from "../constants";
+import { intakeSurveyKey, vaccinationSurveyKey, weeklySurveyKey } from "../../constants";
 
 const create = (): Expression[]=> {
 
     const assignedSurveys = se.participantActions.assignedSurveys;
-    const hasParticipantFlagKeyAndValue = se.participantState.hasParticipantFlagKeyAndValue;
-    const testerFlag = GrippenetFlags.reminderTester;
     const out: Expression[] = [];
-
     
-    const exp = se.ifThen(
-        hasParticipantFlagKeyAndValue(testerFlag.key, testerFlag.values.yes),
-        se.do(
+    const exp =  se.do(
             assignedSurveys.remove(intakeSurveyKey, 'all'),
             assignedSurveys.remove(weeklySurveyKey, 'all'),
             assignedSurveys.remove(vaccinationSurveyKey, 'all'),
             assignedSurveys.add(intakeSurveyKey, 'prio'),
             assignedSurveys.add(vaccinationSurveyKey, 'prio'),
-        ));
+        );
 
     out.push(exp);
    
@@ -28,6 +22,6 @@ const create = (): Expression[]=> {
 };
 
 export const ruleset: RuleSet = {
-    name : 'assign_survey_testers',
+    name : 'assign_survey_all',
     rules: create
 }
