@@ -2,7 +2,7 @@ import { IntakeDef } from "./surveys/intake/survey";
 import { WeeklyDef } from "./surveys/weekly/survey";
 import { VaccinationDef } from "./surveys/vaccination/vaccination";
 import { StudyBuilder, StudyRulesBuilder, SurveyKeys } from "../common";
-import { GrippenetRulesBuilder } from "./rules";
+import { GrippenetRulesBuilder } from "./rules/builder";
 import { GrippenetKeys } from "./keys";
 
 export class GrippenetStudyBuilder extends StudyBuilder {
