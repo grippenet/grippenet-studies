@@ -1,5 +1,5 @@
 import { SurveyItem, Expression, SurveySingleItem, Validation } from "survey-engine/data_types";
-import { as_option, BaseChoiceQuestion, exp_as_arg, ItemQuestion, option_def, ClientExpression as client, textComponent, as_input_option, make_exclusive_options, } from "../common";
+import { as_option, BaseChoiceQuestion, exp_as_arg, ItemQuestion, option_def, ClientExpression as client, textComponent, as_input_option, make_exclusive_options, num_as_arg, } from "../common";
 import { SurveyItems } from "case-editor-tools/surveys";
 import { _T } from "./helpers";
 import { QuestionInfo, question_info } from "./data";
@@ -59,7 +59,7 @@ export class RandomCodeQuestion extends BaseRandomCodeQuestion {
                 codeLabel: _T(itemKey +'.code', "Code à nous communiquer :"),
                 codeAlphabet: "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ",
                 codeSize: 5,
-                codeLink: 'mailto:puli@grippenet.fr?subject=%code%',
+                codeLink: 'mailto:punaisedelit@iplesp.upmc.fr?subject=%code%',
                 linkLabel: _T(itemKey + '.link', "Cliquez ici pour envoyer un courriel")
             }
         }, itemKey);
@@ -80,7 +80,7 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
         this.info = question_info(name);
 
         const top = type == "multiple" ? [
-            textComponent({"content": text(this, 'several', "Plusieurs réponses possibles"), className:"mt-0 mb-1"})
+            textComponent({"content": text(this, 'several', "Plusieurs réponses possibles"), className:"mt-0 mb-1", key: "several"})
         ] : undefined;
 
         this.setOptions({
@@ -229,17 +229,46 @@ export class MonthDateQuestion extends ItemQuestion {
 
 }
 
+interface NumericQuestionOptions {
+    min?: number;
+    max?: number;
+}
+
+type NumericInputParameters = Parameters<typeof SurveyItems.numericInput>;
+
+type ComponentPoperties = NumericInputParameters[0]['componentProperties']
+
 export class NumericQuestion extends ItemQuestion {
     
     title: string;
-    constructor(parentKey: string, key: string) {
+
+    componentProps?: NumericQuestionOptions;
+
+    constructor(parentKey: string, key: string, opts?: NumericQuestionOptions) {
         super({parentKey: parentKey}, key);
         const info = question_info(key);
         this.title = info.title;
+        this.componentProps = opts;
+    }
+
+    getComponentProperties(): ComponentPoperties {
+        if(!this.componentProps) {
+            return undefined;
+        }
+        const p : ComponentPoperties = {};
+        if(typeof(this.componentProps.min) != "undefined") {
+            p.min = num_as_arg(this.componentProps.min);
+        }
+        if(typeof(this.componentProps.max) != "undefined") {
+            p.max = num_as_arg(this.componentProps.max);
+        }
+        return p;
     }
 
     buildItem() {
+
         return SurveyItems.numericInput({
+            componentProperties: this.getComponentProperties(),
             parentKey: this.key,
             itemKey: this.itemKey,
             questionText: _T(this.key + '.title', this.title),

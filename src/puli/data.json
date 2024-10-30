@@ -18,7 +18,7 @@
   },
   "_1": " caracteristiques de l'infestation",
   "q2": {
-    "title": "L’infestation était-elle à votre domicile ?",
+    "title": "Cette infestation était-elle à votre domicile ?",
     "options": [
       {
         "key": "1",
@@ -48,7 +48,7 @@
     ]
   },
   "q4": {
-    "title": "L’infestation est-elle toujours en cours ?",
+    "title": "Cette infestation est-elle toujours en cours ?",
     "options": [
       {
         "key": "1",
@@ -113,7 +113,7 @@
     "title": "Merci de nous envoyer la/les photo(s) par e-mail à punaisedelit@iplesp.upmc.fr avec le code xxxxx de la question en objet"
   },
   "q9": {
-    "title": "Précisez le(s) zone(s) de votre logement où elles ont été vues:",
+    "title": "Précisez la ou les zones de votre logement de votre logement où elles ont été vues:",
     "options": [
       {
         "key": "4",
@@ -121,15 +121,15 @@
       },
       {
         "key": "5",
-        "label": "Dans la chambre murs mobilier autour du lit"
+        "label": "Dans la chambre (murs, mobilier, autour du lit)"
       },
       {
         "key": "6",
-        "label": "Autres pièces de l'appartement"
+        "label": "Autre(s) pièce(s) de l'appartement"
       },
       {
         "key": "7",
-        "label": "Autre (précisez)"
+        "label": "Autre"
       },
       {
         "key": "3",
@@ -192,7 +192,7 @@
       },
       {
         "key": "7",
-        "label": "Autre (précisez)"
+        "label": "Autre"
       },
       {
         "key": "3",
@@ -246,7 +246,7 @@
       },
       {
         "key": "7",
-        "label": "Autre (précisez)"
+        "label": "Autre"
       },
       {
         "key": "3",
@@ -281,7 +281,7 @@
     ]
   },
   "q17": {
-    "title": "Combien de semaines se sont écoulées entre le contact avec la source d’exposition et le moment où vous avez remarqué l’infestation à votre domicile ? (en chiffre)",
+    "title": "Combien de semaines se sont écoulées entre le contact avec la source d’exposition et le moment où vous avez remarqué l’infestation à votre domicile ? (en chiffres)",
     "options": [
       {
         "key": "temps",
@@ -307,7 +307,7 @@
     ]
   },
   "q19": {
-    "title": "Combien de fois par le passé votre logement a-t-il déjà connu des infestations de punaises de lit ?",
+    "title": "Combien de fois par le passé votre logement a-t-il connu d'infestation par des punaises de lit (sans compter l'infestation que vous venez de nous décrire) ?",
     "options": [
       {
         "key": "valeur",
@@ -332,7 +332,7 @@
       },
       {
         "key": "7",
-        "label": "Autre (précisez)"
+        "label": "Autre"
       }
     ]
   },
@@ -382,7 +382,7 @@
       },
       {
         "key": "7",
-        "label": "Autre (précisez)"
+        "label": "Autre"
       },
       {
         "key": "3",
@@ -448,7 +448,7 @@
     ]
   },
   "q27": {
-    "title": "Les zones touchées étaient-elles des zones couvertes ou découvertes par des vêtements la nuit ? :",
+    "title": "Les zones piquées étaient-elles des zones couvertes ou découvertes par des vêtements la nuit ?",
     "options": [
       {
         "key": "4",
@@ -465,7 +465,7 @@
     ]
   },
   "q28": {
-    "title": "Quelles étaient la ou les zones touchées :",
+    "title": "Quelles étaient la ou les zones piquées",
     "options": [
       {
         "key": "4",
@@ -490,7 +490,7 @@
     ]
   },
   "q29": {
-    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présenté en même temps",
+    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présentées en même temps",
     "options": [
       {
         "key": "4",
@@ -588,7 +588,7 @@
     ]
   },
   "q34": {
-    "title": "Au cours de la période d’infestation par des punaises de lit, à quelle fréquence avez-vous été dérangé par les problèmes suivants ?",
+    "title": "Au cours de la période d’infestation par des punaises de lit, combien de jours avez-vous été dérangé par les problèmes suivants",
     "options": [
       {
         "key": "sq34_1",
@@ -680,7 +680,7 @@
       },
       {
         "key": "7",
-        "label": "Autre(précisez)"
+        "label": "Autre"
       }
     ]
   },
@@ -696,19 +696,19 @@
   "_4": "Impact sur les activités",
   "note_cotation": "Pour les questions ci-dessous, utiliser la cotation suivante : 0 : « pas du tout » ; 1, 2 ou 3 : « légèrement » ; 4, 5 ou 6 : « moyennement » ; 7, 8 ou 9 : « beaucoup » ; 10 « énormément ».",
   "q38": {
-    "title": " Au cours de la période d’infestation par des punaises de lit, les symptômes ou signes cliniques liés aux punaises de lit ont :",
+    "title": " Au cours de la période d’infestation par des punaises de lit, les symptômes ou signes cliniques liés aux punaises de lit ont-ils :",
     "options": [
       {
         "key": "sq38_1",
-        "label": "perturbé votre travail (rémunéré, bénévolat ou formation) et/ou vos études :"
+        "label": "Perturbé votre travail (rémunéré, bénévolat ou formation) et/ou vos études ?"
       },
       {
         "key": "sq38_2",
-        "label": "perturbé votre vie sociale et/ou vos loisirs :"
+        "label": "Perturbé votre vie sociale et/ou vos loisirs ?"
       },
       {
         "key": "sq38_3",
-        "label": "perturbé votre vie familiale et/ou vos tâches domestiques :"
+        "label": "Perturbé votre vie familiale et/ou vos tâches domestiques ?"
       }
     ],
     "scale": [
@@ -818,7 +818,7 @@
       },
       {
         "key": "4",
-        "label": "3 fois ou plus"
+        "label": "Plus de 3 fois"
       }
     ]
   },
@@ -866,7 +866,7 @@
     ]
   },
   "q45": {
-    "title": "Avez-vous consulté un autre professionnel de santé pour des symptômes en lien avec cette infestation (pharmacien, infirmier …) ?",
+    "title": "Avez-vous pris conseil auprès d'un autre professionnel de santé pour des symptômes en lien avec cette infestation (pharmacien, infirmier …) ?",
     "options": [
       {
         "key": "1",
@@ -883,7 +883,7 @@
     ]
   },
   "q46": {
-    "title": "Quel(s) autre(s) professionnel(s) de santé avez-vous consulté ?",
+    "title": "Auprès de quel(s) autre(s) professionnel(s) de santé avez-vous pris conseil ?",
     "options": [
       {
         "key": "4",
@@ -895,7 +895,7 @@
       },
       {
         "key": "7",
-        "label": "Autre(précisez)"
+        "label": "Autre"
       }
     ]
   },
@@ -971,7 +971,7 @@
     ]
   },
   "q50": {
-    "title": "Pendant la période de l’infestation, vous a-t-on préscrit un arrêt de travail en lien avec l’infestation ?",
+    "title": "Pendant la période de l’infestation, vous a-t-on prescrit un arrêt de travail en lien avec l’infestation ?",
     "options": [
       {
         "key": "0",
@@ -988,7 +988,7 @@
     ]
   },
   "q51": {
-    "title": "Quelle a été la durée totale du ou des arrêts de travail que l’on vous a prescrit(s) ?",
+    "title": "Quelle a été la durée totale du ou des arrêts de travail que l’on vous a prescrit(s) ? (en chiffres)",
     "options": [
       {
         "key": "temps",
@@ -1014,11 +1014,11 @@
       },
       {
         "key": "5",
-        "label": "Site internet du gouvernement"
+        "label": "Site Internet du gouvernement"
       },
       {
         "key": "6",
-        "label": "Autre site internet"
+        "label": "Autre site Internet"
       },
       {
         "key": "8",
