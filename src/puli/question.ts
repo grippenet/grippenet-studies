@@ -1,5 +1,5 @@
 import { SurveyItem, Expression, SurveySingleItem, Validation } from "survey-engine/data_types";
-import { as_option, BaseChoiceQuestion, exp_as_arg, ItemQuestion, option_def, ClientExpression as client, textComponent, as_input_option, make_exclusive_options, num_as_arg, } from "../common";
+import { as_option, BaseChoiceQuestion, exp_as_arg, ItemQuestion, option_def, ClientExpression as client, textComponent, as_input_option, make_exclusive_options, num_as_arg, ItemProps, markdownComponent, } from "../common";
 import { SurveyItems } from "case-editor-tools/surveys";
 import { _T } from "./helpers";
 import { QuestionInfo, question_info } from "./data";
@@ -16,6 +16,32 @@ interface ItemWithKey {
 const text = function(item: ItemWithKey, name: string, text: string) {
     return _T(item.key + '.' + name, text);
 }
+
+export class MarkdownQuestion extends ItemQuestion {
+    
+    text: string
+
+    constructor(parentKey:string, key:string) {
+        super({parentKey: parentKey}, key);
+        const info = question_info(key);
+        this.text = info.title;
+    }
+
+    buildItem(): SurveySingleItem {
+        return SurveyItems.display({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            content: [
+                markdownComponent({
+                    key: this.itemKey,
+                    content: text(this, "text", this.text )
+                })
+            ]
+        });
+    }
+}
+
+
 
 export class TitleQuestion extends ItemQuestion {
     
@@ -52,6 +78,7 @@ export class RandomCodeQuestion extends BaseRandomCodeQuestion {
     
     constructor(parentKey:string, itemKey: string, responseKey: string, text: Map<string,string>) {
         super({
+            isRequired: true,
             parentKey: parentKey,
             questionText: text,
             codeConfig: {
@@ -76,7 +103,7 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
     exclusiveOptions: string[];
 
     constructor(parentKey: string, name:string, type: QuestionType, opts?: ChoiceQuestionOptions ) {
-        super({parentKey: parentKey}, name, type);
+        super({parentKey: parentKey, isRequired: true}, name, type);
         this.info = question_info(name);
 
         const top = type == "multiple" ? [
@@ -163,9 +190,14 @@ export class MonthDateQuestion extends ItemQuestion {
    validation?: QuestionValidation
    
   constructor(parent: string, itemKey:string) {
-    super({parentKey: parent }, itemKey);
+    super({parentKey: parent, isRequired: true }, itemKey);
     this.info = question_info(itemKey);
   } 
+
+  required(b: boolean) {
+    this.isRequired = b;
+    return true;
+  }
 
   setValication(validation?: QuestionValidation) {
     this.validation = validation;
@@ -245,10 +277,15 @@ export class NumericQuestion extends ItemQuestion {
     componentProps?: NumericQuestionOptions;
 
     constructor(parentKey: string, key: string, opts?: NumericQuestionOptions) {
-        super({parentKey: parentKey}, key);
+        super({parentKey: parentKey, isRequired: true}, key);
         const info = question_info(key);
         this.title = info.title;
         this.componentProps = opts;
+    }
+
+    required(b: boolean) {
+        this.isRequired = b;
+        return this;
     }
 
     getComponentProperties(): ComponentPoperties {
@@ -270,6 +307,7 @@ export class NumericQuestion extends ItemQuestion {
         return SurveyItems.numericInput({
             componentProperties: this.getComponentProperties(),
             parentKey: this.key,
+            isRequired: this.isRequired,
             itemKey: this.itemKey,
             questionText: _T(this.key + '.title', this.title),
             inputLabel: _T(this.key + '.input', "Entrez un nombre"),
@@ -291,7 +329,7 @@ export class LikertQuestion extends ItemQuestion {
     info: QuestionInfo;
     
     constructor(parentKey: string, key: string) {
-        super({"parentKey": parentKey}, key);
+        super({"parentKey": parentKey, isRequired: true}, key);
         this.info = question_info(key);
         if(!this.info.hasScale()) {
             throw new Error("Cannot use Likert without scale in " + key);
@@ -299,6 +337,11 @@ export class LikertQuestion extends ItemQuestion {
         if(!this.info.hasOptions()) {
             throw new Error("Cannot use Likert without options in " + key);
         }
+    }
+
+    required(b: boolean) {
+        this.isRequired = b;
+        return this;
     }
 
     getScaleOptions() {
@@ -337,6 +380,7 @@ export class LikertQuestion extends ItemQuestion {
         return SurveyItems.responsiveSingleChoiceArray({
             parentKey: this.parentKey,
             itemKey: this.itemKey,
+            isRequired: this.isRequired,
             scaleOptions: this.getScaleOptions(),
             questionText: text(this, 'title', this.info.title),
             rows: this.getRows(),

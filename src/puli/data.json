@@ -1,4 +1,11 @@
 {
+  "prelude": {
+    "title": [
+      "Les réponses aux questions précédées d’un astérisque (*) sont obligatoires pour pouvoir valider le questionnaire.",
+      "",
+      "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
+    ]
+  },
   "q1": {
     "title": "Avez-vous été confronté à une infestation de punaises de lit depuis avril 2024, que ce soit chez vous ou hors de votre domicile, que vous ayez été piqué ou non ?",
     "options": [

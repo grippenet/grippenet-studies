@@ -53,6 +53,10 @@ const import_options = (options: OptionData[], name: string): Map<string,string>
     return oo;
 }
 
+const parse_title = (title: string|string[]) =>{
+    return Array.isArray(title) ? title.join("\n") : title;
+}
+
 class SurveyInfo {
     data : Map<string, QuestionInfo>;
 
@@ -70,12 +74,13 @@ class SurveyInfo {
                 console.warn("Duplicate entry for "+ name);
             }
             if(typeof(info) == "object") {
-                const title = info['title'];
+                const title = parse_title(info['title']);
                 if(!title) {
                     console.log(info);
                     throw new Error("Title not found for " + name);
                 }
 
+                
                 const options = info['options'] ?? undefined;
                 const scale = info['scale'] ?? undefined;
                 let oo: Map<string,string>|undefined = undefined;

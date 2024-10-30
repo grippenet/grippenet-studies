@@ -2,7 +2,7 @@
 import { Group, Item, OptionDef, SurveyDefinition } from "case-editor-tools/surveys/types";
 import { _T, K } from "./helpers";
 import { surveyInfo } from "./data";
-import { ChoiceQuestion, LikertQuestion, MonthDateQuestion, NumberDontKnowQuestion, NumericQuestion, SurveyEnd, TitleQuestion,RandomCodeQuestion } from "./question";
+import { ChoiceQuestion, LikertQuestion, MonthDateQuestion, NumberDontKnowQuestion, NumericQuestion, SurveyEnd, TitleQuestion,RandomCodeQuestion, MarkdownQuestion } from "./question";
 import { GroupQuestion, SimpleGroupQuestion, SurveyBuilder, ClientExpression as client, make_exclusive_options } from "../common";
 import { SurveyItems,  } from "case-editor-tools/surveys";
 export class PuliSurvey extends SurveyBuilder {
@@ -18,6 +18,9 @@ export class PuliSurvey extends SurveyBuilder {
     }
 
     create(): void {
+
+        const prelude = new MarkdownQuestion(this.key, 'prelude');
+
         const q1 = new ChoiceQuestion(this.key, 'q1', 'single');   
         this.push(q1);
 
