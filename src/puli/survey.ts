@@ -21,6 +21,8 @@ export class PuliSurvey extends SurveyBuilder {
 
         const prelude = new MarkdownQuestion(this.key, 'prelude');
 
+        this.push(prelude);
+
         const q1 = new ChoiceQuestion(this.key, 'q1', 'single');   
         this.push(q1);
 
