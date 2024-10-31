@@ -1,4 +1,4 @@
-import { SurveyItem, Expression, SurveySingleItem, Validation } from "survey-engine/data_types";
+import { SurveyItem, Expression, SurveySingleItem, Validation, ItemComponent } from "survey-engine/data_types";
 import { as_option, BaseChoiceQuestion, exp_as_arg, ItemQuestion, option_def, ClientExpression as client, textComponent, as_input_option, make_exclusive_options, num_as_arg, ItemProps, markdownComponent, } from "../common";
 import { SurveyItems } from "case-editor-tools/surveys";
 import { _T } from "./helpers";
@@ -72,13 +72,13 @@ type ResponseHandler = (options: OptionDef[])=>OptionDef[];
 interface ChoiceQuestionOptions {
     otherOptions?: string[];
     exclusive?: string[];
+    required?: boolean;
 }
 
 export class RandomCodeQuestion extends BaseRandomCodeQuestion {
     
     constructor(parentKey:string, itemKey: string, responseKey: string, text: Map<string,string>) {
         super({
-            isRequired: true,
             parentKey: parentKey,
             questionText: text,
             codeConfig: {
@@ -103,7 +103,7 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
     exclusiveOptions: string[];
 
     constructor(parentKey: string, name:string, type: QuestionType, opts?: ChoiceQuestionOptions ) {
-        super({parentKey: parentKey, isRequired: true}, name, type);
+        super({parentKey: parentKey}, name, type);
         this.info = question_info(name);
 
         const top = type == "multiple" ? [
@@ -122,6 +122,9 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
             }
             if(opts.exclusive) {
                 this.exclusiveOptions.push(...opts.exclusive);
+            }
+            if(opts.required) {
+                this.isRequired = opts.required;
             }
         }
         
@@ -188,9 +191,12 @@ export class MonthDateQuestion extends ItemQuestion {
    info: QuestionInfo;
 
    validation?: QuestionValidation
+
+   addLesssOneMonth?: string
    
   constructor(parent: string, itemKey:string) {
-    super({parentKey: parent, isRequired: true }, itemKey);
+    super({parentKey: parent}, itemKey);
+    this.addLesssOneMonth = undefined;
     this.info = question_info(itemKey);
   } 
 
@@ -199,45 +205,73 @@ export class MonthDateQuestion extends ItemQuestion {
     return true;
   }
 
-  setValication(validation?: QuestionValidation) {
+  setValidation(validation?: QuestionValidation) {
     this.validation = validation;
   }
   
   getValidations(): Validation[]|undefined {
-    if(!this.validation) {
+    
+    const vv : Validation[] = [];
+    if(this.validation) {
+       vv.push(
+            {
+                'key': 'pc1',
+                'type':'hard',
+                rule: this.validation.condition
+            },
+       );
+    }
+    
+    if(this.isRequired) {
+        vv.push(
+            {
+                'key': 'pc2',
+                'type':'hard',
+                rule: client.compare.gt(client.getResponseValueAsNum(this.key, MonthDateQuestion.DateComponent), 0),
+            }
+        );
+    }
+
+    if(vv.length == 0) {
         return undefined;
     }
-    return [
-        {
-            'key': 'pc1',
-            'type':'hard',
-            rule: this.validation.condition
-        },
-    ];
+
+    return vv;
   } 
 
   getBottomComponents() {
-    if(!this.validation) {
+    const b : ItemComponent[] = [];
+
+    if(this.validation) {
+    
+        b.push(
+                textComponent({
+                    displayCondition: client.logic.not(client.getSurveyItemValidation(this.key, 'pc1')),
+                    content: text(this, 'validationError', this.validation.message),
+                    className: "text-danger",
+                })
+        );
+    }
+
+    if(this.isRequired) {
+       b.push(textComponent({
+            displayCondition: client.logic.not(client.getSurveyItemValidation(this.key, 'pc2')),
+            content: text(this, 'dateError', "Vous devez entrer une date"),
+            className: "text-danger",
+            })
+        );
+    }
+
+    if(b.length == 0) {
         return undefined;
     }
-    return [
-        textComponent({
-            displayCondition: client.logic.not(client.getSurveyItemValidation(this.key, 'pc1')),
-            content: text(this, 'validationError', this.validation.message),
-            className: "text-danger",
-        })
-    ]
+
+    return b;
   }
 
   buildItem(): SurveySingleItem {
 
-        return SurveyItems.singleChoice({
-        parentKey: this.parentKey,
-        itemKey: this.itemKey,
-        isRequired: this.isRequired,
-        condition: this.getCondition(),
-        questionText: _T(this.key, this.info.title),
-        responseOptions: [
+        const rr: OptionDef[] = [
             {
                 key: 'date', role: 'dateInput',
                 optionProps: {
@@ -245,11 +279,24 @@ export class MonthDateQuestion extends ItemQuestion {
                     min: exp_as_arg( client.timestampWithOffset({'years': -1})),
                     max: exp_as_arg( client.timestampWithOffset({'minutes': 1}) )
                 },
-                content: _T(this.key + '.date', "Choissez une date"),
+                content: _T(this.key + '.date', "Choissez une date (année, puis mois) "),
                 //description: _T("Q10a.option.date.desc","desc")
             },
-            as_option('3', _T(this.key + '.option.idk.title', "Je ne sais pas")),
-        ],
+        ];
+
+        if(this.addLesssOneMonth) {
+            as_option('2', _T(this.key + '.option.l1m.title', this.addLesssOneMonth)) 
+        }
+
+        rr.push(as_option('3', _T(this.key + '.option.idk.title', "Je ne sais pas")) );
+
+        return SurveyItems.singleChoice({
+        parentKey: this.parentKey,
+        itemKey: this.itemKey,
+        isRequired: this.isRequired,
+        condition: this.getCondition(),
+        questionText: _T(this.key, this.info.title),
+        responseOptions: rr,
         customValidations: this.getValidations(),
         bottomDisplayCompoments: this.getBottomComponents(),
     });
@@ -277,7 +324,7 @@ export class NumericQuestion extends ItemQuestion {
     componentProps?: NumericQuestionOptions;
 
     constructor(parentKey: string, key: string, opts?: NumericQuestionOptions) {
-        super({parentKey: parentKey, isRequired: true}, key);
+        super({parentKey: parentKey}, key);
         const info = question_info(key);
         this.title = info.title;
         this.componentProps = opts;
@@ -329,7 +376,7 @@ export class LikertQuestion extends ItemQuestion {
     info: QuestionInfo;
     
     constructor(parentKey: string, key: string) {
-        super({"parentKey": parentKey, isRequired: true}, key);
+        super({"parentKey": parentKey}, key);
         this.info = question_info(key);
         if(!this.info.hasScale()) {
             throw new Error("Cannot use Likert without scale in " + key);
@@ -370,7 +417,8 @@ export class LikertQuestion extends ItemQuestion {
         if(this.info.top) {
             return [textComponent({
                 'key': 'top',
-                content: text(this, 'top', this.info.top)
+                content: text(this, 'top', this.info.top),
+                className: 'mb-1'
             })];
         }
         return undefined;
@@ -397,7 +445,7 @@ interface NumberDontKnowQuestionOpts {
 
 export class NumberDontKnowQuestion extends ItemQuestion {
 
-    static readonly DateComponent = 'rg.1';
+    static readonly NumberComponent = 'rg.1';
  
     info: QuestionInfo;
 

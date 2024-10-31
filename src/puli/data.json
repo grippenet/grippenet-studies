@@ -42,7 +42,7 @@
     ]
   },
   "q3": {
-    "title": "A quelle date a débuté l’infestation ?",
+    "title": "A quelle date a débuté l’infestation à votre domicile ?",
     "options": [
       {
         "key": "date",
@@ -81,7 +81,7 @@
     ]
   },
   "q6": {
-    "title": "Selon vous, combien de semaines se sont écoulées entre le moment où vous avez remarqué  l’infestation à votre domicile et l’éradication ?",
+    "title": " L'infestation ayant duré moins de trois mois, sauriez-vous nous indiquer combien de semaines environ se sont écoulées entre le début de l'infestation à votre domicile et l'éradication à votre domicile ? ",
     "options": [
       {
         "key": "duree",
@@ -103,7 +103,7 @@
     ]
   },
   "q8": {
-    "title": "Avez-vous une ou plusieurs photos et seriez-vous disposé à nous les envoyer par e-mail ?",
+    "title": "Avez-vous une ou plusieurs photos des punaises de lit dans votre logement et seriez-vous disposé à nous les envoyer par e-mail ?",
     "options": [
       {
         "key": "1",
@@ -120,7 +120,7 @@
     "title": "Merci de nous envoyer la/les photo(s) par e-mail à punaisedelit@iplesp.upmc.fr avec le code xxxxx de la question en objet"
   },
   "q9": {
-    "title": "Précisez la ou les zones de votre logement de votre logement où elles ont été vues:",
+    "title": "Précisez la ou les zones de votre logement de votre logement où elles ont été vues",
     "options": [
       {
         "key": "4",
@@ -179,7 +179,7 @@
     "options": [
       {
         "key": "4",
-        "label": "Médecin generaliste"
+        "label": "Médecin généraliste"
       },
       {
         "key": "5",
@@ -621,7 +621,7 @@
       },
       {
         "key": "4",
-        "label": "Plusieurs jours"
+        "label": "entre 1 et 7 jours"
       },
       {
         "key": "5",
@@ -701,8 +701,8 @@
     ]
   },
   "_4": "Impact sur les activités",
-  "note_cotation": "Pour les questions ci-dessous, utiliser la cotation suivante : 0 : « pas du tout » ; 1, 2 ou 3 : « légèrement » ; 4, 5 ou 6 : « moyennement » ; 7, 8 ou 9 : « beaucoup » ; 10 « énormément ».",
   "q38": {
+    "top":  "Pour les questions ci-dessous, utiliser la cotation suivante : 0 : « pas du tout » ; 1, 2 ou 3 : « légèrement » ; 4, 5 ou 6 : « moyennement » ; 7, 8 ou 9 : « beaucoup » ; 10 « énormément ».",
     "title": " Au cours de la période d’infestation par des punaises de lit, les symptômes ou signes cliniques liés aux punaises de lit ont-ils :",
     "options": [
       {
@@ -792,7 +792,7 @@
     "options": [
       {
         "key": "4",
-        "label": "Symptômes physiques"
+        "label": "Symptômes physiques (comme des piqûres par exemple)"
       },
       {
         "key": "5",
@@ -941,11 +941,11 @@
       },
       {
         "key": "5",
-        "label": "Antibiotique en application cutanée"
+        "label": "Antibiotique locale (crème)"
       },
       {
         "key": "6",
-        "label": "Antibiotique par voie générale"
+        "label": "Antibiotique par voie orale"
       },
       {
         "key": "8",
