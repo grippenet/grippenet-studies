@@ -256,7 +256,7 @@ export class MonthDateQuestion extends ItemQuestion {
     if(this.isRequired) {
        b.push(textComponent({
             displayCondition: client.logic.not(client.getSurveyItemValidation(this.key, 'pc2')),
-            content: text(this, 'dateError', "Vous devez entrer une date"),
+            content: text(this, 'dateError', "Une date est attendue pour cette question (si vous avez déjà indiqué une date, n'en tenez pas compte, il va disparaitre en remplissant les questions suivantes)."),
             className: "text-danger",
             })
         );

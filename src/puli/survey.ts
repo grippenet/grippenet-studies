@@ -32,7 +32,7 @@ export class PuliSurvey extends SurveyBuilder {
         const g = this.buildMainGroup();
         this.push(g, q1.createConditionFrom(["1" ]));
 
-        const end = new SurveyEnd(this.key, "Merci pour votre réponse ! L'étude étant ciblée sur les infestations de punaises de lit, nous n'avons pas de questions supplémentaires à vous poser. A bientôt !");
+        const end = new SurveyEnd(this.key, "Merci pour votre réponse ! Nous n'avons pas de questions supplémentaires à vous poser. A bientôt !");
         this.push(end);
     }
 
