@@ -168,7 +168,7 @@ export class PuliSurvey extends SurveyBuilder {
 
     buildSkinLesion(g: SimpleGroupQuestion) {
         const root = g.key;
-        const t1 = new TitleQuestion(root,'t2', "Lésions cutanées");
+        const t1 = new TitleQuestion(root,'t2', "Piqûres");
         g.add(t1);
 
         const q26 = new ChoiceQuestion(root, "q26", "single", {"required": true});
