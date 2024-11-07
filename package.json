@@ -17,8 +17,8 @@
   "dependencies": {
     "@types/jest": "29.0.3",
     "@types/node": "^16.10.3",
-    "case-editor-tools": "^1.6.0",
-    "survey-engine": "^1.2.1",
+    "case-editor-tools": "^1.6.8",
+    "survey-engine": "^1.2.9",
     "date-fns": "^2.29.3",
     "typescript": "^4.5.5",
     "ifn-survey-tools":"^0.0.1"
