@@ -4,6 +4,9 @@ import { VaccinationDef } from "./surveys/vaccination/vaccination";
 import { StudyBuilder, StudyRulesBuilder, SurveyKeys } from "../common";
 import { GrippenetRulesBuilder } from "./rules/builder";
 import { GrippenetKeys } from "./keys";
+import { GrippenetRulesOffSeasonBuilder } from "./rules/builder_offseason";
+import { off } from "process";
+import { GrippenetRulesTestBuilder } from "./rules/builder_test";
 
 export class GrippenetStudyBuilder extends StudyBuilder {
 
@@ -35,9 +38,15 @@ export class GrippenetStudyBuilder extends StudyBuilder {
         };
 
         const builder = new GrippenetRulesBuilder(keys);
-
         this.studyRules = builder.build();
+        
+        const offseasonBuilder = new GrippenetRulesOffSeasonBuilder(keys);
+        const offseasonRules = offseasonBuilder.build().get();
 
+        this.addCustomStudyRules('offseason', offseasonRules);
+
+        const testBuilder = new GrippenetRulesTestBuilder(keys);
+        this.addCustomStudyRules('testRules', testBuilder.build().get());
     }
 
 }

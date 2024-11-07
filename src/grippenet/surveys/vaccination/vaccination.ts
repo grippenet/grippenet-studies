@@ -1,14 +1,20 @@
+import { Expression } from "survey-engine/data_types";
 import {  ItemBuilder, _T,questionPools, SurveyBuilder } from "../../../common"
 import { vaccinationSurveyKey } from "../../constants";
 import { GrippenetFlags } from "../../flags";
 import { lastSubmissionQuestion } from "../../questions/lastSubmission";
 import * as vaccination from "./questions";
+import { ResponseRef } from "../../types";
+import ResponseEncoding from "./responses";
+import { sign } from "crypto";
 
 const pool = questionPools.vaccination;
 
 export class VaccinationDef extends SurveyBuilder {
 
     items: ItemBuilder[];
+
+    preventionResponses: ResponseRef[]
 
     constructor(meta:Map<string,string>) {
         super({
@@ -25,6 +31,7 @@ export class VaccinationDef extends SurveyBuilder {
         });
 
         this.items = [];
+        this.preventionResponses = [];
 
         const rootKey = this.key
 
@@ -33,7 +40,6 @@ export class VaccinationDef extends SurveyBuilder {
 
         const QLastSubmit = new lastSubmissionQuestion({parentKey: rootKey, itemKey:'submission', flagKey: GrippenetFlags.lastVaccination.key, trans:'weekly.lastsubmission'});
         this.items.push(QLastSubmit);
-
 
         const vaccGroup = this.buildVaccGroup(rootKey);
 
@@ -71,6 +77,8 @@ export class VaccinationDef extends SurveyBuilder {
         //Q10
         const Q_flu_vaccine_this_season = new pool.FluVaccineThisSeason({parentKey:rootKey, isRequired:true});
         items.push(Q_flu_vaccine_this_season);
+
+        this.preventionResponses.push({'itemKey': Q_flu_vaccine_this_season.key, 'responses': [ResponseEncoding.flu_vaccine_season.yes], 'type': 'single'})
         
         // Q10b
         const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
@@ -81,9 +89,16 @@ export class VaccinationDef extends SurveyBuilder {
         Q_flu_vaccin_by_whom.setCondition(Q_flu_vaccine_this_season.createIsVaccinatedCondition());
         items.push(Q_flu_vaccin_by_whom);
 
+        // Q10c
         const Q_flu_vaccine_this_season_reasons_for = new vaccination.FluVaccineThisSeasonReasonFor({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_reasons_for);
 
+        this.preventionResponses.push({
+            'itemKey': Q_flu_vaccine_this_season_reasons_for.key, 
+            'responses': [ResponseEncoding.flu_vac_reason.voucher, ResponseEncoding.flu_vac_reason.riskgroup], 
+            'type': 'multiple'
+        });
+ 
         // Q10d
         const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:rootKey, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_reasons_against);
@@ -130,4 +145,10 @@ export class VaccinationDef extends SurveyBuilder {
             this.addItem(item.get());
         }
     }
+
+    getInfluenzaPreventionResponses(): ResponseRef[] {
+        return this.preventionResponses;
+    }
+
+    
 }

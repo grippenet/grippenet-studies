@@ -11,6 +11,8 @@ export class IntakeDef extends SurveyBuilder {
 
     Q_postal?: intake.PostalCode;
 
+    Q_Tobacco?: intake.Smoking;
+
     constructor(meta:Map<string,string>) {
 
         super({
@@ -207,6 +209,8 @@ export class IntakeDef extends SurveyBuilder {
 
         const Q_smoking = new intake.Smoking({parentKey:rootKey, isRequired:true});
         this.prefillWithLastResponse(Q_smoking, {'years': 1});
+        this.Q_Tobacco = Q_smoking;
+
         items.push(Q_smoking);
 
         const Q_allergies = new pool.Allergies({parentKey:rootKey, isRequired:true, useOtherInput: true});
@@ -243,6 +247,13 @@ export class IntakeDef extends SurveyBuilder {
             throw new Error("Postal not initialized");
         }
         return this.Q_postal;
+    }
+
+    getSmoking(): Item {
+        if(!this.Q_Tobacco) {
+            throw new Error("Postal not initialized");
+        }
+        return this.Q_Tobacco; 
     }
 }
 

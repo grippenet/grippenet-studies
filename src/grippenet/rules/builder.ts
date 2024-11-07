@@ -8,6 +8,9 @@ import { GrippenetFlags as flags } from "../flags";
 import { Duration,  } from "case-editor-tools/types/duration";
 import { assignedSurveys, updateFlag, hasParticipantFlagKeyAndValue, hasSurveyKeyAssigned, updateLastSubmission} from "./helpers";
 import { ExtraStudyRulesBuilder } from "./extra_study";
+import { BadgeRuleBuilder } from "../../badge/rules";
+import { getUnixTime, parseISO } from "date-fns";
+import { parse } from "path";
 
 export function response_item_key(name:string) {
     return responseGroupKey + '.' + name;
@@ -165,7 +168,53 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             ) // do
         );
 
+        const Smoking = se.singleChoice.any(this.keys.intake.getSmoking().key, '5','6');
+
+        const influenzaPrevConditions : Expression[] = [];
+
+        this.keys.vaccination.getInfluenzaPreventionResponses().forEach(r => {
+            let expr: Expression | undefined = undefined;
+            if(r.type == 'single') {
+                expr = se.singleChoice.any(r.itemKey, ...r.responses);
+            }
+            if(r.type == 'multiple') {
+                expr = se.multipleChoice.any(r.itemKey, ...r.responses);
+            }
+            if(expr) {
+                influenzaPrevConditions.push(expr);
+            }
+        });
+        
+        const InfluenzaPrev = (influenzaPrevConditions.length > 0) ? se.or(
+            ...influenzaPrevConditions
+        ) : undefined;
+        
+        const WeeklyMoreQuestion = se.singleChoice.any(this.keys.weekly.getHasMoreQuestion().key, WeeklyResponses.consent_more.yes);
+
+        const badgeBuilder = new BadgeRuleBuilder({
+            IntakeKey: intakeKey,
+            WeeklyKey: weeklyKey,
+            VaccKey: vacKey,
+            seasonStart: getUnixTime(parseISO('2024-11-25')),
+            previousSeasonStart: getUnixTime(parseISO('2023-11-10')),
+            FlagSeasonCounter:'seasons',
+            FlagsLastSubmission: {
+                intake: flags.lastIntake.key,
+                weekly: flags.lastWeekly.key,
+                vacc: flags.lastVaccination.key,
+            },
+            FlagWeeklySeasonalCounter: 'cWC',
+            FlagWeeklySequentialCounter:'cWSeq', // Number of sequential weeks
+            FlagWeeklyOverallCounter: 'cWT', 
+            WeeklyMoreQuestion: WeeklyMoreQuestion,
+            IntakeTobacco: Smoking,
+            InfluenzaVaccPrev: InfluenzaPrev,
+            IntakePostalCode: se.getResponseValueAsStr(postalCodeKey, 'rg.0'),
+            Externals: ['mozart','puli','dengue']
+        });
+        
         const submitRules: Expression[] = [
+            ...badgeBuilder.build(),
             handleIntake,
             handleWeekly,
             handleVaccination,

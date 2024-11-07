@@ -37,6 +37,12 @@ export const GrippenetFlags = {
     lastWeekly: {
         key: 'lastWeeklyTime',
     },
+    lastMozart: {
+        key: 'lastMozartTime'
+    },
+    lastPuli: {
+        key: 'lastPuliTime'
+    },
     mozartS0: {
         key: 'mozartS0',
         values: booleanValues
