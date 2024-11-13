@@ -1,0 +1,375 @@
+{
+    "weekly.QFRmask5.text": {
+    "en": "Why did you not wear a mask",
+    "fr": "Vous avez indiqué ne pas avoir porté de masque à votre domicile et/ou à l'extérieur de votre domicile. Pour quelle(s) raison(s) n'avez-vous pas porté de masque dans ces circonstances ?"
+  },
+  "weekly.QFRmask5.option.ridiculous": {
+    "en": "You fear to be ridiculous",
+    "fr": "Vous avez eu peur d’être ridicule"
+  },
+  "weekly.QFRmask5.option.excessive": {
+    "en": "it's a little excessive",
+    "fr": "Vous pensez que c’est un peu exagéré"
+  },
+  "weekly.QFRmask5.option.efficient": {
+    "en": "it would not be efficient",
+    "fr": "Vous estimez que ça ne serait pas assez efficace"
+  },
+  "weekly.QFRmask5.option.unrisky.trans": {
+    "en": "There is no risk of transmission",
+    "fr": "Vous pensez qu’il n’y a pas de risque de transmettre des virus aux autres"
+  },
+  "weekly.QFRmask5.option.dontcare.trans": {
+    "en": "I dont care much if I transmit the virus",
+    "fr": "Cela vous importe peu de transmettre des virus aux autres"
+  },
+  "weekly.QFRmask5.option.find.mask": {
+    "en": "I dont know where to obtain this kind of mask",
+    "fr": "Vous ne savez pas où vous procurer ce genre de masque"
+  },
+  "weekly.QFRmask5.option.spend.money": {
+    "en": "I don't want to spend money for that",
+    "fr": "Vous ne souhaitez pas dépenser votre argent pour cela"
+  },
+  "weekly.QFRmask5.option.keep.mask": {
+    "en": "I find hard to keep the mask a long time on my face",
+    "fr": "Vous trouvez qu’il est difficile de garder un masque un long moment"
+  },
+  "weekly.QFRmask5.option.concerned": {
+    "en": "I dont feel concerned",
+    "fr": "Vous ne vous sentez pas concerné"
+  },
+  "weekly.QFRmask5.option.other": {
+    "en": "Other",
+    "fr": "Autre"
+  },
+  "weekly.QFRmask5.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas / Je ne souhaite pas répondre"
+  },
+  "weekly.QFRmask5.option.nosympt": {
+    "en": "I dont have any respiratory symptom",
+    "fr": "Je n’ai pas de symptôme(s) respiratoire(s)"
+  },
+  "weekly.QFRmask1.text": {
+    "en": "Under what circumstances did you wear a mask",
+    "fr": "Dans quelle(s) circonstance(s) avez-vous porté un masque ?"
+  },
+  "weekly.QFRmask1.option.fear_transmit": {
+    "en": "By fear of transmitting to household",
+    "fr": "Chez vous pour ne pas contaminer votre entourage (enfants, parents, conjoint)"
+  },
+  "weekly.QFRmask1.option.oustide": {
+    "en": "Oustide home",
+    "fr": "A l’extérieur (pour aller faire vos courses, voir des amis, dans les transports en commun, etc.) pour ne pas contaminer les autres"
+  },
+  "weekly.QFRmask1.option.at_work": {
+    "en": "At work",
+    "fr": "Sur votre lieu de travail (ou d’étude)"
+  },
+  "weekly.QFRmask1.option.contact_elder": {
+    "en": "Close to elder people",
+    "fr": "Lorsque vous avez été en contact avec une ou plusieurs personnes âgées de 65 ans et plus"
+  },
+  "weekly.QFRmask1.option.contact_at_risk": {
+    "en": "Close to people with chronic disease",
+    "fr": "Lorsque vous avez été en contact avec une ou plusieurs personnes porteuses de pathologie(s) chronique(s) (asthme, diabète, maladie cardiaque, cancer, etc.)"
+  },
+  "weekly.QFRmask1.option.hospital": {
+    "en": "By visiting people at hospital",
+    "fr": "Lorsque vous avez rendu visite à une ou plusieurs personnes hospitalisées"
+  },
+  "weekly.QFRmask1.option.young_children": {
+    "en": "Close to young people",
+    "fr": "Lorsque vous avez été en contact avec un ou plusieurs jeunes enfants (moins de deux ans)"
+  },
+  "weekly.QFRmask1.option.other": {
+    "en": "Other",
+    "fr": "Dans d’autres circonstances"
+  },
+  "weekly.QFRmask1.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas  / je ne souhaite pas répondre"
+  },
+  "weekly.QFRmask2.text": {
+    "en": "In this context, did you always wear a mask",
+    "fr": "Dans ces circonstances, avez-vous systématiquement porté un masque en présence d’autres personnes, tant que vous aviez des symptômes ?"
+  },
+  "weekly.QFRmask2.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "weekly.QFRmask2.option.no": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.QFRmask2.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas  / je ne souhaite pas répondre"
+  },
+  "weekly.QFRmaskE.text": {
+    "en": "Why did you not always wear a mask in this context",
+    "fr": "Pour quelle(s) raison(s) n’avez-vous pas systématiquement porté un masque en présence d’autres personnes, tant que vous aviez des symptômes ?"
+  },
+  "weekly.QFRmask3.option.at_home": {
+    "en": "At home",
+    "fr": "Chez vous pour ne pas contaminer votre entourage (enfants, parents, conjoint)"
+  },
+  "weekly.QFRmask3.option.not_enough": {
+    "en": "Dont have enough mask",
+    "fr": "Vous n’aviez pas suffisamment de masques"
+  },
+  "weekly.QFRmask3.option.incommode": {
+    "en": "Mask incommode me for breathing",
+    "fr": "Cela vous gênait pour respirer ou vous donnait une sensation désagréable (chaleur, humidité)"
+  },
+  "weekly.QFRmask3.option.constraint": {
+    "en": "Too constraining",
+    "fr": "Vous avez trouvé cela trop contraignant à utiliser"
+  },
+  "weekly.QFRmask3.option.other_look": {
+    "en": "Because of other people's opinion when seeing me",
+    "fr": "A cause du regard des autres"
+  },
+  "weekly.QFRmask3.option.other": {
+    "en": "Other reason",
+    "fr": "Pour une autre raison"
+  },
+  "weekly.QFRmask3.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas / je ne souhaite pas répondre"
+  },
+  "weekly.QFRmask4.text": {
+    "en": "Where did you get this mask from?",
+    "fr": "Où vous êtes-vous procuré ce ou ces masques ?"
+  },
+  "weekly.QFRmask4.option.pharmacy": {
+    "en": "At the pharmacy",
+    "fr": "En pharmacie / parapharmacie"
+  },
+  "weekly.QFRmask4.option.internet": {
+    "en": "On internet",
+    "fr": "Sur Internet"
+  },
+  "weekly.QFRmask4.option.work": {
+    "en": "At work",
+    "fr": "Sur votre lieu de travail"
+  },
+  "weekly.QFRmask4.option.doctor": {
+    "en": "From my doctor",
+    "fr": "Votre médecin traitant vous en a donné"
+  },
+  "weekly.QFRmask4.option.other": {
+    "en": "Other",
+    "fr": "Autre"
+  },
+  "weekly.QFRmask4.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas / je ne souhaite pas répondre"
+  },
+
+  "weekly.Q1ansm.text": {
+    "en": "Q1ansm",
+    "fr": "Suite à cette (ou ces) consultation(s), le professionnel de santé vous a-t-il prescrit un ou plusieurs produits de santé tel qu’un médicament, un dispositif médical (chambre d'inhalation, dispositif d'oxygénothérapie, etc.) ou un vaccin ?"
+  },
+  "weekly.Q1ansm.option.no": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.Q1ansm.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "weekly.Q1ansm.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas / Je ne me souviens pas"
+  },
+  "weekly.Q2ansm.text": {
+    "en": "Q2ansm",
+    "fr": "Est-ce qu’au moins un produit de santé figurant sur votre ordonnance n’a pas pu vous être délivré du tout, en raison d’une rupture de stock ?"
+  },
+  "weekly.Q2ansm.option.no": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.Q2ansm.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "weekly.Q2ansm.helpGroup.asking_reason": {
+    "en": "weekly.Q2ansm Question asking reason",
+    "fr": "Pour nous aider à connaître la disponibilité des produits de santé dans les pharmacies de ville."
+  },
+  "weekly.Q2ansm.helpGroup.answer_tip": {
+    "en": "weekly.Q2ansm Question answer tip",
+    "fr": "Cochez « Oui » si vous avez été confronté à la non délivrance de tout ou une partie de votre ordonnance pour raison de rupture de stock, qu'il s'agisse de médicaments (ex : paracétamol, antibiotique), de dispositif médical (ex : chambre d'inhalation, dispositif d'oxygénothérapie, etc.) ou d'un vaccin."
+  },
+  "weekly.QAnsmNotDelivered.text": {
+    "en": "QAnsmNotDelivered",
+    "fr": "Qu’est-ce qui ne vous a pas été délivré ?"
+  },
+  "weekly.QAnsmNotDelivered.option.text.painkiller": {
+    "en": "Pain killer",
+    "fr": "Médicament contre la douleur ou la fièvre (paracétamol, ibuprofène, aspirine, etc.)"
+  },
+  "weekly.QAnsmNotDelivered.option.desc.painkiller": {
+    "en": "tylenol, ...",
+    "fr": "Précisez si possible"
+  },
+  "weekly.QAnsmNotDelivered.option.text.cough": {
+    "en": "Cough medication",
+    "fr": "Médicament contre la toux "
+  },
+  "weekly.QAnsmNotDelivered.option.text.flu": {
+    "en": "Influenza antiviral",
+    "fr": "Antiviral contre la grippe (Tamiflu)"
+  },
+  "weekly.QAnsmNotDelivered.option.text.covid19": {
+    "en": "Covid19 antiviral",
+    "fr": "Antiviral contre la Covid-19 (Paxlovid)"
+  },
+  "weekly.QAnsmNotDelivered.option.text.antibiotic.": {
+    "en": "Antibiotic",
+    "fr": "Antibiotique"
+  },
+  "weekly.QAnsmNotDelivered.option.text.device": {
+    "en": "Medical device",
+    "fr": "Dispositif médical (chambre d'inhalation, dispositif d'oxygénothérapie, etc.)"
+  },
+  "weekly.QAnsmNotDelivered.option.desc.device": {
+    "en": "inhalation chamber, ...",
+    "fr": "Précisez si possible"
+  },
+  "weekly.QAnsmNotDelivered.option.text.vaccine": {
+    "en": "Vaccine",
+    "fr": "Vaccin"
+  },
+  "weekly.QAnsmNotDelivered.option.text.other": {
+    "en": "Other",
+    "fr": "Autre"
+  },
+  "weekly.QAnsmNotDelivered.option.input_desc": {
+    "en": "Name it if possible",
+    "fr": "Précisez si possible"
+  },
+  "weekly.QAnsmNotDelivered.option.text.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas"
+  },
+  "weekly.QAnsmDelivedyReplaced.text": {
+    "en": "QAnsmDelivedyReplaced",
+    "fr": "Est-ce qu'au moins un autre produit de santé vous a été proposé par votre pharmacien, pour remplacer le(s) produit(s) non délivré(s) ?"
+  },
+  "weekly.QAnsmDelivedyReplaced.option.no": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.QAnsmDelivedyReplaced.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "weekly.QAnsmDelivedyReplaced.option.dnk": {
+    "en": "I dont' know",
+    "fr": "Je ne sais pas"
+  },
+  "weekly.QAnsmProposedAlternative.text": {
+    "en": "QAnsmProposedAlternative",
+    "fr": "Quelle(s) alternative(s) le pharmacien vous a-t-il proposée(s) ?"
+  },
+  "weekly.QAnsmProposedAlternative.option.dose": {
+    "en": "Other dose",
+    "fr": "Autre dosage"
+  },
+  "weekly.QAnsmProposedAlternative.option.medication": {
+    "en": "Other medication",
+    "fr": "Autre médicament (hors générique)"
+  },
+  "weekly.QAnsmProposedAlternative.option.preparation": {
+    "en": "Magistral preparation",
+    "fr": "Préparation magistrale (préparation médicamenteuse effectuée juste pour vous par le pharmacien ou le préparateur)"
+  },
+  "weekly.QAnsmProposedAlternative.option.generic": {
+    "en": "Generic",
+    "fr": "Un générique (même médicament, mais d’une autre marque)"
+  },
+  "weekly.QAnsmProposedAlternative.option.text.other": {
+    "en": "Other",
+    "fr": "Autre"
+  },
+  "weekly.QAnsmProposedAlternative.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas"
+  },
+  "weekly.QAnsmProposedAlternative.option.input_desc": {
+    "en": "Name it if possible",
+    "fr": "Précisez si possible le nom du médicament"
+  },
+  "weekly.Q6ansm.text": {
+    "en": "Q6ansm",
+    "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si c'est votre première visite de la saison), à votre connaissance, vous ou un membre de votre famille proche (conjoint(e), enfant, parent, petit-enfant) a-t-il renoncé à se procurer un médicament SANS ordonnance (ex : paracétamol ou ibuprofène) pour cause de rupture de stock?"
+  },
+  "weekly.Q7ansm.text": {
+    "en": "Q7ansm",
+    "fr": "Depuis votre dernière déclaration (ou dans les sept derniers jours, si c’est votre première visite de la saison), à votre connaissance, au moins un mineur de votre famille proche (enfant de votre foyer, petit-enfant, neveu/nièce) a-t-il été confronté à une rupture de stock concernant un produit de santé figurant sur une de ses ordonnances ?"
+  },
+  "weekly.Qansm.prelude": {
+    "en": "ANSM ancillary study",
+    "fr": "Cette saison, GrippeNet.fr/COVIDnet.fr aide l’Agence nationale de sécurité du médicament et des produits de santé (ANSM) à évaluer la disponibilité de certains produits de santé en pharmacie, en particulier pour les plus jeunes. Les questions figurant ci-dessous permettent d’explorer cette question."
+  },
+  "weekly.Q6ansm.option.no": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.Q6ansm.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "weekly.Q6ansm.helpGroup.asking_reason": {
+    "en": "weekly.Q6ansm Question asking reason",
+    "fr": "Pour nous aider à connaître la disponibilité des produits de santé disponibles sans ordonnance dans les pharmacies de ville."
+  },
+  "weekly.Q6ansm.helpGroup.answer_tip": {
+    "en": "weekly.Q6ansm Question answer tip",
+    "fr": ""
+  },
+  "weekly.Q6ansm.option.text.other_desc": {
+    "en": "If possible describe it",
+    "fr": "Précisez si possible"
+  },
+  "weekly.Q7ansm.option.no": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.Q7ansm.option.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "weekly.Q7ansm.option.not_concerned": {
+    "en": "Not concerned",
+    "fr": "Je ne suis pas concerné, je n’ai pas de mineur dans ma famille proche"
+  },
+  "weekly.Q7ansm.option.dnk": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas / Je ne me souviens pas"
+  },
+  "weekly.Q7ansm.helpGroup.asking_reason": {
+    "en": "weekly.Q7ansm Question asking reason",
+    "fr": "Pour nous aider à connaître la disponibilité des produits de santé pédiatriques dans les pharmacies de ville."
+  },
+  "weekly.Q7ansm.helpGroup.answer_tip": {
+    "en": "weekly.Q7ansm Question answer tip",
+    "fr": "Cochez « Oui » si un mineur de votre entourage a été confronté à la non délivrance de tout ou une partie d’une de ses ordonnances pour raison de rupture de stock, qu'il s'agisse de médicaments (ex : paracétamol, antibiotique), de dispositif médical (ex : chambre d'inhalation, dispositif d'oxygénothérapie, etc.) ou d'un vaccin."
+  },
+  "weekly.Q8ansm.text": {
+    "en": "QAnsmNotDelivered",
+    "fr": "Qu’est-ce qui n'a pas été délivré ?"
+  },
+  "weekly.Q9ansm.text": {
+    "en": "QAnsmDelivedyReplaced",
+    "fr": "Est-ce qu'au moins un autre produit de santé a été proposé par le pharmacien à la place de celui ou ceux prescrits ?"
+  },
+  "weekly.Q10ansm.text": {
+    "en": "QAnsmDelivedyReplaced",
+    "fr": "Quelle(s) alternative(s) le pharmacien a-t-il proposée(s) ?"
+  }
+}
