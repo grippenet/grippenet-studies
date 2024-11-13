@@ -94,7 +94,7 @@ export class QAge extends ItemQuestion {
 export class QSexe extends ItemQuestion {
   constructor(parent: string, itemKey:string ) {
     super({parentKey: parent }, itemKey);
-   } 
+   }
 
    buildItem(): SurveySingleItem {
     return SurveyItems.singleChoice({
