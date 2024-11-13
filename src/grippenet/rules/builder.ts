@@ -42,6 +42,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
         ];
        
         const postalCodeKey = this.keys.intake.getPostalCodeItem().key;
+        const postalCodeResponseKey = 'rg.0';
         
         /**
          * Define what should happen, when persons submit an intake survey:
@@ -58,7 +59,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
                 assignedSurveys.add(weeklyKey, 'prio')
             ),
             se.ifThen(
-                se.hasResponseKey(postalCodeKey,'rg.0'),
+                se.hasResponseKey(postalCodeKey, postalCodeResponseKey),
                 updateFlag(flags.needLocation.key, flags.needLocation.values.no),
             ),
             // add optional intake
@@ -192,25 +193,29 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
         const WeeklyMoreQuestion = se.singleChoice.any(this.keys.weekly.getHasMoreQuestion().key, WeeklyResponses.consent_more.yes);
 
         const badgeBuilder = new BadgeRuleBuilder({
-            IntakeKey: intakeKey,
-            WeeklyKey: weeklyKey,
-            VaccKey: vacKey,
+            intakeKey: intakeKey,
+            weeklyKey: weeklyKey,
+            vaccKey: vacKey,
             seasonStart: getUnixTime(parseISO('2024-11-25')),
             previousSeasonStart: getUnixTime(parseISO('2023-11-10')),
-            FlagSeasonCounter:'seasons',
-            FlagsLastSubmission: {
+            flagSeasonCounter:'seasons',
+            flagsLastSubmission: {
                 intake: flags.lastIntake.key,
                 weekly: flags.lastWeekly.key,
                 vacc: flags.lastVaccination.key,
             },
-            FlagWeeklySeasonalCounter: 'cWC',
-            FlagWeeklySequentialCounter:'cWSeq', // Number of sequential weeks
-            FlagWeeklyOverallCounter: 'cWT', 
-            WeeklyMoreQuestion: WeeklyMoreQuestion,
-            IntakeTobacco: Smoking,
-            InfluenzaVaccPrev: InfluenzaPrev,
-            IntakePostalCode: se.getResponseValueAsStr(postalCodeKey, 'rg.0'),
-            Externals: ['mozart','puli','dengue']
+            flagWeeklySeasonalCounter: 'cWC',
+            flagWeeklySequentialCounter:'cWSeq', // Number of sequential weeks
+            flagWeeklyOverallCounter: 'cWT', 
+            weeklyMoreQuestion: WeeklyMoreQuestion,
+            intakeTobacco: Smoking,
+            influenzaVaccPrev: InfluenzaPrev,
+            intakePostalCode: {
+                itemKey: postalCodeKey, 
+                responseKey: postalCodeResponseKey
+            },
+            flagLastLocation: flags.lastLocation.key,
+            externals: ['mozart','puli','dengue']
         });
         
         const submitRules: Expression[] = [
