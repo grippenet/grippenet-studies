@@ -56,6 +56,9 @@ export const GrippenetFlags = {
         key: 'needLocation',
         values: booleanValues
     } as const,
+    lastLocation: {
+        key: 'lastLoc',
+    },
     main: {
         key: 'main',
         values: booleanValues
