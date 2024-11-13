@@ -87,6 +87,7 @@ export class RandomCodeQuestion extends ItemQuestion {
 
     buildItem(): SurveyItem {
         return randomCodeItem({
+            isRequired: this.isRequired,
             parentKey: this.parentKey,
             itemKey: this.itemKey,
             questionText: this.questionText,
