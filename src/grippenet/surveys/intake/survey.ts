@@ -1,10 +1,12 @@
-import {  _T } from "../../../common"
+import {  _T, condition_builder, ConditionBuilder } from "../../../common"
 import { Item } from "case-editor-tools/surveys/types";
 import { questionPools, SurveyBuilder, SimpleGroupQuestion, ClientExpression as ce } from "../../../common";
 import * as intake from "./questions";
 import { GrippenetFlags } from "../../flags";
 import pool = questionPools.intake;
 import { intakeSurveyKey } from "../../constants";
+import { IRAPrevWorkingDomain } from "./iraprev";
+import ResponseEncoding from "./responses";
 export class IntakeDef extends SurveyBuilder {
 
     Q_birthdate?: pool.DateOfBirth;
@@ -165,7 +167,25 @@ export class IntakeDef extends SurveyBuilder {
         const Q_postal_work_location = new intake.PostalCodeWorkLocation({parentKey: rootKey, isRequired: false}, Q_postal_work);
         this.prefillWithLastResponse(Q_postal_work_location);
         items.push(Q_postal_work_location);
-        
+
+        const Q_IraPrevWorkDomain = new IRAPrevWorkingDomain({parentKey: rootKey, isRequired: true});
+        this.prefillWithLastResponse(Q_IraPrevWorkDomain);
+
+        const workingTypeCondition= condition_builder(Q_work_type, "single");
+        const workerTypes = ResponseEncoding.working_type;
+
+        const workDomainCondition = workingTypeCondition.createConditionFrom(
+            workerTypes.service_worker, 
+            workerTypes.other, 
+            workerTypes.army_worker,
+            workerTypes.manager,
+            workerTypes.professional,
+            workerTypes.technician,
+            workerTypes.clerical,
+            workerTypes.elementary,
+        );
+        Q_IraPrevWorkDomain.setCondition(workDomainCondition);
+
         const Q_highest_education = new intake.HighestEducation({parentKey:rootKey,isRequired:false});
         Q_highest_education.setCondition(
             ce.compare.gte(Q_birthdate.getAgeExpression('years'), 16)
@@ -196,17 +216,11 @@ export class IntakeDef extends SurveyBuilder {
         this.prefillWithLastResponse(Q_common_cold_frequ);
         items.push(Q_common_cold_frequ);
 
-        const Q_gastro_freq = new intake.GastroEnteritisFrequency({parentKey:rootKey, isRequired:false});
-        this.prefillWithLastResponse(Q_gastro_freq);
-        items.push(Q_gastro_freq);
-
         const Q_regular_medication = new pool.RegularMedication({parentKey:rootKey, isRequired:true, useRatherNotAnswer: false});
         this.prefillWithLastResponse(Q_regular_medication);
         items.push(Q_regular_medication);
 
-        //const Q_pregnancy_trimester = new pool.PregnancyTrimester({parentKey:rootKey, keyQGender:Q_gender.key, keyQBirthday:Q_birthdate.key, keyQPregnancy:Q_pregnancy.key, isRequired:true});
-        //items.push(Q_pregnancy_trimester);
-
+       
         const Q_smoking = new intake.Smoking({parentKey:rootKey, isRequired:true});
         this.prefillWithLastResponse(Q_smoking, {'years': 1});
         this.Q_Tobacco = Q_smoking;
@@ -216,9 +230,6 @@ export class IntakeDef extends SurveyBuilder {
         const Q_allergies = new pool.Allergies({parentKey:rootKey, isRequired:true, useOtherInput: true});
         this.prefillWithLastResponse(Q_allergies);
         items.push(Q_allergies);
-
-        //const Q_special_diet = new pool.SpecialDiet({parentKey:rootKey, isRequired:true});
-        //items.push(Q_special_diet);
 
         // Q26 in standard, but Q24 in French implementation
         const Q_homeopathic_meds = new pool.HomeophaticMedicine({parentKey:rootKey, isRequired:false, keyOverride:'Q24', useHelpgroup: false});

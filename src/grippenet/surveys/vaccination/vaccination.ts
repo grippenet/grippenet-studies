@@ -103,9 +103,11 @@ export class VaccinationDef extends SurveyBuilder {
         const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:rootKey, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:false});
         items.push(Q_flu_vaccine_this_season_reasons_against);
 
+        // Q9
         const Q_flu_vaccine_last_season = new pool.FluVaccineLastSeason({parentKey:rootKey, isRequired:true});
         items.push(Q_flu_vaccine_last_season);
 
+        // Q35
         const Q_covidVac = new pool.CovidVac({parentKey:rootKey, isRequired:true});
         items.push(Q_covidVac);
 
@@ -117,6 +119,7 @@ export class VaccinationDef extends SurveyBuilder {
         items.push(Q_vaccineShots.get());
         */
 
+        // Q35j
         const Q_dateLastVaccine = new pool.CovidDateLastVaccine({parentKey:rootKey, keyVac:Q_covidVac.key, isRequired:false});
         items.push(Q_dateLastVaccine);
 
@@ -131,9 +134,11 @@ export class VaccinationDef extends SurveyBuilder {
         items.push(Q_vaccinePro.get());
         */
 
+        // Q35m
         const Q_vaccineContra = new vaccination.CovidVaccineAgainstReasons({parentKey:rootKey, keyVac:Q_covidVac.key, isRequired:false});
         items.push(Q_vaccineContra);
         
+        // Q37
         const Q_lastCovidInfection = new vaccination.LastCovid19Infection({parentKey: rootKey, isRequired: false});
         items.push(Q_lastCovidInfection);
 

@@ -1,10 +1,13 @@
-import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce,  textComponent, ItemQuestion } from "../../../common"
-import { Item } from "case-editor-tools/surveys/types";
+import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce,  textComponent, ItemQuestion, GroupQuestion } from "../../../common"
+import {  Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
 //import * as ansm from "./ansm";
 import { lastSubmissionQuestion } from "../../questions/lastSubmission";
 import { GrippenetFlags } from "../../flags";
 import { weeklySurveyKey } from "../../constants";
+import responses from './responses';
+import * as iraprev from "./iraprev";
+import { Expression } from "survey-engine/data_types";
 
 const pool = questionPools.weekly;
 
@@ -34,7 +37,7 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_symptoms = new pool.Symptoms({parentKey: rootKey, isRequired: true, useRash: false, noteOnTop: true, useMarkdownNote: false});
         this.items.push(Q_symptoms);
 
-        // // -------> HAS SYMPTOMS GROUP
+        // // Group HS -------> HAS SYMPTOMS GROUP
         const hasSymptomGroup = new pool.SymptomsGroup({parentKey: rootKey, keySymptomsQuestion: Q_symptoms.key});
         const hasSymptomGroupKey = hasSymptomGroup.key;
 
@@ -51,6 +54,7 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_pcrHouseholdContact = new pool.PcrHouseholdContact({parentKey: hasSymptomGroupKey, covid19ContactKey: Q_covidPCRTestedContact.key, isRequired: true});
         hasSymptomGroup.addItem(Q_pcrHouseholdContact.get());
         */
+
         // // Q3 when first symptoms --------------------------------------
         const Q_symptomStart = new weekly.SymptomsStart({parentKey: hasSymptomGroupKey, keySameIllness: Q_same_illness.key, isRequired: false});
         hasSymptomGroup.addItem(Q_symptomStart.get());
@@ -59,6 +63,11 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_symptomsEnd = new pool.SymptomsEnd({parentKey:hasSymptomGroupKey, keySymptomsStart: Q_symptomStart.key, isRequired:false});
         this.Q_symptomsEnd = Q_symptomsEnd;
         hasSymptomGroup.addItem(Q_symptomsEnd.get());
+
+        // QIRA1
+        const QIraPrev1 = new iraprev.IRAPrev1({parentKey: hasSymptomGroupKey});
+        const iraPrevCondition = Q_symptoms.createSymptomCondition("fever", "rhino","sorethroat", "cough", "loss_smell", "loss_smell");
+        QIraPrev1.setCondition(iraPrevCondition);
 
         // // Q5 symptoms developed suddenly --------------------------------------
         const Q_symptomsSuddenlyDeveloped = new pool.SymptomsSuddenlyDeveloped({parentKey:hasSymptomGroupKey, isRequired:false});
@@ -126,11 +135,11 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_resultRapidAntigenicTest = new pool.ResultRapidAntigenicTest({parentKey:hasMoreGroupKey, keyTestType:Q_covidTestType.key, isRequired:false})
         hasMoreGroup.addItem(Q_resultRapidAntigenicTest.get());
 
-        // // Qcov19 test 
+        // Qcov19 test 
         const Q_fluTest = new pool.FluTest({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_fluTest.get());
 
-        //Qcov19b Flu PCR test result
+        // Qcov19b Flu PCR test result
         const Q_resultFluPCRTest = new pool.ResultFluTest({parentKey:hasMoreGroupKey, isRequired: false})
         Q_resultFluPCRTest.setCondition(Q_fluTest.getHasTestCondition());
         hasMoreGroup.addItem(Q_resultFluPCRTest.get());
@@ -143,6 +152,7 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_visitedMedicalServiceWhen = new weekly.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, isRequired: false, visiteMedicalService: Q_visitedMedicalService});
         hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
 
+        // Qcov20
         const Q_testBeforeMedical = new weekly.TestBeforeMedicalVisit({parentKey: hasMoreGroupKey, isRequired: false});
         Q_testBeforeMedical.setCondition(
             ce.logic.and(
@@ -197,6 +207,10 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_hospitalized = new pool.Hospitalized({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_hospitalized.get());
 
+
+        //fièvre, nez qui coule, éternuements, maux de gorge, toux, perte d’odorat et perte de goût. 
+        this.buildIRAPrev(hasMoreGroup, Q_symptoms.createAnySymptomCondition());
+ 
         // // Q10 daily routine------------------------------------------------
         const Q_dailyRoutine = new pool.DailyRoutine({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_dailyRoutine.get());
@@ -211,8 +225,8 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_dailyRoutineDaysMissed.get());
 
         // // Qcov7 Covid 19 habits change question ------------------------------------------------------
-        const Q_covidHabits = new weekly.CovidHabitsChange({parentKey:hasMoreGroupKey, isRequired:false});
-        hasMoreGroup.addItem(Q_covidHabits.get());
+        //const Q_covidHabits = new weekly.CovidHabitsChange({parentKey:hasMoreGroupKey, isRequired:false});
+        //hasMoreGroup.addItem(Q_covidHabits.get());
 
         /**
          * CovidMask
@@ -235,7 +249,6 @@ export class WeeklyDef extends SurveyBuilder {
         maskGroup.addItem(QMaskProvidedFrom.get());
 
         hasMoreGroup.addItem(maskGroup.get());
-        */
        // Qm5
        const QMaskWhyNotWearing = new weekly.MaskWhyNotWearing({parentKey: hasMoreGroupKey});
        QMaskWhyNotWearing.setCondition(
@@ -245,7 +258,8 @@ export class WeeklyDef extends SurveyBuilder {
             )
        );
        hasMoreGroup.addItem(QMaskWhyNotWearing.get());
-
+        */
+       
         // // Q11 think cause of symptoms --------------------------------------
         const Q_causeOfSymptoms = new weekly.CauseOfSymptoms({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_causeOfSymptoms.get());
@@ -271,6 +285,21 @@ export class WeeklyDef extends SurveyBuilder {
         const surveyEndText = new pool.SurveyEnd({parentKey:rootKey});
         this.items.push(surveyEndText);
     }
+
+    buildIRAPrev(g: GroupQuestion, condition: Expression) {
+
+        const QIra2 = new iraprev.QIRAPrev2({parentKey: g.key});
+        g.addItem(QIra2.get());
+
+        const QIra3 = new iraprev.QIRAPrev3({parentKey:g.key});
+        g.addItem(QIra3.get());
+
+        const QIra4 = new iraprev.QIRAPrev4({parentKey:g.key});
+        g.addItem(QIra4.get());
+
+
+    }
+
 
     getSymptomEnd(): Item {
         return this.Q_symptomsEnd;
