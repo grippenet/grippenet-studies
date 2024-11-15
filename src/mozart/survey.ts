@@ -33,7 +33,7 @@ export class MozartSurvey extends SurveyDefinition {
             this.editor.setMetadata(m);
         }
         this.extra_ending = " Il est également possible que vous receviez d'ici là un autre questionnaire, portant sur une autre thématique en lien avec l'actualité. Nous vous souhaitons un très bel automne !";
-        this.next_period = "Il est possible que vous soyez sollicité(e) au printemps prochain pour répondre à un dernier questionnaire similaire concernant la période de Novembre 2025 à Février 2025.";
+        this.next_period = "Il est possible que vous soyez sollicité(e) au printemps prochain pour répondre à un dernier questionnaire similaire concernant la période de Novembre 2024 à Février 2025.";
         this.period = createPeriod("2024-07-01", "2024-10-31", "Juillet 2024 à Octobre 2024");
 
         this.editor.setSurveyDescription(generateLocStrings(
