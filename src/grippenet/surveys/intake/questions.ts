@@ -394,6 +394,7 @@ export class HighestEducation extends ItemQuestion {
             questionText: _T("intake.Q4d.title.0", "What is the highest level of formal education/qualification that you have?"),
             topDisplayCompoments: [
                 textComponent({
+                    key: 'top',
                     content: _T("intake.Q4dfr.top.0", "If you are still in education")
                 })
             ],

@@ -1,7 +1,7 @@
 {
   "intake.prelude": {
     "#comment": "",
-    "en": "Intake survey prelude text in markdown",
+    "en": "intake survey prelude text in markdown",
     "fr": [
       "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet.fr/COVIDnet.fr, et vous prendra entre 5 et 10 minutes. Son remplissage n’a lieu qu’une fois par saison. Vous pourrez revenir sur le questionnaire pour nous indiquer un changement de situation (situation professionnelle, lieu d’habitation…).",
       "",
@@ -11,7 +11,7 @@
     ]
   },
   "intake.warning.location": {
-    "en": "Intake survey warning for location catch-up",
+    "en": "Warning about location catch-up",
     "fr": [
       "### Des informations importantes sont manquantes pour ce participant",
       "Lors du remplissage de votre questionnaire préliminaire en début de saison, vous avez omis de renseigner votre code commune, alors que cette question est normalement obligatoire. Nous avons corrigé cela par la suite, mais nous vous serions reconnaissants de bien vouloir prendre quelques minutes pour mettre à jour votre questionnaire avec cette information.",

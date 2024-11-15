@@ -110,7 +110,7 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_symptomImpliedCovidTest = new pool.SymptomImpliedCovidTest({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_symptomImpliedCovidTest.get());
 
-        const severalTestRealized = textComponent({"content": _T("common.qcov16.several_test_realized", "If you have realized several test"), className:'mb-2'});
+        const severalTestRealized = textComponent({key:"several", "content": _T("common.qcov16.several_test_realized", "If you have realized several test"), className:'mb-2'});
         
         const addQcov16notes= (item: ItemQuestion) => {
             item.setOptions({topDisplayCompoments: [severalTestRealized]});
