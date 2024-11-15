@@ -49,6 +49,10 @@
     "en": "I fear the influenza vaccine to increase my risk to get Covid19",
     "fr": "Je crains que le vaccin contre la grippe augmente mon risque d’attraper la Covid-19 "
   },
+  "vaccination.Q10d.option.prefer_other_measures": {
+    "en": "I prefer to protect my self by other protective measures (mask, hand washing...)",
+    "fr": "Je préfère me protéger par d’autres moyens que la vaccination comme les gestes barrières (port du masque, lavages des mains, ...)"
+  },
   "vaccination.Q10d.option.other_covid19": {
     "en": "Other reason related to Covid19",
     "fr": "Autre raison en lien avec la Covid-19"
@@ -109,6 +113,38 @@
     "en": "bad experience with previous vaccine",
     "fr": "J’ai déjà eu une mauvaise expérience suite à une vaccination"
   },
+  "vaccination.Q35m.option.vaccinated": {
+    "en": "I'm already vaccinated or have been tested postivive to covid 19 in the last 6 months",
+    "fr": "J'ai reçu une injection de ce vaccin ou ai été testé positif à la Covid-19 depuis moins de 6 mois"
+  },
+  "vaccination.Q35m.option.prefer_other_measures": {
+    "en": "I prefer to protect my self by other protective measures (mask, hand washing...)",
+    "fr": "Je préfère me protéger par d’autres moyens que la vaccination comme les gestes barrières (port du masque, lavages des mains, ...)"
+  },
+  "vaccination.Q35v2.title.0": {
+    "en": "Have you received a COVID-19 vaccine this season?",
+    "fr": "Avez-vous été vacciné contre la Covid-19 depuis octobre 2024 ?"
+  },
+  "vaccination.Q35v2.helpGroup.asking_reason": {
+    "en": "vaccination.Q35v2 Question asking reason",
+    "fr": "Nous voudrions pouvoir évaluer la protection apportée par le vaccin."
+  },
+  "vaccination.Q35v2.helpGroup.answer_tip": {
+    "en": "vaccination.Q35v2 Question answer tip",
+    "fr": "Répondez « Oui » si vous avez été vacciné contre la Covid-19, une ou plusieurs fois, entre octobre 2024 et maintenant. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de le mettre à jour."
+  },
+  "vaccination.Q35v2.options.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "vaccination.Q35v2.options.no": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "vaccination.Q35v2.options.dnk": {
+    "en": "I don't know/can't remember.",
+    "fr": "Je ne sais pas / Je ne me souviens pas"
+  },
   "vaccination.Q18.asking_reason": {
     "en": "asking_reason",
     "fr": "Pour savoir si vous appartenez à une catégorie de personnes ciblées par les recommandations vaccinales."
@@ -140,6 +176,30 @@
   "vaccination.Q37.helpGroup.text.3": {
     "en": "Response as precisely as possible",
     "fr": "Répondez « Oui » si vous avez été infecté par le virus. Si vous ne connaissez pas la date exacte, merci de donner la meilleure estimation possible. "
+  },
+  "vaccination.Q35n.text": {
+    "en": "Did yout get a vaccine covid during previous seasons",
+    "fr": "Avez-vous été vacciné contre la Covid-19 lors des saisons précédentes ?"
+  },
+  "vaccination.Q35n.option.yes_last": {
+    "en": "Yes, during last season",
+    "fr": "Oui entre octobre 2023 et septembre 2024"
+  },
+  "vaccination.Q35n.option.yes_before": {
+    "en": "Yes, before last season",
+    "fr": "Oui avant octobre 2023"
+  },
+  "vaccination.Q35n.option.never": {
+    "en": "No, never",
+    "fr": "Non jamais"
+  },
+  "vaccination.Q35n.helpGroup.asking_reason": {
+    "en": "vaccination.Q35n Question asking reason",
+    "fr": "Connaître votre historique de vaccination récent et ancien permet de savoir l’évolution des campagnes de vaccination"
+  },
+  "vaccination.Q35n.helpGroup.answer_tip": {
+    "en": "vaccination.Q35n Question answer tip",
+    "fr": "Répondez « Oui » si vous avez été vacciné contre la Covid-19, une ou plusieurs fois, avant octobre 2024."
   },
   "vaccination.surveyEnd.title.0": {
     "en": "Thank you! This was all for now, please submit (push « send ») your responses.",

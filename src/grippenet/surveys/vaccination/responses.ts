@@ -6,7 +6,6 @@ const common = common_responses.vaccination;
 
 const ResponseEncoding = {
     ...common,
-
 } as const;
 
 check_encoding_collection(ResponseEncoding);

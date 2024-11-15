@@ -69,6 +69,8 @@ export class WeeklyDef extends SurveyBuilder {
         const iraPrevCondition = Q_symptoms.createSymptomCondition("fever", "rhino","sorethroat", "cough", "loss_smell", "loss_smell");
         QIraPrev1.setCondition(iraPrevCondition);
 
+        hasSymptomGroup.addItem(QIraPrev1.get());
+
         // // Q5 symptoms developed suddenly --------------------------------------
         const Q_symptomsSuddenlyDeveloped = new pool.SymptomsSuddenlyDeveloped({parentKey:hasSymptomGroupKey, isRequired:false});
         hasSymptomGroup.addItem(Q_symptomsSuddenlyDeveloped.get());
@@ -148,9 +150,11 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_visitedMedicalService = new weekly.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: false, noteOnTop: true});
         hasMoreGroup.addItem(Q_visitedMedicalService.get());
 
+        /** Removed 2024
         // Q7b how soon visited medical service 
         const Q_visitedMedicalServiceWhen = new weekly.VisitedMedicalServiceWhen({parentKey: hasMoreGroupKey, isRequired: false, visiteMedicalService: Q_visitedMedicalService});
         hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
+        */
 
         // Qcov20
         const Q_testBeforeMedical = new weekly.TestBeforeMedicalVisit({parentKey: hasMoreGroupKey, isRequired: false});
@@ -215,6 +219,7 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_dailyRoutine = new pool.DailyRoutine({parentKey:hasMoreGroupKey, isRequired:false});
         hasMoreGroup.addItem(Q_dailyRoutine.get());
 
+        /** Removed 2024
         // // Q10b today-------------------------------------------------------
         const Q_dailyRoutineToday = new pool.DailyRoutineToday({parentKey:hasMoreGroupKey, keyDailyRoutine: Q_dailyRoutine.key, isRequired:false});
         hasMoreGroup.addItem(Q_dailyRoutineToday.get());
@@ -223,6 +228,7 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_dailyRoutineDaysMissed = new pool.DailyRoutineDaysMissed({parentKey:hasMoreGroupKey, keyDailyRoutine: Q_dailyRoutine.key, isRequired:false});
         Q_dailyRoutineDaysMissed.setOptions({topDisplayCompoments: [ transTextComponent("weekly.Q10c.top.text.1", "Select the corresponding delay from the menu") ]})
         hasMoreGroup.addItem(Q_dailyRoutineDaysMissed.get());
+        */
 
         // // Qcov7 Covid 19 habits change question ------------------------------------------------------
         //const Q_covidHabits = new weekly.CovidHabitsChange({parentKey:hasMoreGroupKey, isRequired:false});

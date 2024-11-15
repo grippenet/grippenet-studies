@@ -1,6 +1,6 @@
 import { SurveyItems } from "case-editor-tools/surveys";
 import {  OptionDef } from "case-editor-tools/surveys/types";
-import { SurveySingleItem } from "survey-engine/data_types";
+import { SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { questionPools as pool, 
     _T, ItemQuestion, ItemProps, BaseChoiceQuestion, 
     ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList, markdownComponent, transTextComponent, trans_text, num_as_arg } from "../../../common"
@@ -8,6 +8,8 @@ import {  OverridenResponses, ResponseOveriddes } from "../../../utils";
 import ResponseEncoding from "./responses";
 
 import encoding from "./responses";
+import { createDefaultHelpGroup } from "../../../utils/questions";
+import { create } from "domain";
 
 const text_how_answer = pool.text_how_answer;
 const text_why_asking = pool.text_why_asking;
@@ -74,6 +76,10 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
             as_option(codes.pregnant_baby, _T("vaccination.Q10d.option.pregnant_baby", "I'm pregnant and fear for my baby"))
         );
        
+        list.insertAfterKey(codes.doubt,
+            as_option(codes.prefer_other_measures, _T("vaccination.Q10d.option.prefer_other_measures", "I prefer to protect my self by other protective measures (mask, hand washing...)"))
+        )
+
         list.insertAfterKey(codes.minor_illness,
             as_option(codes.avoid_healthseek, _T("vaccination.Q10d.option.avoid_healthseeking","Because of pandemic, I avoid to visit doctor or pharmacy")),
             as_option(codes.risk_covid,  _T("vaccination.Q10d.option.increase_risk_covid", "I fear the influenza vaccine to increase my risk to get Covid19")),
@@ -123,6 +129,16 @@ export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAga
             as_option(codes.bad_experience, _T("vaccination.Q35m.option.19", "bad experience with previous vaccine"))
         )
 
+        list.insertAfterKey(
+            codes.natural_immunity,
+            as_option(codes.vaccined_or_infected, _T("vaccination.Q35m.option.vaccinated", "I'm already vaccinated or have been tested postivive to covid 19 in the last 6 months"))
+        );
+
+        list.insertAfterKey(
+            codes.notriskgroup,
+            as_option(codes.prefer_other_measures, _T("vaccination.Q35m.option.prefer_other_measures", "I prefer to protect my self by other protective measures (mask, hand washing...)"))
+        )
+    
         list.without(codes.counter_indication, codes.not_free, codes.pregnant_disc);
 
         const new_options = list.values();
@@ -159,6 +175,7 @@ export class FluVaccinationByWhom extends BaseChoiceQuestion {
         ];
     }   
 }
+
 export class FluVaccinationVoucher extends BaseChoiceQuestion { 
     constructor(props: ItemProps) {
         super(props, 'Q18', 'single');
@@ -230,5 +247,87 @@ export class LastCovid19Infection extends ItemQuestion {
                 content: _T("vaccination.Q37.helpGroup.text.3", "Response as precisely as possible"),
             },
         ]
+    }
+}
+
+/**
+ Contexte Q35n (non préremplie) (Condition si « Non Jamais » coché, décocher les deux autres)
+Avez-vous été vacciné contre la Covid-19 lors des saisons précédentes ?
+o Oui entre octobre 2023 et septembre 2024 0
+o Oui avant octobre 2023 1
+o Non jamais 2
+
+Pourquoi demandons-nous cela ?
+Connaître votre historique de vaccination récent et ancien permet de savoir l’évolution des campagnes de vaccination
+Comment dois-je répondre ?
+Répondez « Oui » si vous avez été vacciné contre la Covid-19, une ou plusieurs fois, avant octobre 2024.
+
+ */
+
+export class LastCovidVaccine extends BaseChoiceQuestion { 
+    constructor(props: ItemProps) {
+        super(props, 'Q35n', 'single');
+        this.setOptions({
+            questionText: _T("vaccination.Q35n.text", "Did yout get a vaccine covid during previous seasons")
+        });
+    }
+
+    getResponses(): OptionDef[] {
+        return [
+            as_option('1', _T("vaccination.Q35n.option.yes_last", "Yes, during last season")),
+            as_option('2', _T("vaccination.Q35n.option.yes_before", "Yes, before last season")),
+            as_option("0",  _T("vaccination.Q35n.option.never","No, never"))
+        ];
+    }
+
+    getHelpGroupContent() { 
+        return createDefaultHelpGroup("vaccination.Q35n");
+    }
+}
+
+
+/**
+ * CovidVac: single choice question about vaccination status
+ */
+export class CovidVacThisSeason extends ItemQuestion {
+
+    constructor(props: ItemProps) {
+        super(props,  'Q35v2');
+    }
+
+    buildItem():SurveyItem {
+        return SurveyItems.singleChoice({
+            parentKey: this.parentKey,
+            itemKey: this.itemKey,
+            isRequired: this.isRequired,
+            condition: this.condition,
+            questionText: _T("vaccination.Q35v2.title.0", "Have you received a COVID-19 vaccine this season?"),
+            helpGroupContent: this.getHelpGroupContent(),
+            responseOptions: this.getResponses()
+        });
+    }
+
+    getResponses(): OptionDef[] {
+
+        const codes = ResponseEncoding.covid_vac;
+
+        return [
+            {
+                key: codes.yes, role: 'option',
+                content: _T("vaccination.Q35v2.options.yes", "Yes")
+            },
+            {
+                key: codes.no, role: 'option',
+                content: _T("vaccination.Q35v2.options.no", "No")
+            },
+            {
+                key: codes.dontknow, role: 'option',
+                content: _T("vaccination.Q35v2.options.dnk", "I don't know/can't remember.")
+            },
+        ];
+    }
+
+    getHelpGroupContent() {
+        return createDefaultHelpGroup(this.key);
     }
 }

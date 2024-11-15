@@ -16,6 +16,9 @@ export class IRAPrev1 extends BaseChoiceQuestion {
 
     constructor(props: ItemProps) {
         super(props, 'QIRA1', 'single');
+        this.setOptions({
+            questionText: _T('weekly.QIRA1.title', 'did you have this symptoms for 3 days or more?')
+        })
     }
 
     getResponses(): OptionDef[] {
@@ -27,7 +30,7 @@ export class IRAPrev1 extends BaseChoiceQuestion {
     }
 
     getHelpGroupContent() {
-        return createDefaultHelpGroup('weekly.QIRA1')
+        return createDefaultHelpGroup(this.key);
     }    
 }
 
@@ -80,6 +83,10 @@ export class QIRAPrev2 extends LikertQuestion {
             {key: "23", content: text(this, "rows.23", "ventilate the room") },
         ]
     }
+
+    getHelpGroupContent() {
+        return createDefaultHelpGroup(this.key, {WhyAsking: true});
+    }
 }
 
 export class QIRAPrev3 extends LikertQuestion {
@@ -116,6 +123,10 @@ export class QIRAPrev3 extends LikertQuestion {
             return {key: r.key, content: text(this, 'row.' + r.key, r.label)}
         })
     }
+
+    getHelpGroupContent() {
+        return createDefaultHelpGroup(this.key, {WhyAsking: true});
+    }
 }
 
 export class QIRAPrev4 extends LikertQuestion {
@@ -148,5 +159,9 @@ export class QIRAPrev4 extends LikertQuestion {
         return rows.map(r=> {
             return {key: r.key, content: text(this, 'row.' + r.key, r.label)}
         })
+    }
+
+    getHelpGroupContent() {
+        return createDefaultHelpGroup(this.key, {WhyAsking: true});
     }
 }

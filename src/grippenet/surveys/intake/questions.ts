@@ -445,7 +445,48 @@ export class HighestEducation extends ItemQuestion {
     }
 }
 
+export class AgeGroups extends pool.intake.AgeGroups {
 
+    getRows() {
+        return [
+            /*
+            {
+                key: 'row0', 
+                label:  _T("intake.Q6.rg.mat.row0.l.label.0", "0 - 4 years"),
+                tags: ['children']
+            },
+            */
+            {
+                key: 'row6', 
+                label:  _T("intake.Q6.row6.label", "0 - 2 years"),
+                tags: ['children']
+            },
+            {
+                key: 'row7', 
+                label:  _T("intake.Q6.row7.label", "3 - 4 years"),
+                tags: ['children']
+            },
+           
+            {
+                key: 'row1',
+                label: _T("intake.Q6.rg.mat.row1.l.label.0", "5 - 18 years"),
+                tags: ['children']
+            },
+            {
+                key: 'row2', 
+                label: _T("intake.Q6.rg.mat.row2.l.label.0", "19 - 44 years")
+            },
+            {
+                key: 'row3', 
+                label: _T("intake.Q6.rg.mat.row3.l.label.0", "45 - 64 years")
+            },
+            {
+                key: 'row4', 
+                label: _T("intake.Q6.rg.mat.row4.l.label.0", "65+")
+            }
+        ]
+    }
+}
 
 
 export class PeopleMet extends pool.intake.PeopleMet {
@@ -453,12 +494,24 @@ export class PeopleMet extends pool.intake.PeopleMet {
     getResponses(): OptionDef[] {
         const options = super.getResponses();
 
+        const exclusive = this.getExclusiveNoneCondition();
+
         const list = new OptionList(options);
 
+        const o_6 = as_option('6', _T("intake.Q5.option.6", "More than 10 infants in the same day (not counting your own children)"));
+        o_6.disabled = exclusive;
+        list.insertBeforeKey('0', o_6);
+
+        const o_7 = as_option('7', _T("intake.Q5.option.7", "Between 1 to 9 infants in the same day (not counting your own children)"));
+        o_7.disabled = exclusive;
+        list.insertBeforeKey('0', o_7);
+
+        const o_8 = as_option('8', _T("intake.Q5.option.8", "Between 1 to 9 people over 65 yo in the same day"));
+        o_8.disabled = exclusive;
+        list.insertAfterKey('1', o_8);
+
         const o_5 = as_option('5', _T("intake.Q5.option.5", "Between 1 to 9 children in the same day (not counting your own children)"));
-
-        o_5.disabled = this.getExclusiveNoneCondition();
-
+        o_5.disabled = exclusive;
         list.insertAfterKey('0', o_5);
 
         return list.values();
@@ -808,9 +861,17 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
                 as_option(codes.social, _T("intake.Q17.option.social", "Via a social network")),
             
                // as_option( '2', _T("intake.Q17.rg.mcg.option.2", "The internet (a website, link, a search engine)")),
-                as_option( codes.poster, _T("intake.Q17.rg.mcg.option.3", "By poster")),
+               // as_option( codes.poster, _T("intake.Q17.rg.mcg.option.3", "By poster")), // removed 2024
+               as_option( codes.poster_healthoffice, _T("intake.Q17.option.poster_healthoffice", "By poster at health service/office")), // added 2024
+               as_option( codes.poster_in_pharmacy, _T("intake.Q17.option.poster_pharmacy", "By poster in pharmacy")), // added 2024
+               as_option( codes.poster_in_mytown, _T("intake.Q17.option.poster_inmytown", "By poster in my town")), // added 2024
+
                 as_option( codes.family,  _T("intake.Q17.rg.mcg.option.4", "Via family or friends")),
-                as_option( codes.work, _T("intake.Q17.rg.mcg.option.5", "Via school or work")),
+                //as_option( codes.work, _T("intake.Q17.rg.mcg.option.5", "Via school or work")), // Removed 2024
+
+                as_option( codes.at_work_only, _T("intake.Q17.option.school", "At school or university")), // added 2024
+                as_option( codes.at_school, _T("intake.Q17.option.work_only", "At work")), // added 2024
+
                 as_option( codes.healthworker, _T("intake.Q17.option.healtworker","By an health worker")),
                 as_option( codes.project,  _T("intake.Q17.option.project", "By a relative working on the project")),
                 as_input_option(codes.other_alt, _T("intake.Q17.rg.mcg.option.6", "Other"))

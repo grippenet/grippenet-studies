@@ -9,8 +9,7 @@ import { Duration,  } from "case-editor-tools/types/duration";
 import { assignedSurveys, updateFlag, hasParticipantFlagKeyAndValue, hasSurveyKeyAssigned, updateLastSubmission} from "./helpers";
 import { ExtraStudyRulesBuilder } from "./extra_study";
 import { BadgeRuleBuilder } from "../../badge/rules";
-import { getUnixTime, parseISO } from "date-fns";
-import { parse } from "path";
+import { StudyConfig } from "../config";
 
 export function response_item_key(name:string) {
     return responseGroupKey + '.' + name;
@@ -22,9 +21,12 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
 
     protected keys: GrippenetKeys;
 
-    constructor(keys: GrippenetKeys) {
+    protected studyConfig: StudyConfig;
+
+    constructor(keys: GrippenetKeys, studyConfig: StudyConfig) {
         super();
         this.keys = keys;
+        this.studyConfig = studyConfig;
     }
 
     create(): void {
@@ -196,8 +198,8 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             intakeKey: intakeKey,
             weeklyKey: weeklyKey,
             vaccKey: vacKey,
-            seasonStart: getUnixTime(parseISO('2024-11-25')),
-            previousSeasonStart: getUnixTime(parseISO('2023-11-10')),
+            seasonStart: this.studyConfig.getStartingTimestamp(),
+            previousSeasonStart: this.studyConfig.getPreviousStartingTimestamp(),
             flagSeasonCounter:'seasons',
             flagsLastSubmission: {
                 intake: flags.lastIntake.key,

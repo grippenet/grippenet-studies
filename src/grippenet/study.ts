@@ -1,12 +1,12 @@
 import { IntakeDef } from "./surveys/intake/survey";
 import { WeeklyDef } from "./surveys/weekly/survey";
 import { VaccinationDef } from "./surveys/vaccination/vaccination";
-import { StudyBuilder, StudyRulesBuilder, SurveyKeys } from "../common";
+import { StudyBuilder } from "../common";
 import { GrippenetRulesBuilder } from "./rules/builder";
 import { GrippenetKeys } from "./keys";
 import { GrippenetRulesOffSeasonBuilder } from "./rules/builder_offseason";
-import { off } from "process";
 import { GrippenetRulesTestBuilder } from "./rules/builder_test";
+import { StudyConfig } from "./config";
 
 export class GrippenetStudyBuilder extends StudyBuilder {
 
@@ -16,9 +16,12 @@ export class GrippenetStudyBuilder extends StudyBuilder {
 
     build() {
 
+        const studyConfig = new StudyConfig(2024, '2024-11-25', '2023-11-10');
+
         const meta = new Map<string, string>();
 
         meta.set('timestamp', Date.now().toString(36));
+        meta.set('season', ''+ studyConfig.season);
 
         const intake = new IntakeDef(meta);
         const weekly = new WeeklyDef(meta);
@@ -37,7 +40,7 @@ export class GrippenetStudyBuilder extends StudyBuilder {
             vaccination: vacc,
         };
 
-        const builder = new GrippenetRulesBuilder(keys);
+        const builder = new GrippenetRulesBuilder(keys, studyConfig);
         this.studyRules = builder.build();
         
         const offseasonBuilder = new GrippenetRulesOffSeasonBuilder(keys);

@@ -110,6 +110,33 @@
     "en": "I dont remember / I dont know",
     "fr": "Je ne sais pas / Je ne me souviens pas"
   },
+  "weekly.QIRA1.title": {
+    "en": "did you have this symptoms for 3 days or more?",
+    "fr": [
+      "Cette année nous nous intéressons particulièrement aux symptômes suivants : fièvre, nez qui coule, éternuements, maux de gorge, toux, perte d’odorat et perte de goût.",
+      "Présentez-vous au moins l’un de ces symptômes depuis 3 jours ou plus ?"
+    ]
+  },
+  "weekly.QIRA1.options.yes": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "weekly.QIRA1.options.no": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.QIRA1.options.dkn": {
+    "en": "I dont know",
+    "fr": "Je ne sais pas"
+  },
+  "weekly.HS.QIRA1.helpGroup.asking_reason": {
+    "en": "weekly.HS.QIRA1 Question asking reason",
+    "fr": "Pour savoir si ces symptômes, caractéristiques d’une infection respiratoire aiguë, viennent juste d’arriver ou sont là depuis plusieurs jours."
+  },
+  "weekly.HS.QIRA1.helpGroup.answer_tip": {
+    "en": "weekly.HS.QIRA1 Question answer tip",
+    "fr": "Cochez oui si la fièvre et/ou les symptômes respiratoires et/ou perte d’odorat et/ou perte de goût durent depuis 3 jours au minimum."
+  },
   "weekly.EX.QIRA2.title": {
     "en": "During this episode, do your usage of barriere measure changed",
     "fr": "Durant cet épisode, votre usage des mesures barrières suivantes a-t-il évolué ?"
@@ -181,6 +208,18 @@
   "weekly.EX.QIRA3.row.17": {
     "en": "At home, in presence of other people",
     "fr": "A domicile en présence d’autres personnes"
+  },
+  "weekly.EX.QIRA2.helpGroup.asking_reason": {
+    "en": "weekly.EX.QIRA2 Question asking reason",
+    "fr": "Pour étudier l’évolution des comportements à caractères préventifs lors d’un épisode symptomatiquelorsque vous présentez des symptômes."
+  },
+  "weekly.EX.QIRA3.helpGroup.asking_reason": {
+    "en": "weekly.EX.QIRA3 Question asking reason",
+    "fr": "Pour étudier l’évolution des comportements à caractères préventifs lorsque vous présentez des symptômes"
+  },
+  "weekly.EX.QIRA4.helpGroup.asking_reason": {
+    "en": "weekly.EX.QIRA4 Question asking reason",
+    "fr": "Pour étudier l’évolution des comportements à caractères préventifs lorsque vous présentez des symptômes"
   },
   "weekly.EX.QIRA4.title": {
     "en": "During this episode, Did you use this measures?",

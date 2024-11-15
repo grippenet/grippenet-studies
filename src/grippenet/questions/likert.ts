@@ -39,6 +39,7 @@ export abstract class LikertQuestion extends ItemQuestion {
             defaultMode: "horizontal",
             topDisplayCompoments: this.options?.topDisplayCompoments,
             bottomDisplayCompoments: this.options?.bottomDisplayCompoments,
+            helpGroupContent: this.getHelpGroupContent(),
         })
     }
 } 
