@@ -51,7 +51,7 @@
   },
   "vaccination.Q10d.option.prefer_other_measures": {
     "en": "I prefer to protect my self by other protective measures (mask, hand washing...)",
-    "fr": "Je préfère me protéger par d’autres moyens que la vaccination comme les gestes barrières (port du masque, lavages des mains, ...)"
+    "fr": "Je préfère me protéger par d’autres moyens que la vaccination comme les gestes barrières (port du masque, lavage des mains, ...)"
   },
   "vaccination.Q10d.option.other_covid19": {
     "en": "Other reason related to Covid19",
@@ -91,7 +91,7 @@
   },
   "vaccination.Q18.text": {
     "en": "Do you have a voucher for influenza vaccine since last october",
-    "fr": "Avez-vous eu un bon de vaccination contre la grippe cette année (depuis octobre 2023)?"
+    "fr": "Avez-vous eu un bon de vaccination contre la grippe cette année (depuis octobre 2024)?"
   },
   "vaccination.Q18.option.yes": {
     "fr": "Oui",
@@ -119,29 +119,29 @@
   },
   "vaccination.Q35m.option.prefer_other_measures": {
     "en": "I prefer to protect my self by other protective measures (mask, hand washing...)",
-    "fr": "Je préfère me protéger par d’autres moyens que la vaccination comme les gestes barrières (port du masque, lavages des mains, ...)"
+    "fr": "Je préfère me protéger par d’autres moyens que la vaccination comme les gestes barrières (port du masque, lavage des mains, ...)"
   },
-  "vaccination.Q35v2.title.0": {
+  "vaccination.Q35p.title.0": {
     "en": "Have you received a COVID-19 vaccine this season?",
     "fr": "Avez-vous été vacciné contre la Covid-19 depuis octobre 2024 ?"
   },
-  "vaccination.Q35v2.helpGroup.asking_reason": {
-    "en": "vaccination.Q35v2 Question asking reason",
+  "vaccination.Q35p.helpGroup.asking_reason": {
+    "en": "vaccination.Q35p Question asking reason",
     "fr": "Nous voudrions pouvoir évaluer la protection apportée par le vaccin."
   },
-  "vaccination.Q35v2.helpGroup.answer_tip": {
-    "en": "vaccination.Q35v2 Question answer tip",
+  "vaccination.Q35p.helpGroup.answer_tip": {
+    "en": "vaccination.Q35p Question answer tip",
     "fr": "Répondez « Oui » si vous avez été vacciné contre la Covid-19, une ou plusieurs fois, entre octobre 2024 et maintenant. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de le mettre à jour."
   },
-  "vaccination.Q35v2.options.yes": {
+  "vaccination.Q35p.options.yes": {
     "en": "Yes",
     "fr": "Oui"
   },
-  "vaccination.Q35v2.options.no": {
+  "vaccination.Q35p.options.no": {
     "en": "No",
     "fr": "Non"
   },
-  "vaccination.Q35v2.options.dnk": {
+  "vaccination.Q35p.options.dnk": {
     "en": "I don't know/can't remember.",
     "fr": "Je ne sais pas / Je ne me souviens pas"
   },

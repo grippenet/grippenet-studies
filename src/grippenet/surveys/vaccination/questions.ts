@@ -292,7 +292,7 @@ export class LastCovidVaccine extends BaseChoiceQuestion {
 export class CovidVacThisSeason extends ItemQuestion {
 
     constructor(props: ItemProps) {
-        super(props,  'Q35v2');
+        super(props,  'Q35p');
     }
 
     buildItem():SurveyItem {
@@ -301,7 +301,7 @@ export class CovidVacThisSeason extends ItemQuestion {
             itemKey: this.itemKey,
             isRequired: this.isRequired,
             condition: this.condition,
-            questionText: _T("vaccination.Q35v2.title.0", "Have you received a COVID-19 vaccine this season?"),
+            questionText: _T("vaccination.Q35p.title.0", "Have you received a COVID-19 vaccine this season?"),
             helpGroupContent: this.getHelpGroupContent(),
             responseOptions: this.getResponses()
         });
@@ -314,15 +314,15 @@ export class CovidVacThisSeason extends ItemQuestion {
         return [
             {
                 key: codes.yes, role: 'option',
-                content: _T("vaccination.Q35v2.options.yes", "Yes")
+                content: _T("vaccination.Q35p.options.yes", "Yes")
             },
             {
                 key: codes.no, role: 'option',
-                content: _T("vaccination.Q35v2.options.no", "No")
+                content: _T("vaccination.Q35p.options.no", "No")
             },
             {
                 key: codes.dontknow, role: 'option',
-                content: _T("vaccination.Q35v2.options.dnk", "I don't know/can't remember.")
+                content: _T("vaccination.Q35p.options.dnk", "I don't know/can't remember.")
             },
         ];
     }

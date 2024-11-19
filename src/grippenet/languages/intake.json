@@ -3,7 +3,7 @@
     "#comment": "",
     "en": "intake survey prelude text in markdown",
     "fr": [
-      "Ce questionnaire permet de mieux connaître le profil des participants de GrippeNet/COVIDnet, et vous prendra entre 5 et 10 minutes. Son remplissage n’a lieu qu’une fois par saison. Vous pourrez revenir sur le questionnaire pour nous indiquer un changement de situation (situation professionnelle, lieu d’habitation…).",
+      "Ce questionnaire permet de mieux connaître le profil des participants de Grippenet/Covidnet, et vous prendra entre 5 et 10 minutes. Son remplissage n’a lieu qu’une fois par saison. Vous pourrez revenir sur le questionnaire pour nous indiquer un changement de situation (situation professionnelle, lieu d’habitation…).",
       "",
       "Les réponses aux questions précédées d’un astérisque (*) sont obligatoires pour pouvoir valider le questionnaire.",
       "",
@@ -16,7 +16,7 @@
       "### Des informations importantes sont manquantes pour ce participant",
       "Lors du remplissage de votre questionnaire préliminaire en début de saison, vous avez omis de renseigner votre code commune, alors que cette question est normalement obligatoire. Nous avons corrigé cela par la suite, mais nous vous serions reconnaissants de bien vouloir prendre quelques minutes pour mettre à jour votre questionnaire avec cette information.",
       "",
-      "Cette question est importante car elle nous permet de vérifier la représentativité de la cohorte GrippeNetCOVIDnet, et d’étudier la propagation de la COVID-19 et de la grippe au niveau spatial.",
+      "Cette question est importante car elle nous permet de vérifier la représentativité de la cohorte GrippeNet/Covidnet, et d’étudier la propagation de la COVID-19 et de la grippe au niveau spatial.",
       "",
       "En vous remerciant par avance pour votre aide !"
     ]
@@ -65,17 +65,49 @@
     "en": "If you are still in education",
     "fr": "Si vous êtes toujours scolarisé ou étudiant, merci de cocher la case correspondant au diplôme le plus élevé que vous avez obtenu jusqu'à maintenant."
   },
+  "intake.Q4i.title": {
+        "en": "Do you work in one of the following domain",
+        "fr": "Travaillez-vous dans l’un des domaines suivants ?"
+    },
+    "intake.Q4i.options.1": {
+        "en": "Health and Social worker",
+        "fr": "Personnel médico-social"
+    },
+    "intake.Q4i.options.2": {
+        "en": "early child workers",
+        "fr": "Personnel de la petite enfance"
+    },
+    "intake.Q4i.options.3": {
+        "en": "Restaurant workers",
+        "fr": "Personnel de la restauration"
+    },
+    "intake.Q4i.options.4": {
+        "en": "Food selling",
+        "fr": "Commerçant dans le domaine alimentaire"
+    },
+    "intake.Q4i.options.5": {
+        "en": "Other",
+        "fr": "Autre"
+    },
+    "intake.Q4.helpGroup.asking_reason": {
+        "en": "intake.Q4 Question asking reason",
+        "fr": "Pour identifier les personnes qui sont le plus à risque de transmettre une infection respiratoire aiguë dans le cadre de leur profession."
+    },
+    "intake.Q4.helpGroup.answer_tip": {
+        "en": "intake.Q4 Question answer tip",
+        "fr": "Merci de cocher la case du domaine d’activité qui correspond le plus à votre activité principale."
+  },
   "intake.Q5.option.5": {
-    "fr": "Entre 1 et 9 enfants ou adolescents dans la même journée (en ne comptant pas vos propres enfants)",
+    "fr": "Entre 1 et 9 enfants ou adolescents dans une même journée (en ne comptant pas vos propres enfants)",
     "en": "Between 1 to 9 children in the same day (not counting your own children)"
   },
   "intake.Q5.option.6": {
     "en": "More than 10 infants in the same day (not counting your own children)",
-    "fr": "Plus de 10 nourrissons dans une même journée (en ne comptant pas vos propres enfants)"
+    "fr": "Plus de 10 nourrissons (moins de 2 ans) dans une même journée (en ne comptant pas vos propres enfants)"
   },
   "intake.Q5.option.7": {
     "en": "Between 1 to 9 infants in the same day (not counting your own children)",
-    "fr": "Entre 1 et 9 nourrissons dans la même journée (en ne comptant pas vos propres enfants) "
+    "fr": "Entre 1 et 9 nourrissons (moins de 2 ans) dans une même journée (en ne comptant pas vos propres enfants) "
   },
   "intake.Q5.option.8": {
     "en": "Between 1 to 9 people over 65 yo in the same day",
@@ -86,12 +118,12 @@
     "fr": "Je vis seul"
   },
   "intake.Q6.row6.label": {
-    "en": "0 - 2 years",
-    "fr": "0 - 2 ans"
+    "en": "< 2 years",
+    "fr": "Moins de 2 ans"
   },
   "intake.Q6.row7.label": {
-    "en": "3 - 4 years",
-    "fr": "4 - 4 ans"
+    "en": "2 - 4 years",
+    "fr": "2 - 4 ans"
   },
   "intake.Q8.option.6": {
     "fr": "Parfois, pas tous les ans",
@@ -267,7 +299,7 @@
   },
   "intake.Q17.helpGroup.text.answer_tip": {
     "en": "Answer tip",
-    "fr": "Sélectionnez tous les supports grâce auxquels vous avez entendu parler de GrippeNet/COVIDnet avant de vous inscrire."
+    "fr": "Sélectionnez tous les supports grâce auxquels vous avez entendu parler de Grippenet/Covidnet avant de vous inscrire."
   },
   "intake.QEnd.option": {
     "en": "",

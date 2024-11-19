@@ -193,6 +193,7 @@ export class IntakeDef extends SurveyBuilder {
             workerTypes.elementary,
         );
         Q_IraPrevWorkDomain.setCondition(workDomainCondition);
+        items.push(Q_IraPrevWorkDomain);
         
         // Q4dfr
         const Q_highest_education = new intake.HighestEducation({parentKey:rootKey,isRequired:false});

@@ -7,6 +7,9 @@ export class IRAPrevWorkingDomain extends BaseChoiceQuestion {
 
     constructor(props: ItemProps) {
         super(props, 'Q4i', 'single');
+        this.setOptions({
+            questionText: _T("intake.Q4i.title", "Do you work in one of the following domain")
+        })
     }
 
     getResponses(): OptionDef[] {
