@@ -458,12 +458,12 @@ export class AgeGroups extends pool.intake.AgeGroups {
             */
             {
                 key: 'row6', 
-                label:  _T("intake.Q6.row6.label", "0 - 2 years"),
+                label:  _T("intake.Q6.row6.label", "< 2 years"),
                 tags: ['children']
             },
             {
                 key: 'row7', 
-                label:  _T("intake.Q6.row7.label", "3 - 4 years"),
+                label:  _T("intake.Q6.row7.label", "2 - 4 years"),
                 tags: ['children']
             },
            
