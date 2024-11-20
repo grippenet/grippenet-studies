@@ -1,6 +1,7 @@
 import { ResponsiveSingleChoiceArrayProps, StyledTextComponentProp } from "case-editor-tools/surveys/types";
-import { ItemProps, ItemQuestion } from "../../common";
+import { ItemProps, ItemQuestion, ClientExpression as client, trans_item } from "../../common";
 import { SurveyItems } from "case-editor-tools/surveys";
+import { responsiveSingleChoiceArrayKey } from "case-editor-tools/constants/key-definitions";
 
 export interface ScaleOption {
     key: string;
@@ -42,4 +43,17 @@ export abstract class LikertQuestion extends ItemQuestion {
             helpGroupContent: this.getHelpGroupContent(),
         })
     }
-} 
+
+    getResponsePrefix(): string {
+        return "rg." + responsiveSingleChoiceArrayKey;
+    }
+
+    getRowItemKey(rowKey: string) {
+        return this.getResponsePrefix() + "." + rowKey;
+    }
+
+    scaleItem(code: string, trans: string):ScaleOption {
+        return {key: code, content: trans_item(this, 'scale.' + code + '.label', trans)};
+    }
+}
+

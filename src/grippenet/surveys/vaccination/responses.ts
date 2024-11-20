@@ -6,6 +6,13 @@ const common = common_responses.vaccination;
 
 const ResponseEncoding = {
     ...common,
+
+    covid_vac_likert: {
+        'current':'row1', // This season
+        'last': 'row2', // Last season
+        'before':'row3' // Before last season
+    } as const,
+
 } as const;
 
 check_encoding_collection(ResponseEncoding);

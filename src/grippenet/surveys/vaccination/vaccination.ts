@@ -1,14 +1,13 @@
 import { Expression } from "survey-engine/data_types";
-import {  ItemBuilder, _T,questionPools, SurveyBuilder } from "../../../common"
+import {  ItemBuilder, _T, questionPools, SurveyBuilder } from "../../../common"
 import { vaccinationSurveyKey } from "../../constants";
 import { GrippenetFlags } from "../../flags";
 import { lastSubmissionQuestion } from "../../questions/lastSubmission";
 import * as vaccination from "./questions";
 import { ResponseRef } from "../../types";
 import ResponseEncoding from "./responses";
-import { sign } from "crypto";
 
-const pool = questionPools.vaccination;
+const pool = questionPools.vaccination_new;
 
 export class VaccinationDef extends SurveyBuilder {
 
@@ -80,17 +79,21 @@ export class VaccinationDef extends SurveyBuilder {
 
         this.preventionResponses.push({'itemKey': Q_flu_vaccine_this_season.key, 'responses': [ResponseEncoding.flu_vaccine_season.yes], 'type': 'single'})
         
+        const FluVaccinated = Q_flu_vaccine_this_season.createIsVaccinatedCondition();
+        const FlutNotVaccinated = Q_flu_vaccine_this_season.createNotVaccinatedCondition();
         // Q10b
-        const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
+        const Q_flu_vaccine_this_season_when = new pool.FluVaccineThisSeasonWhen({parentKey:rootKey, isRequired:false});
+        Q_flu_vaccine_this_season_when.setCondition(FluVaccinated);
         items.push(Q_flu_vaccine_this_season_when);
 
         // Q10e
         const Q_flu_vaccin_by_whom = new vaccination.FluVaccinationByWhom({parentKey: rootKey, isRequired: false});
-        Q_flu_vaccin_by_whom.setCondition(Q_flu_vaccine_this_season.createIsVaccinatedCondition());
+        Q_flu_vaccin_by_whom.setCondition(FluVaccinated);
         items.push(Q_flu_vaccin_by_whom);
 
         // Q10c
-        const Q_flu_vaccine_this_season_reasons_for = new vaccination.FluVaccineThisSeasonReasonFor({parentKey:rootKey, keyFluVaccineThisSeason:Q_flu_vaccine_this_season.key, isRequired:false});
+        const Q_flu_vaccine_this_season_reasons_for = new vaccination.FluVaccineThisSeasonReasonFor({parentKey:rootKey, isRequired:false});
+        Q_flu_vaccine_this_season_reasons_for.setCondition(FluVaccinated);
         items.push(Q_flu_vaccine_this_season_reasons_for);
 
         this.preventionResponses.push({
@@ -100,7 +103,9 @@ export class VaccinationDef extends SurveyBuilder {
         });
  
         // Q10d
-        const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:rootKey, keyFluVaccineThisSeason: Q_flu_vaccine_this_season.key, isRequired:false});
+        const Q_flu_vaccine_this_season_reasons_against = new vaccination.FluVaccineThisSeasonReasonAgainst({parentKey:rootKey, isRequired:false});
+        Q_flu_vaccine_this_season_reasons_against.setCondition(FlutNotVaccinated);
+        
         items.push(Q_flu_vaccine_this_season_reasons_against);
 
         // Q9
@@ -108,12 +113,10 @@ export class VaccinationDef extends SurveyBuilder {
         items.push(Q_flu_vaccine_last_season);
 
         // Q35p (replaces Q35)
-        const Q_covidVac = new vaccination.CovidVacThisSeason({parentKey:rootKey, isRequired:true});
+        const Q_covidVac = new vaccination.CovidVaccinationSeasons({parentKey:rootKey, isRequired:true});
         items.push(Q_covidVac);
 
-        // Q35n
-        const Q_lastCovidVac= new vaccination.LastCovidVaccine({parentKey: rootKey, isRequired: true});
-        items.push(Q_lastCovidVac);
+        const CovidNotVaccinatedForThisSeason = Q_covidVac.createNotVaccinatedForThisSeasonCondition();
 
         /*
         const Q_vaccineBrand = new pool.CovidVaccineBrand({parentKey:hasVaccineGroupKey, keyVac:Q_covidVac.key, isRequired:true});
@@ -142,7 +145,8 @@ export class VaccinationDef extends SurveyBuilder {
         */
 
         // Q35m
-        const Q_vaccineContra = new vaccination.CovidVaccineAgainstReasons({parentKey:rootKey, keyVac:Q_covidVac.key, isRequired:false});
+        const Q_vaccineContra = new vaccination.CovidVaccineAgainstReasons({parentKey:rootKey, isRequired:false});
+        Q_vaccineContra.setCondition(CovidNotVaccinatedForThisSeason);
         items.push(Q_vaccineContra);
         
         /** removed 2024

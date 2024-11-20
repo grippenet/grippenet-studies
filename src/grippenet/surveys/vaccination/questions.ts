@@ -1,18 +1,27 @@
 import { SurveyItems } from "case-editor-tools/surveys";
 import {  OptionDef } from "case-editor-tools/surveys/types";
-import { SurveyItem, SurveySingleItem } from "survey-engine/data_types";
+import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
 import { questionPools as pool, 
     _T, ItemQuestion, ItemProps, BaseChoiceQuestion, 
-    ClientExpression as client, exp_as_arg, as_input_option, as_option, option_input_other, OptionList, markdownComponent, transTextComponent, trans_text, num_as_arg } from "../../../common"
+    ClientExpression as client, exp_as_arg, as_option, option_input_other, OptionList, markdownComponent,  trans_text, 
+    make_exclusive_options,
+    option_def,
+    trans_item,
+    ItemWithKey,
+    HelpGroupContentType} from "../../../common"
 import {  OverridenResponses, ResponseOveriddes } from "../../../utils";
 import ResponseEncoding from "./responses";
 
 import encoding from "./responses";
 import { createDefaultHelpGroup } from "../../../utils/questions";
-import { create } from "domain";
+import { LikertQuestion, LikertRow, ScaleOption } from "../../questions";
 
 const text_how_answer = pool.text_how_answer;
 const text_why_asking = pool.text_why_asking;
+
+
+const VaccinationPool = pool.vaccination_new;
+
 
 // Q10c.11
 // Q10d.15, 16, 17, 18, 19
@@ -35,7 +44,7 @@ export class SurveyPrelude extends ItemQuestion {
 
 }
 
-export class FluVaccineThisSeasonReasonFor extends pool.vaccination.FluVaccineThisSeasonReasonFor implements OverridenResponses {
+export class FluVaccineThisSeasonReasonFor extends VaccinationPool.FluVaccineThisSeasonReasonFor implements OverridenResponses {
     
     getResponses(): OptionDef[] {
         const options = super.getResponses();
@@ -63,8 +72,7 @@ export class FluVaccineThisSeasonReasonFor extends pool.vaccination.FluVaccineTh
     }
 }
 
-export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVaccineThisSeasonReasonAgainst implements OverridenResponses {
-
+export class FluVaccineThisSeasonReasonAgainst extends VaccinationPool.FluVaccineThisSeasonReasonAgainst implements OverridenResponses {
 
     getResponses(): OptionDef[] {
         const prev_options = super.getResponses();
@@ -115,7 +123,7 @@ export class FluVaccineThisSeasonReasonAgainst extends pool.vaccination.FluVacci
 }
 
 
-export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAgainstReasons {
+export class CovidVaccineAgainstReasons extends VaccinationPool.CovidVaccineAgainstReasons {
 
     getResponses(): OptionDef[] {
 
@@ -130,12 +138,12 @@ export class CovidVaccineAgainstReasons extends pool.vaccination.CovidVaccineAga
         )
 
         list.insertAfterKey(
-            codes.natural_immunity,
+            codes.notriskgroup,
             as_option(codes.vaccined_or_infected, _T("vaccination.Q35m.option.vaccinated", "I'm already vaccinated or have been tested postivive to covid 19 in the last 6 months"))
         );
 
         list.insertAfterKey(
-            codes.notriskgroup,
+            codes.natural_immunity,
             as_option(codes.prefer_other_measures, _T("vaccination.Q35m.option.prefer_other_measures", "I prefer to protect my self by other protective measures (mask, hand washing...)"))
         )
     
@@ -266,18 +274,20 @@ Répondez « Oui » si vous avez été vacciné contre la Covid-19, une ou plusi
 
 export class LastCovidVaccine extends BaseChoiceQuestion { 
     constructor(props: ItemProps) {
-        super(props, 'Q35n', 'single');
+        super(props, 'Q35n', 'multiple');
         this.setOptions({
             questionText: _T("vaccination.Q35n.text", "Did yout get a vaccine covid during previous seasons")
         });
     }
 
     getResponses(): OptionDef[] {
-        return [
+        const oo = [
             as_option('1', _T("vaccination.Q35n.option.yes_last", "Yes, during last season")),
             as_option('2', _T("vaccination.Q35n.option.yes_before", "Yes, before last season")),
             as_option("0",  _T("vaccination.Q35n.option.never","No, never"))
         ];
+        make_exclusive_options(this.key, oo, ['0']);
+        return oo;
     }
 
     getHelpGroupContent() { 
@@ -329,5 +339,54 @@ export class CovidVacThisSeason extends ItemQuestion {
 
     getHelpGroupContent() {
         return createDefaultHelpGroup(this.key);
+    }
+}
+
+export class CovidVaccinationSeasons extends LikertQuestion {
+    
+    constructor(props: ItemProps) {
+        super(props, 'Q35n');
+        this.setOptions({
+            questionText: trans_item(this, "title", "Did you get vaccinated against covid")
+        })
+    }
+
+    getScaleOptions(): ScaleOption[] {
+        const codes = ResponseEncoding.covid_vac;
+        return [
+            this.scaleItem(codes.yes, 'Yes'),
+            this.scaleItem(codes.no, 'No'),
+            this.scaleItem(codes.dontknow, "I don't know"),
+        ]
+    }
+    
+    getRows(): LikertRow[] {
+        const codes = ResponseEncoding.covid_vac_likert;
+        return [
+            {key: codes.current, content: trans_item(this, 'row.current' , 'This season')},
+            {key: codes.last, content: trans_item(this, 'row.last', 'Last season')},
+            {key: codes.before, content: trans_item(this, 'row.before', 'Before last season')},
+        ]
+    }
+
+    createNotVaccinatedForAllCondition():Expression  {
+
+        const optionKeys = ResponseEncoding.covid_vac;
+        
+        const rows = this.getRows().map(row =>  client.responseHasKeysAny(this.key, this.getRowItemKey(row.key), optionKeys.no ));
+
+        return client.logic.and(
+            ...rows
+        )
+    }
+
+    createNotVaccinatedForThisSeasonCondition():Expression  {
+        const codes = ResponseEncoding.covid_vac_likert;
+        const optionKeys = ResponseEncoding.covid_vac;
+        return client.responseHasKeysAny(this.key, this.getRowItemKey(codes.current), optionKeys.no);
+    }
+
+    getHelpGroupContent(): HelpGroupContentType | undefined {
+        return createDefaultHelpGroup("vaccination.Q35n");
     }
 }
