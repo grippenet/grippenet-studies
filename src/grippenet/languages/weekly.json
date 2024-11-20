@@ -165,6 +165,10 @@
     "en": "ventilate the room",
     "fr": "Aérer la pièce où vous vous trouvez"
   },
+  "weekly.EX.QIRA2.top.1": {
+    "en":"question help notice",
+    "fr":"Indiquez « Davantage » si vous appliquez cette mesure de manière plus importante qu’avant d’avoir les symptômes déclarés, « Pareil » si vous appliquiez cette mesure à la même fréquence qu’avant d'avoir les symptômes déclarés, « Non » si vous n'appliquez pas cette mesure, et « Non applicable » si vous n'êtes pas concerné par cette mesure."
+  },
   "weekly.EX.QIRA3.title": {
     "en": "During this episode, how often did you wear a mask in the following situations",
     "fr": "Durant cet épisode, à quelle fréquence avez-vous porté un masque dans les situations suivantes ?"

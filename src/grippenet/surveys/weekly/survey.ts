@@ -66,7 +66,7 @@ export class WeeklyDef extends SurveyBuilder {
 
         // QIRA1
         const QIraPrev1 = new iraprev.IRAPrev1({parentKey: hasSymptomGroupKey});
-        const iraPrevCondition = Q_symptoms.createSymptomCondition("fever", "rhino","sorethroat", "cough", "loss_smell", "loss_smell");
+        const iraPrevCondition = Q_symptoms.createSymptomCondition("fever", "rhino","sorethroat", "cough", "sneeze", "loss_smell", "loss_taste");
         QIraPrev1.setCondition(iraPrevCondition);
 
         hasSymptomGroup.addItem(QIraPrev1.get());
@@ -295,12 +295,15 @@ export class WeeklyDef extends SurveyBuilder {
     buildIRAPrev(g: GroupQuestion, condition: Expression) {
 
         const QIra2 = new iraprev.QIRAPrev2({parentKey: g.key});
+        QIra2.setCondition(condition);
         g.addItem(QIra2.get());
 
         const QIra3 = new iraprev.QIRAPrev3({parentKey:g.key});
+        QIra3.setCondition(condition);
         g.addItem(QIra3.get());
 
         const QIra4 = new iraprev.QIRAPrev4({parentKey:g.key});
+        QIra4.setCondition(condition);
         g.addItem(QIra4.get());
 
 

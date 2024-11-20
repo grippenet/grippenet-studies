@@ -1,5 +1,5 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
-import { _T, BaseChoiceQuestion, ItemProps, option_def } from "../../../common";
+import { _T, BaseChoiceQuestion, ItemProps, option_def, transTextComponent } from "../../../common";
 import { createDefaultHelpGroup } from "../../../utils/questions";
 import { LikertQuestion, LikertRow } from "../../questions";
 
@@ -63,7 +63,10 @@ export class QIRAPrev2 extends LikertQuestion {
         super(props, 'QIRA2');
         this.setOptions(
             {
-                questionText: text(this, 'title', 'During this episode, do your usage of barriere measure changed')
+                questionText: text(this, 'title', 'During this episode, do your usage of barriere measure changed'),
+                topDisplayCompoments: [
+                    transTextComponent("weekly.EX.QIRA2.top.1", "question help notice", {"className":"mb-1"})
+                ]
             }
         );
     }
@@ -85,7 +88,8 @@ export class QIRAPrev2 extends LikertQuestion {
     }
 
     getHelpGroupContent() {
-        return createDefaultHelpGroup(this.key, {WhyAsking: true});
+        return undefined;
+        //return createDefaultHelpGroup(this.key, {WhyAsking: true});
     }
 }
 
