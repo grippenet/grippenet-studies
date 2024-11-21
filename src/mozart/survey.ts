@@ -185,7 +185,7 @@ export class MozartSurvey extends SurveyDefinition {
     }
 
     Q0(parent:string): SurveyItem {
-        return YesNo(parent, 'Q0', _T("Q0.text", "Avez-vous ces derniers mois déjà rempli un questionnaire GrippeNet.fr concernant l’exposition aux piqûres de tiques ?"));
+        return YesNo(parent, 'Q0', _T("Q0.text", "Avez-vous ces derniers mois déjà rempli un questionnaire Grippenet concernant l’exposition aux piqûres de tiques ?"));
     }
     
     Q1 = (parent: string, condition?: Expression) => {
