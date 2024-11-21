@@ -114,8 +114,8 @@
     "fr": "J’ai déjà eu une mauvaise expérience suite à une vaccination"
   },
   "vaccination.Q35m.option.vaccinated": {
-    "en": "I'm already vaccinated or have been tested postivive to covid 19 in the last 6 months",
-    "fr": "J'ai reçu une injection de ce vaccin ou ai été testé positif à la Covid-19 depuis moins de 6 mois"
+    "en": "I think I'm already immune against it thanks to vaccine or infection in the past",
+    "fr": "Je pense être déjà immunisé contre cette maladie (grâce à un/des vaccins reçus dans le passé, ou car j’ai déjà eu la Covid-19)"
   },
   "vaccination.Q35m.option.prefer_other_measures": {
     "en": "I prefer to protect my self by other protective measures (mask, hand washing...)",

@@ -1,13 +1,10 @@
 import { SurveyItems } from "case-editor-tools/surveys";
 import {  OptionDef } from "case-editor-tools/surveys/types";
-import { Expression, SurveyItem, SurveySingleItem } from "survey-engine/data_types";
+import { Expression, SurveySingleItem } from "survey-engine/data_types";
 import { questionPools as pool, 
     _T, ItemQuestion, ItemProps, BaseChoiceQuestion, 
     ClientExpression as client, exp_as_arg, as_option, option_input_other, OptionList, markdownComponent,  trans_text, 
-    make_exclusive_options,
-    option_def,
     trans_item,
-    ItemWithKey,
     HelpGroupContentType} from "../../../common"
 import {  OverridenResponses, ResponseOveriddes } from "../../../utils";
 import ResponseEncoding from "./responses";
@@ -139,7 +136,7 @@ export class CovidVaccineAgainstReasons extends VaccinationPool.CovidVaccineAgai
 
         list.insertAfterKey(
             codes.notriskgroup,
-            as_option(codes.vaccined_or_infected, _T("vaccination.Q35m.option.vaccinated", "I'm already vaccinated or have been tested postivive to covid 19 in the last 6 months"))
+            as_option(codes.vaccined_or_infected, _T("vaccination.Q35m.option.vaccinated", "I'm already vaccinated or have been tested postivive to covid 19"))
         );
 
         list.insertAfterKey(
