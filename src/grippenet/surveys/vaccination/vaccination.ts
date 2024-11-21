@@ -112,7 +112,7 @@ export class VaccinationDef extends SurveyBuilder {
         const Q_flu_vaccine_last_season = new pool.FluVaccineLastSeason({parentKey:rootKey, isRequired:true});
         items.push(Q_flu_vaccine_last_season);
 
-        // Q35p (replaces Q35)
+        // Q35n (replaces Q35)
         const Q_covidVac = new vaccination.CovidVaccinationSeasons({parentKey:rootKey, isRequired:true});
         items.push(Q_covidVac);
 

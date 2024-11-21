@@ -1,23 +1,17 @@
 import { OptionDef } from "case-editor-tools/surveys/types";
-import { _T, BaseChoiceQuestion, ItemProps, option_def, transTextComponent } from "../../../common";
+import { _T, BaseChoiceQuestion, ItemProps, option_def, trans_item, transTextComponent } from "../../../common";
 import { createDefaultHelpGroup } from "../../../utils/questions";
 import { LikertQuestion, LikertRow } from "../../questions";
 
-interface ItemWithKey {
-    key: string;
-}
-
-const text = function(item: ItemWithKey, name: string, text: string) {
-    return _T(item.key + '.' + name, text);
-}
-
+const text = trans_item;
 
 export class IRAPrev1 extends BaseChoiceQuestion {
 
     constructor(props: ItemProps) {
+        props.transKey = 'weekly.QIRA1';
         super(props, 'QIRA1', 'single');
         this.setOptions({
-            questionText: _T('weekly.QIRA1.title', 'did you have this symptoms for 3 days or more?')
+            questionText: text(this, 'title', 'did you have this symptoms for 3 days or more?')
         })
     }
 
@@ -30,7 +24,7 @@ export class IRAPrev1 extends BaseChoiceQuestion {
     }
 
     getHelpGroupContent() {
-        return createDefaultHelpGroup(this.key);
+        return createDefaultHelpGroup(this.getTransKey());
     }    
 }
 
@@ -60,12 +54,13 @@ Réduire les contacts avec les nourrissons 16
 export class QIRAPrev2 extends LikertQuestion {
     
     constructor(props: ItemProps) {
+        props.transKey = 'weekly.QIRA2';
         super(props, 'QIRA2');
         this.setOptions(
             {
                 questionText: text(this, 'title', 'During this episode, do your usage of barriere measure changed'),
                 topDisplayCompoments: [
-                    transTextComponent("weekly.EX.QIRA2.top.1", "question help notice", {"className":"mb-1"})
+                    transTextComponent("weekly.QIRA2.top.1", "question help notice", {"className":"mb-1"})
                 ]
             }
         );
@@ -96,6 +91,7 @@ export class QIRAPrev2 extends LikertQuestion {
 export class QIRAPrev3 extends LikertQuestion {
     
     constructor(props: ItemProps) {
+        props.transKey = 'weekly.QIRA3';
         super(props, 'QIRA3');
         this.setOptions({
             questionText: text(this, 'title', 'During this episode, how often did you wear a mask in the following situations'),
@@ -129,13 +125,14 @@ export class QIRAPrev3 extends LikertQuestion {
     }
 
     getHelpGroupContent() {
-        return createDefaultHelpGroup(this.key, {WhyAsking: true});
+        return createDefaultHelpGroup(this.getTransKey(), {WhyAsking: true});
     }
 }
 
 export class QIRAPrev4 extends LikertQuestion {
     
     constructor(props: ItemProps) {
+        props.transKey = 'weekly.QIRA4';
         super(props, 'QIRA4');
         this.setOptions({
             questionText: text(this, 'title', 'During this episode, Did you use this measures?'),
@@ -157,7 +154,7 @@ export class QIRAPrev4 extends LikertQuestion {
             {label: "Avoid busy places and gatherings (supermarket, cinema, stadium)", key: '7'},
             {label: "Avoid seeing friends and family", key: "14"},
             {label: "Avoid being in contact with people over 65 years old or with a chronic disease", key:"15"},
-            {label: "Avoid being in contact with children", key: "16"},
+            {label: "Avoid being in contact with young children (less 2 yo)", key: "16"},
         ];
 
         return rows.map(r=> {
@@ -166,6 +163,6 @@ export class QIRAPrev4 extends LikertQuestion {
     }
 
     getHelpGroupContent() {
-        return createDefaultHelpGroup(this.key, {WhyAsking: true});
+        return createDefaultHelpGroup(this.getTransKey(), {WhyAsking: true});
     }
 }

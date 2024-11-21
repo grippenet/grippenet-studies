@@ -271,80 +271,10 @@ Comment dois-je répondre ?
 Répondez « Oui » si vous avez été vacciné contre la Covid-19, une ou plusieurs fois, avant octobre 2024.
 
  */
-
-export class LastCovidVaccine extends BaseChoiceQuestion { 
-    constructor(props: ItemProps) {
-        super(props, 'Q35n', 'multiple');
-        this.setOptions({
-            questionText: _T("vaccination.Q35n.text", "Did yout get a vaccine covid during previous seasons")
-        });
-    }
-
-    getResponses(): OptionDef[] {
-        const oo = [
-            as_option('1', _T("vaccination.Q35n.option.yes_last", "Yes, during last season")),
-            as_option('2', _T("vaccination.Q35n.option.yes_before", "Yes, before last season")),
-            as_option("0",  _T("vaccination.Q35n.option.never","No, never"))
-        ];
-        make_exclusive_options(this.key, oo, ['0']);
-        return oo;
-    }
-
-    getHelpGroupContent() { 
-        return createDefaultHelpGroup("vaccination.Q35n");
-    }
-}
-
-
-/**
- * CovidVac: single choice question about vaccination status
- */
-export class CovidVacThisSeason extends ItemQuestion {
-
-    constructor(props: ItemProps) {
-        super(props,  'Q35p');
-    }
-
-    buildItem():SurveyItem {
-        return SurveyItems.singleChoice({
-            parentKey: this.parentKey,
-            itemKey: this.itemKey,
-            isRequired: this.isRequired,
-            condition: this.condition,
-            questionText: _T("vaccination.Q35p.title.0", "Have you received a COVID-19 vaccine this season?"),
-            helpGroupContent: this.getHelpGroupContent(),
-            responseOptions: this.getResponses()
-        });
-    }
-
-    getResponses(): OptionDef[] {
-
-        const codes = ResponseEncoding.covid_vac;
-
-        return [
-            {
-                key: codes.yes, role: 'option',
-                content: _T("vaccination.Q35p.options.yes", "Yes")
-            },
-            {
-                key: codes.no, role: 'option',
-                content: _T("vaccination.Q35p.options.no", "No")
-            },
-            {
-                key: codes.dontknow, role: 'option',
-                content: _T("vaccination.Q35p.options.dnk", "I don't know/can't remember.")
-            },
-        ];
-    }
-
-    getHelpGroupContent() {
-        return createDefaultHelpGroup(this.key);
-    }
-}
-
 export class CovidVaccinationSeasons extends LikertQuestion {
     
     constructor(props: ItemProps) {
+        props.transKey = 'vaccination.Q35n';
         super(props, 'Q35n');
         this.setOptions({
             questionText: trans_item(this, "title", "Did you get vaccinated against covid")
@@ -363,9 +293,9 @@ export class CovidVaccinationSeasons extends LikertQuestion {
     getRows(): LikertRow[] {
         const codes = ResponseEncoding.covid_vac_likert;
         return [
-            {key: codes.current, content: trans_item(this, 'row.current' , 'This season')},
-            {key: codes.last, content: trans_item(this, 'row.last', 'Last season')},
-            {key: codes.before, content: trans_item(this, 'row.before', 'Before last season')},
+            {key: codes.current, content: this.trans('row.current' , 'This season')},
+            {key: codes.last, content: this.trans('row.last', 'Last season')},
+            {key: codes.before, content: this.trans('row.before', 'Before last season')},
         ]
     }
 
@@ -387,6 +317,6 @@ export class CovidVaccinationSeasons extends LikertQuestion {
     }
 
     getHelpGroupContent(): HelpGroupContentType | undefined {
-        return createDefaultHelpGroup("vaccination.Q35n");
+        return createDefaultHelpGroup(this.getTransKey(), {howAnswer: false});
     }
 }

@@ -129,136 +129,136 @@
     "en": "I dont know",
     "fr": "Je ne sais pas"
   },
-  "weekly.HS.QIRA1.helpGroup.asking_reason": {
-    "en": "weekly.HS.QIRA1 Question asking reason",
+  "weekly.QIRA1.helpGroup.asking_reason": {
+    "en": "weekly.QIRA1 Question asking reason",
     "fr": "Pour savoir si ces symptômes, caractéristiques d’une infection respiratoire aiguë, viennent juste d’arriver ou sont là depuis plusieurs jours."
   },
-  "weekly.HS.QIRA1.helpGroup.answer_tip": {
-    "en": "weekly.HS.QIRA1 Question answer tip",
+  "weekly.QIRA1.helpGroup.answer_tip": {
+    "en": "weekly.QIRA1 Question answer tip",
     "fr": "Cochez oui si la fièvre et/ou les symptômes respiratoires et/ou perte d’odorat et/ou perte de goût durent depuis 3 jours au minimum."
   },
-  "weekly.EX.QIRA2.title": {
+  "weekly.QIRA2.title": {
     "en": "During this episode, do your usage of barriere measure changed",
     "fr": "Durant cet épisode, votre usage des mesures barrières suivantes a-t-il évolué ?"
   },
-  "weekly.EX.QIRA2.scale.1": {
+  "weekly.QIRA2.scale.1": {
     "en": "More than usual",
     "fr": "Davantage"
   },
-  "weekly.EX.QIRA2.scale.2": {
+  "weekly.QIRA2.scale.2": {
     "en": "Same",
     "fr": "Pareil"
   },
-  "weekly.EX.QIRA2.scale.3": {
+  "weekly.QIRA2.scale.3": {
     "en": "No",
     "fr": "Non"
   },
-  "weekly.EX.QIRA2.scale.4": {
+  "weekly.QIRA2.scale.4": {
     "en": "Not applicable",
     "fr": "Non applicable"
   },
-  "weekly.EX.QIRA2.rows.1": {
+  "weekly.QIRA2.rows.1": {
     "en": "Washing hands",
     "fr": "Se laver les mains"
   },
-  "weekly.EX.QIRA2.rows.23": {
+  "weekly.QIRA2.rows.23": {
     "en": "ventilate the room",
     "fr": "Aérer la pièce où vous vous trouvez"
   },
-  "weekly.EX.QIRA2.top.1": {
+  "weekly.QIRA2.top.1": {
     "en":"question help notice",
     "fr":"Indiquez « Davantage » si vous appliquez cette mesure de manière plus importante qu’avant d’avoir les symptômes déclarés, « Pareil » si vous appliquiez cette mesure à la même fréquence qu’avant d'avoir les symptômes déclarés, « Non » si vous n'appliquez pas cette mesure, et « Non applicable » si vous n'êtes pas concerné par cette mesure."
   },
-  "weekly.EX.QIRA3.title": {
+  "weekly.QIRA3.title": {
     "en": "During this episode, how often did you wear a mask in the following situations",
     "fr": "Durant cet épisode, à quelle fréquence avez-vous porté un masque dans les situations suivantes ?"
   },
-  "weekly.EX.QIRA3.scale.1": {
+  "weekly.QIRA3.scale.1": {
     "en": "Not at all",
     "fr": "Pas du tout"
   },
-  "weekly.EX.QIRA3.scale.2": {
+  "weekly.QIRA3.scale.2": {
     "en": "Sometimes",
     "fr": "Parfois"
   },
-  "weekly.EX.QIRA3.scale.3": {
+  "weekly.QIRA3.scale.3": {
     "en": "Often",
     "fr": "Souvent"
   },
-  "weekly.EX.QIRA3.scale.4": {
+  "weekly.QIRA3.scale.4": {
     "en": "All the time",
     "fr": "Systématiquement"
   },
-  "weekly.EX.QIRA3.scale.5": {
+  "weekly.QIRA3.scale.5": {
     "en": "Not concerned",
     "fr": "Pas concerné"
   },
-  "weekly.EX.QIRA3.row.19": {
+  "weekly.QIRA3.row.19": {
     "en": "Public transports",
     "fr": "Dans les transports en commun"
   },
-  "weekly.EX.QIRA3.row.20": {
+  "weekly.QIRA3.row.20": {
     "en": "Crowdy locations",
     "fr": "Dans les lieux très fréquentés (ex : supermarché, salles de spectacle, compétitions sportives, etc.) "
   },
-  "weekly.EX.QIRA3.row.21": {
+  "weekly.QIRA3.row.21": {
     "en": "In preseence of newborn or very young child",
-    "fr": "En présence de nourrissons"
+    "fr": "En présence de nourrissons (moins de deux ans)"
   },
-  "weekly.EX.QIRA3.row.22": {
+  "weekly.QIRA3.row.22": {
     "en": "In presence of fragile people",
     "fr": "En présence de personnes âgées ou fragiles (personnes avec maladie chronique, femmes enceintes)"
   },
-  "weekly.EX.QIRA3.row.17": {
+  "weekly.QIRA3.row.17": {
     "en": "At home, in presence of other people",
     "fr": "A domicile en présence d’autres personnes"
   },
-  "weekly.EX.QIRA2.helpGroup.asking_reason": {
-    "en": "weekly.EX.QIRA2 Question asking reason",
+  "weekly.QIRA2.helpGroup.asking_reason": {
+    "en": "weekly.QIRA2 Question asking reason",
     "fr": "Pour étudier l’évolution des comportements à caractères préventifs lors d’un épisode symptomatiquelorsque vous présentez des symptômes."
   },
-  "weekly.EX.QIRA3.helpGroup.asking_reason": {
-    "en": "weekly.EX.QIRA3 Question asking reason",
+  "weekly.QIRA3.helpGroup.asking_reason": {
+    "en": "weekly.QIRA3 Question asking reason",
     "fr": "Pour étudier l’évolution des comportements à caractères préventifs lorsque vous présentez des symptômes"
   },
-  "weekly.EX.QIRA4.helpGroup.asking_reason": {
-    "en": "weekly.EX.QIRA4 Question asking reason",
+  "weekly.QIRA4.helpGroup.asking_reason": {
+    "en": "weekly.QIRA4 Question asking reason",
     "fr": "Pour étudier l’évolution des comportements à caractères préventifs lorsque vous présentez des symptômes"
   },
-  "weekly.EX.QIRA4.title": {
+  "weekly.QIRA4.title": {
     "en": "During this episode, Did you use this measures?",
     "fr": "Durant cet épisode, avez-vous adopté les comportements suivants ? "
   },
-  "weekly.EX.QIRA4.scale.1": {
+  "weekly.QIRA4.scale.1": {
     "en": "Yes",
     "fr": "Oui"
   },
-  "weekly.EX.QIRA4.scale.0": {
+  "weekly.QIRA4.scale.0": {
     "en": "No",
     "fr": "Non"
   },
-  "weekly.EX.QIRA4.scale.2": {
+  "weekly.QIRA4.scale.2": {
     "en": "Not applicable",
     "fr": "Non applicable"
   },
-  "weekly.EX.QIRA4.row.6": {
+  "weekly.QIRA4.row.6": {
     "en": "Limit usage of public transport",
-    "fr": " Limiter l’usage des transports en commun"
+    "fr": "Limiter l’usage des transports en commun"
   },
-  "weekly.EX.QIRA4.row.7": {
+  "weekly.QIRA4.row.7": {
     "en": "Avoid busy places and gatherings (supermarket, cinema, stadium)",
     "fr": "Éviter les lieux très fréquentés (sortie au théâtre, au cinéma, au stade, au supermarché …)"
   },
-  "weekly.EX.QIRA4.row.14": {
+  "weekly.QIRA4.row.14": {
     "en": "Avoid seeing friends and family",
     "fr": "Réduire les contacts avec son entourage familial, amical ou professionnel"
   },
-  "weekly.EX.QIRA4.row.15": {
+  "weekly.QIRA4.row.15": {
     "en": "Avoid being in contact with people over 65 years old or with a chronic disease",
     "fr": "Réduire les contacts avec les personnes âgées ou les personnes fragiles"
   },
-  "weekly.EX.QIRA4.row.16": {
-    "en": "Avoid being in contact with children",
-    "fr": "Réduire les contacts avec les nourrissons"
+  "weekly.QIRA4.row.16": {
+    "en": "Avoid being in contact with young children (less 2 yo)",
+    "fr": "Réduire les contacts avec les nourrissons (moins de deux ans)"
   }
 }

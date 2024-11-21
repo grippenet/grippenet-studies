@@ -53,7 +53,7 @@ export abstract class LikertQuestion extends ItemQuestion {
     }
 
     scaleItem(code: string, trans: string):ScaleOption {
-        return {key: code, content: trans_item(this, 'scale.' + code + '.label', trans)};
+        return {key: code, content: this.trans('scale.' + code + '.label', trans)};
     }
 }
 

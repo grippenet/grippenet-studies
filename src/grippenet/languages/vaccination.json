@@ -4,7 +4,7 @@
     "fr": [
       "Les réponses aux questions précédées d’un astérisque (*) sont obligatoires pour pouvoir valider le questionnaire.",
       "",
-      "Ce questionnaire a pour but de mieux connaître votre profil vaccinal. Il est important de le mettre à jour en cours de saison si vous recevez une nouvelle dose de vaccin contre la grippe ou la Covid-19. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire.",
+      "Ce questionnaire a pour but de mieux connaître votre profil vaccinal. Il est important de le **mettre à jour** en cours de saison si vous recevez **une nouvelle dose de vaccin contre la grippe ou la Covid-19**. Il sera dans ce cas pré-complété avec ce que vous avez indiqué dans le précédent questionnaire.",
       "",
       "Dans ce questionnaire, le genre masculin est utilisé comme générique, dans le seul but de ne pas alourdir le texte."
     ]
@@ -123,7 +123,7 @@
   },
 "vaccination.Q35n.title": {
         "en": "Did you get vaccinated against covid",
-        "fr": "Avez-vous été vacciné contre la Covid-19"
+        "fr": "Avez-vous été vacciné contre la Covid-19 :"
     },
     "vaccination.Q35n.row.current": {
         "en": "This season",
@@ -131,11 +131,11 @@
     },
     "vaccination.Q35n.row.last": {
         "en": "Last season",
-        "fr": "Entre octobre 2023 et septembre 2024"
+        "fr": "Entre octobre 2023 et septembre 2024 ?"
     },
     "vaccination.Q35n.row.before": {
         "en": "Before last season",
-        "fr": "Avant octobre 2023"
+        "fr": "Avant octobre 2023 ?"
     },
     "vaccination.Q35n.scale.1.label": {
         "en": "Yes",
