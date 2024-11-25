@@ -94,7 +94,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             se.checkSurveyResponseKey(vacKey),
             // remove vaccination and re-add it with a new timeout
             assignedSurveys.remove(vacKey, 'all'),
-            assignedSurveys.add(vacKey, 'optional', se.timestampWithOffset({hours: 1})),
+            assignedSurveys.add(vacKey, 'optional'),
             // update vaccinationCompleted flag
             updateFlag(flags.vaccinationCompleted.key, flags.vaccinationCompleted.values.yes),
             updateLastSubmission(flags.lastVaccination.key)
@@ -129,7 +129,6 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
                 se.timestampWithOffset(offset)
             );
         };
-
 
         const handleChild = se.ifThen(
             se.checkSurveyResponseKey(intakeKey),
