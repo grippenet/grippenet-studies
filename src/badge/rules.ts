@@ -161,11 +161,18 @@ export class BadgeRuleBuilder {
             );
         }
 
+        const flagValueAfterSeasonStart = (flag: string) => {
+            return se.and(
+                    hasFlag(flag),
+                    se.gte(getFlagValueAsNum(flag), this.config.seasonStart)
+            );
+        }
+
         // Starting badge check each other survey
         intakeRules.push(
             createBadgeIfNotExists({
                 flag: BadgeDefinitions.starting.flag,
-                condition: hasFlag(FlagsLastSubmission.vacc)
+                condition: flagValueAfterSeasonStart(FlagsLastSubmission.vacc)
             })
         );
         
@@ -177,7 +184,7 @@ export class BadgeRuleBuilder {
         vaccRules.push(
             createBadgeIfNotExists({
                 flag:BadgeDefinitions.starting.flag,
-                condition: hasFlag(FlagsLastSubmission.intake)
+                condition: flagValueAfterSeasonStart(FlagsLastSubmission.intake)
             })
         );
 
