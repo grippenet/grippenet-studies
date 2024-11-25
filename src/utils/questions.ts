@@ -34,5 +34,9 @@ export const createDefaultHelpGroup = (prefix: string, opts?: DefaultHelpGroupOp
         )
     }
 
+    if(!oo.howAnswer && !oo.WhyAsking) {
+        console.warn("Empty helpgroup : Both part asking_reason and answer_tip are disabled in " + prefix);
+    }
+
     return h;
 }
