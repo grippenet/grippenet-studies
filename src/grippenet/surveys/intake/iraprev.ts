@@ -18,7 +18,9 @@ export class IRAPrevWorkingDomain extends BaseChoiceQuestion {
             option_def('2', _T('intake.Q4i.options.2', 'early child workers')),
             option_def('3', _T('intake.Q4i.options.3', 'Restaurant workers')),
             option_def('4', _T('intake.Q4i.options.4', 'Food selling')),
-            option_input_other('5', _T('intake.Q4i.options.5', 'Other'), '')
+            //option_input_other('5', _T('intake.Q4i.options.5', 'Other'), ''),
+            option_def('0', _T('intake.Q4i.options.0', 'None of these domains')),
+            
        ]
     }
     

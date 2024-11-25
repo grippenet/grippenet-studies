@@ -66,36 +66,36 @@
     "fr": "Si vous êtes toujours scolarisé ou étudiant, merci de cocher la case correspondant au diplôme le plus élevé que vous avez obtenu jusqu'à maintenant."
   },
   "intake.Q4i.title": {
-        "en": "Do you work in one of the following domain",
-        "fr": "Travaillez-vous dans l’un des domaines suivants ?"
-    },
-    "intake.Q4i.options.1": {
-        "en": "Health and Social worker",
-        "fr": "Personnel médico-social"
-    },
-    "intake.Q4i.options.2": {
-        "en": "early child workers",
-        "fr": "Personnel de la petite enfance"
-    },
-    "intake.Q4i.options.3": {
-        "en": "Restaurant workers",
-        "fr": "Personnel de la restauration"
-    },
-    "intake.Q4i.options.4": {
-        "en": "Food selling",
-        "fr": "Commerçant dans le domaine alimentaire"
-    },
-    "intake.Q4i.options.5": {
-        "en": "Other",
-        "fr": "Autre"
-    },
-    "intake.Q4.helpGroup.asking_reason": {
-        "en": "intake.Q4 Question asking reason",
-        "fr": "Pour identifier les personnes qui sont le plus à risque de transmettre une infection respiratoire aiguë dans le cadre de leur profession."
-    },
-    "intake.Q4.helpGroup.answer_tip": {
-        "en": "intake.Q4 Question answer tip",
-        "fr": "Merci de cocher la case du domaine d’activité qui correspond le plus à votre activité principale."
+    "en": "Do you work in one of the following domain",
+    "fr": "Travaillez-vous dans l’un des domaines suivants ?"
+  },
+  "intake.Q4i.options.1": {
+    "en": "Health and Social worker",
+    "fr": "Personnel médico-social"
+  },
+  "intake.Q4i.options.2": {
+    "en": "early child workers",
+    "fr": "Personnel de la petite enfance"
+  },
+  "intake.Q4i.options.3": {
+    "en": "Restaurant workers",
+    "fr": "Personnel de la restauration"
+  },
+  "intake.Q4i.options.4": {
+    "en": "Food selling",
+    "fr": "Commerçant dans le domaine alimentaire"
+  },
+  "intake.Q4i.options.0": {
+    "en": "None of these domains",
+    "fr": "Non, je ne travaille dans aucun de ces domaines"
+  },
+  "intake.Q4.helpGroup.asking_reason": {
+    "en": "intake.Q4 Question asking reason",
+    "fr": "Pour identifier les personnes qui sont le plus à risque de transmettre une infection respiratoire aiguë dans le cadre de leur profession."
+  },
+  "intake.Q4.helpGroup.answer_tip": {
+    "en": "intake.Q4 Question answer tip",
+    "fr": "Merci de cocher la case du domaine d’activité qui correspond le plus à votre activité principale."
   },
   "intake.Q5.option.5": {
     "fr": "Entre 1 et 9 enfants ou adolescents dans une même journée (en ne comptant pas vos propres enfants)",
