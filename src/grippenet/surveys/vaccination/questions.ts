@@ -314,6 +314,6 @@ export class CovidVaccinationSeasons extends LikertQuestion {
     }
 
     getHelpGroupContent(): HelpGroupContentType | undefined {
-        return createDefaultHelpGroup(this.getTransKey(), {howAnswer: false});
+        return createDefaultHelpGroup(this.getTransKey(), {howAnswer: false, WhyAsking: true});
     }
 }
