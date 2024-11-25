@@ -83,8 +83,7 @@ export class QIRAPrev2 extends LikertQuestion {
     }
 
     getHelpGroupContent() {
-        return undefined;
-        //return createDefaultHelpGroup(this.key, {WhyAsking: true});
+        return createDefaultHelpGroup(this.getTransKey(), {WhyAsking: true});
     }
 }
 
