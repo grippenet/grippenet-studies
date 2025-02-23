@@ -846,10 +846,10 @@ caniuse-lite@^1.0.30001400:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001402.tgz#aa29e1f47f5055b0d0c07696a67b8b08023d14c8"
   integrity sha512-Mx4MlhXO5NwuvXGgVb+hg65HZ+bhUYsz8QtDGDo2QmaJS2GBX47Xfi2koL86lc8K+l+htXeTEB/Aeqvezoo6Ew==
 
-case-editor-tools@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.6.0.tgz#905ec702c7419731c5a43aa3e196abf446186e63"
-  integrity sha512-B2y7ZHPBZPJteXWZiw+TF9nxCMNi0Oxw0jWR8/BEG9oj6GXK4uXqDAzGWaM4enRRkIRNl/t2DvD9+PP1Ta0LYg==
+case-editor-tools@^1.6.8:
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/case-editor-tools/-/case-editor-tools-1.6.8.tgz#31dbaf3586a362c9d53fce079ec22425489fcfa7"
+  integrity sha512-GkRUVeHbwUx0WsK7WXCYHb+6Xf8i7c5DFsK03QrSjxz0W5AHedfXU3pSnQHyUDP+DB8iP5k1geggZN1f9XGG3A==
   dependencies:
     survey-engine "^1.2.0"
 
@@ -1172,10 +1172,10 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-ifn-survey-tools@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ifn-survey-tools/-/ifn-survey-tools-0.0.1.tgz#fa45abd01c364af825ba5c326d3b81bc473eee27"
-  integrity sha512-6CzjT2SgxCvzeXTMtK02uiHUa+IQPeDo8fkAJKv7HxhZaDE4lfOeQHSlYS0KHc9kMOqDGL3SJwn3nZ9WlpQCEQ==
+ifn-survey-tools@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ifn-survey-tools/-/ifn-survey-tools-0.2.0.tgz#59481a3ed711337c43fb65caf5d659346941afc0"
+  integrity sha512-XNDUclO2amQuWp5Um21YDFr4FGQ05MDF0GEXSVzBFJM+UnHGmn1gOB3qvzZcwI+tfsPGB7lHqSfVTrGf9aLROQ==
   dependencies:
     date-fns "^2.30.0"
     static-jsx "^1.0.1"
@@ -2091,6 +2091,13 @@ survey-engine@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/survey-engine/-/survey-engine-1.2.1.tgz#214099ca904782c454e14962b43624f3899b16f9"
   integrity sha512-q+9m16D+Zfu5F7u0BMol5HcrfXwQaVbrfQgEyo7HMt5BLsSL6aOwvznvQaHT0wdfCruAY3Dc3LHr/ZQ6qjVdyQ==
+  dependencies:
+    date-fns "^2.29.3"
+
+survey-engine@^1.2.9:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/survey-engine/-/survey-engine-1.3.1.tgz#2c5a8e0b4f60c100f6aac2e3a050b6f70a188755"
+  integrity sha512-q7i3xsAXSOT7ksqC4SooPnT586EhdrGqTcDJ+XNyZt9Zej6VtAPyiBJSpZdE85kJEQuvPW+0S0Y/mxjk1svdqA==
   dependencies:
     date-fns "^2.29.3"
 

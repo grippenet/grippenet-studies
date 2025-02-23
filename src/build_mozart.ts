@@ -3,6 +3,7 @@ import { MozartSurvey } from "./mozart/survey";
 import { study_exporter } from "../common/tools/exporter";
 import "../common/studies/common/languages/fr";
 import "./grippenet/languages";
+import { DocumentExporterPlugin } from "../common/tools/exporter/documents";
 
 class MozartStudy extends StudyBuilder {
     constructor() {
@@ -29,5 +30,7 @@ builder.build();
 
 const study = builder.getStudy();
 
-study_exporter([study], {'check': true, 'missing': true, 'classNames': true, 'document': true, languages: ['fr']});
+const docPlugin = new DocumentExporterPlugin();
+
+study_exporter([study], {'check': true, 'missing': true, 'classNames': true, languages: ['fr'], plugins: [docPlugin]});
 
