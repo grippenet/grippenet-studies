@@ -32,9 +32,9 @@ export class MozartSurvey extends SurveyDefinition {
             const m = Object.fromEntries(meta.entries());
             this.editor.setMetadata(m);
         }
-        this.extra_ending = " Il est également possible que vous receviez d'ici là un autre questionnaire, portant sur une autre thématique en lien avec l'actualité. Nous vous souhaitons un très bel automne !";
-        this.next_period = "Il est possible que vous soyez sollicité(e) au printemps prochain pour répondre à un dernier questionnaire similaire concernant la période de Novembre 2024 à Février 2025.";
-        this.period = createPeriod("2024-07-01", "2024-10-31", "Juillet 2024 à Octobre 2024");
+        this.extra_ending = " Comme d’habitude, nous vous tiendrons bien sûr informé(e) des résultats. Nous vous souhaitons une bonne fin d'hiver !";
+        this.next_period = "Cette étude est terminée, il ne vous sera pas proposé de remplir à nouveau ce questionnaire, mais vous serez probablement invité(e) à participer à d'autres études.";
+        this.period = createPeriod("2024-11-01", "2025-02-28", "Novembre 2024 à Février 2025");
 
         this.editor.setSurveyDescription(generateLocStrings(
             _T("description.0", "Etude épidémiologique sur votre santé et les activités de plein air que vous avez pratiquées au cours de la période "+ this.period.toRange() + ".")
