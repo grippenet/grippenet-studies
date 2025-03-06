@@ -53,7 +53,7 @@ export class TitleQuestion extends ItemQuestion {
 
     buildItem() {
         return SurveyItems.display({
-            parentKey: this.key,
+            parentKey: this.parentKey,
             itemKey: this.itemKey,
             content: [ 
                 textComponent({
@@ -323,9 +323,9 @@ export class NumericQuestion extends ItemQuestion {
 
     componentProps?: NumericQuestionOptions;
 
-    constructor(parentKey: string, key: string, opts?: NumericQuestionOptions) {
-        super({parentKey: parentKey}, key);
-        const info = question_info(key);
+    constructor(parentKey: string, itemKey: string, opts?: NumericQuestionOptions) {
+        super({parentKey: parentKey}, itemKey);
+        const info = question_info(itemKey);
         this.title = info.title;
         this.componentProps = opts;
     }
@@ -353,7 +353,7 @@ export class NumericQuestion extends ItemQuestion {
 
         return SurveyItems.numericInput({
             componentProperties: this.getComponentProperties(),
-            parentKey: this.key,
+            parentKey: this.parentKey,
             isRequired: this.isRequired,
             itemKey: this.itemKey,
             questionText: _T(this.key + '.title', this.title),
