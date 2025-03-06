@@ -32,7 +32,7 @@ export class MozartSurvey extends SurveyDefinition {
             const m = Object.fromEntries(meta.entries());
             this.editor.setMetadata(m);
         }
-        this.extra_ending = " Comme d’habitude, nous vous tiendrons bien sûr informé(e) des résultats. Nous vous souhaitons une bonne fin d'hiver !";
+        this.extra_ending = "Comme d’habitude, nous vous tiendrons bien sûr informé(e) des résultats. Nous vous souhaitons une bonne fin d'hiver !";
         this.next_period = "Cette étude est terminée, il ne vous sera pas proposé de remplir à nouveau ce questionnaire, mais vous serez probablement invité(e) à participer à d'autres études.";
         this.period = createPeriod("2024-11-01", "2025-02-28", "Novembre 2024 à Février 2025");
 
@@ -179,7 +179,7 @@ export class MozartSurvey extends SurveyDefinition {
 
         const surveyEnd  = SurveyItems.surveyEnd(
            rootKey,
-            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête. " + this.next_period + " Comme d’habitude, nous vous tiendrons bien sûr informé(e) des résultats." + this.extra_ending)
+            _T("surveyEnd", "Merci de valider votre questionnaire en cliquant sur le bouton « Envoyer » ci dessous. Nous vous remercions vivement pour votre participation à cette enquête. " + this.next_period + " " + this.extra_ending)
         );
         this.addItem(surveyEnd);
     }
