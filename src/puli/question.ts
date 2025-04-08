@@ -41,8 +41,6 @@ export class MarkdownQuestion extends ItemQuestion {
     }
 }
 
-
-
 export class TitleQuestion extends ItemQuestion {
     
     text: string;
@@ -73,6 +71,7 @@ interface ChoiceQuestionOptions {
     otherOptions?: string[];
     exclusive?: string[];
     required?: boolean;
+    placeholders?: Record<string,string>;
 }
 
 export class RandomCodeQuestion extends BaseRandomCodeQuestion {
@@ -94,6 +93,37 @@ export class RandomCodeQuestion extends BaseRandomCodeQuestion {
     
 }
 
+const apply_plaholders = (text: string, placeholders: Record<string,string>) => {
+    Object.entries(placeholders).forEach(v => {
+        const [name, replacement] = v;
+        text = text.replaceAll('{' + name + '}', replacement);
+    });
+    return text;
+}
+
+
+export class InfestationHistory extends BaseChoiceQuestion {
+    
+    constructor(parentKey: string, name: string, period:string) {
+        super({'parentKey': parentKey}, name, 'single');
+
+        this.setOptions({
+            questionText: 
+                 text(this, 'title', "Avez-vous été confronté à une infestation de punaises de lit depuis "+ period + " que ce soit chez vous ou hors de votre domicile, que vous ayez été piqué ou non ?")
+            },
+        );
+    }
+    
+    getResponses(): OptionDef[] {
+        return [
+            option_def('1', text(this, 'option.yes', "Oui")),
+            option_def('0', text(this, 'option.no', "Non")),
+            option_def('3', text(this, 'option.nsp', "Je ne sais pas")),
+        ]
+    }
+}
+
+
 export class ChoiceQuestion extends BaseChoiceQuestion {
 
     info: QuestionInfo;
@@ -105,6 +135,10 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
     constructor(parentKey: string, name:string, type: QuestionType, opts?: ChoiceQuestionOptions ) {
         super({parentKey: parentKey}, name, type);
         this.info = question_info(name);
+
+        if(opts?.placeholders) {
+            this.info.title = apply_plaholders(this.info.title, opts.placeholders);
+        }
 
         const top = type == "multiple" ? [
             textComponent({"content": text(this, 'several', "Plusieurs réponses possibles"), className:"mt-0 mb-1", key: "several"})
@@ -127,8 +161,9 @@ export class ChoiceQuestion extends BaseChoiceQuestion {
                 this.isRequired = opts.required;
             }
         }
-        
     }
+
+
 
     getResponses(): OptionDef[] {
         const oo: OptionDef[] = [];

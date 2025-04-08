@@ -2,9 +2,12 @@
 import { Group, Item, OptionDef, SurveyDefinition } from "case-editor-tools/surveys/types";
 import { _T, K } from "./helpers";
 import { surveyInfo } from "./data";
-import { ChoiceQuestion, LikertQuestion, MonthDateQuestion, NumberDontKnowQuestion, NumericQuestion, SurveyEnd, TitleQuestion,RandomCodeQuestion, MarkdownQuestion } from "./question";
+import { ChoiceQuestion, LikertQuestion, MonthDateQuestion, NumberDontKnowQuestion, NumericQuestion, SurveyEnd, TitleQuestion,RandomCodeQuestion, MarkdownQuestion, InfestationHistory } from "./question";
 import { GroupQuestion, SimpleGroupQuestion, SurveyBuilder, ClientExpression as client, make_exclusive_options } from "../common";
 import { SurveyItems,  } from "case-editor-tools/surveys";
+
+type PuliFlavors = '1y' | '6m';
+
 export class PuliSurvey extends SurveyBuilder {
 
     constructor(meta?:Map<string,string>) {
@@ -23,14 +26,34 @@ export class PuliSurvey extends SurveyBuilder {
 
         this.push(prelude);
 
-        
+        const q1_1y = new InfestationHistory(this.key, 'q1y', "avril 2024");
+        this.push(q1_1y, client.logic.not(client.participantFlags.hasKeyAndValue('puli_prev', '1')));
 
-        const q1 = new ChoiceQuestion(this.key, 'q1', 'single', {'required': true});   
-        
-        this.push(q1);
+
+        const q1_6m = new InfestationHistory(this.key, 'q1m', "novembre 2024");
+        this.push(q1_6m, client.participantFlags.hasKeyAndValue('puli_prev', '1'));
+
+        //const q1 = new ChoiceQuestion(this.key, 'q1', 'single', {'required': true, placeholders: placeholders});   
+       // this.push(q1);
+
+        const condition = (responses: string[]) => {
+            const e1 = q1_1y.createConditionFrom(responses);
+            const e2 = q1_6m.createConditionFrom(responses);
+            if (typeof(e1) == "undefined" ) {
+                throw new Error("e1 is undefined");
+            }
+            if (typeof(e2) == "undefined" ) {
+                throw new Error("e1 is undefined");
+            }
+            return client.logic.or(e1, e2);
+        }
 
         const g = this.buildMainGroup();
-        this.push(g, q1.createConditionFrom(["1" ]));
+        this.push(g, condition(["1"]));
+
+        const g5 = this.buildAntecedents(this.key);
+
+        this.push(g5, condition(['0', '3']));
 
         const end = new SurveyEnd(this.key, "Merci pour votre réponse ! Nous n'avons pas de questions supplémentaires à vous poser. A bientôt !");
         this.push(end);
@@ -287,4 +310,25 @@ export class PuliSurvey extends SurveyBuilder {
         g.add(qx19);
     }
 
+    buildAntecedents(rootKey: string): Group {
+        const g = new SimpleGroupQuestion({parentKey: rootKey}, 'g5');
+        const groupKey = g.key;
+
+        const title = new TitleQuestion(groupKey, 't7', "Antécédents");
+        g.add(title);
+
+        const q55 = new ChoiceQuestion(groupKey, "q55", "single");
+        g.add(q55);
+
+        const q56 = new NumericQuestion(groupKey, "q56");
+        g.add(q56, q55.createConditionFrom(["1"]));
+        
+        const q57 = new ChoiceQuestion(groupKey, "q57", "single");
+        g.add(q57);
+
+        const q58 = new NumericQuestion(groupKey, "q58");
+        g.add(q58, q57.createConditionFrom(["1"]));
+       
+        return g;
+    }
 }
