@@ -53,7 +53,7 @@ export class PuliSurvey extends SurveyBuilder {
 
         const g5 = this.buildAntecedents(this.key);
 
-        this.push(g5, condition(['0', '3']));
+        this.push(g5);
 
         const end = new SurveyEnd(this.key, "Merci pour votre réponse ! Nous n'avons pas de questions supplémentaires à vous poser. A bientôt !");
         this.push(end);
