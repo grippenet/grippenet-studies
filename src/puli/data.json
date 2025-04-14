@@ -353,7 +353,7 @@
     ]
   },
   "q22": {
-    "title": "D'après vous, d'ou venaient ces punaises de lit ?",
+    "title": "D'après vous, d'où venaient ces punaises de lit ?",
     "options": [
       {
         "key": "4",
@@ -472,7 +472,7 @@
     ]
   },
   "q28": {
-    "title": "Quelles étaient la ou les zones piquées",
+    "title": "Quelles étaient la ou les zones piquées ?",
     "options": [
       {
         "key": "4",
@@ -497,7 +497,7 @@
     ]
   },
   "q29": {
-    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présentées en même temps",
+    "title": "Au maximum de l’infestation, combien de piqûres avez-vous présentées en même temps ?",
     "options": [
       {
         "key": "4",
@@ -1080,7 +1080,7 @@
     ]
   },
   "q55": {
-    "title":"Au cours des 5 dernières années (depuis 2020), avez-vous été confronté, A votre domicile, à une infestation par des punaises de lit ?",
+    "title":"Au cours des 5 dernières années (depuis 2020), avez-vous été confronté, à votre domicile, à une infestation par des punaises de lit ?",
     "options": [
       {
         "key": "1",
