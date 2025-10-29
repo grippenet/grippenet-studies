@@ -64,6 +64,13 @@ export const GrippenetFlags = {
         values: booleanValues
     } as const,
     hasOnGoingSymptoms: flags.hasOnGoingSymptoms,
-    vaccinationCompleted: flags.vaccinationCompleted
+    vaccinationCompleted: flags.vaccinationCompleted,
+    sispo: {
+        key: 'sispo',
+        values: {
+            'alpes_maritimes': 'A',
+            'bas_rhin' : 'B'
+        }
+    }
 } as const;
 
