@@ -245,6 +245,10 @@
     "en": "By poster in my town",
     "fr": "Par une affiche présente dans ma commune"
   },
+  "intake.Q17.option.poster_vacc_center": {
+      "en": "By a poster at a vaccination center",
+      "fr": "Par une affiche présente dans un centre de vaccination"
+  },
   "intake.Q17.option.school": {
     "en": "At school or university",
     "fr": "A l’école/université"

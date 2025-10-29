@@ -865,7 +865,7 @@ export class CommonColdFrequency extends pool.intake.CommonColdFrequency impleme
                as_option( codes.poster_healthoffice, _T("intake.Q17.option.poster_healthoffice", "By poster at health service/office")), // added 2024
                as_option( codes.poster_in_pharmacy, _T("intake.Q17.option.poster_pharmacy", "By poster in pharmacy")), // added 2024
                as_option( codes.poster_in_mytown, _T("intake.Q17.option.poster_inmytown", "By poster in my town")), // added 2024
-
+               as_option( codes.poster_vacc_center, _T("intake.Q17.option.poster_vacc_center", "By a poster at a vaccination center")), 
                 as_option( codes.family,  _T("intake.Q17.rg.mcg.option.4", "Via family or friends")),
                 //as_option( codes.work, _T("intake.Q17.rg.mcg.option.5", "Via school or work")), // Removed 2024
 

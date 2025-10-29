@@ -91,7 +91,7 @@
   },
   "vaccination.Q18.text": {
     "en": "Do you have a voucher for influenza vaccine since last october",
-    "fr": "Avez-vous eu un bon de vaccination contre la grippe cette année (depuis octobre 2024)?"
+    "fr": "Avez-vous eu un bon de vaccination contre la grippe cette année (depuis octobre 2025)?"
   },
   "vaccination.Q18.option.yes": {
     "fr": "Oui",
@@ -127,15 +127,15 @@
     },
     "vaccination.Q35n.row.current": {
         "en": "This season",
-        "fr": "Depuis octobre 2024 ?"
+        "fr": "Depuis octobre 2025 ?"
     },
     "vaccination.Q35n.row.last": {
         "en": "Last season",
-        "fr": "Entre octobre 2023 et septembre 2024 ?"
+        "fr": "Entre octobre 2024 et septembre 2025 ?"
     },
     "vaccination.Q35n.row.before": {
         "en": "Before last season",
-        "fr": "Avant octobre 2023 ?"
+        "fr": "Avant octobre 2024 ?"
     },
     "vaccination.Q35n.scale.1.label": {
         "en": "Yes",
