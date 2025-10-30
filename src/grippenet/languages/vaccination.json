@@ -139,7 +139,7 @@
   },
   "vaccination.Q35n.row.last_summer": {
         "en": "Last season during summer (March Y+1 to September Y+1)",
-        "fr": "Entre mars 2025 et septembre 2025"
+        "fr": "Entre mars 2025 et septembre 2025 ?"
   },
   "vaccination.Q35n.row.before": {
         "en": "Before last season",

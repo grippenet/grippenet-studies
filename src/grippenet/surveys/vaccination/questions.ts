@@ -291,8 +291,8 @@ export class CovidVaccinationSeasons extends LikertQuestion {
         const codes = ResponseEncoding.covid_vac_likert;
         return [
             {key: codes.current, content: this.trans('row.current' , 'This season')},
-            {key: codes.last_winter, content: this.trans('row.last_winter', 'Last season during winter (october Y to february Y+1)')},
             {key: codes.last_summer, content: this.trans('row.last_summer', 'Last season during summer (March Y+1 to September Y+1)')},
+            {key: codes.last_winter, content: this.trans('row.last_winter', 'Last season during winter (october Y to february Y+1)')},
             {key: codes.before, content: this.trans('row.before', 'Before last season')},
         ]
     }
