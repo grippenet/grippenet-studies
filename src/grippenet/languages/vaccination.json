@@ -124,23 +124,31 @@
 "vaccination.Q35n.title": {
         "en": "Did you get vaccinated against covid",
         "fr": "Avez-vous été vacciné contre la Covid-19 :"
-    },
-    "vaccination.Q35n.row.current": {
+  },
+  "vaccination.Q35n.row.current": {
         "en": "This season",
         "fr": "Depuis octobre 2025 ?"
-    },
-    "vaccination.Q35n.row.last": {
+  },
+  "vaccination.Q35n.row.last": {
         "en": "Last season",
         "fr": "Entre octobre 2024 et septembre 2025 ?"
-    },
-    "vaccination.Q35n.row.before": {
+  },
+  "vaccination.Q35n.row.last_winter": {
+        "en": "Last season during winter (october Y to february Y+1)",
+        "fr": "Entre octobre 2024 et février 2025 ?"
+  },
+  "vaccination.Q35n.row.last_summer": {
+        "en": "Last season during summer (March Y+1 to September Y+1)",
+        "fr": "Entre mars 2025 et septembre 2025"
+  },
+  "vaccination.Q35n.row.before": {
         "en": "Before last season",
         "fr": "Avant octobre 2024 ?"
-    },
-    "vaccination.Q35n.scale.1.label": {
+  },
+  "vaccination.Q35n.scale.1.label": {
         "en": "Yes",
         "fr": "Oui"
-    },
+  },
     "vaccination.Q35n.scale.0.label": {
         "en": "No",
         "fr": "Non"
@@ -155,7 +163,7 @@
   },
   "vaccination.Q35n.helpGroup.answer_tip": {
     "en": "vaccination.Q35n Question answer tip",
-    "fr": "Répondez « Oui » si vous avez été vacciné contre la Covid-19, une ou plusieurs fois, pour chacune des périodes. Si vous ne vous souvenez plus exactement, indiquer celle qui vous semble le plus vraissemblable. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de le mettre à jour."
+    "fr": "Répondez « Oui » si vous avez été vacciné contre la Covid-19, une ou plusieurs fois, pour chacune des périodes. Si vous ne vous souvenez plus exactement, indiquer celle qui vous semble le plus vraisemblable. Si vous vous faites vacciner après avoir rempli ce questionnaire, merci de le mettre à jour."
   },
   "vaccination.Q18.asking_reason": {
     "en": "asking_reason",
@@ -163,7 +171,7 @@
   },
   "vaccination.Q18.answer_tip": {
     "en": "how_answer",
-    "fr": "Cochez « Oui » si vous avez reçu un bon de vaccination contre la grippe depuis le mois d'octobre, envoyé par l’assurance maladie ou si votre médecin vous a fait un bon."
+    "fr": "Cochez « Oui » si vous avez reçu un bon de vaccination contre la grippe depuis le mois d'octobre, envoyé par l’Assurance Maladie ou si votre médecin vous a fait un bon."
   },
   "vaccination.Q37.rg.scg.option.1.text": {
     "en": "Choose date",
