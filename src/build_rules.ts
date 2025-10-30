@@ -15,10 +15,11 @@ const modules: string[] = [
     //"./grippenet/rules/standalone/location_catchup",
     "./grippenet/rules/standalone/assign_surveys_all",
     "./grippenet/rules/standalone/assign_surveys_tester",
+    "./grippenet/rules/standalone/filter_participant_sispeau",
+    "./grippenet/rules/standalone/remove_survey_nonsispo",
+    "./grippenet/rules/standalone/assign_surveys_sispo",
+    
 ];
-
-
-
 
 modules.forEach(name => {    
     import(name).then((m)=> {
