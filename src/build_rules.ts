@@ -18,7 +18,7 @@ const modules: string[] = [
     "./grippenet/rules/standalone/filter_participant_sispeau",
     "./grippenet/rules/standalone/remove_survey_nonsispo",
     "./grippenet/rules/standalone/assign_surveys_sispo",
-    
+    "./grippenet/rules/standalone/remove_badges"
 ];
 
 modules.forEach(name => {    

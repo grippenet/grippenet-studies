@@ -15,6 +15,8 @@ export class IntakeDef extends SurveyBuilder {
 
     Q_Tobacco?: intake.Smoking;
 
+    Q_Transport?: pool.MeansOfTransport;
+
     constructor(meta:Map<string,string>) {
 
         super({
@@ -228,6 +230,7 @@ export class IntakeDef extends SurveyBuilder {
         const Q_means_of_transport = new pool.MeansOfTransport({parentKey:rootKey, isRequired:true});
         this.prefillWithLastResponse(Q_means_of_transport);
         items.push(Q_means_of_transport);
+        this.Q_Transport = Q_means_of_transport;
 
         // Q8
         const Q_common_cold_frequ = new intake.CommonColdFrequency({parentKey:rootKey, isRequired:false});
@@ -286,6 +289,13 @@ export class IntakeDef extends SurveyBuilder {
             throw new Error("Postal not initialized");
         }
         return this.Q_Tobacco; 
+    }
+
+    getTransport(): Item {
+        if(!this.Q_Transport) {
+            throw new Error("Transport not initialized");
+        }
+        return this.Q_Transport;
     }
 }
 

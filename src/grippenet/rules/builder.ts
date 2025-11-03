@@ -4,6 +4,7 @@ import { responseGroupKey } from "case-editor-tools/constants/key-definitions";
 import { ServerExpression as se } from "../../common";
 import { Expression } from "survey-engine/data_types";
 import WeeklyResponses from "../surveys/weekly/responses";
+import IntakeResponses from "../surveys/intake/responses";
 import { GrippenetFlags as flags } from "../flags";
 import { Duration,  } from "case-editor-tools/types/duration";
 import { assignedSurveys, updateFlag, hasParticipantFlagKeyAndValue, hasSurveyKeyAssigned, updateLastSubmission} from "./helpers";
@@ -15,7 +16,7 @@ export function response_item_key(name:string) {
     return responseGroupKey + '.' + name;
 }
 
-const IntakeResponses = responses.intake;
+//const IntakeResponses = responses.intake;
 
 export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
 
@@ -30,7 +31,6 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
     }
 
     create(): void {
-     
         
         const intakeKey = this.keys.intake.key;
         const weeklyKey = this.keys.weekly.key;
@@ -170,7 +170,9 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
             ) // do
         );
 
-        const Smoking = se.singleChoice.any(this.keys.intake.getSmoking().key, '5','6');
+        const Smoking = se.singleChoice.any(this.keys.intake.getSmoking().key, IntakeResponses.smoking.stop_less_year);
+
+        const intakeBicycle= se.singleChoice.any(this.keys.intake.getTransport().key, IntakeResponses.transport.bike);
 
         const influenzaPrevConditions : Expression[] = [];
 
@@ -215,6 +217,7 @@ export class GrippenetRulesBuilder extends AbstractStudyRulesBuilder {
                 itemKey: postalCodeKey, 
                 responseKey: postalCodeResponseKey
             },
+            intakeBicycle: intakeBicycle,
             flagLastLocation: flags.lastLocation.key,
             externals: ['mozart','puli','dengue']
         });

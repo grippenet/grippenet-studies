@@ -1,6 +1,7 @@
 
 export interface BadgeBaseDefinition {
     flag: string;
+    seasonal?: boolean;
 }
 
 export interface BadgeSimpleDefinition extends BadgeBaseDefinition {
@@ -29,7 +30,8 @@ export const BadgeDefinitions : Record<string, BadgeDefinition>= {
     } as const,
     'starting': {
         type: 'base',
-        flag: 'bg2'
+        flag: 'bg2',
+        seasonal: true,
     } as const,
     'step5': {
         flag: 'bgs5',
@@ -64,7 +66,8 @@ export const BadgeDefinitions : Record<string, BadgeDefinition>= {
     'regularity': {
         type: 'counter',
         count: 12,
-        flag: 'bg4'
+        flag: 'bg4',
+        seasonal: true,
     } as const,
     'seasonBronze': {
         'type':'counter',
@@ -83,15 +86,18 @@ export const BadgeDefinitions : Record<string, BadgeDefinition>= {
     },
     'return': {
         'type':"base",
-        "flag":"bg12"
+        "flag":"bg12",
+        seasonal: true,
     },
     'pionner': {
         "type":"base",
-        "flag":"bg13"
+        "flag":"bg13",
+        "seasonal": true,
     },
     'precision': {
         "type": "base",
-        "flag": "bg11"
+        "flag": "bg11",
+        seasonal: true,
     },
     'external': {
         'type': 'base',
@@ -99,10 +105,17 @@ export const BadgeDefinitions : Record<string, BadgeDefinition>= {
     },
     'stop_tobacco': {
         'type':'base',
-        flag: 'bg9'
+        flag: 'bg9',
+        'seasonal': true,
     },
     'influenza_prev': {
         'type': 'base',
-        flag: 'bg10'
+        flag: 'bg10',
+        seasonal: true,
+    },
+    'muscles': {
+        'type': 'base',
+        'flag': 'bg11',
+        seasonal: true,
     }
 } as const;

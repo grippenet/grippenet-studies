@@ -7,6 +7,7 @@ import { ResponseRef } from "./types";
 interface GrippenetIntakeDefinition extends IntakeSurveyDefinition {
     getPostalCodeItem(): Item
     getSmoking(): Item;
+    getTransport(): Item;
 }
 
 interface GrippenetWeeklyDefinition extends WeeklySurveyDefinition {

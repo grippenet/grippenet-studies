@@ -19,7 +19,6 @@ export interface SingleResponseRef {
     responseKey: string
 }
 
-
 interface BadgeBuilderConfig {
     weeklyKey: string;
     intakeKey: string;
@@ -40,6 +39,7 @@ interface BadgeBuilderConfig {
     intakeTobacco: Expression,
     intakePostalCode:SingleResponseRef, // Expression to get postalcode value
     influenzaVaccPrev?: Expression, // Vaccination question
+    intakeBicycle: Expression,
     externals?: string[]
 }
 
@@ -175,11 +175,17 @@ export class BadgeRuleBuilder {
                 condition: flagValueAfterSeasonStart(FlagsLastSubmission.vacc)
             })
         );
+
+        intakeRules.push(
+            createBadgeIfNotExists({
+                flag: BadgeDefinitions.muscles.flag,
+                condition:  this.config.intakeBicycle,
+            })
+        );
         
         intakeRules.push(
             createPioneerBadge(this.config.intakePostalCode, this.config.flagLastLocation )    
         );
-        
        
         vaccRules.push(
             createBadgeIfNotExists({
