@@ -116,6 +116,6 @@ export const BadgeDefinitions : Record<string, BadgeDefinition>= {
     'muscles': {
         'type': 'base',
         'flag': 'bg11',
-        seasonal: true,
+        seasonal: false,
     }
 } as const;
