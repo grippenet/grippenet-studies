@@ -12,7 +12,8 @@
     "mozart": "npm run-script build && node  --report-uncaught-exception build/src/build_mozart.js",
     "puli": "npm run-script build && node  --report-uncaught-exception build/src/build_puli.js",
     "build-test": "npm run-script build && node  --report-uncaught-exception build/src/build_test.js",
-    "build-rules": "npm run-script build && node  --report-uncaught-exception build/src/build_rules.js"
+    "build-rules": "npm run-script build && node  --report-uncaught-exception build/src/build_rules.js",
+    "heatwave": "npm run-script build && node  --report-uncaught-exception build/src/build_heatwave.js"
   },
   "dependencies": {
     "@types/jest": "29.0.3",

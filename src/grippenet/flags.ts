@@ -71,6 +71,20 @@ export const GrippenetFlags = {
             'alpes_maritimes': 'A',
             'bas_rhin' : 'B'
         }
-    }
+    },
+    heatbackCompleted: {
+        key: 'hwbc',
+        values: {
+            no: '0',
+            yes: '1',
+        } as const,
+    } as const,
+    lastHeatwavebackround: {
+        key: 'lasthwbTime'
+    } as const,
+    lastHeatwaveSymptoms: {
+        key: 'lasthwsTime'
+    } as const,
+
 } as const;
 
