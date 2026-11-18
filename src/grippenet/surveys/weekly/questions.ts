@@ -1,7 +1,8 @@
 import {  questionPools, _T, LanguageMap, ItemProps, ItemQuestion, BaseChoiceQuestion,
      ClientExpression as client, trans_text,  as_option,  MatrixRow, 
      markdownComponent,
-     textComponent, option_def, option_input_other, }  from "../../../common"
+     textComponent, option_def, option_input_other,
+     OptionList, }  from "../../../common"
 import {  Expression,SurveySingleItem } from "survey-engine/data_types";
 import {  OptionDef } from "case-editor-tools/surveys/types";
 import { SurveyItems } from 'case-editor-tools/surveys';
@@ -16,6 +17,7 @@ const MultipleChoicePrefix = questionPools.MultipleChoicePrefix;
 
 // Alias namespace
 import pool = questionPools.weekly;
+import ResponseEncoding from "./responses";
 
 // [X] Q16
 // [X] Q7 
@@ -331,6 +333,20 @@ export class WhyVisitedNoMedicalService extends pool.WhyVisitedNoMedicalService 
     getCondition(): Expression|undefined {
         return this.condition; // Use condition defined in survey
     }
+
+    getResponses(): OptionDef[] {
+        const parentOptions = super.getResponses();
+        const responses = ResponseEncoding.no_medical_visit_reasons;
+        const list =new OptionList(parentOptions);
+        list.without(responses.fear_consequences_covid); // Replace Fear of consequences of covid19
+        list.insertBeforeKey(responses.vaccinated_covid19, 
+            option_def(responses.vaccinated_influenza, _T('weekly.EX.Qcov18.rg.scg.option.vacc_flu',"I'm vaccinated against influenza"))
+        );
+        list.insertAfterKey(responses.vaccinated_covid19, 
+            option_def(responses.fear_consequences_viro, _T('weekly.EX.Qcov18.rg.scg.option.fear_viro',"For fear of consequences if the doctor thinks I have COVID-19, Influenza or RSV"))
+        )
+        return list.values();
+    }
 }
 
 interface AntibioticFromProps extends ItemProps {
@@ -512,6 +528,28 @@ export class TestBeforeMedicalVisit extends BaseChoiceQuestion {
             option_def('3', _T('weekly.Qcov20.option.3', "Yes, result is not known or not interpretable")),
             option_def('4', _T('weekly.Qcov20.option.4', "No")),
             option_def('99',_T('weekly.Qcov20.option.dnk','I dont remember / I dont know')),
+        ];
+    }
+
+}
+
+export class VirologicalTestBeforeMedicalVisit extends BaseChoiceQuestion {
+
+    constructor(props: ItemProps) {
+        super(props, 'Qvir20', 'single');
+        this.setOptions({
+            questionText: _T("weekly.Qvir20.text", "Did you do a virological test before to visit a medical service"),
+        });
+    }
+
+    getResponses(): OptionDef[] {
+       
+        return [
+            option_def('4', _T('weekly.Qvir20.option.4', "No")),
+            option_def('1', _T('weekly.Qvir20.option.1', "Yes, it was negative")),
+            option_def('2', _T('weekly.Qvir20.option.2', "Yes, it was positive")),
+            option_def('3', _T('weekly.Qvir20.option.3', "Yes, result is not known or not interpretable")),
+            option_def('99',_T('weekly.Qvir20.option.dnk','I dont remember / I dont know')),
         ];
     }
 

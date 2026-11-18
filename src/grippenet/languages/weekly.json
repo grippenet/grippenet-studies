@@ -113,7 +113,7 @@
   "weekly.QIRA1.title": {
     "en": "did you have this symptoms for 3 days or more?",
     "fr": [
-      "Cette année nous nous intéressons particulièrement aux symptômes suivants : fièvre, nez qui coule, éternuements, maux de gorge, toux, perte d’odorat et perte de goût.",
+      "Nous nous intéressons particulièrement aux symptômes suivants : fièvre, nez qui coule, éternuements, maux de gorge, toux, perte d’odorat et perte de goût.",
       "Présentez-vous au moins l’un de ces symptômes depuis 3 jours ou plus ?"
     ]
   },
@@ -260,5 +260,198 @@
   "weekly.QIRA4.row.16": {
     "en": "Avoid being in contact with young children (less 2 yo)",
     "fr": "Réduire les contacts avec les nourrissons (moins de deux ans)"
+  },
+  "weekly.EX.Qvir16h.title": {
+    "en": "Because of your symptoms, did you undergo one or several test/analyses to know if you have COVID-19, influenza or RSV?",
+    "fr": "En raison de vos symptômes, avez-vous effectué un ou plusieurs tests pour savoir si vous aviez la Covid-19, la grippe ou le virus respiratoire syncytial (VRS) ? "
+  },
+  "weekly.Qvir16b.helpGroup.text": {
+    "en": "We want to understand how the respiratory viruses are spreading within the population.",
+    "fr": "Nous souhaitons comprendre comment les virus responsables des IRA se diffusent dans la population."
+  },
+  "weekly.Qvir16b.option.covid19": {
+    "en": "Yes, positive for COVID-19",
+    "fr": "Positif pour la Covid-19"
+  },
+  "weekly.Qvir16b.option.influenza": {
+    "en": "Yes, positive for Influenza",
+    "fr": "Positif pour la grippe"
+  },
+  "weekly.Qvir16b.option.negative": {
+    "en": "The result is negative",
+    "fr": "Négatif"
+  },
+  "weekly.Qvir16b.option.not_available": {
+    "en": "I have not yet received the test results",
+    "fr": "Je n'ai pas encore le résultat"
+  },
+  "weekly.Qvir16b.option.not_interpretable": {
+    "en": "The results are inconclusive",
+    "fr": "Le résultat est non interprétable"
+  },
+  "weekly.Qvir16b.option.rsv": {
+    "en": "Yes, positive for RSV",
+    "fr": "Positif pour le VRS"
+  },
+  "weekly.Qvir16b.title": {
+    "en": "Do you know the result of your PCR test? (if several were performed and at least one was positive, chose the “Positive” answer)",
+    "fr": "Quel est le résultat de ce ou ces tests PCR ?"
+  },
+  "weekly.Qvir16f.helpGroup.text": {
+    "en": "We want to understand how the respiratory viruses are spreading within the population.",
+    "fr": "Nous souhaitons comprendre comment les virus responsables des IRA se diffusent dans la population."
+  },
+  "weekly.Qvir16f.option.covid19": {
+    "en": "Yes, positive for COVID-19",
+    "fr": "Positif pour la Covid-19"
+  },
+  "weekly.Qvir16f.option.dont_know": {
+    "en": "I don't know",
+    "fr": "Je ne sais pas / Je ne me souviens pas"
+  },
+  "weekly.Qvir16f.option.influenza": {
+    "en": "Yes, positive for Influenza",
+    "fr": "Positif pour la grippe"
+  },
+  "weekly.Qvir16f.option.negative": {
+    "en": "The result is negative",
+    "fr": "Négatif"
+  },
+  "weekly.Qvir16f.option.not_interpretable": {
+    "en": "The results are inconclusive",
+    "fr": "Le résultat est non interprétable "
+  },
+  "weekly.Qvir16f.option.rsv": {
+    "en": "Yes, positive for RSV",
+    "fr": "Positif pour le VRS "
+  },
+  
+  "weekly.Qvir16f.title": {
+    "en": "Do you know the result of this rapid antigen detection test on nasopharyngeal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
+    "fr": "Quel est le résultat de ce ou ces tests antigéniques rapides réalisés par un professionnel ?"
+  },
+  "weekly.Qvir16h.helpGroup.text.1": {
+    "en": "We want to know which complaints lead people to get tested for the respiratory viruses.",
+    "fr": "Nous souhaitons étudier quelles situations (symptômes par exemple) motivent la réalisation d'un test."
+  },
+  "weekly.Qvir16h.option.0": {
+    "en": "Yes",
+    "fr": "Oui"
+  },
+  "weekly.Qvir16h.option.1": {
+    "en": "Not yet, I plan to shortly undergo a test",
+    "fr": "Pas encore, je prévois de réaliser prochainement un test"
+  },
+  "weekly.Qvir16h.option.2": {
+    "en": "No, I have a prescription but will not undergo a test",
+    "fr": "Non, j'ai une prescription mais je ne prévois pas de réaliser de test "
+  },
+  "weekly.Qvir16h.option.3": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.Qvir16i.helpGroup.text": {
+    "en": "We are interested in knowing how many people with symptoms have udergone a test",
+    "fr": "Nous souhaitons connaître combien de personnes vont faire un test en cas de symptômes."
+  },
+  "weekly.Qvir16i.option.antigenic_nasal": {
+    "en": "A rapid antigen detection test or autotest done on a nasal sample (a swab inserted to 1 - 4 cm into the nostril, sampling that can be done by oneself, result obtained in a few minutes)",
+    "fr": "Un test antigénique rapide ou autotest réalisé vous-même"
+  },
+  "weekly.Qvir16i.option.antigenic_pro": {
+    "en": "A rapid antigen detection test on a sample realized in the back of the nose (nasopharyngeal sampling, done by a health professional or a trained person, with a swab inserted to 15 cm into the nose, result obtained in less than one hour)",
+    "fr": "Un test antigénique rapide réalisé par un professionnel"
+  },
+  "weekly.Qvir16i.option.pcr": {
+    "en": "A PCR test (virus search, on a swab in nose or mouth, or a sputum or saliva sample)",
+    "fr": "Un test PCR (recherche du virus à partir d’un écouvillon dans le nez ou dans la bouche, ou d’un prélèvement de salive)"
+  },
+  "weekly.Qvir16i.title": {
+    "en": "Which analyse(s) was it?",
+    "fr": "De quel(s) test(s) s'agit-il ?"
+  },
+  "weekly.Qvir16k.helpGroup.text": {
+    "en": "We want to understand how the respiratory viruses are spreading within the population.",
+    "fr": "Nous souhaitons comprendre comment les virus responsables des IRA se diffusent dans la population."
+  },
+  "weekly.Qvir16k.option.covid19": {
+    "en": "Yes, positive for COVID-19",
+    "fr": "Positif pour la Covid-19"
+  },
+  "weekly.Qvir16k.option.dont_know": {
+    "en": "I don't know",
+    "fr": "Je ne sais pas / Je ne me souviens pas"
+  },
+  "weekly.Qvir16k.option.influenza": {
+    "en": "Yes, positive for Influenza",
+    "fr": "Positif pour la grippe"
+  },
+  "weekly.Qvir16k.option.negative": {
+    "en": "The result is negative",
+    "fr": "Négatif"
+  },
+  "weekly.Qvir16k.option.not_interpretable": {
+    "en": "The results are inconclusive",
+    "fr": "Le résultat est non interprétable"
+  },
+  "weekly.Qvir16k.option.rsv": {
+    "en": "Yes, positive for RSV",
+    "fr": "Positif pour le VRS"
+  },
+  "weekly.Qvir16k.title": {
+    "en": "Do you know the result of this antigenic test or self-test on nasal sample? (if several were performed and at least one was positive, chose the “Positive” answer)",
+    "fr": "Quel est le résultat de ce ou ces tests antigéniques rapides ou autotests réalisés vous-même ?"
+  },
+  "weekly.Qvir16v.helpGroup.text": {
+    "en": "We are interested in knowing how many people with symptoms have udergone a test",
+    "fr": "Nous souhaitons savoir quels virus vos test ont recherchés, afin de mieux comprendre à quelle fréquence la COVID-19, la grippe et le VRS sont responsables d'infections respiratoires dans la population."
+  },
+  "weekly.Qvir16v.option.covid19": {
+    "en": "Covid19 virus",
+    "fr": "Le virus de la Covid-19"
+  },
+  "weekly.Qvir16v.option.dont_know": {
+    "en": "Dont know/Other",
+    "fr": "Je ne sais pas "
+  },
+  "weekly.Qvir16v.option.influenza": {
+    "en": "Influenza virus",
+    "fr": "Le virus de la grippe (influenza)"
+  },
+  "weekly.Qvir16v.option.other": {
+    "en": "Other",
+    "fr": "Autre"
+  },
+  "weekly.Qvir16v.option.rsv": {
+    "en": "RSV virus",
+    "fr": "Le virus syncytial respiratoire (VRS)"
+  },
+  "weekly.Qvir16v.title": {
+    "en": "Which viruses were tested for ?",
+    "fr": "Quels virus ce ou ces tests ont-ils recherchés ?"
+  },
+  "weekly.Qvir20.option.1": {
+    "en": "Yes, it was negative",
+    "fr": "Oui, le résultat était négatif"
+  },
+  "weekly.Qvir20.option.2": {
+    "en": "Yes, it was positive",
+    "fr": "Oui, le résultat était positif"
+  },
+  "weekly.Qvir20.option.3": {
+    "en": "Yes, result is not known or not interpretable",
+    "fr": "Oui, mais je n’avais pas encore le résultat / le résultat était non interprétable"
+  },
+  "weekly.Qvir20.option.4": {
+    "en": "No",
+    "fr": "Non"
+  },
+  "weekly.Qvir20.option.dnk": {
+    "en": "I dont remember / I dont know",
+    "fr": "Je ne sais pas / Je ne me souviens pas"
+  },
+  "weekly.Qvir20.text": {
+    "en": "Did you do a virological test before to visit a medical service",
+    "fr": "Au moins un des tests réalisés pour savoir si vous aviez la Covid-19, la grippe ou le VRS a-t-il été effectué AVANT la première consultation du professionnel de santé ?"
   }
 }

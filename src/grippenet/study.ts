@@ -16,7 +16,7 @@ export class GrippenetStudyBuilder extends StudyBuilder {
 
     build() {
 
-        const studyConfig = new StudyConfig(2025, '2025-11-03', '2023-11-102024-11-25');
+        const studyConfig = new StudyConfig(2026, '2026-11-23', '2025-11-03');
 
         const meta = new Map<string, string>();
 

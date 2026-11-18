@@ -86,7 +86,7 @@ export class FluVaccineThisSeasonReasonAgainst extends VaccinationPool.FluVaccin
         )
 
         list.insertAfterKey(codes.minor_illness,
-            as_option(codes.avoid_healthseek, _T("vaccination.Q10d.option.avoid_healthseeking","Because of pandemic, I avoid to visit doctor or pharmacy")),
+           // as_option(codes.avoid_healthseek, _T("vaccination.Q10d.option.avoid_healthseeking","Because of pandemic, I avoid to visit doctor or pharmacy")), // Removed 2026
             as_option(codes.risk_covid,  _T("vaccination.Q10d.option.increase_risk_covid", "I fear the influenza vaccine to increase my risk to get Covid19")),
             option_input_other(codes.covid_other, _T( "vaccination.Q10d.option.other_covid19", "Other reason related to Covid19"), "none")
         );
@@ -144,7 +144,12 @@ export class CovidVaccineAgainstReasons extends VaccinationPool.CovidVaccineAgai
             as_option(codes.prefer_other_measures, _T("vaccination.Q35m.option.prefer_other_measures", "I prefer to protect my self by other protective measures (mask, hand washing...)"))
         )
     
-        list.without(codes.counter_indication, codes.not_free, codes.pregnant_disc);
+        list.without(
+            codes.counter_indication, 
+            codes.not_free, 
+            codes.pregnant_disc,
+            codes.avoid_health_facilities // Removed 2026
+        );
 
         const new_options = list.values();
         new_options.forEach(o => {

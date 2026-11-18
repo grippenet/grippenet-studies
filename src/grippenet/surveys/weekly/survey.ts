@@ -1,4 +1,4 @@
-import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce,  textComponent, ItemQuestion, GroupQuestion } from "../../../common"
+import {  _T,questionPools, SurveyBuilder, transTextComponent, ClientExpression as ce,  GroupQuestion } from "../../../common"
 import {  Item } from "case-editor-tools/surveys/types";
 import * as weekly from "./questions";
 //import * as ansm from "./ansm";
@@ -10,6 +10,7 @@ import * as iraprev from "./iraprev";
 import { Expression } from "survey-engine/data_types";
 
 const pool = questionPools.weekly;
+const pool_viro = questionPools.weekly_viro;
 
 export class WeeklyDef extends SurveyBuilder {
 
@@ -108,6 +109,9 @@ export class WeeklyDef extends SurveyBuilder {
         const hasMoreGroup = new pool.HasMoreGroup({parentKey: rootKey, consentForMoreKey: Q_wantsMore.key});
         const hasMoreGroupKey = hasMoreGroup.key;
 
+        /*
+        Qcov* Removed in 2026, replaced by Qvir16
+
         // // Qcov16h test -----------------------------------------------------
         const Q_symptomImpliedCovidTest = new pool.SymptomImpliedCovidTest({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_symptomImpliedCovidTest.get());
@@ -137,6 +141,7 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_resultRapidAntigenicTest = new pool.ResultRapidAntigenicTest({parentKey:hasMoreGroupKey, keyTestType:Q_covidTestType.key, isRequired:false})
         hasMoreGroup.addItem(Q_resultRapidAntigenicTest.get());
 
+        
         // Qcov19 test 
         const Q_fluTest = new pool.FluTest({parentKey: hasMoreGroupKey, isRequired: false});
         hasMoreGroup.addItem(Q_fluTest.get());
@@ -145,10 +150,7 @@ export class WeeklyDef extends SurveyBuilder {
         const Q_resultFluPCRTest = new pool.ResultFluTest({parentKey:hasMoreGroupKey, isRequired: false})
         Q_resultFluPCRTest.setCondition(Q_fluTest.getHasTestCondition());
         hasMoreGroup.addItem(Q_resultFluPCRTest.get());
-
-        // Q7 visited medical service
-        const Q_visitedMedicalService = new weekly.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: false, noteOnTop: true});
-        hasMoreGroup.addItem(Q_visitedMedicalService.get());
+        */
 
         /** Removed 2024
         // Q7b how soon visited medical service 
@@ -156,11 +158,21 @@ export class WeeklyDef extends SurveyBuilder {
         hasMoreGroup.addItem(Q_visitedMedicalServiceWhen.get());
         */
 
+        const viroBuilder = new pool_viro.VirologicalQuestionBuilder(hasMoreGroupKey);
+
+        viroBuilder.build( (item) => {
+            hasMoreGroup.addItem(item);
+        });
+
+        // Q7 visited medical service
+        const Q_visitedMedicalService = new weekly.VisitedMedicalService({parentKey: hasMoreGroupKey, isRequired: false, noteOnTop: true});
+        hasMoreGroup.addItem(Q_visitedMedicalService.get());
+        
         // Qcov20
-        const Q_testBeforeMedical = new weekly.TestBeforeMedicalVisit({parentKey: hasMoreGroupKey, isRequired: false});
+        const Q_testBeforeMedical = new weekly.VirologicalTestBeforeMedicalVisit({parentKey: hasMoreGroupKey, isRequired: false});
         Q_testBeforeMedical.setCondition(
             ce.logic.and(
-                Q_symptomImpliedCovidTest.getYesResponseCondition(),
+                viroBuilder.hasTestQuestion().getYesResponseCondition(),
                 Q_visitedMedicalService.getResponseCondition('gp', 'emergency', 'other','other_community')
             )
         )
