@@ -537,8 +537,12 @@ export class VirologicalTestBeforeMedicalVisit extends BaseChoiceQuestion {
 
     constructor(props: ItemProps) {
         super(props, 'Qvir20', 'single');
+
+        const severalTestRealized = textComponent({key:"several", "content": _T("common.qvir.several_test_realized", "If you have realized several test"), className:'mb-2'});
+        
         this.setOptions({
             questionText: _T("weekly.Qvir20.text", "Did you do a virological test before to visit a medical service"),
+            topDisplayCompoments: [severalTestRealized],
         });
     }
 

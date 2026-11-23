@@ -103,7 +103,7 @@
       "en": "Cancel response",
       "fr": "Annuler ma réponse"
   },
- "common.qvir16.several_test_realized": {
+ "common.qvir.several_test_realized": {
     "en": "If you have realized several test",
     "fr": "Si vous avez réalisé plusieurs tests et que vous en avez obtenu au moins un positif, considérez ce test pour la réponse"
  }
